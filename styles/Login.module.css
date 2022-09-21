@@ -1,5 +1,5 @@
 .wavy {
-    background: linear-gradient(90deg, #F4B95F, #DAA65D, #7A7A7A);
+    background: linear-gradient(90deg, #F4B95F, #DAA65D, #525252);
     background-size: 300% 300%;
     animation: gradient 5s alternate infinite;
     position: absolute;
