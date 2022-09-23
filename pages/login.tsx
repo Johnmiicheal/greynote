@@ -9,13 +9,15 @@ import {
   FormErrorMessage,
   Input,
   Button,
-  Highlight,
+  InputLeftAddon,
+  InputGroup,
   Link,
   Divider,
 } from "@chakra-ui/react";
 import styles from "../styles/Login.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field } from "formik";
+import NextLink from "next/link";
 
 const Login = () => {
   function validateEmail(value: string) {
@@ -135,8 +137,15 @@ const Login = () => {
                         mb={14}
                         ml={6}
                       >
-                        Don't have an account? <Link color='#F4B95F'> Register Here </Link>
-                      </Text>
+                        Don't have an account? {" "}
+                         <NextLink href='/register' passHref>
+                          <Link color="#F4B95F">
+                           Register Here 
+                           </Link>
+                         </NextLink>
+                         </Text>
+                         
+                     
                     </Flex>
 
                     <Button

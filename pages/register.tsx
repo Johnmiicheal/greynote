@@ -9,15 +9,26 @@ import {
     FormErrorMessage,
     Input,
     Button,
-    Highlight,
+    InputLeftAddon,
+    InputGroup,
     Link,
     Divider,
   } from "@chakra-ui/react";
   import styles from "../styles/Register.module.css";
   import { FcGoogle } from "react-icons/fc";
   import { Formik, Form, Field } from "formik";
+  import NextLink from "next/link";
+  import { useRouter } from "next/router";
   
-  const Login = () => {
+  const Register = () => {
+    function validateName(value: string) {
+      let error;
+      if (!value) {
+        error = "Name is required";
+      }
+      return error;
+    }
+
     function validateEmail(value: string) {
       let error;
       if (!value) {
@@ -33,39 +44,65 @@ import {
       }
       return error;
     }
-  
+
+    function validatePhone(value: any) {
+      let error;
+      if (!value) {
+        error = "Phone Number is required";
+      } else if( value.length < 10 ){
+        error = "Phone Number is Invalid"
+      } 
+      return error;
+    }
+    
+    const router = useRouter();
+
     return (
-      <Center bg="gray.200" minH="100vh">
-        <div className={styles.rewavy}>
-          
-          <Flex direction={{ base: 'column', lg: 'row'}} justify={{ lg: 'space-between' }} w="full" align="center" px={{ base: 3, md: 10, lg: 40}} zIndex={2}>
+      <Center bg="gray.200" minH='100vh'>
+        <div className={styles.rewavy}>          
+          <Flex direction={{ base: 'column', lg: 'row'}} justify={{ lg: 'space-between' }} align="center" px={{ base: 3, md: 10, lg: 40}}>
             <Flex
               direction="column"
               justify="center"
               bg="white"
               w={{ base: 'full', md: '500px', lg: '600px'}}
-              py={5}
+              pb={5}
               px={{ base: 2, md: 5, lg: 10}}
-              borderRadius="md"
-              mt={10}
               mr={20}
+              h="100vh"
             >
               <Image src="/grayfull.png" w={40} />
-              <Text mt={2} fontSize={20} fontWeight={500}>
-                Login to GrayBook
+              <Text mt={2} fontSize={16} fontWeight={500}>
+                Register to GrayBook
               </Text>
+              <Flex>
+                        <Text
+                        color="gray.500"
+                        fontSize={12}
+                        fontWeight={500}
+                        mt={5}
+                        mb={4}
+                      >
+                        Already have an account? {" "}
+                         <NextLink href='/login' passHref>
+                          <Link color="#F4B95F">
+                           Login Here 
+                           </Link>
+                         </NextLink>
+                         </Text>
+                      </Flex>
                 <Button
-                mt={10}
                   leftIcon={<FcGoogle size={20} />}
                   alignItems="center"
                   variant="outline"
                   colorScheme="gray"
+                  fontSize={14}
                 >
-                  Login with Google
+                  Register with Google
                 </Button>
   
               
-              <Flex direction="column" mt={10}>
+              <Flex direction="column" mt={2}>
   
                 <Formik
                   initialValues={{ name: "" }}
@@ -74,16 +111,37 @@ import {
                       alert(JSON.stringify(values, null, 2));
                       actions.setSubmitting(false);
                     }, 1000);
+                    router.push('/onboarding')
                   }}
                 >
                   {(props) => (
                     <Form>
-                      <Field name="name" validate={validateEmail}>
+                      <Field name="name" validate={validateName}>
                         {({ field, form }: any) => (
                           <FormControl
                             isInvalid={form.errors.name && form.touched.name}
                           >
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel fontSize={14}>Full Name</FormLabel>
+                            <Input
+                              {...field}
+                              placeholder="Full Name"
+                              type="text"
+                              variant="outline"
+                              mb={2}
+                            />
+                            <FormErrorMessage>
+                              {form.errors.name}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Field name="email" validate={validateEmail}>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={form.errors.email && form.touched.email}
+                          >
+                            <FormLabel fontSize={14}>Email Address</FormLabel>
                             <Input
                               {...field}
                               placeholder="Email"
@@ -92,7 +150,24 @@ import {
                               mb={2}
                             />
                             <FormErrorMessage>
-                              {form.errors.name}
+                              {form.errors.email}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Field name="telephone" validate={validatePhone}>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={form.errors.telephone && form.touched.telephone}
+                          >
+                            <FormLabel fontSize={14}>Phone Number</FormLabel>
+                            <InputGroup>
+                              <InputLeftAddon children='+234' />
+                              <Input {...field} type='tel' placeholder='phone number' variant='outline' mb={2} />
+                            </InputGroup>
+                            <FormErrorMessage>
+                              {form.errors.telephone}
                             </FormErrorMessage>
                           </FormControl>
                         )}
@@ -105,7 +180,7 @@ import {
                               form.errors.password && form.touched.password
                             }
                           >
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel fontSize={14}>Password</FormLabel>
                             <Input
                               {...field}
                               placeholder="Password"
@@ -118,27 +193,7 @@ import {
                           </FormControl>
                         )}
                       </Field>
-                      <Flex justify='center'>
-                        <Text
-                          color="#F4B95F"
-                          fontSize={12}
-                          fontWeight={500}
-                          mt={2}
-                          mb={14}
-                        >
-                          Forgot Password?
-                        </Text>
-                        <Text
-                          color="gray.500"
-                          fontSize={12}
-                          fontWeight={500}
-                          mt={2}
-                          mb={14}
-                          ml={6}
-                        >
-                          Don't have an account? <Link color='#F4B95F'> Register Here </Link>
-                        </Text>
-                      </Flex>
+                      
   
                       <Button
                         mt={4}
@@ -149,7 +204,7 @@ import {
                         isLoading={props.isSubmitting}
                         type="submit"
                       >
-                        Login
+                        Continue
                       </Button>
                     </Form>
                   )}
@@ -166,5 +221,5 @@ import {
     );
   };
   
-  export default Login;
+  export default Register;
   

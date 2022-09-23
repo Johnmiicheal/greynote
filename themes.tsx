@@ -1,16 +1,19 @@
-import type { StyleFunctionProps } from '@chakra-ui/styled-system'
-import { extendTheme } from '@chakra-ui/react'
+import { createTheme } from '@mui/material/styles';
+import { red } from '@mui/material/colors';
 
-
-const overrides = extendTheme({
-    styles: {
-      global: (props: StyleFunctionProps) => ({
-        body: {
-         bgGradient: 'linear(to-r, #F4B95F, #DAA65D, #7A7A7A)',
-         animation: 'gradient 5s alternate infinite'
-        },
-      }),
+// Create a theme instance.
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#556cd6',
     },
-  })
+    secondary: {
+      main: '#19857b',
+    },
+    error: {
+      main: red.A400,
+    },
+  },
+});
 
-export default overrides
+export default theme;

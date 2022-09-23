@@ -1,7 +1,9 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import { ThemeProvider } from "@mui/material";
 import React, {useEffect} from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import theme from "../themes";
 
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -18,14 +20,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     return <></>;
   } else {
     return (
-        <ChakraProvider>
+      <ThemeProvider theme={theme}>
         <Head>
           <link rel="shortcut icon" href="/graylogo.png" />
           <title>GrayBook</title>
         </Head>
-
+          <ChakraProvider>
           <Component {...pageProps} />
         </ChakraProvider>
+        
+        </ThemeProvider>
     );
   }
 }
