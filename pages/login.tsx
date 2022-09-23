@@ -18,6 +18,7 @@ import styles from "../styles/Login.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field } from "formik";
 import NextLink from "next/link";
+import { Layout } from "../src/components/Layout";
 
 const Login = () => {
   function validateEmail(value: string) {
@@ -37,7 +38,7 @@ const Login = () => {
   }
 
   return (
-    <Center bg="gray.200" minH="100vh">
+    <Layout>
       <div className={styles.wavy}>
         
         <Flex direction="row" w="full" align="center" px={40} zIndex={2}>
@@ -170,7 +171,7 @@ const Login = () => {
           </Flex>
         </Flex>
       </div>
-    </Center>
+    </Layout>
   );
 };
 

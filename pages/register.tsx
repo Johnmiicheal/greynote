@@ -19,6 +19,7 @@ import {
   import { Formik, Form, Field } from "formik";
   import NextLink from "next/link";
   import { useRouter } from "next/router";
+import { Layout } from "../src/components/Layout";
   
   const Register = () => {
     function validateName(value: string) {
@@ -58,7 +59,7 @@ import {
     const router = useRouter();
 
     return (
-      <Center bg="gray.200" minH='100vh'>
+      <Layout>
         <div className={styles.rewavy}>          
           <Flex direction={{ base: 'column', lg: 'row'}} justify={{ lg: 'space-between' }} align="center" px={{ base: 3, md: 10, lg: 40}}>
             <Flex
@@ -217,7 +218,7 @@ import {
             </Flex>
           </Flex>
         </div>
-      </Center>
+      </Layout>
     );
   };
   

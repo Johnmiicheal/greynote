@@ -1,115 +1,182 @@
-import * as React from 'react';
-import { Box, Stepper, Step, StepLabel, Button, Typography } from '@mui/material';
-
-
-
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+import React from "react";
+import { Flex, Box, Button, Input, Select, Text, FormControl, FormErrorMessage, FormLabel, Image, Textarea} from "@chakra-ui/react";
+import { Formik, Form, Field } from "formik";
+import { Layout } from "../src/components/Layout";
+import { useRouter } from "next/router";
 
 const Onboarding = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set<number>());
 
-  const isStepOptional = (step: number) => {
-    return step === 1;
-  };
-
-  const isStepSkipped = (step: number) => {
-    return skipped.has(step);
-  };
-
-  const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
+  function validateRCNumber(value: number) {
+    let error;
+    if (!value) {
+      error = "RCNumber is required";
     }
+    return error;
+  }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
+  function validateName(value: string) {
+    let error;
+    if (!value) {
+      error = "School Name is required";
     }
+    return error;
+  }
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
+  function validateAddress(value: any) {
+    let error;
+    if (!value) {
+      error = "Address is required";
+    }
+    return error;
+  }
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
 
-  return (
-    <Box sx={{ width: '100%' }}>
-      <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => {
-          const stepProps: { completed?: boolean } = {};
-          const labelProps: {
-            optional?: React.ReactNode;
-          } = {};
-          if (isStepOptional(index)) {
-            labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
-            );
-          }
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
-          return (
-            <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box>
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: '1 1 auto' }} />
-            {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )}
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
-          </Box>
-        </React.Fragment>
-      )}
-    </Box>
-  );
+  const router = useRouter();
+  return(
+    <Layout>
+      <Flex bg='white' borderRadius='md' w='500px' px={5} py={3} direction='column' justify='center' align='center' mt={5}>
+        <Image src="/grayfull.png" w={40} mb={5} />
+        <Text fontWeight={500} fontSize={20}>Setup your School Profile</Text>
+
+        <Flex direction='column' mt={10} w='full' px={10} pb={10}>
+        <Formik
+                  initialValues={{ name: "", address: "" }}
+                  onSubmit={(values, actions) => {
+                    setTimeout(() => {
+                      alert(JSON.stringify(values, null, 2));
+                      actions.setSubmitting(false);
+                    }, 1000);
+                  }}
+                >
+                  {(props) => (
+                    <Form>
+                      <Field name="name" validate={validateName}>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={form.errors.name && form.touched.name}
+                          >
+                            <FormLabel fontSize={14}>School Name</FormLabel>
+                            <Input
+                              {...field}
+                              placeholder="School Name"
+                              type="text"
+                              variant="outline"
+                              mb={2}
+                            />
+                            <FormErrorMessage>
+                              {form.errors.name}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+
+                      <Field name="address" validate={validateAddress}>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={form.errors.address && form.touched.address}
+                          >
+                            <FormLabel fontSize={14}>Address</FormLabel>
+                            <Textarea
+                              {...field}
+                              placeholder="Address"
+                              type="text"
+                              variant="outline"
+                              mb={2}
+                            />
+                            <FormErrorMessage>
+                              {form.errors.address}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                      <Flex direction='row' mb={2}>
+                        <Field name="state">
+                          {({ field, form }: any) => (
+                            <FormControl
+                            isRequired
+                            >
+                              <FormLabel fontSize={14}>State</FormLabel>
+                              <Select placeholder='Select option' {...field} name='state' mb={2} w={40}>
+                                <option value='option1'>State 1</option>
+                                <option value='option2'>State 2</option>
+                                <option value='option3'>State 3</option>
+                              </Select>
+                            </FormControl>
+                          )}
+                        </Field>
+                        <Field name="country">
+                          {({ field, form }: any) => (
+                            <FormControl
+                            isRequired
+                            >
+                              <FormLabel fontSize={14}>Country</FormLabel>
+                              <Select placeholder='Select option' {...field} name='country' w="200px" >
+                                <option value='option1'>Country 1</option>
+                                <option value='option2'>Country 2</option>
+                                <option value='option3'>Country 3</option>
+                              </Select>
+                            </FormControl>
+                          )}
+                        </Field>
+                      
+                      </Flex>    
+
+
+
+                      <Field name="rcnumber" validate={validateRCNumber}>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={form.errors.rcnumber && form.touched.rcnumber}
+                          >
+                            <FormLabel fontSize={14}>RC Number</FormLabel>
+                              <Input {...field} type='tel' placeholder='RC Number' variant='outline' mb={2} />
+                            <FormErrorMessage>
+                              {form.errors.rcnumber}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+  
+                      {/* <Field name="password" validate={validatePass}>
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={
+                              form.errors.password && form.touched.password
+                            }
+                          >
+                            <FormLabel fontSize={14}>Password</FormLabel>
+                            <Input
+                              {...field}
+                              placeholder="Password"
+                              type="password"
+                              variant="outline"
+                            />
+                            <FormErrorMessage>
+                              {form.errors.password}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field> */}
+                      
+  
+                      <Button
+                        mt={4}
+                        w="full"
+                        bg="#F4B95F"
+                        color="white"
+                        _hover={{ bg: "#DAA65D" }}
+                        isLoading={props.isSubmitting}
+                        type="submit"
+                      >
+                        Continue
+                      </Button>
+                    </Form>
+                  )}
+                </Formik>
+        </Flex>
+      </Flex>
+    </Layout>
+  )
 }
 
 export default Onboarding;
