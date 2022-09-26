@@ -138,7 +138,7 @@ const Login = () => {
                         mb={14}
                         ml={6}
                       >
-                        Don't have an account? {' '}
+                        Don't have an account? 
                          <NextLink href='/register' passHref>
                           <Link color="#F4B95F">
                            Register Here 
