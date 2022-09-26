@@ -123,13 +123,19 @@ import {
       </Flex>
         </Flex>  
        
-        <IconButton
+        {/* <IconButton
           icon={<IoApps fontSize={24} />}
           aria-label="More Options"
           variant="ghost"
           display={{ base: "none", md: "flex" }}
           onClick={onOpen}
-        />
+        /> */}
+             <NextLink href='/login'>
+      <Button ml={3} mr={3} colorScheme='yellow' color='white' borderRadius='md' size='sm'>Login</Button>
+      </NextLink>
+      <NextLink href='/register'>
+      <Button mr={3} colorScheme='yellow' variant='ghost' borderRadius='md' size='sm'>Register</Button>
+      </NextLink>
   
         {/* Mobile View Avatar */}
         <Flex ml={'auto'} display={{ base: 'flex', md: 'none' }}> 

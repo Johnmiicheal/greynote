@@ -84,7 +84,7 @@ import { Layout } from "../src/components/Layout";
                         mt={5}
                         mb={4}
                       >
-                        Already have an account?
+                        Already have an account? {" "}
                          <NextLink href='/login' passHref>
                           <Link color="#F4B95F">
                            Login Here 
