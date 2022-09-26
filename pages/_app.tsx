@@ -1,5 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { ThemeProvider } from "@mui/material";
+import { ChakraProvider, ThemeProvider } from "@chakra-ui/react";
 import React, {useEffect} from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";

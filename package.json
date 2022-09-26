@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^2.3.4",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@fontsource/montserrat": "^4.5.12",
     "@mui/material": "^5.10.6",
     "@mui/styled-engine-sc": "^5.10.6",
     "formik": "^2.2.9",
