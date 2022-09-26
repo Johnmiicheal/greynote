@@ -164,7 +164,7 @@ import { Layout } from "../src/components/Layout";
                           >
                             <FormLabel fontSize={14}>Phone Number</FormLabel>
                             <InputGroup>
-                              <InputLeftAddon children='+234' />
+                              <InputLeftAddon>+234</InputLeftAddon>
                               <Input {...field} type='tel' placeholder='phone number' variant='outline' mb={2} />
                             </InputGroup>
                             <FormErrorMessage>
