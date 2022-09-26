@@ -35,7 +35,7 @@ const Onboarding = () => {
   return(
     <Layout>
       <Flex bg='white' borderRadius='md' w='500px' px={5} py={3} direction='column' justify='center' align='center' mt={5}>
-        <Image src="/grayfull.png" w={40} mb={5} />
+        <Image src="/grayfull.png" alt="grayfull" w={40} mb={5} />
         <Text fontWeight={500} fontSize={20}>Setup your School Profile</Text>
 
         <Flex direction='column' mt={10} w='full' px={10} pb={10}>

@@ -72,7 +72,7 @@ import { Layout } from "../src/components/Layout";
               mr={20}
               h="100vh"
             >
-              <Image src="/grayfull.png" w={40} />
+              <Image src="/grayfull.png" alt="grayfull" w={40} />
               <Text mt={2} fontSize={16} fontWeight={500}>
                 Register to GrayBook
               </Text>
@@ -214,7 +214,7 @@ import { Layout } from "../src/components/Layout";
             </Flex>
   
             <Flex justify='end' display={{ base: 'none', lg: 'block' }}>
-              <Image src="/gray2art.png" w='70%' />
+              <Image src="/gray2art.png" alt="gray2art" w='70%' />
             </Flex>
           </Flex>
         </div>

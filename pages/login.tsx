@@ -52,7 +52,7 @@ const Login = () => {
             borderRadius="md"
             mt={10}
           >
-            <Image src="/grayfull.png" w={40} />
+            <Image src="/grayfull.png" alt="grayfull" w={40} />
             <Text mt={2} fontSize={20} fontWeight={500}>
               Login to GrayBook
             </Text>
@@ -167,7 +167,7 @@ const Login = () => {
           </Flex>
 
           <Flex justify='end'>
-            <Image src="/grayart.png" w='70%' />
+            <Image src="/grayart.png" alt="gray2art" w='70%' />
           </Flex>
         </Flex>
       </div>
