@@ -43,7 +43,7 @@ export const fakedb = [
     },
     {
       grade: 7,
-      cases: 6,
+      cases: 4,
       status: "13 days ago",
       flair: "green",
       variant: "solid"
