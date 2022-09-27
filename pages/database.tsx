@@ -62,7 +62,7 @@ const Database = () => {
                 </Thead>
                 <Tbody>
                   {fakedb.map((p) => (
-                    <Tr>
+                    <Tr key={p.grade}>
                       <Th fontWeight={500}>Grade {p.grade}</Th>
                       <Th fontWeight={500}>{p.cases}</Th>
                       <Th fontWeight={400}> <Badge variant={p.variant} colorScheme={p.flair}> {p.status} </Badge> </Th>
