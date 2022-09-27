@@ -19,6 +19,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field } from "formik";
 import NextLink from "next/link";
 import { Layout } from "../src/components/Layout";
+import { useRouter } from "next/router";
 
 const Login = () => {
   function validateEmail(value: string) {
@@ -36,6 +37,8 @@ const Login = () => {
     }
     return error;
   }
+
+  const router = useRouter();
 
   return (
     <Layout>
@@ -76,6 +79,7 @@ const Login = () => {
                     alert(JSON.stringify(values, null, 2));
                     actions.setSubmitting(false);
                   }, 1000);
+                  router.push("/");
                 }}
               >
                 {(props) => (

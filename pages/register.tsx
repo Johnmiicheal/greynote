@@ -122,10 +122,10 @@ import { Layout } from "../src/components/Layout";
                           <FormControl
                             isInvalid={form.errors.name && form.touched.name}
                           >
-                            <FormLabel fontSize={14}>Full Name</FormLabel>
+                            <FormLabel fontSize={14}>Admin Name</FormLabel>
                             <Input
                               {...field}
-                              placeholder="Full Name"
+                              placeholder="Admin Name"
                               type="text"
                               variant="outline"
                               mb={2}

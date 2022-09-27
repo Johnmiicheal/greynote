@@ -55,10 +55,10 @@ const Onboarding = () => {
                           <FormControl
                             isInvalid={form.errors.name && form.touched.name}
                           >
-                            <FormLabel fontSize={14}>School Name</FormLabel>
+                            <FormLabel fontSize={14}>Name of Institution</FormLabel>
                             <Input
                               {...field}
-                              placeholder="School Name"
+                              placeholder="Name of Institution"
                               type="text"
                               variant="outline"
                               mb={2}

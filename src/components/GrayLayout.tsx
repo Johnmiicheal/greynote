@@ -9,7 +9,7 @@ const GrayLayout = () => {
         <Flex
         direction="column"
         bg="#212121"
-        minH="100vh"
+        minH="full"
         w="130px"
         pos="absolute"
         mx="auto"
