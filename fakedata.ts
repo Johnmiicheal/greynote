@@ -86,3 +86,6 @@ export const fakedb = [
 
    
   ];
+
+  export const fakecase = ["Expulsion", "Suspension", "Fees Default"];
+  export const fakegender = ["Male", "Female", "Prefer not to say"];

@@ -55,7 +55,6 @@ const Database = () => {
                   <Tr>
                     <Th>Grade Classes</Th>
                     <Th>Number of Cases</Th>
-                    <Th>Status</Th>
                     <Th>Action</Th>
                   </Tr>
 
@@ -65,7 +64,6 @@ const Database = () => {
                     <Tr key={p.grade}>
                       <Th fontWeight={500}>Grade {p.grade}</Th>
                       <Th fontWeight={500}>{p.cases}</Th>
-                      <Th fontWeight={400}> <Badge variant={p.variant} colorScheme={p.flair}> {p.status} </Badge> </Th>
                     </Tr>
                   ))}
                 </Tbody>
@@ -73,7 +71,6 @@ const Database = () => {
                   <Tr>
                     <Th>Grade Classes</Th>
                     <Th>Number of Cases</Th>
-                    <Th>Status</Th>
                     <Th>Action</Th>
                   </Tr>
                 </Tfoot>

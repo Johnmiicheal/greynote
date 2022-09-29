@@ -8,8 +8,13 @@ const theme = extendTheme({
     body: 'Montserrat',       
 },
 components: {
-  Button: { baseStyle: {_focus: { boxShadow: 'none'}}}       
+  Button: { baseStyle: {_focus: { boxShadow: 'none'}}},
 },
+
+defaultProps: {
+  focusBorderColor: '#F4B95F',
+},
+
 });
 
 export default theme;

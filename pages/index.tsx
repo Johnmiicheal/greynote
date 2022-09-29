@@ -6,6 +6,7 @@ import {
   Icon,
   Center,
   Modal,
+  Select,
   ModalOverlay,
   ModalContent,
   ModalHeader,
@@ -16,7 +17,12 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Input
+  Input,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import Header from "../src/components/Header";
 import { IoPersonAddOutline } from "react-icons/io5";
@@ -24,6 +30,7 @@ import { AiOutlineFileSearch } from "react-icons/ai";
 
 import { useRouter } from "next/router";
 import GrayLayout from "../src/components/GrayLayout";
+import {fakedb, fakecase, fakegender} from "fakedata.ts";
 
 const Home = () => {
   const router = useRouter();
@@ -61,10 +68,10 @@ const Home = () => {
               Welcome to GrayBook
             </Text>
             <Text fontSize={18} fontWeight={400} color="black" mt={2}>
-              Try creating a case to start a database.
+              Try registering a student to start a database.
             </Text>
             <Text fontSize={18} fontWeight={400} color="black" mt={2}>
-              You can also search for your candidate, if they have a graybook
+              You can also search for a student, if they have a graybook
               case
             </Text>
             <Flex direction="row" mt={10}>
@@ -90,7 +97,7 @@ const Home = () => {
                 >
                   <Icon as={IoPersonAddOutline} w={7} h={7} />
                 </Flex>
-                <Text>Create a graybook case</Text>
+                <Text>Register a Student</Text>
               </Flex>
 
               <Flex
@@ -115,7 +122,7 @@ const Home = () => {
                 >
                   <Icon as={AiOutlineFileSearch} w={7} h={7} />
                 </Flex>
-                <Text>Search for a candidate</Text>
+                <Text>Search Database</Text>
               </Flex>
             </Flex>
           </Flex>
@@ -135,28 +142,69 @@ const Home = () => {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>First name</FormLabel>
-              <Input ref={initialRef} placeholder='First name' />
+              <Input ref={initialRef} placeholder='First name' focusBorderColor='#F4B95F' />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Last name</FormLabel>
-              <Input placeholder='Last name' />
+              <Input placeholder='Last name' focusBorderColor='#F4B95F' />
+            </FormControl>
+
+            <Flex direction="row">
+            <FormControl mt={4}>
+              <FormLabel>Age</FormLabel>
+              <NumberInput w={40}>
+                <NumberInputField placeholder="15" />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
             </FormControl>
 
             <FormControl mt={4}>
-              <FormLabel>Grade Class</FormLabel>
-              <Input placeholder='Grade Class' />
+              <FormLabel>Gender</FormLabel>
+              <Select placeholder="Select Gender" w={40} focusBorderColor='#F4B95F'>
+                {fakegender.map((p, i) => (
+                  <option key={i}>{p}</option>
+                ))}
+              </Select>
             </FormControl>
+            </Flex>
+
+            <Flex direction="row">
+            <FormControl mt={4}>
+              <FormLabel>Grade Class</FormLabel>
+              <Select placeholder="Select Grade" w={40} focusBorderColor='#F4B95F'>
+                {fakedb.map((p) => (
+                  <option key={p.grade}>Grade {p.grade} </option>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl mt={4}>
+              <FormLabel>Graybook Case</FormLabel>
+              <Select placeholder="Select Case" w={40} focusBorderColor='#F4B95F'>
+                {fakegender.map((p, i) => (
+                  <option key={i}>{p}</option>
+                ))}
+              </Select>
+            </FormControl>
+            </Flex>
+
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} type='submit'>
-              Save
+            <Button bg="#F4B95F"
+          color="white"
+          _hover={{ bg: "#DAA65D" }} mr={3} type='submit'>
+              Create
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
+
     </Center>
   );
 };
