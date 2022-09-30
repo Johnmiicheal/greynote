@@ -30,7 +30,7 @@ import { AiOutlineFileSearch } from "react-icons/ai";
 
 import { useRouter } from "next/router";
 import GrayLayout from "../src/components/GrayLayout";
-import {fakedb, fakecase, fakegender} from "fakedata.ts";
+import {fakedb, fakecase, fakegender} from "../fakedata";
 
 const Home = () => {
   const router = useRouter();
@@ -185,7 +185,7 @@ const Home = () => {
             <FormControl mt={4}>
               <FormLabel>Graybook Case</FormLabel>
               <Select placeholder="Select Case" w={40} focusBorderColor='#F4B95F'>
-                {fakegender.map((p, i) => (
+                {fakecase.map((p, i) => (
                   <option key={i}>{p}</option>
                 ))}
               </Select>

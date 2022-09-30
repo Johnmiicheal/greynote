@@ -89,3 +89,55 @@ export const fakedb = [
 
   export const fakecase = ["Expulsion", "Suspension", "Fees Default"];
   export const fakegender = ["Male", "Female", "Prefer not to say"];
+
+  export const fakestudents = [
+    {
+      name: "Toluwade Oresanya",
+      age: 15,
+      case: "Expulsion",
+      gender: "Male",
+      variant: "solid",
+      flair: "gray",
+    },
+    {
+      name: "Kunle David",
+      age: 15,
+      case: "Fees Default",
+      gender: "Male",
+      flair: "red",
+      variant: "solid"
+    },
+    {
+      name: "Sharon Nelson",
+      age: 17,
+      case: "Fees Default",
+      gender: "Female",
+      flair: "red",
+      variant: "solid"
+    },
+    {
+      name: "Zainab Ali",
+      age: 16,
+      case: "Suspension",
+      gender: "Female",
+      flair: "orange",
+      variant: "solid"
+    },
+    {
+      name: "Sarah Oresanya",
+      age: 15,
+      case: "Inactive",
+      gender: "Female",
+      flair: "green",
+      variant: "solid"
+    },
+    {
+      name: "Charles Kayode",
+      age: 15,
+      case: "Fees Default",
+      gender: "Male",
+      flair: "red",
+      variant: "solid"
+    },
+    
+  ]
