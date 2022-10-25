@@ -12,20 +12,20 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
+  IconButton,
   TableContainer,
   Badge,
+  Box,
 } from "@chakra-ui/react";
-import Header from "../src/components/Header";
-import { IoPersonAddOutline } from "react-icons/io5";
+import Header from "../../src/components/Header";
+import { IoEllipsisVertical } from "react-icons/io5";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { useRouter } from "next/router";
-import GrayLayout from "../src/components/GrayLayout";
-import NextLink from "next/link";
+import GrayLayout from "../../src/components/GrayLayout";
 
-import { fakedb } from "../fakedata";
+import { fakedb, fakestudents } from "../../fakedata";
 
-const Database = () => {
+const Grade = () => {
   const router = useRouter();
   return (
     <Center>
@@ -51,9 +51,9 @@ const Database = () => {
             px={10}
           >
             <Text fontSize={24} fontWeight={600} color="black">
-              My Student Database
+              Grade Database
             </Text>
-            <Flex direction="row" mt={4}>
+            {/* <Flex direction="row" mt={4}>
               <Flex
                 bg="white"
                 px={4}
@@ -102,42 +102,35 @@ const Database = () => {
                 </Flex>
                 <Text>Search for a candidate</Text>
               </Flex>
-            </Flex>
+            </Flex> */}
 
             <Flex direction="column" mt={5}>
               <TableContainer borderRadius="md" bg="white">
                 <Table variant="simple">
-                  <TableCaption>Graybook Database</TableCaption>
                   <Thead bg="#F0F0F0">
                     <Tr>
-                      <Th>Grade Classes</Th>
-                      <Th>Number of Cases</Th>
+                      <Th>Student</Th>
+                      <Th>Active Case</Th>
+                      <Th>Status</Th>
                       <Th>Action</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {fakedb.map((p) => (
-                      <Tr key={p.grade}>
-                        <NextLink
-                        href={{
-                          pathname: "/[school]/[grade]",
-                          query: { school: "schoolname", grade: `grade-${p.grade}` },
-                        }}
-                        passHref
-                      >
-                        <Th fontWeight={500} _hover={{ color: "#8E6930", fontWeight: 'bold' }} cursor='pointer'> Grade {p.grade}</Th>
-                      </NextLink>
-                        <Th fontWeight={500}>{p.cases}</Th>
+                    {fakestudents.map((p, i) => (
+                      <Tr key={i}>
+                        <Th fontWeight={500}>{p.name}</Th>
+                        <Th fontWeight={500}>{p.case}</Th>
+                        <Th fontWeight={500}>
+                            <Box>
+                                <Badge variant={p.variant} colorScheme={p.flair}>2</Badge>
+                            </Box>
+                        </Th>
+                        <Th>
+                            <IconButton aria-label="action-button" icon={<IoEllipsisVertical />} variant="ghost" />
+                        </Th>
                       </Tr>
                     ))}
                   </Tbody>
-                  <Tfoot>
-                    <Tr>
-                      <Th>Grade Classes</Th>
-                      <Th>Number of Cases</Th>
-                      <Th>Action</Th>
-                    </Tr>
-                  </Tfoot>
                 </Table>
               </TableContainer>
             </Flex>
@@ -148,4 +141,4 @@ const Database = () => {
   );
 };
 
-export default Database;
+export default Grade;

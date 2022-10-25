@@ -32,7 +32,7 @@ export default function Header({ onOpen, ...rest }: any) {
             pointerEvents="none">
               {<IoSearch color="#7A7A7A" />}
           </InputLeftElement>
-          <Input type="text" placeholder="Search" _placeholder={{ color: "#7A7A7A"}} />
+          <Input type="text" placeholder="Search" _placeholder={{ color: "#7A7A7A"}} focusBorderColor='#F4B95F' />
         </InputGroup>
       </Flex>
 
