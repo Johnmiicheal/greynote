@@ -81,7 +81,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
         });
         if (response.error) {
           toast({
-            title: "Register Error.",
+            title: "Error.",
             description: "We could not register the Student",
             status: "error",
             variant: "left-accent",
