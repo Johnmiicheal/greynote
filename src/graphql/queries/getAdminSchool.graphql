@@ -1,0 +1,15 @@
+query GetAdminSchool{
+  getAdminSchool {
+    id
+    createdAt
+    schoolName
+    rcnumber
+    address
+    state
+    country
+    description
+    logoImgUrl
+    bannerImgUrl
+    creator
+  }
+}

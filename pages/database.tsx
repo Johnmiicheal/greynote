@@ -50,9 +50,9 @@ const Database = () => {
             py={5}
             px={10}
           >
-            <Text fontSize={24} fontWeight={600} color="black">
-              My Student Database
-            </Text>
+              <Text fontSize={24} fontWeight={800} color="#212121">
+                My Student Database
+              </Text>
             <Flex direction="row" mt={4}>
               <Flex
                 bg="white"
@@ -112,7 +112,6 @@ const Database = () => {
                     <Tr>
                       <Th>Grade Classes</Th>
                       <Th>Number of Cases</Th>
-                      <Th>Action</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
@@ -135,7 +134,6 @@ const Database = () => {
                     <Tr>
                       <Th>Grade Classes</Th>
                       <Th>Number of Cases</Th>
-                      <Th>Action</Th>
                     </Tr>
                   </Tfoot>
                 </Table>

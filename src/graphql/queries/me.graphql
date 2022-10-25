@@ -1,0 +1,17 @@
+query Me {
+  me {
+    errors {
+      field
+      message
+    }
+    admin {
+      id
+      createdAt
+      adminName
+      phoneNumber
+      isDisabled
+      profileImgUrl
+      email
+    }
+  }
+}
