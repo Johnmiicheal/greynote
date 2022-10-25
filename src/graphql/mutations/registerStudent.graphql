@@ -1,0 +1,19 @@
+mutation RegisterStudent($profileImgUrl: String!, $academicResult: String!, $lgaOrigin: String!, $state: String!, $homeAddress: String!, $parentEmail: String!, $parentNumber: String!, $parentName: String!, $birthYear: String!, $birthMonth: String!, $birthDay: String!, $ageInput: Float!, $gradeClass: String!, $gender: String!, $lastName: String!, $firstName: String!) {
+  registerStudent(profileImgUrl: $profileImgUrl, academicResult: $academicResult, lgaOrigin: $lgaOrigin, state: $state, homeAddress: $homeAddress, parentEmail: $parentEmail, parentNumber: $parentNumber, parentName: $parentName, birthYear: $birthYear, birthMonth: $birthMonth, birthDay: $birthDay, ageInput: $ageInput, gradeClass: $gradeClass, gender: $gender, lastName: $lastName, firstName: $firstName) {
+    student {
+      id
+      createdAt
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      birthDay
+      birthMonth
+      birthYear
+      isArchived
+      profileImgUrl
+      owner
+    }
+  }
+}

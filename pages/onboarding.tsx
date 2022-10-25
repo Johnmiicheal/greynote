@@ -1,8 +1,10 @@
 import React from "react";
-import { Flex, Box, Button, Input, Select, Text, FormControl, FormErrorMessage, FormLabel, Image, Textarea} from "@chakra-ui/react";
+import { Flex, Box, Button, Input, Select, Text, FormControl, FormErrorMessage, FormLabel, Image, Textarea, useToast} from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import { Layout } from "../src/components/Layout";
 import { useRouter } from "next/router";
+import { useRegisterSchoolMutation } from "../src/gql/graphql";
+import { toErrorMap } from "../src/utils/toErrorMap";
 
 const Onboarding = () => {
 
@@ -29,6 +31,8 @@ const Onboarding = () => {
     }
     return error;
   }
+  const [, register] = useRegisterSchoolMutation();
+  const toast = useToast();
 
 
   const router = useRouter();
@@ -40,20 +44,44 @@ const Onboarding = () => {
 
         <Flex direction='column' mt={10} w='full' px={10} pb={10}>
         <Formik
-                  initialValues={{ name: "", address: "" }}
-                  onSubmit={(values, actions) => {
-                    setTimeout(() => {
-                      alert(JSON.stringify(values, null, 2));
-                      actions.setSubmitting(false);
-                    }, 1000);
+                  initialValues={{ schoolName: "", address: "", rcnumber: 0, state: "", country: "" }}
+                  onSubmit={async (values, {setErrors}) => {
+                    console.log(values);
+                    const response = await register({
+                      country: values.country,
+                      state: values.state,
+                      address: values.address,
+                      rcnumber: values.rcnumber,
+                      schoolName: values.schoolName                      
+                    });
+                    if(response.error){
+                      toast({
+                        title: "Register Error.",
+                        description: "We could not register the School",
+                        status: "error",
+                        variant: "left-accent",
+                        duration: 5000,
+                        isClosable: true,
+                      });
+                    } else if (response.data?.registerSchool?.school) {
+                      toast({
+                        title: "School registerd Successfully.",
+                        description: "We've registered your school for you.",
+                        status: "success",
+                        variant: "left-accent",
+                        duration: 5000,
+                        isClosable: true,
+                      });
+                      router.push("/");
+                    }
                   }}
                 >
                   {(props) => (
                     <Form>
-                      <Field name="name" validate={validateName}>
+                      <Field name="schoolName">
                         {({ field, form }: any) => (
                           <FormControl
-                            isInvalid={form.errors.name && form.touched.name}
+                            isInvalid={form.errors.schoolName && form.touched.schoolName}
                           >
                             <FormLabel fontSize={14}>Name of Institution</FormLabel>
                             <Input
@@ -64,7 +92,7 @@ const Onboarding = () => {
                               mb={2}
                             />
                             <FormErrorMessage>
-                              {form.errors.name}
+                              {form.errors.schoolName}
                             </FormErrorMessage>
                           </FormControl>
                         )}
@@ -129,35 +157,13 @@ const Onboarding = () => {
                             isInvalid={form.errors.rcnumber && form.touched.rcnumber}
                           >
                             <FormLabel fontSize={14}>RC Number</FormLabel>
-                              <Input {...field} type='tel' placeholder='RC Number' variant='outline' mb={2} />
+                              <Input {...field} type='number' placeholder='RC Number' variant='outline' mb={2} />
                             <FormErrorMessage>
                               {form.errors.rcnumber}
                             </FormErrorMessage>
                           </FormControl>
                         )}
-                      </Field>
-  
-                      {/* <Field name="password" validate={validatePass}>
-                        {({ field, form }: any) => (
-                          <FormControl
-                            isInvalid={
-                              form.errors.password && form.touched.password
-                            }
-                          >
-                            <FormLabel fontSize={14}>Password</FormLabel>
-                            <Input
-                              {...field}
-                              placeholder="Password"
-                              type="password"
-                              variant="outline"
-                            />
-                            <FormErrorMessage>
-                              {form.errors.password}
-                            </FormErrorMessage>
-                          </FormControl>
-                        )}
-                      </Field> */}
-                      
+                      </Field>                     
   
                       <Button
                         mt={4}

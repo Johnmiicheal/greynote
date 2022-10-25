@@ -1,0 +1,17 @@
+mutation RegisterSchool($country: String!, $state: String!, $address: String!, $rcnumber: Float!, $schoolName: String!) {
+  registerSchool(country: $country, state: $state, address: $address, rcnumber: $rcnumber, schoolName: $schoolName) {
+    school {
+      id
+      createdAt
+      schoolName
+      rcnumber
+      address
+      state
+      country
+      description
+      logoImgUrl
+      bannerImgUrl
+      creator
+    }
+  }
+}
