@@ -42,12 +42,7 @@ import { useMeQuery, useGetAdminSchoolQuery } from "../src/gql/graphql";
 
 const Home = () => {
   const router = useRouter();
-  const toast = useToast({
-    title: 'Please login or register to access this feature',
-    status: 'info',
-    duration: 6000,
-    isClosable: false,
-  });
+  const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -55,7 +50,6 @@ const Home = () => {
 
   const [{ data: me }] = useMeQuery();
   const [{ data: admin }] = useGetAdminSchoolQuery();
-
 
   return (
     <Center>
@@ -153,7 +147,7 @@ const Home = () => {
                   cursor="pointer"
                   role="group"
                   _hover={{ borderWidth: "1px", borderColor: "#FFD088" }}
-                  onClick={ me?.me?.admin ? onRegOpen : toast }
+                  onClick={ onRegOpen }
                 >
                   <Flex
                     color="#8E6930"
@@ -204,7 +198,12 @@ const Home = () => {
                   cursor="pointer"
                   role="group"
                   _hover={{ borderWidth: "1px", borderColor: "#FFD088" }}
-                  onClick={me?.me?.admin ? onOpen : toast}
+                  onClick={me?.me?.admin ? onOpen : () => toast({
+                    title: 'Please login or register to access this feature',
+                    status: 'info',
+                    duration: 6000,
+                    isClosable: false,
+                  })}
                 >
                   <Flex
                     color="#8E6930"

@@ -18,7 +18,7 @@ const GrayLayout = () => {
         align="center"
         justify="start"
       >
-        <Image src="/grayaxis.png" alt="grayaxis" minW="80px" />
+        <Image src="/grayaxis.png" alt="grayaxis" minW="80px" pointerEvents='none'/>
 
         <Flex
           direction="column"
