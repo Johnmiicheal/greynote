@@ -16,6 +16,10 @@ import {
   TableContainer,
   Badge,
   Box,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import Header from "../../src/components/Header";
 import { IoEllipsisVertical } from "react-icons/io5";
@@ -121,12 +125,27 @@ const Grade = () => {
                         <Th fontWeight={500}>{p.name}</Th>
                         <Th fontWeight={500}>{p.case}</Th>
                         <Th fontWeight={500}>
-                            <Box>
-                                <Badge variant={p.variant} colorScheme={p.flair}>2</Badge>
-                            </Box>
+                          <Box>
+                            <Badge variant={p.variant} colorScheme={p.flair}>
+                              2
+                            </Badge>
+                          </Box>
                         </Th>
                         <Th>
-                            <IconButton aria-label="action-button" icon={<IoEllipsisVertical />} variant="ghost" />
+                          <Menu>
+                            <MenuButton
+                               as={IconButton}
+                               aria-label='actions'
+                               icon={<IoEllipsisVertical />}
+                               variant='outline' />
+                            <MenuList>
+                              <MenuItem>Transfer Student</MenuItem>
+                              <MenuItem>Create a GrayCase</MenuItem>
+                              <MenuItem>Update Details</MenuItem>
+                              <MenuItem>Delete</MenuItem>
+                              <MenuItem>View Profile</MenuItem>
+                            </MenuList>
+                          </Menu>
                         </Th>
                       </Tr>
                     ))}

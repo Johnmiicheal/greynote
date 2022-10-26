@@ -94,7 +94,7 @@ export const fakeclass = [
 ];
 
 export const fakecase = ['Expulsion', 'Suspension', 'Fees Default'];
-export const fakegender = ['Male', 'Female', 'Prefer not to say'];
+export const fakegender = ['Male', 'Female'];
 
 export const realState = [
   "Abia",
