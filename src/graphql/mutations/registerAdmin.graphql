@@ -9,9 +9,10 @@ mutation RegisterAdmin($options: UsernamePasswordInput!) {
       createdAt
       adminName
       phoneNumber
+      email
       isDisabled
       profileImgUrl
-      email
+      school
     }
   }
 }

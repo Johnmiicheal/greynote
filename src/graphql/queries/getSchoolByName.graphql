@@ -1,5 +1,5 @@
-mutation RegisterSchool($country: String!, $state: String!, $address: String!, $rcnumber: Float!, $schoolName: String!) {
-  registerSchool(country: $country, state: $state, address: $address, rcnumber: $rcnumber, schoolName: $schoolName) {
+query GetSchoolByName($schoolName: String!) {
+  getSchoolByName(schoolName: $schoolName) {
     errors {
       field
       message

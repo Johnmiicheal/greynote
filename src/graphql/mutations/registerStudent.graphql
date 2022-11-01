@@ -1,5 +1,9 @@
-mutation RegisterStudent($profileImgUrl: String!, $academicResult: String!, $lgaOrigin: String!, $state: String!, $homeAddress: String!, $parentEmail: String!, $parentNumber: String!, $parentName: String!, $birthYear: String!, $birthMonth: String!, $birthDay: String!, $ageInput: Float!, $gradeClass: String!, $gender: String!, $lastName: String!, $firstName: String!) {
-  registerStudent(profileImgUrl: $profileImgUrl, academicResult: $academicResult, lgaOrigin: $lgaOrigin, state: $state, homeAddress: $homeAddress, parentEmail: $parentEmail, parentNumber: $parentNumber, parentName: $parentName, birthYear: $birthYear, birthMonth: $birthMonth, birthDay: $birthDay, ageInput: $ageInput, gradeClass: $gradeClass, gender: $gender, lastName: $lastName, firstName: $firstName) {
+mutation RegisterStudent($profileImgUrl: String!, $academicResult: String!, $lgaOrigin: String!, $state: String!, $homeAddress: String!, $parentEmail: String!, $parentNumber: String!, $parentName: String!, $birthDate: DateTime!, $ageInput: Float!, $gradeClass: String!, $gender: String!, $lastName: String!, $firstName: String!) {
+  registerStudent(profileImgUrl: $profileImgUrl, academicResult: $academicResult, lgaOrigin: $lgaOrigin, state: $state, homeAddress: $homeAddress, parentEmail: $parentEmail, parentNumber: $parentNumber, parentName: $parentName, birthDate: $birthDate, ageInput: $ageInput, gradeClass: $gradeClass, gender: $gender, lastName: $lastName, firstName: $firstName) {
+    errors {
+      field
+      message
+    }
     student {
       id
       createdAt
@@ -8,12 +12,43 @@ mutation RegisterStudent($profileImgUrl: String!, $academicResult: String!, $lga
       gradeClass
       gender
       ageInput
-      birthDay
-      birthMonth
-      birthYear
+      birthDate
       isArchived
       profileImgUrl
-      owner
+      school {
+        errors {
+          field
+          message
+        }
+        school {
+          id
+          createdAt
+          schoolName
+          rcnumber
+          address
+          state
+          country
+          description
+          logoImgUrl
+          bannerImgUrl
+        }
+      }
+      creator {
+        errors {
+          field
+          message
+        }
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+        }
+      }
     }
   }
 }

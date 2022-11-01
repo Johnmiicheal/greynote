@@ -25,15 +25,16 @@ import {
 import { DayPicker } from "react-day-picker";
 import { Formik, Form, Field } from "formik";
 import { fakegender, fakeclass, realState } from "../../fakedata";
-import { useRegisterStudentMutation } from "../gql/graphql";
+import { useRegisterAdminMutation, useRegisterSchoolMutation } from "../gql/graphql";
 import { useRouter } from "next/router";
 import { format } from "date-fns"
 import "react-day-picker/dist/style.css";
 
-export const RegStudent = ({ isOpen, onClose }: any) => {
+export const RegAdmin = ({ isOpen, onClose }: any) => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-  const [, register] = useRegisterStudentMutation();
+  const [, register] = useRegisterAdminMutation();
+  const [, regschool] = useRegisterSchoolMutation();
   
   const router = useRouter();
   const toast = useToast();
@@ -41,7 +42,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
   
   const [tabIndex, setTabIndex] = React.useState(0);
   let currYear = new Date().getFullYear()
-  let footer = <p>Please select a date.</p>;
+  let footer = <p>Please select a day.</p>;
   if (selected) {
     footer = <p>You selected {format(selected, 'PP')}.</p>;
   }
@@ -52,40 +53,20 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
   return (
     <Formik
       initialValues={{
-        firstName: "",
-        lastName: "",
-        gradeClass: "",
-        gender: "",
-        ageInput: 0,
-        birthDate: selected,
-        parentName: "",
-        parentNumber: "",
-        parentEmail: "",
-        homeAddress: "",
+        adminName: "",
+        phoneNumber: "",
+        email: "",
+        password: "",
+        schoolName: "",
+        rcnumber: "",
+        address: "",
         state: "",
-        lgaOrigin: "",
-        academicResult: "",
-        profileImgUrl: "",
+        country: "",
       }}
       onSubmit={async (values, { setErrors }) => {
         console.log(values);
-        const response = await register({
-          profileImgUrl: values.profileImgUrl,
-          academicResult: values.academicResult,
-          lgaOrigin: values.lgaOrigin,
-          state: values.state,
-          homeAddress: values.homeAddress,
-          parentEmail: values.parentEmail,
-          parentNumber: values.parentNumber,
-          parentName: values.parentName,
-          birthDate: selected!,
-          ageInput: values.ageInput,
-          gender: values.gender,
-          gradeClass: values.gradeClass,
-          lastName: values.lastName,
-          firstName: values.firstName,
-        });
-        if (!response.data?.registerStudent?.student) {
+        const response = await register({ options: values });
+        if (response.error) {
           toast({
             title: "Error.",
             description: "We could not register the Student",
@@ -94,7 +75,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
             duration: 5000,
             isClosable: true,
           });
-        } else if (response.data?.registerStudent?.student) {
+        } else if (response.data?.registerAdmin?.admin) {
           toast({
             title: "Student registerd Successfully.",
             description: "We've registered your Student for you.",
@@ -214,7 +195,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                   </ModalHeader>
                   <ModalBody pb={6}>
                     <Form>
-                      <Field name="birthDate">
+                      <Field name="birthDay">
                         {({ field, form }: any) => (
                           <FormControl isRequired>
                             <FormLabel>Date of Birth</FormLabel>

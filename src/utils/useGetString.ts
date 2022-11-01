@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 export const useGetString = () => {
     const router = useRouter();
-    const useStr = typeof router.query.name === "string" ? (router.query.name).toString() : "";
+    const useStr = typeof router.query.schoolName === "string" ? (router.query.schoolName).toString() : "";
     return useStr
 }
 
