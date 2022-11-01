@@ -1,23 +1,38 @@
 import React from 'react';
 import {
   Chart as ChartJS,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
   Tooltip,
+  Filler,
   Legend,
 } from 'chart.js';
-import { Radar } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
   Tooltip,
+  Filler,
   Legend
 );
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top' as const,
+    },
+    title: {
+      display: true,
+      text: 'GrayCase Line Chart',
+    },
+  },
+};
 
 
 const data = {
@@ -33,20 +48,16 @@ const data = {
     fill: true,
     backgroundColor: 'rgba(195, 60, 0, 0.2)',
     borderColor: 'rgb(195, 60, 0)',
-    pointBackgroundColor: 'rgb(195, 60, 0)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgb(195, 60, 0)'
+    borderWidth: 1,
+    tension: 0.3
   }, {
     label: 'Fees Default',
     data: [0, 0, 2, 0, 4, 5, 6, 0, 5, 8, 7, 4, 0, 0, 5, 5, 3, 4],
     fill: true,
     backgroundColor: 'rgba(195, 0, 0, 0.2)',
     borderColor: 'rgb(195, 0, 0)',
-    pointBackgroundColor: 'rgb(195, 0, 0)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgb(195, 0, 0)'
+    borderWidth: 1,
+    tension: 0.3
   },
   {
     label: 'Expulsion',
@@ -54,13 +65,11 @@ const data = {
     fill: true,
     backgroundColor: 'rgba(129, 129, 129, 0.2)',
     borderColor: 'rgb(129, 129, 129)',
-    pointBackgroundColor: 'rgb(129, 129, 129)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgb(129, 129, 129)'
+    borderWidth: 1,
+    tension: 0.3
   }]
 };
 
 export function RadarChart() {
-  return <Radar data={data} />;
+  return <Bar options={options} data={data} />;
 }

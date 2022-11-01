@@ -38,12 +38,12 @@ import { FiSettings, FiBookmark, FiLogOut } from "react-icons/fi";
 import { RiContactsBookLine } from "react-icons/ri";
 import React from "react";
 import { useRouter } from "next/router";
-import { useGetAdminSchoolQuery, useMeQuery } from "../gql/graphql";
+import { useMeQuery, useLogoutUserMutation } from "../gql/graphql";
 
 export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
   const router = useRouter();
-  const [{ data: admin }] = useGetAdminSchoolQuery();
   const [{ data: me }] = useMeQuery();
+  const [,logout] = useLogoutUserMutation();
 
   return (
     <HStack spacing={{ base: "0", md: "3" }} ml={1}>
@@ -71,7 +71,7 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
                 pr={2}
                 display={{ base: "none", md: "flex" }}
               >
-                <Avatar name={admin?.getAdminSchool[0]?.schoolName} size="sm" ml={1} mr={1}>
+                <Avatar name={me?.me?.admin?.school!} size="sm" ml={1} mr={1}>
                   {" "}
                   <AvatarBadge boxSize="1.25em" bg="green.500" />{" "}
                 </Avatar>
@@ -82,7 +82,7 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
                   spacing="1px"
                 >
                   <Text fontWeight={600} fontSize="0.9em">
-                  {admin?.getAdminSchool[0]?.schoolName} 
+                  {me?.me?.admin?.school} 
                   </Text>
                 </VStack>
                 <Box display={{ base: "none", md: "flex" }}>
@@ -99,14 +99,21 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
               mt={-2}
             >
               <MenuGroup title="My School">
-                <NextLink href="#" passHref>
+                <NextLink href={{ pathname: '/[schoolName]', query: { schoolName: me?.me?.admin?.school! } }}  passHref>
                   <MenuItem icon={<CgProfile />}>Profile</MenuItem>
                 </NextLink>
                 <MenuItem icon={<RiContactsBookLine />}>My Database</MenuItem>
                 <MenuItem icon={<FiSettings />}>Settings</MenuItem>
               </MenuGroup>
               <MenuDivider />
-              <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
+              <MenuItem icon={<FiLogOut />} 
+              onClick={() => {
+                logout
+                router.push("/");
+              }}
+              >
+                Logout
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>

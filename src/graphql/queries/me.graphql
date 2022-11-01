@@ -12,6 +12,7 @@ query Me {
       isDisabled
       profileImgUrl
       email
+      school
     }
   }
 }
