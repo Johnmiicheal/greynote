@@ -119,8 +119,8 @@ const Database = () => {
                       <Tr key={p.grade}>
                         <NextLink
                         href={{
-                          pathname: "/[school]/[grade]",
-                          query: { school: "schoolname", grade: `grade-${p.grade}` },
+                          pathname: "/[schoolName]/[grade]",
+                          query: { schoolName: "schoolName", grade: `grade-${p.grade}` },
                         }}
                         passHref
                       >
