@@ -6,6 +6,18 @@
 
 Open [https://graybook.netlify.app](https://graybook.netlify.app) with your browser to see the result.
 
+## Run Locally
+fork the [server code](https://github.com/johnmiicheal/graybook-server) and run the following code:
+
+```
+npm install or yarn install
+
+npm run dev
+```
+
+Requirements: 
+  - Redis
+  - Postgresql database
 
 ## Learn More
 
