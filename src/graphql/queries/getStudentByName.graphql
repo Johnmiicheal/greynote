@@ -1,0 +1,32 @@
+query GetStudentByName($firstName: String!) {
+  getStudentByName(firstName: $firstName) {
+    errors {
+      field
+      message
+    }
+    student {
+      id
+      createdAt
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      birthDate
+      isArchived
+      profileImgUrl
+      creator {
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+        }
+      }
+    }
+  }
+}

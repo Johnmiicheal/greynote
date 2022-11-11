@@ -1,0 +1,51 @@
+query GetStudentById($id: Float!) {
+  getStudentById(id: $id) {
+    errors {
+      field
+      message
+    }
+    student {
+      id
+      createdAt
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      birthDate
+      isArchived
+      profileImgUrl
+      parentName
+      parentEmail
+      parentNumber
+      homeAddress
+      state
+      school {
+        school {
+          id
+          createdAt
+          schoolName
+          rcnumber
+          address
+          state
+          country
+          description
+          logoImgUrl
+          bannerImgUrl
+        }
+      }
+      creator {
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+        }
+      }
+    }
+  }
+}

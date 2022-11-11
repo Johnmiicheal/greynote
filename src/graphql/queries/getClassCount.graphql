@@ -1,0 +1,3 @@
+query getClassCount($gradeClass: String!) {
+  getClassCount(gradeClass: $gradeClass)
+}

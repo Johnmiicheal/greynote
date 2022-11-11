@@ -1,0 +1,36 @@
+query SchoolCases($limit: Float!, $cursor: Float, $sortBy: String) {
+  schoolCases(limit: $limit, cursor: $cursor, sortBy: $sortBy) {
+    grayCase {
+      id
+      createdAt
+      updatedAt
+      category
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      isActive
+      voteCount
+      wasEdited
+      creator {
+        errors {
+          field
+          message
+        }
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+        }
+      }
+    }
+    hasMore
+    cursor
+  }
+}
