@@ -25,7 +25,7 @@ export type Admin = {
   isDisabled: Scalars['Boolean'];
   phoneNumber: Scalars['String'];
   profileImgUrl: Scalars['String'];
-  school?: Maybe<Scalars['String']>;
+  school: Scalars['String'];
 };
 
 export type AdminResponse = {
@@ -188,12 +188,19 @@ export type MutationUpdateSchoolDetailsArgs = {
 
 
 export type MutationUpdateStudentDetailsArgs = {
-  address: Scalars['String'];
-  bannerImgUrl?: InputMaybe<Scalars['String']>;
-  country: Scalars['String'];
+  academicResult: Scalars['String'];
+  ageInput: Scalars['Float'];
+  birthDate: Scalars['DateTime'];
   firstName: Scalars['String'];
-  logoImgUrl?: InputMaybe<Scalars['String']>;
-  rcnumber: Scalars['Float'];
+  gender: Scalars['String'];
+  gradeClass: Scalars['String'];
+  homeAddress: Scalars['String'];
+  lastName: Scalars['String'];
+  lgaOrigin: Scalars['String'];
+  parentEmail: Scalars['String'];
+  parentName: Scalars['String'];
+  parentNumber: Scalars['String'];
+  profileImgUrl: Scalars['String'];
   state: Scalars['String'];
   studentId: Scalars['Float'];
 };
@@ -211,12 +218,17 @@ export type Query = {
   getAdminGrayCases: Array<GrayCase>;
   getAdminStudents: Array<Student>;
   getAdmins: Array<Admin>;
+  getCaseCount: Scalars['Float'];
+  getClassCount: Scalars['Float'];
   getGrayCase: GrayCaseResponse;
   getSchoolByName: SchoolResponse;
   getSchoolStudentsCount: Scalars['Float'];
   getSchools: Array<School>;
   getStudent: Array<Student>;
+  getStudentById: StudentResponse;
   getStudentByName: StudentResponse;
+  getStudentCaseCount: Scalars['Float'];
+  getStudentFromClass: Array<Student>;
   getStudentFromSchool: Array<Student>;
   me?: Maybe<AdminResponse>;
   schoolCases: PaginatedGrayCase;
@@ -226,6 +238,16 @@ export type Query = {
 
 export type QueryAdminArgs = {
   adminName: Scalars['String'];
+};
+
+
+export type QueryGetCaseCountArgs = {
+  id: Scalars['Float'];
+};
+
+
+export type QueryGetClassCountArgs = {
+  gradeClass: Scalars['String'];
 };
 
 
@@ -244,13 +266,28 @@ export type QueryGetSchoolStudentsCountArgs = {
 };
 
 
+export type QueryGetStudentByIdArgs = {
+  id: Scalars['Float'];
+};
+
+
 export type QueryGetStudentByNameArgs = {
   firstName: Scalars['String'];
 };
 
 
+export type QueryGetStudentCaseCountArgs = {
+  id: Scalars['Float'];
+};
+
+
+export type QueryGetStudentFromClassArgs = {
+  gradeClass: Scalars['String'];
+};
+
+
 export type QueryGetStudentFromSchoolArgs = {
-  schoolId: Scalars['Float'];
+  schoolId: Scalars['String'];
 };
 
 
@@ -297,11 +334,17 @@ export type Student = {
   firstName: Scalars['String'];
   gender: Scalars['String'];
   gradeClass: Scalars['String'];
+  homeAddress: Scalars['String'];
   id: Scalars['Float'];
   isArchived: Scalars['Boolean'];
   lastName: Scalars['String'];
+  parentEmail: Scalars['String'];
+  parentName: Scalars['String'];
+  parentNumber: Scalars['String'];
   profileImgUrl: Scalars['String'];
   school: SchoolResponse;
+  state: Scalars['String'];
+  studentCase: GrayCaseResponse;
 };
 
 export type StudentResponse = {
@@ -317,6 +360,14 @@ export type UsernamePasswordInput = {
   phoneNumber: Scalars['String'];
 };
 
+export type AddGrayCaseMutationVariables = Exact<{
+  studentId: Scalars['Float'];
+  category: Scalars['String'];
+}>;
+
+
+export type AddGrayCaseMutation = { __typename?: 'Mutation', addGrayCase: { __typename?: 'GrayCaseResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, voteCount: number, wasEdited: boolean, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } } | null } };
+
 export type CreateNewGrayCaseMutationVariables = Exact<{
   ageInput: Scalars['Float'];
   gradeClass: Scalars['String'];
@@ -327,7 +378,7 @@ export type CreateNewGrayCaseMutationVariables = Exact<{
 }>;
 
 
-export type CreateNewGrayCaseMutation = { __typename?: 'Mutation', createNewGrayCase: { __typename?: 'GrayCaseResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, voteCount: number, wasEdited: boolean, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school?: string | null } | null } } | null } };
+export type CreateNewGrayCaseMutation = { __typename?: 'Mutation', createNewGrayCase: { __typename?: 'GrayCaseResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, voteCount: number, wasEdited: boolean, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } } | null } };
 
 export type LoginAdminMutationVariables = Exact<{
   password: Scalars['String'];
@@ -347,7 +398,7 @@ export type RegisterAdminMutationVariables = Exact<{
 }>;
 
 
-export type RegisterAdminMutation = { __typename?: 'Mutation', registerAdmin: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school?: string | null } | null } };
+export type RegisterAdminMutation = { __typename?: 'Mutation', registerAdmin: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } };
 
 export type RegisterSchoolMutationVariables = Exact<{
   country: Scalars['String'];
@@ -358,7 +409,7 @@ export type RegisterSchoolMutationVariables = Exact<{
 }>;
 
 
-export type RegisterSchoolMutation = { __typename?: 'Mutation', registerSchool: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string, creator?: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school?: string | null } | null } | null } | null } };
+export type RegisterSchoolMutation = { __typename?: 'Mutation', registerSchool: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string, creator?: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } | null } | null } };
 
 export type RegisterStudentMutationVariables = Exact<{
   profileImgUrl: Scalars['String'];
@@ -378,14 +429,28 @@ export type RegisterStudentMutationVariables = Exact<{
 }>;
 
 
-export type RegisterStudentMutation = { __typename?: 'Mutation', registerStudent: { __typename?: 'StudentResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, student?: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, birthDate: any, isArchived: boolean, profileImgUrl: string, school: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string } | null }, creator: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school?: string | null } | null } } | null } };
+export type RegisterStudentMutation = { __typename?: 'Mutation', registerStudent: { __typename?: 'StudentResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, student?: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, birthDate: any, isArchived: boolean, profileImgUrl: string, school: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string } | null }, creator: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } } | null } };
+
+export type GetCaseCountQueryVariables = Exact<{
+  getCaseCountId: Scalars['Float'];
+}>;
+
+
+export type GetCaseCountQuery = { __typename?: 'Query', getCaseCount: number };
+
+export type GetClassCountQueryVariables = Exact<{
+  gradeClass: Scalars['String'];
+}>;
+
+
+export type GetClassCountQuery = { __typename?: 'Query', getClassCount: number };
 
 export type GetSchoolByNameQueryVariables = Exact<{
   schoolName: Scalars['String'];
 }>;
 
 
-export type GetSchoolByNameQuery = { __typename?: 'Query', getSchoolByName: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string, creator?: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school?: string | null } | null } | null } | null } };
+export type GetSchoolByNameQuery = { __typename?: 'Query', getSchoolByName: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string, creator?: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } | null } | null } };
 
 export type GetSchoolStudentsCountQueryVariables = Exact<{
   schoolId: Scalars['Float'];
@@ -394,12 +459,89 @@ export type GetSchoolStudentsCountQueryVariables = Exact<{
 
 export type GetSchoolStudentsCountQuery = { __typename?: 'Query', getSchoolStudentsCount: number };
 
+export type GetStudentByIdQueryVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type GetStudentByIdQuery = { __typename?: 'Query', getStudentById: { __typename?: 'StudentResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, student?: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, birthDate: any, isArchived: boolean, profileImgUrl: string, parentName: string, parentEmail: string, parentNumber: string, homeAddress: string, state: string, school: { __typename?: 'SchoolResponse', school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string } | null }, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } } | null } };
+
+export type GetStudentByNameQueryVariables = Exact<{
+  firstName: Scalars['String'];
+}>;
+
+
+export type GetStudentByNameQuery = { __typename?: 'Query', getStudentByName: { __typename?: 'StudentResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, student?: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, birthDate: any, isArchived: boolean, profileImgUrl: string, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } } | null } };
+
+export type GetStudentFromClassQueryVariables = Exact<{
+  gradeClass: Scalars['String'];
+}>;
+
+
+export type GetStudentFromClassQuery = { __typename?: 'Query', getStudentFromClass: Array<{ __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, birthDate: any, isArchived: boolean, profileImgUrl: string, parentName: string, parentEmail: string, parentNumber: string, homeAddress: string, state: string, school: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string } | null }, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } }> };
+
+export type GetStudentFromSchoolQueryVariables = Exact<{
+  schoolId: Scalars['String'];
+}>;
+
+
+export type GetStudentFromSchoolQuery = { __typename?: 'Query', getStudentFromSchool: Array<{ __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, birthDate: any, isArchived: boolean, profileImgUrl: string, creator: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null }, school: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string, creator?: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } | null } | null } }> };
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, isDisabled: boolean, profileImgUrl: string, email: string, school?: string | null } | null } | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, isDisabled: boolean, profileImgUrl: string, email: string, school: string } | null } | null };
+
+export type SchoolCasesQueryVariables = Exact<{
+  limit: Scalars['Float'];
+  cursor?: InputMaybe<Scalars['Float']>;
+  sortBy?: InputMaybe<Scalars['String']>;
+}>;
 
 
+export type SchoolCasesQuery = { __typename?: 'Query', schoolCases: { __typename?: 'PaginatedGrayCase', hasMore: boolean, cursor: number, grayCase?: Array<{ __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, voteCount: number, wasEdited: boolean, creator: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } }> | null } };
+
+
+export const AddGrayCaseDocument = gql`
+    mutation AddGrayCase($studentId: Float!, $category: String!) {
+  addGrayCase(studentId: $studentId, category: $category) {
+    errors {
+      field
+      message
+    }
+    grayCase {
+      id
+      createdAt
+      updatedAt
+      category
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      isActive
+      voteCount
+      wasEdited
+      creator {
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useAddGrayCaseMutation() {
+  return Urql.useMutation<AddGrayCaseMutation, AddGrayCaseMutationVariables>(AddGrayCaseDocument);
+};
 export const CreateNewGrayCaseDocument = gql`
     mutation CreateNewGrayCase($ageInput: Float!, $gradeClass: String!, $gender: String!, $lastName: String!, $firstName: String!, $category: String!) {
   createNewGrayCase(
@@ -626,6 +768,24 @@ export const RegisterStudentDocument = gql`
 export function useRegisterStudentMutation() {
   return Urql.useMutation<RegisterStudentMutation, RegisterStudentMutationVariables>(RegisterStudentDocument);
 };
+export const GetCaseCountDocument = gql`
+    query getCaseCount($getCaseCountId: Float!) {
+  getCaseCount(id: $getCaseCountId)
+}
+    `;
+
+export function useGetCaseCountQuery(options: Omit<Urql.UseQueryArgs<GetCaseCountQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetCaseCountQuery, GetCaseCountQueryVariables>({ query: GetCaseCountDocument, ...options });
+};
+export const GetClassCountDocument = gql`
+    query getClassCount($gradeClass: String!) {
+  getClassCount(gradeClass: $gradeClass)
+}
+    `;
+
+export function useGetClassCountQuery(options: Omit<Urql.UseQueryArgs<GetClassCountQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetClassCountQuery, GetClassCountQueryVariables>({ query: GetClassCountDocument, ...options });
+};
 export const GetSchoolByNameDocument = gql`
     query GetSchoolByName($schoolName: String!) {
   getSchoolByName(schoolName: $schoolName) {
@@ -677,6 +837,222 @@ export const GetSchoolStudentsCountDocument = gql`
 export function useGetSchoolStudentsCountQuery(options: Omit<Urql.UseQueryArgs<GetSchoolStudentsCountQueryVariables>, 'query'>) {
   return Urql.useQuery<GetSchoolStudentsCountQuery, GetSchoolStudentsCountQueryVariables>({ query: GetSchoolStudentsCountDocument, ...options });
 };
+export const GetStudentByIdDocument = gql`
+    query GetStudentById($id: Float!) {
+  getStudentById(id: $id) {
+    errors {
+      field
+      message
+    }
+    student {
+      id
+      createdAt
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      birthDate
+      isArchived
+      profileImgUrl
+      parentName
+      parentEmail
+      parentNumber
+      homeAddress
+      state
+      school {
+        school {
+          id
+          createdAt
+          schoolName
+          rcnumber
+          address
+          state
+          country
+          description
+          logoImgUrl
+          bannerImgUrl
+        }
+      }
+      creator {
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useGetStudentByIdQuery(options: Omit<Urql.UseQueryArgs<GetStudentByIdQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetStudentByIdQuery, GetStudentByIdQueryVariables>({ query: GetStudentByIdDocument, ...options });
+};
+export const GetStudentByNameDocument = gql`
+    query GetStudentByName($firstName: String!) {
+  getStudentByName(firstName: $firstName) {
+    errors {
+      field
+      message
+    }
+    student {
+      id
+      createdAt
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      birthDate
+      isArchived
+      profileImgUrl
+      creator {
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useGetStudentByNameQuery(options: Omit<Urql.UseQueryArgs<GetStudentByNameQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetStudentByNameQuery, GetStudentByNameQueryVariables>({ query: GetStudentByNameDocument, ...options });
+};
+export const GetStudentFromClassDocument = gql`
+    query GetStudentFromClass($gradeClass: String!) {
+  getStudentFromClass(gradeClass: $gradeClass) {
+    id
+    createdAt
+    firstName
+    lastName
+    gradeClass
+    gender
+    ageInput
+    birthDate
+    isArchived
+    profileImgUrl
+    school {
+      errors {
+        field
+        message
+      }
+      school {
+        id
+        createdAt
+        schoolName
+        rcnumber
+        address
+        state
+        country
+        description
+        logoImgUrl
+        bannerImgUrl
+      }
+    }
+    creator {
+      admin {
+        id
+        createdAt
+        adminName
+        phoneNumber
+        email
+        isDisabled
+        profileImgUrl
+        school
+      }
+    }
+    parentName
+    parentEmail
+    parentNumber
+    homeAddress
+    state
+  }
+}
+    `;
+
+export function useGetStudentFromClassQuery(options: Omit<Urql.UseQueryArgs<GetStudentFromClassQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetStudentFromClassQuery, GetStudentFromClassQueryVariables>({ query: GetStudentFromClassDocument, ...options });
+};
+export const GetStudentFromSchoolDocument = gql`
+    query GetStudentFromSchool($schoolId: String!) {
+  getStudentFromSchool(schoolId: $schoolId) {
+    id
+    createdAt
+    firstName
+    lastName
+    gradeClass
+    gender
+    ageInput
+    birthDate
+    isArchived
+    profileImgUrl
+    creator {
+      errors {
+        field
+        message
+      }
+      admin {
+        id
+        createdAt
+        adminName
+        phoneNumber
+        email
+        isDisabled
+        profileImgUrl
+        school
+      }
+    }
+    school {
+      errors {
+        field
+        message
+      }
+      school {
+        id
+        createdAt
+        schoolName
+        rcnumber
+        address
+        state
+        country
+        description
+        logoImgUrl
+        bannerImgUrl
+        creator {
+          admin {
+            id
+            createdAt
+            adminName
+            phoneNumber
+            email
+            isDisabled
+            profileImgUrl
+            school
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useGetStudentFromSchoolQuery(options: Omit<Urql.UseQueryArgs<GetStudentFromSchoolQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetStudentFromSchoolQuery, GetStudentFromSchoolQueryVariables>({ query: GetStudentFromSchoolDocument, ...options });
+};
 export const MeDocument = gql`
     query Me {
   me {
@@ -700,4 +1076,46 @@ export const MeDocument = gql`
 
 export function useMeQuery(options?: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'>) {
   return Urql.useQuery<MeQuery, MeQueryVariables>({ query: MeDocument, ...options });
+};
+export const SchoolCasesDocument = gql`
+    query SchoolCases($limit: Float!, $cursor: Float, $sortBy: String) {
+  schoolCases(limit: $limit, cursor: $cursor, sortBy: $sortBy) {
+    grayCase {
+      id
+      createdAt
+      updatedAt
+      category
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      isActive
+      voteCount
+      wasEdited
+      creator {
+        errors {
+          field
+          message
+        }
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+        }
+      }
+    }
+    hasMore
+    cursor
+  }
+}
+    `;
+
+export function useSchoolCasesQuery(options: Omit<Urql.UseQueryArgs<SchoolCasesQueryVariables>, 'query'>) {
+  return Urql.useQuery<SchoolCasesQuery, SchoolCasesQueryVariables>({ query: SchoolCasesDocument, ...options });
 };

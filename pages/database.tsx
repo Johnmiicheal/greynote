@@ -15,18 +15,27 @@ import {
   TableCaption,
   TableContainer,
   Badge,
+  useDisclosure
 } from "@chakra-ui/react";
 import Header from "../src/components/Header";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { useRouter } from "next/router";
 import GrayLayout from "../src/components/GrayLayout";
+import { RegStudent } from "../src/components/RegStudent";
 import NextLink from "next/link";
+import { useGetStudentFromClassQuery, useMeQuery, useGetClassCountQuery } from "../src/gql/graphql";
 
-import { fakedb } from "../fakedata";
+import { fakeclass } from "../fakedata";
 
 const Database = () => {
+  const [{ data: me }] = useMeQuery();
   const router = useRouter();
+  const {
+    isOpen: isRegOpen,
+    onOpen: onRegOpen,
+    onClose: onRegClose,
+  } = useDisclosure();
   return (
     <Center>
       <Flex direction="row" justify="space-between" w="full" minH="100vh">
@@ -65,6 +74,7 @@ const Database = () => {
                 cursor="pointer"
                 role="group"
                 _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
+                onClick={onRegOpen}
               >
                 <Flex
                   color="#8E6930"
@@ -75,8 +85,9 @@ const Database = () => {
                 >
                   <Icon as={IoPersonAddOutline} w={7} h={7} />
                 </Flex>
-                <Text>Add Student to a database</Text>
+                <Text>Register a Student</Text>
               </Flex>
+              <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
 
               <Flex
                 bg="white"
@@ -111,29 +122,30 @@ const Database = () => {
                   <Thead bg="#F0F0F0">
                     <Tr>
                       <Th>Grade Classes</Th>
-                      <Th>Number of Cases</Th>
+                      <Th>Number of Students</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {fakedb.map((p) => (
-                      <Tr key={p.grade}>
+                    {fakeclass.map((p, i) => (
                         <NextLink
                         href={{
-                          pathname: "/[schoolName]/[grade]",
-                          query: { schoolName: "schoolName", grade: `grade-${p.grade}` },
+                          pathname: "/[schoolName]/[gradeClass]",
+                          query: { schoolName: me?.me?.admin?.school, gradeClass: p },
                         }}
                         passHref
+                        key={i}
                       >
-                        <Th fontWeight={500} _hover={{ color: "#8E6930", fontWeight: 'bold' }} cursor='pointer'> Grade {p.grade}</Th>
-                      </NextLink>
-                        <Th fontWeight={500}>{p.cases}</Th>
+                      <Tr key={i}>
+                        <Th fontWeight={500} _hover={{ color: "#8E6930", fontWeight: 'bold' }} cursor='pointer'> {p} </Th>
+                        <Th fontWeight={500}>{ NumCount(p)?.getClassCount }</Th>
                       </Tr>
+                      </NextLink>
                     ))}
                   </Tbody>
                   <Tfoot>
                     <Tr>
                       <Th>Grade Classes</Th>
-                      <Th>Number of Cases</Th>
+                      <Th>Number of Students</Th>
                     </Tr>
                   </Tfoot>
                 </Table>
@@ -147,3 +159,12 @@ const Database = () => {
 };
 
 export default Database;
+
+const NumCount = (classNum: string) => {
+  const [{data}] = useGetClassCountQuery({
+    variables: {
+      gradeClass: classNum
+    }
+  })
+  return data;
+}

@@ -6,6 +6,12 @@ export const useGetString = () => {
     return useStr
 }
 
+export const useGetClass = () => {
+  const router = useRouter();
+  const useClass = typeof router.query.gradeClass === "string" ? ( router.query.gradeClass).toString() :  "";
+  return useClass;
+}
+
 
 export const useGetIntId = () => {
   const router = useRouter();
