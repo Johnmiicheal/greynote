@@ -67,6 +67,9 @@ export const NewGrayCase = ({ isOpen, onClose }: any) => {
                   duration: 5000,
                   isClosable: true,
                 });
+                setTimeout(() => {
+                  router.reload();
+                }, 1000);
               } else if (response.data?.createNewGrayCase?.grayCase) {
                 toast({
                   title: "Student registerd Successfully.",
@@ -76,7 +79,9 @@ export const NewGrayCase = ({ isOpen, onClose }: any) => {
                   duration: 5000,
                   isClosable: true,
                 });
-                router.reload();
+                setTimeout(() => {
+                  router.reload();
+                }, 1000);
               }
             }}
           >
@@ -136,7 +141,7 @@ export const NewGrayCase = ({ isOpen, onClose }: any) => {
                           focusBorderColor="#F4B95F"
                         >
                           {fakegender.map((p, i) => (
-                            <option key={i}>{p}</option>
+                            <option value={p} key={i}>{p}</option>
                           ))}
                         </Select>
                       </FormControl>
@@ -156,7 +161,7 @@ export const NewGrayCase = ({ isOpen, onClose }: any) => {
                           focusBorderColor="#F4B95F"
                         >
                           {fakeclass.map((p, i) => (
-                            <option key={i}>{p}</option>
+                            <option value={p} key={i}>{p}</option>
                           ))}
                         </Select>
                       </FormControl>

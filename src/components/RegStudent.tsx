@@ -27,23 +27,23 @@ import { Formik, Form, Field } from "formik";
 import { fakegender, fakeclass, realState } from "../../fakedata";
 import { useRegisterStudentMutation } from "../gql/graphql";
 import { useRouter } from "next/router";
-import { format } from "date-fns"
+import { format } from "date-fns";
 import "react-day-picker/dist/style.css";
 
 export const RegStudent = ({ isOpen, onClose }: any) => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const [, register] = useRegisterStudentMutation();
-  
+
   const router = useRouter();
   const toast = useToast();
   const [selected, setSelected] = React.useState<Date>();
-  
+
   const [tabIndex, setTabIndex] = React.useState(0);
-  let currYear = new Date().getFullYear()
+  let currYear = new Date().getFullYear();
   let footer = <p>Please select a date.</p>;
   if (selected) {
-    footer = <p>You selected {format(selected, 'PP')}.</p>;
+    footer = <p>You selected {format(selected, "PP")}.</p>;
   }
 
   const handleTabsChange = (index: React.SetStateAction<number>) => {
@@ -54,9 +54,9 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
       initialValues={{
         firstName: "",
         lastName: "",
-        gradeClass: "",
-        gender: "",
         ageInput: 0,
+        gender: "",
+        gradeClass: "",
         birthDate: selected,
         parentName: "",
         parentNumber: "",
@@ -80,8 +80,8 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
           parentName: values.parentName,
           birthDate: selected!,
           ageInput: values.ageInput,
-          gender: values.gender,
           gradeClass: values.gradeClass,
+          gender: values.gender,
           lastName: values.lastName,
           firstName: values.firstName,
         });
@@ -94,6 +94,9 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
             duration: 5000,
             isClosable: true,
           });
+          setTimeout(() => {
+            router.reload();
+          }, 1000)
         } else if (response.data?.registerStudent?.student) {
           toast({
             title: "Student registerd Successfully.",
@@ -103,7 +106,9 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
             duration: 5000,
             isClosable: true,
           });
-          router.reload();
+          setTimeout(() => {
+            router.reload();
+          }, 1000)
         }
       }}
     >
@@ -113,7 +118,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
           finalFocusRef={finalRef}
           isOpen={isOpen}
           onClose={onClose}
-          motionPreset='slideInBottom'
+          motionPreset="slideInBottom"
         >
           <ModalOverlay />
           <ModalContent>
@@ -139,6 +144,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                               {...field}
                               ref={initialRef}
                               placeholder="First name"
+                              focusBorderColor="#F4B95F"
                             />
                           </FormControl>
                         )}
@@ -148,39 +154,40 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                         {({ field, form }: any) => (
                           <FormControl mt={4} isRequired>
                             <FormLabel>Last name</FormLabel>
-                            <Input {...field} placeholder="Last name" />
+                            <Input
+                              {...field}
+                              placeholder="Last name"
+                              focusBorderColor="#F4B95F"
+                            />
                           </FormControl>
                         )}
                       </Field>
+
                       <Flex direction="row">
-                        <Field name="gradeClass">
+                        <Field name="ageInput">
                           {({ field, form }: any) => (
                             <FormControl mt={4} isRequired>
-                              <FormLabel>Grade</FormLabel>
-                              <Select
-                                placeholder="Select Grade"
+                              <FormLabel>Age</FormLabel>
+                              <Input
+                                {...field}
+                                placeholder="Age"
+                                type="number"
                                 w={40}
                                 focusBorderColor="#F4B95F"
-                                {...field}
-                              >
-                                {fakeclass.map((p, i) => (
-                                  <option value={p} key={i}>
-                                    {p}
-                                  </option>
-                                ))}
-                              </Select>
+                              />
                             </FormControl>
                           )}
                         </Field>
+
                         <Field name="gender">
                           {({ field, form }: any) => (
                             <FormControl mt={4} isRequired>
                               <FormLabel>Gender</FormLabel>
                               <Select
+                                {...field}
                                 placeholder="Select Gender"
                                 w={40}
                                 focusBorderColor="#F4B95F"
-                                {...field}
                               >
                                 {fakegender.map((p, i) => (
                                   <option value={p} key={i}>
@@ -192,6 +199,26 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                           )}
                         </Field>
                       </Flex>
+
+                      <Field name="gradeClass">
+                        {({ field, form }: any) => (
+                          <FormControl mt={4} isRequired>
+                            <FormLabel>Grade</FormLabel>
+                            <Select
+                              placeholder="Select Grade"
+                              w={40}
+                              focusBorderColor="#F4B95F"
+                              {...field}
+                            >
+                              {fakeclass.map((grade, id) => (
+                                <option value={grade} key={id}>
+                                  {grade}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        )}
+                      </Field>
 
                       <Flex direction="row" justify="end" mt={10}>
                         <Button
@@ -234,37 +261,38 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
 
                       <Field name="lgaOrigin">
                         {({ field, form }: any) => (
-                          <FormControl mt={4} >
+                          <FormControl mt={4}>
                             <FormLabel>LGA of Origin</FormLabel>
                             <Input
                               {...field}
                               placeholder="LGA of Origin"
+                              focusBorderColor="#F4B95F"
                             />
                           </FormControl>
                         )}
                       </Field>
 
-                        <Field name="state">
-                          {({ field, form }: any) => (
-                            <FormControl mt={4} >
-                              <FormLabel>State</FormLabel>
-                              <Select
-                                placeholder="Select State"
-                                w={40}
-                                focusBorderColor="#F4B95F"
-                                {...field}
-                              >
-                                {realState.map((p, i) => (
-                                  <option value={p} key={i}>
-                                    {p}
-                                  </option>
-                                ))}
-                              </Select>
-                            </FormControl>
-                          )}
-                        </Field>
+                      <Field name="state">
+                        {({ field, form }: any) => (
+                          <FormControl mt={4}>
+                            <FormLabel>State</FormLabel>
+                            <Select
+                              placeholder="Select State"
+                              w={40}
+                              focusBorderColor="#F4B95F"
+                              {...field}
+                            >
+                              {realState.map((p, i) => (
+                                <option value={p} key={i}>
+                                  {p}
+                                </option>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        )}
+                      </Field>
 
-                        <Field name="academicResult">
+                      <Field name="academicResult">
                         {({ field, form }: any) => (
                           <FormControl mt={4}>
                             <FormLabel>Academic Result</FormLabel>
@@ -272,6 +300,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                               {...field}
                               placeholder="Link to Academic Result"
                               type="url"
+                              focusBorderColor="#F4B95F"
                             />
                           </FormControl>
                         )}
@@ -293,7 +322,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                   </ModalBody>{" "}
                 </TabPanel>
                 <TabPanel>
-                <ModalHeader textAlign="center">
+                  <ModalHeader textAlign="center">
                     Parent/Guardian Details
                   </ModalHeader>
                   <ModalBody pb={6}>
@@ -306,6 +335,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                               {...field}
                               ref={initialRef}
                               placeholder="Parent/Guardian name"
+                              focusBorderColor="#F4B95F"
                             />
                           </FormControl>
                         )}
@@ -318,6 +348,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                             <Input
                               {...field}
                               placeholder="Parent/Guardian Number"
+                              focusBorderColor="#F4B95F"
                             />
                           </FormControl>
                         )}
@@ -330,6 +361,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                             <Input
                               {...field}
                               placeholder="Parent/Guardian Email"
+                              focusBorderColor="#F4B95F"
                               type="email"
                             />
                           </FormControl>
@@ -343,6 +375,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                             <Textarea
                               {...field}
                               placeholder="Home Address"
+                              focusBorderColor="#F4B95F"
                             />
                           </FormControl>
                         )}

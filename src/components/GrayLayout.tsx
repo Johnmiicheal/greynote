@@ -2,8 +2,10 @@ import { Flex, Icon, Text, Image } from "@chakra-ui/react"
 import { AiFillHome, AiOutlineHome, AiOutlineProfile, AiFillProfile } from "react-icons/ai"
 import { RiContactsBookFill, RiContactsBookLine } from "react-icons/ri"
 import { useRouter } from "next/router"
+import { useMeQuery } from "../gql/graphql"
 
 const GrayLayout = () => {
+  const [{ data: me }] = useMeQuery();
     const router = useRouter();
     return(
         <Flex
@@ -11,7 +13,7 @@ const GrayLayout = () => {
         bg="#212121"
         minH="full"
         w="130px"
-        pos="absolute"
+        pos="fixed"
         mx="auto"
         px={5}
         py={4}
@@ -52,6 +54,7 @@ const GrayLayout = () => {
           cursor="pointer"
           color={ router.pathname ==="/graycase" ? "#FFCE83" : "gray.200" }
           onClick={() => router.push("/graycase")}
+          display={!me?.me?.admin ? "none" : "flex"}
         >
           <Icon as={router.pathname === "/graycase" ? RiContactsBookFill : RiContactsBookLine} w={6} h={6} mb={2} />
           <Text fontSize={13} fontWeight={400}>
@@ -72,6 +75,7 @@ const GrayLayout = () => {
           cursor="pointer"
           color={ router.pathname ==="/database" ? "#FFCE83" : "gray.200" }
           onClick={() => router.push("/database")}
+          display={!me?.me?.admin ? "none" : "flex"}
         >
           <Icon as={router.pathname === "/database" ? AiFillProfile : AiOutlineProfile} w={6} h={6} mb={2} />
           <Text fontSize={13} fontWeight={400}>

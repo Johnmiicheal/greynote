@@ -26,11 +26,21 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { useRouter } from "next/router";
 import GrayLayout from "../../src/components/GrayLayout";
+import { useGetStudentFromSchoolQuery, useMeQuery } from "../../src/gql/graphql";
+import NextLink from "next/link";
+import { useGetClassFromUrl } from "../../src/utils/useGetClassFromUrl";
 
 import { fakedb, fakestudents } from "../../fakedata";
 
 const Grade = () => {
   const router = useRouter();
+  const [{ data: me }] = useMeQuery();
+  const [{ data: student }] = useGetStudentFromSchoolQuery({
+    variables: {
+      schoolId: me?.me?.admin?.school!
+    }
+  })
+  const [{ data: stud }] = useGetClassFromUrl();
   return (
     <Center>
       <Flex direction="row" justify="space-between" w="full" minH="100vh">
@@ -113,24 +123,23 @@ const Grade = () => {
                 <Table variant="simple">
                   <Thead bg="#F0F0F0">
                     <Tr>
-                      <Th>Student</Th>
-                      <Th>Active Case</Th>
-                      <Th>Status</Th>
+                      <Th>First Name</Th>
+                      <Th>Last Name</Th>
+                      <Th>Age</Th>
+                      <Th>Grade</Th>
+                      <Th>Gender</Th>
                       <Th>Action</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {fakestudents.map((p, i) => (
-                      <Tr key={i}>
-                        <Th fontWeight={500}>{p.name}</Th>
-                        <Th fontWeight={500}>{p.case}</Th>
-                        <Th fontWeight={500}>
-                          <Box>
-                            <Badge variant={p.variant} colorScheme={p.flair}>
-                              2
-                            </Badge>
-                          </Box>
-                        </Th>
+                    { stud?.getStudentFromClass?.map((p) => (
+                      <Tr key={p.id}>
+                        <Th fontWeight={500}>{p.firstName}</Th>
+                        <Th fontWeight={500}>{p.lastName}</Th>
+                        <Th fontWeight={500}>{p.ageInput}</Th>
+                        <Th fontWeight={500}>{p.gradeClass}</Th>
+                        <Th fontWeight={500}>{p.gender}</Th>
+
                         <Th>
                           <Menu>
                             <MenuButton
@@ -139,11 +148,11 @@ const Grade = () => {
                                icon={<IoEllipsisVertical />}
                                variant='outline' />
                             <MenuList>
-                              <MenuItem>Transfer Student</MenuItem>
-                              <MenuItem>Create a GrayCase</MenuItem>
+                              <NextLink href={{ pathname: '/s/[id]', query: { id: p?.id } }} passHref>
+                                <MenuItem>View Profile</MenuItem>
+                              </NextLink>
                               <MenuItem>Update Details</MenuItem>
-                              <MenuItem>Delete</MenuItem>
-                              <MenuItem>View Profile</MenuItem>
+                              <MenuItem>Archive Student</MenuItem>
                             </MenuList>
                           </Menu>
                         </Th>

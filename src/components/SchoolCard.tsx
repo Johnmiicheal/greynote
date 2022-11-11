@@ -3,7 +3,7 @@ import {
   Flex,
   Image,
   Text,
-  HStack,
+  useDisclosure,
   Badge,
   Button,
   VStack,
@@ -33,6 +33,9 @@ import {
   IoLinkOutline,
 } from "react-icons/io5";
 import { useRouter } from "next/router";
+import { format } from "date-fns";
+import { RegStudent } from "./RegStudent";
+import { NewGrayCase } from "./NewGrayCase";
 
 export default function GroupCard() {
   const router = useRouter();
@@ -43,26 +46,14 @@ export default function GroupCard() {
       schoolId: data?.getSchoolByName?.school?.id!,
     },
   });
-  const monthshort = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  let d = new Date(data?.getSchoolByName?.school?.createdAt);
-  let day = d.getDate();
-  let month = monthshort[d.getMonth()];
-  let year = d.getFullYear();
 
   const members = numbers?.getSchoolStudentsCount;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isRegOpen,
+    onOpen: onRegOpen,
+    onClose: onRegClose,
+  } = useDisclosure();
 
   return (
     <Stack spacing={4} direction="column">
@@ -91,14 +82,14 @@ export default function GroupCard() {
               </Text>
 
               <Text fontSize="1rem" mr={2}>
-                <b>103</b> Posts
+                <b>127</b> Cases
               </Text>
               <Box>
                 <Badge
                   bgGradient="linear(to-r, green.200, pink.500)"
                   variant="solid"
                 >
-                  L3 GROUP
+                  L3 ADMIN
                 </Badge>
               </Box>
             </Stack>
@@ -108,7 +99,7 @@ export default function GroupCard() {
               <Icon as={HiOutlineCake} mr={2} />
 
               <Text>
-                Created on {month} {day}, {year}{" "}
+                Created on {format(new Date(data?.getSchoolByName?.school?.createdAt), 'PP')}
               </Text>
             </Flex>
           </Flex>
@@ -125,6 +116,7 @@ export default function GroupCard() {
             }}
             ml={4}
             mt={2}
+            onClick={onRegOpen}
           >
             Register Student
           </Button>
@@ -141,9 +133,12 @@ export default function GroupCard() {
             }}
             ml={4}
             mt={2}
+            onClick={onOpen}
           >
             Create GrayCase
           </Button>
+          <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
+          <NewGrayCase isOpen={isOpen} onClose={onClose} />
 
           <Divider mt={3} />
 
@@ -298,6 +293,7 @@ export default function GroupCard() {
           </NextLink>
         </Box>
       </Flex>
+      
     </Stack>
   );
 }

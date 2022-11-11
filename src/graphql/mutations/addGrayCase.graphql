@@ -1,0 +1,34 @@
+mutation AddGrayCase($studentId: Float!, $category: String!) {
+  addGrayCase(studentId: $studentId, category: $category) {
+    errors {
+      field
+      message
+    }
+    grayCase {
+      id
+      createdAt
+      updatedAt
+      category
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      isActive
+      voteCount
+      wasEdited
+      creator {
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+query getCaseCount($getCaseCountId: Float!) {
+  getCaseCount(id: $getCaseCountId)
+}

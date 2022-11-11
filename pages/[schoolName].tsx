@@ -27,15 +27,23 @@ import {
   IoBookmarksOutline,
   IoCaretUpCircleOutline,
 } from "react-icons/io5";
+import { MdOutlinePersonPin, MdOutlineArchive, MdOutlineViewList } from "react-icons/md"
 import GrayLayout from "../src/components/GrayLayout";
 import Header from "../src/components/Header";
+import Cases from "../src/components/Cases"
 import { useGetSchoolFromUrl } from "../src/utils/useGetSchoolFromUrl";
-import { useMeQuery } from "../src/gql/graphql";
+import { useMeQuery, useSchoolCasesQuery } from "../src/gql/graphql";
 import SchoolCard from "../src/components/SchoolCard";
 
 const School = () => {
   const [{ data }] = useGetSchoolFromUrl();
   const [{ data: me }] = useMeQuery();
+  const [{ data: cases, fetching }] = useSchoolCasesQuery({
+    variables:{
+      limit: 15,
+      cursor: 0,
+    }
+  })
 
   return (
     <Center>
@@ -56,6 +64,8 @@ const School = () => {
             mt={2}
             bg="#E6E6E6"
             h="full"
+            minW="full"
+            justify="center"
             borderRadius="20px 20px 0 0 "
             py={5}
             px={10}
@@ -63,8 +73,7 @@ const School = () => {
             <Box w={{ base: "full", lg: "650px" }}>
               <Flex
                 direction="column"
-                align={{ base: "center", md: "start" }}
-                justify={{ md: "flex-start" }}
+                justify="center"
                 mt={{ base: 2 }}
                 bg="white"
                 borderRadius="md"
@@ -200,7 +209,7 @@ const School = () => {
                     fontWeight={600}
                     color="gray.500"
                   >
-                    <Tab _selected={{ color: "blue.300" }}>
+                    <Tab _selected={{ color: "#F4B95F" }}>
                       <Flex
                         align="center"
                         borderRadius="md"
@@ -214,16 +223,16 @@ const School = () => {
                         pl={1}
                       >
                         <Icon
-                          as={IoGridOutline}
+                          as={MdOutlineViewList}
                           fontSize={{ base: 24, md: 26 }}
                         />
                         <Text ml="1" pr={2}>
-                          Posts
+                          All Cases
                         </Text>
                       </Flex>
                     </Tab>
 
-                    <Tab _selected={{ color: "#487D8D" }}>
+                    <Tab _selected={{ color: "#F4B95F" }}>
                       <Flex
                         align="center"
                         borderRadius="md"
@@ -237,17 +246,17 @@ const School = () => {
                         pl={1}
                       >
                         <Icon
-                          as={IoChatbubbleEllipsesOutline}
+                          as={MdOutlinePersonPin}
                           fontSize={{ base: 24, md: 26 }}
                         />
                         <Text ml="1" pr={2}>
-                          Comments
+                          Active Cases
                         </Text>
                       </Flex>
                     </Tab>
 
                     <Tab
-                      _selected={{ color: "#FF377F" }}
+                      _selected={{ color: "#F4B95F" }}
                       display={
                         me?.me?.admin?.id ===
                         data?.getSchoolByName?.school?.creator?.admin?.id
@@ -268,49 +277,18 @@ const School = () => {
                         pl={1}
                       >
                         <Icon
-                          as={IoBookmarksOutline}
+                          as={MdOutlineArchive}
                           fontSize={{ base: 24, md: 26 }}
                         />
                         <Text ml="1" pr={2}>
-                          Saved
-                        </Text>
-                      </Flex>
-                    </Tab>
-
-                    <Tab
-                      _selected={{ color: "#5E00AB" }}
-                      display={
-                        me?.me?.admin?.id ===
-                        data?.getSchoolByName?.school?.creator?.admin?.id
-                          ? "flex"
-                          : "none"
-                      }
-                    >
-                      <Flex
-                        align="center"
-                        borderRadius="md"
-                        role="group"
-                        cursor="pointer"
-                        _hover={{
-                          bg: "gray.200",
-                        }}
-                        mr={{ base: 0, md: 2 }}
-                        py={1}
-                        pl={1}
-                      >
-                        <Icon
-                          as={IoCaretUpCircleOutline}
-                          fontSize={{ base: 24, md: 26 }}
-                        />
-                        <Text ml="1" pr={2}>
-                          Upvotes
+                          Archived Cases
                         </Text>
                       </Flex>
                     </Tab>
                   </TabList>
                   <TabPanels>
-                    {/* USER POST SECTION */}
-                    {/* <TabPanel>
+                    {/*** ALL CASES SECTION ***/}
+                    <TabPanel>
                   {!data && fetching ? (
                     <VStack spacing={{ base: 0, md: 5 }}>
                       <Box
@@ -342,8 +320,8 @@ const School = () => {
                       </Box>
                     </VStack>
                   ) : (
-                    userpost?.userPosts?.posts?.map((p) => (
-                      <UserPosts p={p} key={p.id} />
+                    cases?.schoolCases?.grayCase?.map((p) => (
+                      <Cases p={p} key={p?.id} />
                     ))
                   )}
                   <Flex justify="center">
@@ -359,7 +337,8 @@ const School = () => {
                   </Flex>
                 </TabPanel>
 
-               
+                {/*** Active Cases Section ***/}
+               {/* 
                 <TabPanel>
                   {!data && fetching ? (
                     <VStack spacing={{ base: 0, md: 5 }}>
