@@ -33,11 +33,11 @@ import {
   IoLinkOutline,
 } from "react-icons/io5";
 import { useRouter } from "next/router";
-import { format } from "date-fns";
+import { format, formatISO } from "date-fns";
 import { RegStudent } from "./RegStudent";
 import { NewGrayCase } from "./NewGrayCase";
 
-export default function GroupCard() {
+export default function SchoolCard() {
   const router = useRouter();
   const [{ data }] = useGetSchoolFromUrl();
   const [{ data: me }] = useMeQuery();
@@ -54,6 +54,25 @@ export default function GroupCard() {
     onOpen: onRegOpen,
     onClose: onRegClose,
   } = useDisclosure();
+
+  const monthshort = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let d = new Date(data?.getSchoolByName?.school?.createdAt);
+  let day = d.getDate();
+  let month = monthshort[d.getMonth()];
+  let year = d.getFullYear();
 
   return (
     <Stack spacing={4} direction="column">
@@ -77,7 +96,7 @@ export default function GroupCard() {
               <Text fontSize="1rem" fontWeight={400} mr={2}>
                 <b> {members} </b>{" "}
                 <Text fontSize="1rem" fontWeight={400}>
-                  {members! > 1 ? "Members" : "Member"}
+                  {members! > 1 ? "Students" : "Student"}
                 </Text>
               </Text>
 
@@ -99,7 +118,7 @@ export default function GroupCard() {
               <Icon as={HiOutlineCake} mr={2} />
 
               <Text>
-                Created on {format(new Date(data?.getSchoolByName?.school?.createdAt), 'PP')}
+                Created on {month} {day}, {year}{" "}
               </Text>
             </Flex>
           </Flex>

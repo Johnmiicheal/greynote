@@ -6,6 +6,7 @@ query GetStudentById($id: Float!) {
     }
     student {
       id
+      grayId
       createdAt
       firstName
       lastName
@@ -20,6 +21,7 @@ query GetStudentById($id: Float!) {
       parentNumber
       homeAddress
       state
+      academicResult
       school {
         school {
           id

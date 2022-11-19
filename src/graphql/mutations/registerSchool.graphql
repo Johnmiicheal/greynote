@@ -1,5 +1,5 @@
-mutation RegisterSchool($country: String!, $state: String!, $address: String!, $rcnumber: Float!, $schoolName: String!) {
-  registerSchool(country: $country, state: $state, address: $address, rcnumber: $rcnumber, schoolName: $schoolName) {
+mutation RegisterSchool($logoImgUrl: String!, $country: String!, $state: String!, $address: String!, $rcnumber: Float!, $schoolName: String!) {
+  registerSchool(logoImgUrl: $logoImgUrl, country: $country, state: $state, address: $address, rcnumber: $rcnumber, schoolName: $schoolName) {
     errors {
       field
       message
@@ -16,10 +16,6 @@ mutation RegisterSchool($country: String!, $state: String!, $address: String!, $
       logoImgUrl
       bannerImgUrl
       creator {
-        errors {
-          field
-          message
-        }
         admin {
           id
           createdAt
@@ -29,6 +25,10 @@ mutation RegisterSchool($country: String!, $state: String!, $address: String!, $
           isDisabled
           profileImgUrl
           school
+        }
+        errors {
+          field
+          message
         }
       }
     }

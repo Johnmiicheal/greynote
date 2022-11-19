@@ -117,20 +117,6 @@ const School = () => {
                       </Flex>
 
                       <Flex direction="column">
-                        <Stack direction="row" spacing={10} mt={2}>
-                          <Text fontSize="1rem" fontWeight={400} mr={2}>
-                            <b>100k</b> Upvotes
-                          </Text>
-
-                          <Text fontSize="1rem" mr={2}>
-                            <b>103</b> Points
-                          </Text>
-                          <Box>
-                            <Badge colorScheme="pink" variant="solid">
-                              L1 USER
-                            </Badge>
-                          </Box>
-                        </Stack>
                         <Box mt={2}>
                           <Text>{data?.getSchoolByName?.school?.address}</Text>
                           <Text fontWeight="light">
@@ -140,6 +126,7 @@ const School = () => {
                         <Flex
                           direction="row"
                           mt={2}
+                          justify="end"
                           display={
                             me?.me?.admin?.id ===
                             data?.getSchoolByName?.school?.creator?.admin?.id
@@ -173,7 +160,7 @@ const School = () => {
                       <Flex
                         direction="row"
                         justify="flex-end"
-                        align="center"
+                        
                         display={
                           me?.me?.admin?.id ===
                           data?.getSchoolByName?.school?.creator?.admin?.id

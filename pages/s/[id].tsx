@@ -14,11 +14,13 @@ import {
 } from "@chakra-ui/react";
 import GrayLayout from "../../src/components/GrayLayout";
 import Header from "../../src/components/Header";
+import { PDFViewer } from "../../src/components/PDFViewer";
 import BarLoader from "react-spinners/BarLoader";
 import { useGetStudentById } from "../../src/utils/useGetStudentById";
 import { AddGrayCase } from "../../src/components/AddGrayCase";
-import { useGetCaseCountQuery, useMeQuery } from "../../src/gql/graphql";
+import { useGetCaseCountQuery, useMeQuery, useGetStudentCasesQuery, useTransferStudentMutation } from "../../src/gql/graphql";
 import { format } from "date-fns";
+import { TransferStudent } from "../../src/components/TransferStudent";
 
 const Student = () => {
   const [{ data, fetching, error }] = useGetStudentById();
@@ -28,7 +30,16 @@ const Student = () => {
       getCaseCountId: data?.getStudentById?.student?.id!,
     },
   });
+  const [{ data: cases }] = useGetStudentCasesQuery({
+    variables: {
+      studentId: data?.getStudentById?.student?.id!
+    }
+  })
+
+  const [, transfer] = useTransferStudentMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isTransferOpen, onOpen: onTransferOpen, onClose: onTransferClose } = useDisclosure();
+  const { isOpen: isFileOpen, onOpen: onFileOpen, onClose: onFileClose } = useDisclosure()
   let student = null;
   if (fetching) {
     student = (
@@ -82,6 +93,9 @@ const Student = () => {
                       " " +
                       data?.getStudentById?.student?.lastName}
                   </Text>
+                  <Text fontWeight={500} fontSize={20}>
+                    Graybook ID: {data?.getStudentById?.student?.grayId}
+                  </Text>
                   <Flex justify="space-between" mt={2}>
                     <Text>
                       <strong>{data?.getStudentById?.student?.ageInput}</strong>{" "}
@@ -102,6 +116,7 @@ const Student = () => {
                       bg="#F4B95F"
                       _hover={{ bg: "#DAA65D" }}
                       color="white"
+                      onClick={onTransferOpen}
                     >
                       {data?.getStudentById?.student?.creator?.admin?.id ===
                       me?.me?.admin?.id
@@ -117,6 +132,7 @@ const Student = () => {
                   </Flex>
                 </Flex>
               </Flex>
+              <TransferStudent id={data?.getStudentById?.student?.id!} isOpen={isTransferOpen} onClose={onTransferClose} />
               <AddGrayCase
                 id={data?.getStudentById?.student?.id!}
                 isOpen={isOpen}
@@ -139,6 +155,12 @@ const Student = () => {
                     </ListItem>
                     <ListItem>
                         <strong>State of Origin: </strong>{data?.getStudentById?.student?.state}
+                    </ListItem>
+                    <ListItem>
+                      <Button onClick={onFileOpen}>
+                        View Student Result
+                      </Button>
+                      <PDFViewer path={data?.getStudentById?.student?.academicResult} isOpen={isFileOpen} onClose={onFileClose} />
                     </ListItem>
                     </UnorderedList>
               </Flex>
@@ -164,6 +186,18 @@ const Student = () => {
               </Flex>
 
             </Flex>
+            <Flex mt={5} bg="white" direction="column" w="550px" borderRadius="lg" py={2} px={5}>
+            <Text fontWeight="bold" fontSize={22}>
+              Active GrayCases
+            </Text>
+                <UnorderedList px={2}>
+                      { cases?.getStudentCases?.map((p, i) => (
+                        <ListItem key={i}>
+                          {p.category} created on {format(new Date(p.createdAt), 'PP')}
+                        </ListItem>
+                      ))}
+                </UnorderedList>
+          </Flex>
             </Flex>
           </Flex>
         </Flex>

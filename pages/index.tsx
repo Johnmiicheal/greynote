@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Flex,
   Text,
@@ -271,6 +271,9 @@ const Home = () => {
         </Flex>
         <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
         <NewGrayCase isOpen={isOpen} onClose={onClose} />
+
+
+        
       </Center>
     );
   }
