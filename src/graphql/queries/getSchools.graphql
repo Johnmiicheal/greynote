@@ -1,0 +1,31 @@
+query GetSchools {
+  getSchools {
+    id
+    createdAt
+    schoolName
+    rcnumber
+    address
+    state
+    country
+    description
+    logoImgUrl
+    bannerImgUrl
+    creator {
+      errors {
+        field
+        message
+      }
+      admin {
+        id
+        createdAt
+        adminName
+        phoneNumber
+        email
+        isDisabled
+        profileImgUrl
+        school
+        schoolImg
+      }
+    }
+  }
+}

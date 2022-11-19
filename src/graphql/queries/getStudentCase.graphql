@@ -1,0 +1,32 @@
+query GetStudentCases($studentId: Float!) {
+  getStudentCases(studentId: $studentId) {
+    id
+    createdAt
+    updatedAt
+    category
+    firstName
+    lastName
+    gradeClass
+    gender
+    ageInput
+    isActive
+    voteCount
+    wasEdited
+    creator {
+      errors {
+        field
+        message
+      }
+      admin {
+        id
+        createdAt
+        adminName
+        phoneNumber
+        email
+        isDisabled
+        profileImgUrl
+        school
+      }
+    }
+  }
+}
