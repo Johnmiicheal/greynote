@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -16,7 +16,7 @@ import {
   Select,
   useToast,
   Tabs,
-  TabList,
+  Avatar,
   TabPanels,
   Tab,
   TabPanel,
@@ -29,6 +29,7 @@ import { useRegisterStudentMutation } from "../gql/graphql";
 import { useRouter } from "next/router";
 import { format } from "date-fns";
 import "react-day-picker/dist/style.css";
+import FileBase from "react-file-base64";
 
 export const RegStudent = ({ isOpen, onClose }: any) => {
   const initialRef = React.useRef(null);
@@ -38,6 +39,19 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
   const router = useRouter();
   const toast = useToast();
   const [selected, setSelected] = React.useState<Date>();
+  type State = {
+    image: string;
+  };
+  type FileState = {
+    file: string;
+  };
+  const [data, setData] = useState<State>({
+      image: "",
+    });
+  const [result, setResult] = useState<FileState>({
+    file: "",
+  })
+    
 
   const [tabIndex, setTabIndex] = React.useState(0);
   let currYear = new Date().getFullYear();
@@ -70,8 +84,8 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
       onSubmit={async (values, { setErrors }) => {
         console.log(values);
         const response = await register({
-          profileImgUrl: values.profileImgUrl,
-          academicResult: values.academicResult,
+          profileImgUrl: data.image,
+          academicResult: result.file,
           lgaOrigin: values.lgaOrigin,
           state: values.state,
           homeAddress: values.homeAddress,
@@ -94,9 +108,9 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
             duration: 5000,
             isClosable: true,
           });
-          setTimeout(() => {
-            router.reload();
-          }, 1000)
+          // setTimeout(() => {
+          //   router.reload();
+          // }, 1000)
         } else if (response.data?.registerStudent?.student) {
           toast({
             title: "Student registerd Successfully.",
@@ -106,9 +120,9 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
             duration: 5000,
             isClosable: true,
           });
-          setTimeout(() => {
-            router.reload();
-          }, 1000)
+          // setTimeout(() => {
+          //   router.reload();
+          // }, 1000)
         }
       }}
     >
@@ -124,11 +138,6 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
           <ModalContent>
             <ModalCloseButton />
             <Tabs index={tabIndex} variant="enclosed" isFitted>
-              <TabList mt={10}>
-                <Tab>One</Tab>
-                <Tab>Two</Tab>
-                <Tab>Three</Tab>
-              </TabList>
               <TabPanels>
                 <TabPanel>
                   <ModalHeader textAlign="center">
@@ -136,6 +145,24 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                   </ModalHeader>
                   <ModalBody pb={6}>
                     <Form>
+                      <Field name="profileImgUrl">
+                        {({ field, form }: any) => (
+                          <FormControl isRequired>
+                            <FormLabel>Upload Student Image</FormLabel>
+                            <Avatar src={data.image} size="xl" />
+                            <FileBase
+                              {...field}
+                              type="file"
+                              multiple={false}
+                              accept="image/*"
+                              onDone={({ base64 }: { base64: string }) =>
+                                setData({ ...data, image: base64 })
+                              }
+                            />
+                          </FormControl>
+                        )}
+                        </Field>
+                      
                       <Field name="firstName">
                         {({ field, form }: any) => (
                           <FormControl isRequired>
@@ -295,13 +322,15 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                       <Field name="academicResult">
                         {({ field, form }: any) => (
                           <FormControl mt={4}>
-                            <FormLabel>Academic Result</FormLabel>
-                            <Input
-                              {...field}
-                              placeholder="Link to Academic Result"
-                              type="url"
-                              focusBorderColor="#F4B95F"
-                            />
+                            <FormLabel>Upload Academic Result</FormLabel>
+                            <FileBase
+                            {...field}
+                            type="file"
+                            multiple={false}
+                            onDone={({ base64 }: { base64: string }) =>
+                              setResult({ ...result, file: base64 })
+                            }
+                          />
                           </FormControl>
                         )}
                       </Field>

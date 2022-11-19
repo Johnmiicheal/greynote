@@ -1,10 +1,10 @@
-import React from "react";
-import { Flex, Box, Button, Input, Select, Text, FormControl, FormErrorMessage, FormLabel, Image, Textarea, useToast} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Flex, Box, Button, Input, Avatar, Select, Text, FormControl, FormErrorMessage, FormLabel, Image, Textarea, useToast} from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import { Layout } from "../src/components/Layout";
 import { useRouter } from "next/router";
 import { useRegisterSchoolMutation } from "../src/gql/graphql";
-import { toErrorMap } from "../src/utils/toErrorMap";
+import FileBase from "react-file-base64";
 
 const Onboarding = () => {
 
@@ -33,6 +33,12 @@ const Onboarding = () => {
   }
   const [, register] = useRegisterSchoolMutation();
   const toast = useToast();
+  type State = {
+    image: string;
+  };
+  const [data, setData] = useState<State>({
+      image: "",
+    });
 
 
   const router = useRouter();
@@ -44,10 +50,11 @@ const Onboarding = () => {
 
         <Flex direction='column' mt={10} w='full' px={10} pb={10}>
         <Formik
-                  initialValues={{ schoolName: "", address: "", rcnumber: 0, state: "", country: "" }}
+                  initialValues={{ logoImgUrl: "", schoolName: "", address: "", rcnumber: 0, state: "", country: "" }}
                   onSubmit={async (values, {setErrors}) => {
                     console.log(values);
                     const response = await register({
+                      logoImgUrl: data.image,
                       country: values.country,
                       state: values.state,
                       address: values.address,
@@ -78,12 +85,30 @@ const Onboarding = () => {
                 >
                   {(props) => (
                     <Form>
+                    <Field name="logoImgUrl">
+                        {({ field, form }: any) => (
+                          <FormControl isRequired>
+                            <FormLabel>Upload School Logo</FormLabel>
+                            <Avatar src={data.image} size="xl" mb={2} />
+                            <FileBase
+                              {...field}
+                              type="file"
+                              multiple={false}
+                              accept="image/*"
+                              onDone={({ base64 }: { base64: string }) =>
+                                setData({ ...data, image: base64 })
+                              }
+                            />
+                          </FormControl>
+                        )}
+                        </Field>
+
                       <Field name="schoolName">
                         {({ field, form }: any) => (
                           <FormControl
                             isInvalid={form.errors.schoolName && form.touched.schoolName}
                           >
-                            <FormLabel fontSize={14}>Name of Institution</FormLabel>
+                            <FormLabel mt={2} fontSize={14}>Name of Institution</FormLabel>
                             <Input
                               {...field}
                               placeholder="Name of Institution"

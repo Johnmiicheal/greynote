@@ -124,7 +124,7 @@ const Login = () => {
                         </FormControl>
                       )}
                     </Field>
-                    <Flex justify='center'>
+                    <Flex align='center'>
                       <Text
                         color="#F4B95F"
                         fontSize={12}

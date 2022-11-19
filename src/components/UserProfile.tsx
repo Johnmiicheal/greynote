@@ -71,7 +71,7 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
                 pr={2}
                 display={{ base: "none", md: "flex" }}
               >
-                <Avatar name={me?.me?.admin?.school!} size="sm" ml={1} mr={1}>
+                <Avatar name={me?.me?.admin?.school!} src={me?.me?.admin?.schoolImg} size="sm" ml={1} mr={1}>
                   {" "}
                   <AvatarBadge boxSize="1.25em" bg="green.500" />{" "}
                 </Avatar>

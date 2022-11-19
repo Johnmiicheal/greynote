@@ -17,7 +17,7 @@ import {
 import React, { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import CaseInteraction from "./CaseInteraction";
-import { GrayCase, useMeQuery } from "../gql/graphql";
+import { GrayCase, useMeQuery, useGetStudentByIdQuery } from "../gql/graphql";
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { formatDistanceToNow } from 'date-fns'
