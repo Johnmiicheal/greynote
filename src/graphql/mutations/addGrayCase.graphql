@@ -15,7 +15,6 @@ mutation AddGrayCase($studentId: Float!, $category: String!) {
       gender
       ageInput
       isActive
-      voteCount
       wasEdited
       creator {
         admin {

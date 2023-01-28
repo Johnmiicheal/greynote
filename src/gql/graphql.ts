@@ -26,7 +26,7 @@ export type Admin = {
   phoneNumber: Scalars['String'];
   profileImgUrl: Scalars['String'];
   school: Scalars['String'];
-  schoolImg: Scalars['String'];
+  schoolImg?: Scalars['String'];
 };
 
 export type AdminResponse = {
@@ -54,7 +54,6 @@ export type GrayCase = {
   isActive: Scalars['Boolean'];
   lastName: Scalars['String'];
   updatedAt: Scalars['DateTime'];
-  voteCount: Scalars['Float'];
   wasEdited: Scalars['Boolean'];
 };
 
@@ -385,7 +384,7 @@ export type AddGrayCaseMutationVariables = Exact<{
 }>;
 
 
-export type AddGrayCaseMutation = { __typename?: 'Mutation', addGrayCase: { __typename?: 'GrayCaseResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, voteCount: number, wasEdited: boolean, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } } | null } };
+export type AddGrayCaseMutation = { __typename?: 'Mutation', addGrayCase: { __typename?: 'GrayCaseResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } } | null } };
 
 export type CreateNewGrayCaseMutationVariables = Exact<{
   ageInput: Scalars['Float'];
@@ -397,7 +396,7 @@ export type CreateNewGrayCaseMutationVariables = Exact<{
 }>;
 
 
-export type CreateNewGrayCaseMutation = { __typename?: 'Mutation', createNewGrayCase: { __typename?: 'GrayCaseResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, voteCount: number, wasEdited: boolean, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } } | null } };
+export type CreateNewGrayCaseMutation = { __typename?: 'Mutation', createNewGrayCase: { __typename?: 'GrayCaseResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } } | null } };
 
 export type LoginAdminMutationVariables = Exact<{
   password: Scalars['String'];
@@ -511,7 +510,7 @@ export type GetStudentCasesQueryVariables = Exact<{
 }>;
 
 
-export type GetStudentCasesQuery = { __typename?: 'Query', getStudentCases: Array<{ __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, voteCount: number, wasEdited: boolean, creator: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } }> };
+export type GetStudentCasesQuery = { __typename?: 'Query', getStudentCases: Array<{ __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean, creator: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, schoolImg: string } | null } }> };
 
 export type GetStudentFromClassQueryVariables = Exact<{
   gradeClass: Scalars['String'];
@@ -539,7 +538,7 @@ export type SchoolCasesQueryVariables = Exact<{
 }>;
 
 
-export type SchoolCasesQuery = { __typename?: 'Query', schoolCases: { __typename?: 'PaginatedGrayCase', hasMore: boolean, cursor: number, grayCase?: Array<{ __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, voteCount: number, wasEdited: boolean, creator: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } }> | null } };
+export type SchoolCasesQuery = { __typename?: 'Query', schoolCases: { __typename?: 'PaginatedGrayCase', hasMore: boolean, cursor: number, grayCase?: Array<{ __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean, creator: { __typename?: 'AdminResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string } | null } }> | null } };
 
 
 export const AddGrayCaseDocument = gql`
@@ -560,7 +559,6 @@ export const AddGrayCaseDocument = gql`
       gender
       ageInput
       isActive
-      voteCount
       wasEdited
       creator {
         admin {
@@ -607,7 +605,6 @@ export const CreateNewGrayCaseDocument = gql`
       gender
       ageInput
       isActive
-      voteCount
       wasEdited
       creator {
         admin {
@@ -1034,7 +1031,6 @@ export const GetStudentCasesDocument = gql`
     gender
     ageInput
     isActive
-    voteCount
     wasEdited
     creator {
       errors {
@@ -1049,7 +1045,7 @@ export const GetStudentCasesDocument = gql`
         email
         isDisabled
         profileImgUrl
-        school
+        schoolImg
       }
     }
   }
@@ -1219,7 +1215,6 @@ export const SchoolCasesDocument = gql`
       gender
       ageInput
       isActive
-      voteCount
       wasEdited
       creator {
         errors {

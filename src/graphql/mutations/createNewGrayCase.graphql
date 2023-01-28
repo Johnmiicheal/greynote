@@ -15,7 +15,6 @@ mutation CreateNewGrayCase($ageInput: Float!, $gradeClass: String!, $gender: Str
       gender
       ageInput
       isActive
-      voteCount
       wasEdited
       creator {
         admin {

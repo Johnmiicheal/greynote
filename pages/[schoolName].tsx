@@ -307,8 +307,8 @@ const School = () => {
                       </Box>
                     </VStack>
                   ) : (
-                    cases?.schoolCases?.grayCase?.map((p) => (
-                      <Cases p={p} key={p?.id} />
+                    cases?.schoolCases?.grayCase?.map((n) => (
+                      <Cases p={n} key={n?.id} />
                     ))
                   )}
                   <Flex justify="center">
