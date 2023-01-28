@@ -110,6 +110,16 @@ const Register = () => {
               variant="outline"
               colorScheme="gray"
               fontSize={14}
+              onClick={() => {
+                toast({
+                  title: "Google Auth not Available",
+                  description: "We are unable to connect to Google Auth Servers at the moment, we are working on it.",
+                  status: "info",
+                  variant: "left-accent",
+                  duration: 5000,
+                  isClosable: true,
+                })
+              }}
             >
               Register with Google
             </Button>

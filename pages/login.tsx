@@ -76,7 +76,7 @@ const Login = () => {
                 initialValues={{ name: "" }}
                 onSubmit={(values, actions) => {
                   setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
+                    alert("We are working on Login, check back later");
                     actions.setSubmitting(false);
                   }, 1000);
                   router.push("/");
