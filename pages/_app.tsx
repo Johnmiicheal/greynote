@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import { ChakraProvider, ThemeProvider } from "@chakra-ui/react";
 import React, {useEffect} from "react";
 import type { AppProps } from "next/app";

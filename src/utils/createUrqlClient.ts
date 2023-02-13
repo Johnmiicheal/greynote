@@ -13,7 +13,7 @@ import { betterUpdateQuery } from "./betterUpdateQuery";
 import { cacheExchange, Cache } from "@urql/exchange-graphcache";
 
 export const createUrqlClient = (ssrExchange: any) => ({
-  url: "http://162.243.186.78:4000/graphql",
+  url: "https://162.243.186.78:4000/graphql",
   fetchOptions: {
     credentials: "include" as const,
   },
