@@ -1,0 +1,76 @@
+query GetStudentByGrayCase($grayId: Float!) {
+  getStudentByGrayCase(grayId: $grayId) {
+    errors {
+      field
+      message
+    }
+    student {
+      id
+      createdAt
+      firstName
+      lastName
+      gradeClass
+      gender
+      ageInput
+      startDate
+      endDate
+      birthDate
+      isArchived
+      profileImgUrl
+      school {
+        school {
+          id
+          createdAt
+          schoolName
+          rcnumber
+          address
+          state
+          country
+          description
+          websiteUrl
+          instagramUrl
+          facebookUrl
+          twitterUrl
+          linkedinUrl
+          logoImgUrl
+          bannerImgUrl
+        }
+      }
+      creator {
+        admin {
+          id
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+          schoolImg
+        }
+      }
+      studentCase {
+        grayCase {
+          id
+          createdAt
+          updatedAt
+          category
+          firstName
+          lastName
+          gradeClass
+          gender
+          ageInput
+          isActive
+          wasEdited
+        }
+      }
+      grayId
+      parentName
+      parentEmail
+      parentNumber
+      homeAddress
+      state
+      academicResult
+    }
+  }
+}

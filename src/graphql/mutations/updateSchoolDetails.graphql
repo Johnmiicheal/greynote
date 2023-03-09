@@ -1,0 +1,3 @@
+mutation UpdateSchoolDetails($country: String!, $state: String!, $address: String!, $rcnumber: Float!, $schoolName: String!, $schoolId: Float!, $linkedinUrl: String, $facebookUrl: String, $twitterUrl: String, $instagramUrl: String, $websiteUrl: String, $description: String, $bannerImgUrl: String, $logoImgUrl: String) {
+  updateSchoolDetails(country: $country, state: $state, address: $address, rcnumber: $rcnumber, schoolName: $schoolName, schoolId: $schoolId, linkedinUrl: $linkedinUrl, facebookUrl: $facebookUrl, twitterUrl: $twitterUrl, instagramUrl: $instagramUrl, websiteUrl: $websiteUrl, description: $description, bannerImgUrl: $bannerImgUrl, logoImgUrl: $logoImgUrl)
+}

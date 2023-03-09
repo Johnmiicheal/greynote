@@ -1,0 +1,13 @@
+query GetAdmins {
+  getAdmins {
+    id
+    createdAt
+    adminName
+    phoneNumber
+    email
+    isDisabled
+    profileImgUrl
+    school
+    schoolImg
+  }
+}

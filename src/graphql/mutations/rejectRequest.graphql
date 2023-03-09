@@ -1,0 +1,3 @@
+mutation RejectRequest($rejectRequestId: Float!) {
+  rejectRequest(id: $rejectRequestId)
+}

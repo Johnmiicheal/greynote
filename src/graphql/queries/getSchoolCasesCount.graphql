@@ -1,0 +1,3 @@
+query getSchoolCasesCount($schoolId: Float!) {
+  getSchoolCasesCount(schoolId: $schoolId)
+}

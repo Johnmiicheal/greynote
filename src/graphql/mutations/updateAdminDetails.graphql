@@ -1,0 +1,3 @@
+mutation UpdateAdminDetails($profileImgUrl: String!, $email: String!, $phoneNumber: String!, $adminName: String!) {
+  updateAdminDetails(profileImgUrl: $profileImgUrl, email: $email, phoneNumber: $phoneNumber, adminName: $adminName)
+}
