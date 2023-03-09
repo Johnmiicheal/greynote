@@ -1,4 +1,4 @@
-query GetStudentFromSchool($schoolId: String!) {
+query GetStudentFromSchool($schoolId: Float!) {
   getStudentFromSchool(schoolId: $schoolId) {
     id
     createdAt

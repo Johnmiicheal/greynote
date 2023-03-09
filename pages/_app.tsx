@@ -4,10 +4,11 @@ import React, {useEffect} from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import theme from "../themes";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "../src/utils/createUrqlClient";
 import TopBarProgress from "react-topbar-progress-indicator"
+import { useMeQuery } from "../src/gql/graphql";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [progress, setProgress] = React.useState(false)
@@ -19,7 +20,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       "1.0": "#8E6930"
     }
   })
-
   const [showChild, setShowChild] = React.useState(false);
   useEffect(() => {
     setShowChild(true);
@@ -46,5 +46,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
   }
 }
+
 
 export default withUrqlClient(createUrqlClient) (MyApp);

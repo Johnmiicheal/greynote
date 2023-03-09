@@ -26,6 +26,7 @@ import { Layout } from "../src/components/Layout";
 
 import { useRegisterAdminMutation } from "../src/gql/graphql";
 import { toErrorMap } from "../src/utils/toErrorMap";
+import Header from "../src/components/Registration/Header";
 
 const Register = () => {
   function validateName(value: string) {
@@ -69,62 +70,26 @@ const Register = () => {
   const toast = useToast();
   return (
     <Layout>
-      <div className={styles.rewavy}>
-        <Flex
-          direction={{ base: "column", lg: "row" }}
-          justify={{ lg: "space-between" }}
-          align="center"
-          px={{ base: 3, md: 10, lg: 40 }}
-        >
+      <Header />
+      <Flex direction="row" minW="full" justify="center" >
+          <Flex direction="row" justify="space-between">
           <Flex
             direction="column"
-            justify="center"
+            align='center'
             bg="white"
-            w={{ base: "full", md: "500px", lg: "600px" }}
+            w={{ base: "full", md: "500px" }}
             pb={5}
+            py={20}
             px={{ base: 2, md: 5, lg: 10 }}
-            mr={20}
             h="100vh"
           >
-            <Image src="/grayfull.png" alt="grayfull" w={40} />
-            <Text mt={2} fontSize={16} fontWeight={500}>
+            <Text fontSize={'1.8rem'} fontWeight={500}>
               Register to GrayBook
             </Text>
-            <Flex>
-              <Text
-                color="gray.500"
-                fontSize={12}
-                fontWeight={500}
-                mt={5}
-                mb={4}
-              >
-                Already have an account?{" "}
-                <NextLink href="/login" passHref>
-                  <Link color="#F4B95F">Login Here</Link>
-                </NextLink>
-              </Text>
-            </Flex>
-            <Button
-              leftIcon={<FcGoogle size={20} />}
-              alignItems="center"
-              variant="outline"
-              colorScheme="gray"
-              fontSize={14}
-              onClick={() => {
-                toast({
-                  title: "Google Auth not Available",
-                  description: "We are unable to connect to Google Auth Servers at the moment, we are working on it.",
-                  status: "info",
-                  variant: "left-accent",
-                  duration: 5000,
-                  isClosable: true,
-                })
-              }}
-            >
-              Register with Google
-            </Button>
-
-            <Flex direction="column" mt={2}>
+            <Text fontSize='0.8rem' w='240px' textAlign='center'>
+              Please fill in the details correctly to ensure that your account is verified
+            </Text>
+            <Flex direction="column" mt={10}>
               <Formik
                 initialValues={{
                   adminName: "",
@@ -133,7 +98,6 @@ const Register = () => {
                   password: "",
                 }}
                 onSubmit={async (values, { setErrors }) => {
-                  console.log(values);
                   const response = await register({ options: values });
                   if (response.data?.registerAdmin?.errors) {
                     setErrors(toErrorMap(response.data?.registerAdmin?.errors));
@@ -170,9 +134,10 @@ const Register = () => {
                           <FormLabel fontSize={14}>Admin Name</FormLabel>
                           <Input
                             {...field}
-                            placeholder="Admin Name"
+                            placeholder="Mayowa Chinedu"
                             type="text"
                             variant="outline"
+                            focusBorderColor="#FFBF5C"
                             mb={2}
                           />
                           <FormErrorMessage>
@@ -190,9 +155,10 @@ const Register = () => {
                           <FormLabel fontSize={14}>Email Address</FormLabel>
                           <Input
                             {...field}
-                            placeholder="Email"
+                            placeholder="example@gmail.com"
                             type="email"
                             variant="outline"
+                            focusBorderColor="#FFBF5C"
                             mb={2}
                           />
                           <FormErrorMessage>
@@ -215,12 +181,12 @@ const Register = () => {
                             <Input
                               {...field}
                               type="tel"
-                              placeholder="phone number"
+                              placeholder="0800-123-4567"
                               variant="outline"
-                              mb={2}
+                              focusBorderColor="#FFBF5C"
                             />
                           </InputGroup>
-                          <FormErrorMessage>
+                          <FormErrorMessage mb={2}>
                             {form.errors.phoneNumber}
                           </FormErrorMessage>
                         </FormControl>
@@ -238,7 +204,8 @@ const Register = () => {
                           <InputGroup>
                             <Input
                               {...field}
-                              placeholder="Password"
+                              placeholder="********"
+                              focusBorderColor="#FFBF5C"
                               type={show ? "text" : "password"}
                               variant="outline"
                             />
@@ -275,12 +242,9 @@ const Register = () => {
               </Formik>
             </Flex>
           </Flex>
-
-          <Flex justify="end" display={{ base: "none", lg: "block" }}>
-            <Image src="/gray2art.png" alt="gray2art" w="70%" />
           </Flex>
+
         </Flex>
-      </div>
     </Layout>
   );
 };

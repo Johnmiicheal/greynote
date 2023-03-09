@@ -1,5 +1,5 @@
 import {
-  Box,
+  Heading,
   Flex,
   Text,
   Center,
@@ -12,7 +12,7 @@ import {
   InputLeftAddon,
   InputGroup,
   Link,
-  Divider,
+  useToast,
 } from "@chakra-ui/react";
 import styles from "../styles/Login.module.css";
 import { FcGoogle } from "react-icons/fc";
@@ -20,6 +20,9 @@ import { Formik, Form, Field } from "formik";
 import NextLink from "next/link";
 import { Layout } from "../src/components/Layout";
 import { useRouter } from "next/router";
+import Header from "../src/components/Registration/Header";
+import { useLoginAdminMutation } from "../src/gql/graphql";
+import { toErrorMap } from "../src/utils/toErrorMap";
 
 const Login = () => {
   function validateEmail(value: string) {
@@ -39,47 +42,60 @@ const Login = () => {
   }
 
   const router = useRouter();
+  const toast = useToast();
+
+  const [, login] = useLoginAdminMutation();
 
   return (
     <Layout>
-      <div className={styles.wavy}>
-        
-        <Flex direction="row" w="full" align="center" px={40} zIndex={2}>
+      <Header />
+      <Flex direction="row" minW="full" justify="center">
+        <Flex direction="row" justify="space-between">
           <Flex
             direction="column"
             justify="center"
+            pos="fixed"
+            right={0}
             bg="white"
-            w='600px'
-            py={5}
-            px={10}
+            w="600px"
+            h="full"
+            py={20}
+            px={24}
             borderRadius="md"
-            mt={10}
           >
-            <Image src="/grayfull.png" alt="grayfull" w={40} />
-            <Text mt={2} fontSize={20} fontWeight={500}>
+            <Heading mt={2} fontSize="2rem" fontWeight={500}>
               Login to GrayBook
-            </Text>
-              <Button
-              mt={10}
-                leftIcon={<FcGoogle size={20} />}
-                alignItems="center"
-                variant="outline"
-                colorScheme="gray"
-              >
-                Login with Google
-              </Button>
+            </Heading>
 
-            
             <Flex direction="column" mt={10}>
-
               <Formik
-                initialValues={{ name: "" }}
-                onSubmit={(values, actions) => {
-                  setTimeout(() => {
-                    alert("We are working on Login, check back later");
-                    actions.setSubmitting(false);
-                  }, 1000);
-                  router.push("/");
+                initialValues={{
+                  adminNameOrEmail: "",
+                  password: "",
+                }}
+                onSubmit={async (values, { setErrors }) => {
+                  const response = await login({ adminNameOrEmail: values.adminNameOrEmail, password: values.password });
+                  if (response.data?.loginAdmin?.errors) {
+                    setErrors(toErrorMap(response.data?.loginAdmin?.errors));
+                    toast({
+                      title: "Login Error.",
+                      description: "Invalid Username or Password",
+                      status: "error",
+                      variant: "left-accent",
+                      duration: 5000,
+                      isClosable: true,
+                    });
+                  } else if (response.data?.loginAdmin?.admin) {
+                    toast({
+                      title: "Login Successfull" ,
+                      description: `Welcome Back, ${response.data?.loginAdmin?.admin?.adminName}`,
+                      status: "success",
+                      variant: "left-accent",
+                      duration: 5000,
+                      isClosable: true,
+                    });
+                    router.push("/app");
+                  }
                 }}
               >
                 {(props) => (
@@ -92,12 +108,12 @@ const Login = () => {
                           <FormLabel>Email</FormLabel>
                           <Input
                             {...field}
-                            placeholder="Email"
+                            placeholder="example@gmail.com"
                             type="email"
                             variant="outline"
-                            mb={2}
+                            focusBorderColor="#FFBF5C"
                           />
-                          <FormErrorMessage>
+                          <FormErrorMessage mb={5}>
                             {form.errors.name}
                           </FormErrorMessage>
                         </FormControl>
@@ -114,9 +130,10 @@ const Login = () => {
                           <FormLabel>Password</FormLabel>
                           <Input
                             {...field}
-                            placeholder="Password"
+                            placeholder="********"
                             type="password"
                             variant="outline"
+                            focusBorderColor="#FFBF5C"
                           />
                           <FormErrorMessage>
                             {form.errors.password}
@@ -124,33 +141,19 @@ const Login = () => {
                         </FormControl>
                       )}
                     </Field>
-                    <Flex align='center'>
-                      <Text
-                        color="#F4B95F"
-                        fontSize={12}
-                        fontWeight={500}
-                        mt={2}
-                        mb={14}
-                      >
-                        Forgot Password?
-                      </Text>
+                    <Flex align="center">
                       <Text
                         color="gray.500"
                         fontSize={12}
                         fontWeight={500}
                         mt={2}
                         mb={14}
-                        ml={6}
                       >
-                        Don't have an account? {" "} 
-                         <NextLink href='/register' passHref>
-                          <Link color="#F4B95F">
-                           Register Here 
-                           </Link>
-                         </NextLink>
-                         </Text>
-                         
-                     
+                        Forgot your password?{" "}
+                        <NextLink href="/register" passHref>
+                          <Link color="#F4B95F">Reset it</Link>
+                        </NextLink>
+                      </Text>
                     </Flex>
 
                     <Button
@@ -169,12 +172,8 @@ const Login = () => {
               </Formik>
             </Flex>
           </Flex>
-
-          <Flex justify='end'>
-            <Image src="/grayart.png" alt="gray2art" w='70%' />
-          </Flex>
         </Flex>
-      </div>
+      </Flex>
     </Layout>
   );
 };

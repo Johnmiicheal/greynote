@@ -1,3 +1,3 @@
-mutation TransferStudent($schoolId: Float!, $studentId: Float!) {
-  transferStudent(schoolId: $schoolId, studentId: $studentId)
+mutation TransferStudent($schoolId: Float!, $studentId: Float!, $adminId: Float!) {
+  transferStudent(schoolId: $schoolId, studentId: $studentId, adminId: $adminId) 
 }

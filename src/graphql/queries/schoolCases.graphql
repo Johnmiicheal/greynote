@@ -26,6 +26,7 @@ query SchoolCases($limit: Float!, $cursor: Float, $sortBy: String) {
           isDisabled
           profileImgUrl
           schoolImg
+          school
         }
       }
     }

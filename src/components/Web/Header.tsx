@@ -17,9 +17,11 @@ import {
   AlertDescription,
 } from "@chakra-ui/react";
 import React from "react";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
 
   return (
     <Flex
@@ -45,7 +47,7 @@ const Header = () => {
             color="#F4B95F"
             mr="30px"
             _hover={{ color: "#DAA65D" }}
-            onClick={onOpen}
+            onClick={() => router.push('/login')}
           >
             Sign In
           </Button>
@@ -55,7 +57,7 @@ const Header = () => {
             color="white"
             bg="#F4B95F"
             _hover={{ bg: "#DAA65D" }}
-            onClick={onOpen}
+            onClick={() => router.push('/register')}
           >
             Join Graybook
           </Button>

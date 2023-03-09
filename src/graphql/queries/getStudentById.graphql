@@ -1,27 +1,22 @@
-query GetStudentById($id: Float!) {
-  getStudentById(id: $id) {
+query GetStudentById($studentId: Float!) {
+  getStudentById(studentId: $studentId) {
     errors {
       field
       message
     }
     student {
       id
-      grayId
       createdAt
       firstName
       lastName
       gradeClass
       gender
       ageInput
+      startDate
+      endDate
       birthDate
       isArchived
       profileImgUrl
-      parentName
-      parentEmail
-      parentNumber
-      homeAddress
-      state
-      academicResult
       school {
         school {
           id
@@ -32,6 +27,11 @@ query GetStudentById($id: Float!) {
           state
           country
           description
+          websiteUrl
+          instagramUrl
+          facebookUrl
+          twitterUrl
+          linkedinUrl
           logoImgUrl
           bannerImgUrl
         }
@@ -46,8 +46,16 @@ query GetStudentById($id: Float!) {
           isDisabled
           profileImgUrl
           school
+          schoolImg
         }
       }
+      grayId
+      parentName
+      parentEmail
+      parentNumber
+      homeAddress
+      state
+      academicResult
     }
   }
 }

@@ -20,6 +20,8 @@ import {
   IoCaretDownOutline,
   IoBookmarkOutline,
 } from "react-icons/io5";
+import { FiEdit } from 'react-icons/fi';
+import { RiBookMarkLine } from 'react-icons/ri';
 import { GrayCase, useMeQuery } from "../gql/graphql";
 
 interface PostInteractionProps {
@@ -39,32 +41,32 @@ const PostInteraction: React.FC<PostInteractionProps> = ({
     <Flex direction="row" justify="end" pr={2}>
         <Flex
           align="center"
-          borderRadius="lg"
+          borderRadius="md"
           color="#000a16"
           cursor="pointer"
-          _hover={{ color: "#8E6930", bg: "#FFCE83" }}
+          _hover={{ color: "#FFBF5C",bg:'#FFEACA', borderWidth: '1px', borderColor: "#FFBF5C" }}
           mr={2}
           py={2}
           px={2}
         >
-          <Icon as={IoChatbubbleOutline} w={6} h={6}  />
-          <Text ml='1px'>
+          <Icon as={FiEdit} w={5} h={5}  />
+          <Text ml='1'>
             Update Case
           </Text>
         </Flex>
 
         <Flex
           align="center"
-          borderRadius="lg"
+          borderRadius="md"
           color="#000a16"
           cursor="pointer"
-          _hover={{ color: "#8E6930", bg: "#FFCE83" }}
+          _hover={{ color: "#FFBF5C",bg:'#FFEACA', borderWidth: '1px', borderColor: "#FFBF5C" }}
           py={2}
           px={2}
         >
-           <Icon as={IoBookmarkOutline} w={6} h={6}  />
-          <Text ml='1px'>
-            Archive
+          <Icon as={RiBookMarkLine} w={5} h={5}  />
+          <Text ml='1'>
+            Archive Case
           </Text>
         </Flex>
       </Flex>

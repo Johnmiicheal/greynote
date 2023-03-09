@@ -5,6 +5,7 @@ import { Layout } from "../src/components/Layout";
 import { useRouter } from "next/router";
 import { useRegisterSchoolMutation } from "../src/gql/graphql";
 import FileBase from "react-file-base64";
+import Header from "../src/components/Registration/Header";
 
 const Onboarding = () => {
 
@@ -44,13 +45,13 @@ const Onboarding = () => {
   const router = useRouter();
   return(
     <Layout>
-      <Flex bg='white' borderRadius='md' w='500px' px={5} py={3} direction='column' justify='center' align='center' mt={5}>
-        <Image src="/grayfull.png" alt="grayfull" w={40} mb={5} />
+      <Header />
+      <Flex bg='white' minH='100vh' w='500px' mt={14} px={5} py={3} direction='column' justify='center' align='center'>
         <Text fontWeight={500} fontSize={20}>Setup your School Profile</Text>
 
         <Flex direction='column' mt={10} w='full' px={10} pb={10}>
         <Formik
-                  initialValues={{ logoImgUrl: "", schoolName: "", address: "", rcnumber: 0, state: "", country: "" }}
+                  initialValues={{ logoImgUrl: "", schoolName: "", address: "", description: "", rcnumber: 0, state: "", country: "" }}
                   onSubmit={async (values, {setErrors}) => {
                     console.log(values);
                     const response = await register({
@@ -58,6 +59,7 @@ const Onboarding = () => {
                       country: values.country,
                       state: values.state,
                       address: values.address,
+                      description: values.description,
                       rcnumber: values.rcnumber,
                       schoolName: values.schoolName                      
                     });
@@ -79,7 +81,7 @@ const Onboarding = () => {
                         duration: 5000,
                         isClosable: true,
                       });
-                      router.push("/");
+                      router.push("/app");
                     }
                   }}
                 >
@@ -123,6 +125,26 @@ const Onboarding = () => {
                         )}
                       </Field>
 
+                      <Field name="description">
+                        {({ field, form }: any) => (
+                          <FormControl
+                            isInvalid={form.errors.description && form.touched.description}
+                          >
+                            <FormLabel fontSize={14}>School Description</FormLabel>
+                            <Textarea
+                              {...field}
+                              placeholder="Short Description"
+                              type="text"
+                              variant="outline"
+                              mb={2}
+                            />
+                            <FormErrorMessage>
+                              {form.errors.description}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+
                       <Field name="address" validate={validateAddress}>
                         {({ field, form }: any) => (
                           <FormControl
@@ -142,6 +164,8 @@ const Onboarding = () => {
                           </FormControl>
                         )}
                       </Field>
+
+                      
                       <Flex direction='row' mb={2}>
                         <Field name="state">
                           {({ field, form }: any) => (

@@ -17,10 +17,10 @@ import { useRouter } from "next/router";
 
 import GrayLayout from "../../components/GrayLayout";
 import NextLink from "next/link";
-import { RegStudent } from "../../components/RegStudent";
+import { RegStudent } from "../Modals/RegStudent";
 
 import { useMeQuery } from "../../gql/graphql";
-import { NewGrayCase } from "../../components/NewGrayCase";
+import { NewGrayCase } from "../Modals/NewGrayCase";
 import BarLoader from "react-spinners/BarLoader";
 
 const App = () => {

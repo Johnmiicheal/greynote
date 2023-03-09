@@ -4,7 +4,7 @@
 ## Getting Started
 [![Netlify Status](https://api.netlify.com/api/v1/badges/77dbeb17-e087-4fb8-b2fb-8851107ebff2/deploy-status)](https://app.netlify.com/sites/graybook/deploys)
 
-Open [https://graybook.netlify.app](https://graybook.netlify.app) with your browser to see the result.
+Open [https://graybook.app](https://graybook.app) with your browser to see the result.
 
 ## Run Locally
 fork the [server code](https://github.com/johnmiicheal/graybook-server) and run the following code:

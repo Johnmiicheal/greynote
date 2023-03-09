@@ -25,7 +25,7 @@ import {
 import NextLink from "next/link";
 import { useGetSchoolFromUrl } from "../utils/useGetSchoolFromUrl";
 import { HiOutlineCake } from "react-icons/hi";
-import { useGetSchoolStudentsCountQuery, useMeQuery } from "../gql/graphql";
+import { useGetSchoolStudentsCountQuery, useMeQuery, useGetSchoolCasesCountQuery } from "../gql/graphql";
 import {
   IoLogoInstagram,
   IoLogoFacebook,
@@ -34,8 +34,8 @@ import {
 } from "react-icons/io5";
 import { useRouter } from "next/router";
 import { format, formatISO } from "date-fns";
-import { RegStudent } from "./RegStudent";
-import { NewGrayCase } from "./NewGrayCase";
+import { RegStudent } from "./Modals/RegStudent";
+import { NewGrayCase } from "./Modals/NewGrayCase";
 
 export default function SchoolCard() {
   const router = useRouter();
@@ -47,7 +47,14 @@ export default function SchoolCard() {
     },
   });
 
+  const [{ data: caseCount }] = useGetSchoolCasesCountQuery({
+    variables: {
+      schoolId: data?.getSchoolByName?.school?.id!,
+    }
+  })
+
   const members = numbers?.getSchoolStudentsCount;
+  const count = caseCount?.getSchoolCasesCount;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: isRegOpen,
@@ -92,23 +99,31 @@ export default function SchoolCard() {
               {data?.getSchoolByName?.school?.description}
             </Text>
 
-            <Stack direction="row" spacing={10} mt={3} mb={3}>
-              <Text fontSize="1rem" fontWeight={400} mr={2}>
-                <b> {members} </b>{" "}
-                <Text fontSize="1rem" fontWeight={400}>
-                  {members! > 1 ? "Students" : "Student"}
+            <Stack direction="row" spacing={5} mt={3} mb={3} align='center' overflow='hidden'>
+              <Flex>
+                <Text fontSize="0.85rem" fontWeight={700} mr={1}>
+                  {members}{" "}
                 </Text>
-              </Text>
+                <Text fontSize="0.85rem" fontWeight={400}>
+                    {members! > 1 ? "Students" : "Student"}
+                </Text>
+              </Flex>
 
-              <Text fontSize="1rem" mr={2}>
-                <b>127</b> Cases
+              <Flex>
+              <Text fontSize="0.85rem" fontWeight={700} mr={1}>
+                {count}
               </Text>
+                <Text fontSize="0.85rem">
+                {count! > 1 ? "Cases" : "Case"}
+                </Text>
+              </Flex>
               <Box>
                 <Badge
-                  bgGradient="linear(to-r, green.200, pink.500)"
+                  bgGradient="linear(45deg, green.200, pink.500)"
                   variant="solid"
+                  w='20px'
                 >
-                  L3 ADMIN
+                  L3
                 </Badge>
               </Box>
             </Stack>
@@ -118,7 +133,7 @@ export default function SchoolCard() {
               <Icon as={HiOutlineCake} mr={2} />
 
               <Text>
-                Created on {month} {day}, {year}{" "}
+                Account created on {month} {day}, {year}{" "}
               </Text>
             </Flex>
           </Flex>

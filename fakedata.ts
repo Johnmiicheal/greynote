@@ -88,13 +88,66 @@ export const fakedb = [
 
 export const fakeclass = [
   'KG 1', 'KG 2', 'KG 3',
-  'Nusery 1', 'Nusery 2', 'Nusery 3',
+  'Nursery 1', 'Nursery 2', 'Nursery 3',
   'Primary 1', 'Primary 2', 'Primary 3', 'Primary 4', 'Primary 5', 'Primary 6',
   'JSS 1', 'JSS 2', 'JSS 3', 'SSS 1', 'SSS 2', 'SSS 3',
 ];
 
 export const fakecase = ['Expulsion', 'Suspension', 'Fees Default'];
 export const fakegender = ['Male', 'Female'];
+
+export const monthDropDown = [
+
+	{
+		"abbreviation": "Jan",
+		"name": "January"
+	},
+	{
+		"abbreviation": "Feb",
+		"name": "February"
+	},
+	{
+		"abbreviation": "Mar",
+		"name": "March"
+	},
+	{
+		"abbreviation": "Apr",
+		"name": "April"
+	},
+	{
+		"abbreviation": "May",
+		"name": "May"
+	},
+	{
+		"abbreviation": "Jun",
+		"name": "June"
+	},
+	{
+		"abbreviation": "Jul",
+		"name": "July"
+	},
+	{
+		"abbreviation": "Aug",
+		"name": "August"
+	},
+	{
+		"abbreviation": "Sep",
+		"name": "September"
+	},
+	{
+		"abbreviation": "Oct",
+		"name": "October"
+	},
+	{
+		"abbreviation": "Nov",
+		"name": "November"
+	},
+	{
+		"abbreviation": "Dec",
+		"name": "December"
+	}
+
+]
 
 export const realState = [
   "Abia",

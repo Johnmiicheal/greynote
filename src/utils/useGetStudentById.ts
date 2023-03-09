@@ -5,7 +5,7 @@ export const useGetStudentById = () => {
     const getId = useGetIntId();
     return useGetStudentByIdQuery({
         variables: {
-            id: getId
+            studentId: getId
         }
     })
 }

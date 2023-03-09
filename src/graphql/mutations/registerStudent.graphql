@@ -1,5 +1,5 @@
-mutation RegisterStudent($profileImgUrl: String!, $academicResult: String!, $lgaOrigin: String!, $state: String!, $homeAddress: String!, $parentEmail: String!, $parentNumber: String!, $parentName: String!, $birthDate: DateTime!, $ageInput: Float!, $gradeClass: String!, $gender: String!, $lastName: String!, $firstName: String!) {
-  registerStudent(profileImgUrl: $profileImgUrl, academicResult: $academicResult, lgaOrigin: $lgaOrigin, state: $state, homeAddress: $homeAddress, parentEmail: $parentEmail, parentNumber: $parentNumber, parentName: $parentName, birthDate: $birthDate, ageInput: $ageInput, gradeClass: $gradeClass, gender: $gender, lastName: $lastName, firstName: $firstName) {
+mutation RegisterStudent($profileImgUrl: String!, $academicResult: String!, $lgaOrigin: String!, $state: String!, $homeAddress: String!, $parentEmail: String!, $parentNumber: String!, $parentName: String!, $birthDate: DateTime!, $endDate: String!, $startDate: String!, $ageInput: Float!, $gender: String!, $gradeClass: String!, $lastName: String!, $firstName: String!) {
+  registerStudent(profileImgUrl: $profileImgUrl, academicResult: $academicResult, lgaOrigin: $lgaOrigin, state: $state, homeAddress: $homeAddress, parentEmail: $parentEmail, parentNumber: $parentNumber, parentName: $parentName, birthDate: $birthDate, endDate: $endDate, startDate: $startDate, ageInput: $ageInput, gender: $gender, gradeClass: $gradeClass, lastName: $lastName, firstName: $firstName) {
     errors {
       field
       message
@@ -12,14 +12,12 @@ mutation RegisterStudent($profileImgUrl: String!, $academicResult: String!, $lga
       gradeClass
       gender
       ageInput
+      startDate
+      endDate
       birthDate
       isArchived
       profileImgUrl
       school {
-        errors {
-          field
-          message
-        }
         school {
           id
           createdAt
@@ -29,15 +27,16 @@ mutation RegisterStudent($profileImgUrl: String!, $academicResult: String!, $lga
           state
           country
           description
+          websiteUrl
+          instagramUrl
+          facebookUrl
+          twitterUrl
+          linkedinUrl
           logoImgUrl
           bannerImgUrl
         }
       }
       creator {
-        errors {
-          field
-          message
-        }
         admin {
           id
           createdAt
@@ -47,8 +46,31 @@ mutation RegisterStudent($profileImgUrl: String!, $academicResult: String!, $lga
           isDisabled
           profileImgUrl
           school
+          schoolImg
         }
       }
+      studentCase {
+        grayCase {
+          id
+          createdAt
+          updatedAt
+          category
+          firstName
+          lastName
+          gradeClass
+          gender
+          ageInput
+          isActive
+          wasEdited
+        }
+      }
+      grayId
+      parentName
+      parentEmail
+      parentNumber
+      homeAddress
+      state
+      academicResult
     }
   }
 }

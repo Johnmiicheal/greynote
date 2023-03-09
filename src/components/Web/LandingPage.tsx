@@ -23,9 +23,11 @@ import {
 } from "@chakra-ui/react";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Footer from "./Footer";
+import { useRouter } from "next/router";
 
 const LandingPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
   return (
     <>
       <WebLayout>
@@ -47,7 +49,7 @@ const LandingPage = () => {
               color="white"
               bg="#F4B95F"
               _hover={{ bg: "#DAA65D" }}
-              onClick={onOpen}
+              onClick={() => router.push('/register')}
             >
               Join Graybook
             </Button>

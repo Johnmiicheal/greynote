@@ -13,13 +13,14 @@ query GetSchoolByName($schoolName: String!) {
       state
       country
       description
+      websiteUrl
+      instagramUrl
+      facebookUrl
+      twitterUrl
+      linkedinUrl
       logoImgUrl
       bannerImgUrl
       creator {
-        errors {
-          field
-          message
-        }
         admin {
           id
           createdAt
@@ -29,6 +30,7 @@ query GetSchoolByName($schoolName: String!) {
           isDisabled
           profileImgUrl
           school
+          schoolImg
         }
       }
     }

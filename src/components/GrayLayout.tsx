@@ -32,11 +32,11 @@ const GrayLayout = () => {
           _hover={{ color: "#8E6930", bg: "#FFCE83" }}
           borderRadius="md"
           cursor="pointer"
-          color={ router.pathname ==="/" ? "#FFCE83" : "gray.200" }
-          onClick={() => router.push("/")}
+          color={ router.pathname ==="/app" ? "#FFCE83" : "gray.200" }
+          onClick={() => router.push("/app")}
         >
-          <Icon as={ router.pathname === "/" ? AiFillHome : AiOutlineHome } w={6} h={6} mb={2} />
-          <Text fontSize={13} fontWeight={router.pathname === "/" ? 500 : 400}>
+          <Icon as={ router.pathname === "/app" ? AiFillHome : AiOutlineHome } w={6} h={6} mb={2} />
+          <Text fontSize={13} fontWeight={router.pathname === "/app" ? 500 : 400}>
             {" "}
             Home{" "}
           </Text>
@@ -52,11 +52,11 @@ const GrayLayout = () => {
           _hover={{ color: "#8E6930", bg: "#FFCE83" }}
           borderRadius="md"
           cursor="pointer"
-          color={ router.pathname ==="/graycase" ? "#FFCE83" : "gray.200" }
-          onClick={() => router.push("/graycase")}
+          color={ router.pathname ==="/app/graycase" ? "#FFCE83" : "gray.200" }
+          onClick={() => router.push("/app/graycase")}
           display={!me?.me?.admin ? "none" : "flex"}
         >
-          <Icon as={router.pathname === "/graycase" ? RiContactsBookFill : RiContactsBookLine} w={6} h={6} mb={2} />
+          <Icon as={router.pathname === "/app/graycase" ? RiContactsBookFill : RiContactsBookLine} w={6} h={6} mb={2} />
           <Text fontSize={13} fontWeight={400}>
             {" "}
             Graycase{" "}
@@ -73,11 +73,11 @@ const GrayLayout = () => {
           _hover={{ color: "#8E6930", bg: "#FFCE83" }}
           borderRadius="md"
           cursor="pointer"
-          color={ router.pathname ==="/database" ? "#FFCE83" : "gray.200" }
-          onClick={() => router.push("/database")}
+          color={ router.pathname ==="/app/database" ? "#FFCE83" : "gray.200" }
+          onClick={() => router.push("/app/database")}
           display={!me?.me?.admin ? "none" : "flex"}
         >
-          <Icon as={router.pathname === "/database" ? AiFillProfile : AiOutlineProfile} w={6} h={6} mb={2} />
+          <Icon as={router.pathname === "/app/database" ? AiFillProfile : AiOutlineProfile} w={6} h={6} mb={2} />
           <Text fontSize={13} fontWeight={400}>
             {" "}
             My Database{" "}

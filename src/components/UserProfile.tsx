@@ -99,11 +99,11 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
               mt={-2}
             >
               <MenuGroup title="My School">
-                <NextLink href={{ pathname: '/[schoolName]', query: { schoolName: me?.me?.admin?.school! } }}  passHref>
+                <NextLink href={{ pathname: '/app/school/[schoolName]', query: { schoolName: me?.me?.admin?.school! } }}  passHref>
                   <MenuItem icon={<CgProfile />}>Profile</MenuItem>
                 </NextLink>
-                <MenuItem icon={<RiContactsBookLine />}>My Database</MenuItem>
-                <MenuItem icon={<FiSettings />}>Settings</MenuItem>
+                <MenuItem icon={<RiContactsBookLine />} onClick={() => router.push('/app/database')}>My Database</MenuItem>
+                <MenuItem icon={<FiSettings />} onClick={() => router.push('/app/settings')}>Settings</MenuItem>
               </MenuGroup>
               <MenuDivider />
               <MenuItem icon={<FiLogOut />} 

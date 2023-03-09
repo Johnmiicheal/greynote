@@ -20,7 +20,7 @@ export const PDFViewer = ({ isOpen, onClose, path }: any) => {
     <Modal isOpen={isOpen} onClose={onClose} size='xl' >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+        <ModalHeader>Student Academic Result</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.0.279/build/pdf.worker.min.js">
