@@ -8,7 +8,6 @@ import Router, { useRouter } from "next/router";
 import { withUrqlClient } from "next-urql";
 import { createUrqlClient } from "../src/utils/createUrqlClient";
 import TopBarProgress from "react-topbar-progress-indicator"
-import { useMeQuery } from "../src/gql/graphql";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [progress, setProgress] = React.useState(false)
