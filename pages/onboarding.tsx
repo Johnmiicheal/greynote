@@ -81,7 +81,9 @@ const Onboarding = () => {
                         duration: 5000,
                         isClosable: true,
                       });
-                      router.push("/app");
+                      setTimeout(() => {
+                        router.push('/app')
+                      }, 500)
                     }
                   }}
                 >

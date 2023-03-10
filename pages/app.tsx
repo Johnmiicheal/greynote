@@ -8,7 +8,7 @@ import App from "../src/components/Dashboard/App";
 const AppPage = () => {
     const [{ data, fetching }] = useMeQuery();
     let page = null;
-    if(fetching){
+    if(fetching && !data?.me?.admin){
       page = (
        <Center>
           <Box minW="full" mt={{ base: 60, md: 60, lg: 40 }}>
@@ -23,7 +23,7 @@ const AppPage = () => {
           </Box>
         </Center>
       )
-}else{
+}else if(data){
     page = ( <App /> )
   }
 

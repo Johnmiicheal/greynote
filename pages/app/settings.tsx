@@ -331,7 +331,7 @@ const Settings = () => {
               email: values.email,
               profileImgUrl: data.image,
             });
-            if (response.data?.updateAdminDetails === false) {
+            if (response.error) {
               toast({
                 title: "Error.",
                 description: "Oops, We could not update this admin profile",
@@ -352,9 +352,9 @@ const Settings = () => {
                 duration: 5000,
                 isClosable: true,
               });
-              // setTimeout(() => {
-              //   router.reload();
-              // }, 1000);
+              setTimeout(() => {
+                router.reload();
+              }, 1000);
             }
           }}
         >

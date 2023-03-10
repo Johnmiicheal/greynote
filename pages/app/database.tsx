@@ -129,7 +129,7 @@ const Database = () => {
                     {fakeclass.map((p, i) => (
                         <NextLink
                         href={{
-                          pathname: "app/school/[schoolName]/[gradeClass]",
+                          pathname: "/app/school/[schoolName]/[gradeClass]",
                           query: { schoolName: me?.me?.admin?.school, gradeClass: p },
                         }}
                         passHref

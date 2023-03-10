@@ -150,9 +150,9 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
             duration: 5000,
             isClosable: true,
           });
-          // setTimeout(() => {
-          //   router.reload();
-          // }, 1000)
+          setTimeout(() => {
+            router.reload();
+          }, 1200)
         } else if (response.data?.registerStudent?.student) {
           console.log(values.endDate, values.startDate);
           toast({
@@ -163,9 +163,9 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
             duration: 5000,
             isClosable: true,
           });
-          // setTimeout(() => {
-          //   router.reload();
-          // }, 1000)
+          setTimeout(() => {
+            router.push(`/app/student/${response?.data?.registerStudent?.student?.id!}`);
+          }, 1000)
         }
       }}
     >
