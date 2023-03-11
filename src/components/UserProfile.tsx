@@ -44,6 +44,10 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
   const router = useRouter();
   const [{ data: me }] = useMeQuery();
   const [,logout] = useLogoutUserMutation();
+  function handleLogout(){
+    logout;
+    router.push('/');
+  }
 
   return (
     <HStack spacing={{ base: "0", md: "3" }} ml={1}>
@@ -107,10 +111,7 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
               </MenuGroup>
               <MenuDivider />
               <MenuItem icon={<FiLogOut />} 
-              onClick={() => {
-                logout
-                router.push("/");
-              }}
+              onClick={handleLogout}
               >
                 Logout
               </MenuItem>

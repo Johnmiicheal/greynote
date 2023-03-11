@@ -100,7 +100,7 @@ const Login = () => {
               >
                 {(props) => (
                   <Form>
-                    <Field name="name" validate={validateEmail}>
+                    <Field name="adminNameOrEmail" validate={validateEmail}>
                       {({ field, form }: any) => (
                         <FormControl
                           isInvalid={form.errors.name && form.touched.name}
