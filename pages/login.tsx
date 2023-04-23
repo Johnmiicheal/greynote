@@ -2,20 +2,14 @@ import {
   Heading,
   Flex,
   Text,
-  Center,
-  Image,
   FormControl,
   FormLabel,
   FormErrorMessage,
   Input,
   Button,
-  InputLeftAddon,
-  InputGroup,
   Link,
   useToast,
 } from "@chakra-ui/react";
-import styles from "../styles/Login.module.css";
-import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field } from "formik";
 import NextLink from "next/link";
 import { Layout } from "../src/components/Layout";
@@ -150,7 +144,7 @@ const Login = () => {
                         mb={14}
                       >
                         Forgot your password?{" "}
-                        <NextLink href="/register" passHref>
+                        <NextLink href="/forgot-password" passHref>
                           <Link color="#F4B95F">Reset it</Link>
                         </NextLink>
                       </Text>

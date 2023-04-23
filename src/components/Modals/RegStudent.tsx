@@ -61,6 +61,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
 
   const [tabIndex, setTabIndex] = React.useState(0);
   let currYear = new Date().getFullYear();
+
   let footer = <p>Please select a date.</p>;
   if (selected) {
     footer = <p>You selected {format(selected, "PP")}.</p>;
@@ -79,7 +80,6 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
     </option>
   ));
 
-
   const [startYears, setStartYears] = useState<string[]>([]);
   const [endYears, setEndYears] = useState<string[]>([]);
 
@@ -93,11 +93,14 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
     setStartYears(startYear.reverse());
   }, []);
 
-
-
   const handleTabsChange = (index: React.SetStateAction<number>) => {
     setTabIndex(index);
   };
+
+  const handleClose = () => {
+    setTabIndex(0);
+    onClose();
+  }
 
   return (
     <Formik
@@ -141,18 +144,18 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
           lastName: values.lastName,
           firstName: values.firstName,
         });
-        if (!response.data?.registerStudent?.student) {
+        if (response?.data?.registerStudent?.errors) {
           toast({
-            title: "Error.",
-            description: "We could not register the Student",
+            title: "Error in registering student",
+            description: `${response.data.registerStudent.errors[0].message}`,
             status: "error",
             variant: "left-accent",
             duration: 5000,
             isClosable: true,
           });
-          setTimeout(() => {
-            router.reload();
-          }, 1200)
+          // setTimeout(() => {
+          //   router.reload();
+          // }, 1200)
         } else if (response.data?.registerStudent?.student) {
           console.log(values.endDate, values.startDate);
           toast({
@@ -178,8 +181,8 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
           motionPreset="slideInBottom"
         >
           <ModalOverlay />
-          <ModalContent>
-            <ModalCloseButton />
+          <ModalContent mt={2} minW="35em">
+            <ModalCloseButton onClick={handleClose} />
             <Tabs index={tabIndex} variant="enclosed" isFitted>
               <TabPanels>
                 <TabPanel>
@@ -250,7 +253,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                                 {...field}
                                 placeholder="Age"
                                 type="number"
-                                w={40}
+                                w={"220px"}
                                 focusBorderColor="#F4B95F"
                               />
                             </FormControl>
@@ -264,7 +267,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                               <Select
                                 {...field}
                                 placeholder="Select Gender"
-                                w={40}
+                                w={"220px"}
                                 focusBorderColor="#F4B95F"
                               >
                                 {fakegender.map((p, i) => (
@@ -284,7 +287,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                             <FormLabel>Grade</FormLabel>
                             <Select
                               placeholder="Select Grade"
-                              w={40}
+                              w={"220px"}
                               focusBorderColor="#F4B95F"
                               {...field}
                             >
@@ -309,7 +312,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                                 <Select
                                   placeholder="Month"
                                   name="startDate.month"
-                                  w={40}
+                                  w={"220px"}
                                   mr={5}
                                   focusBorderColor="#F4B95F"
                                   {...field}
@@ -331,7 +334,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                                   {...field}
                                   name="startDate.year"
                                   placeholder="Year"
-                                  w={40}
+                                  w={"220px"}
                                   focusBorderColor="#F4B95F"
                                 >
                                   { startYears.map((v, i) => (
@@ -356,7 +359,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                                 <Select
                                   placeholder="Month"
                                   name="endDate.month"
-                                  w={40}
+                                  w={"220px"}
                                   mr={5}
                                   focusBorderColor="#F4B95F"
                                   {...field}
@@ -378,7 +381,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                                   {...field}
                                   name="endDate.year"
                                   placeholder="Year"
-                                  w={40}
+                                  w={"220px"}
                                   focusBorderColor="#F4B95F"
                                 >
                                   { endYears.map((v, i) => (
@@ -419,16 +422,18 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                         {({ field, form }: any) => (
                           <FormControl>
                             <FormLabel>Date of Birth</FormLabel>
-                            <DayPicker
-                              fromYear={2000}
-                              toYear={currYear}
-                              captionLayout="dropdown"
-                              mode="single"
-                              onSelect={setSelected}
-                              selected={selected}
-                              footer={footer}
-                              {...field}
-                            />
+                            <Flex justify="center" mt={-2}>
+                              <DayPicker
+                                fromYear={2000}
+                                toYear={currYear}
+                                captionLayout="dropdown"
+                                mode="single"
+                                onSelect={setSelected}
+                                selected={selected}
+                                footer={footer}
+                                {...field}
+                              />
+                            </Flex>
                           </FormControl>
                         )}
                       </Field>
@@ -567,7 +572,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                         >
                           Complete
                         </Button>
-                        <Button onClick={onClose}>Cancel</Button>
+                        <Button onClick={handleClose}>Cancel</Button>
                       </Flex>
                     </Form>
                   </ModalBody>{" "}

@@ -9,5 +9,6 @@ query GetAdmins {
     profileImgUrl
     school
     schoolImg
+    isSuper
   }
 }

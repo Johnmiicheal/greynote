@@ -14,14 +14,18 @@ import {
   Td,
   TableCaption,
   TableContainer,
-  Badge,
+  useDisclosure,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import Header from "../../src/components/Header";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { AiOutlineFileSearch, AiOutlineFileAdd } from "react-icons/ai";
 import { useRouter } from "next/router";
 import GrayLayout from "../../src/components/GrayLayout";
-import { useSchoolCasesQuery } from "../../src/gql/graphql";
+import {
+  useSchoolCasesQuery,
+  useAdminCaseCountQuery,
+} from "../../src/gql/graphql";
 import NextLink from "next/link";
 import { format } from "date-fns";
 
@@ -30,16 +34,39 @@ import { RadarChart } from "../../src/components/RadarChart";
 
 const Graycase = () => {
   const router = useRouter();
-  const [{ data: cases, fetching }] = useSchoolCasesQuery({
+  const {
+    isOpen: isGrayOpen,
+    onOpen: onGrayOpen,
+    onClose: onGrayClose,
+  } = useDisclosure();
+  const [{ data: cases, fetching: isLoading }] = useSchoolCasesQuery({
     variables: {
       limit: 15,
       cursor: 0,
-      sortBy: "recent"
-    }
-  })
+      sortBy: "recent",
+    },
+  });
+  const [{ data: caseCount }] = useAdminCaseCountQuery();
+
+  const grayStyle = {
+    bg: "white",
+    px: 4,
+    py: 10,
+    h: "100px",
+    w: "300px",
+    borderRadius: "md",
+    align: "center",
+    role: "group",
+  };
   return (
     <Center>
-      <Flex direction="row" justify="space-between" w="full" minH="100vh">
+      <Head>
+        <title>
+          Graybook - Graycase Records
+        </title>
+        <link rel="shortcut icon" href="/graylogo.png" />
+      </Head>
+      <Flex justify="space-between" w="full" minH="100vh">
         <Flex direction="column">
           <GrayLayout />
         </Flex>
@@ -60,22 +87,21 @@ const Graycase = () => {
             py={5}
             px={10}
           >
-              <Text fontSize={24} fontWeight={800} color="#212121">
-                My GrayCases
-              </Text>
-            <Flex direction="row" mt={4}>
-              <Flex
-                bg="white"
-                px={4}
-                py={10}
-                h="100px"
-                w="300px"
-                borderRadius="md"
-                align="center"
-                cursor="pointer"
-                role="group"
-                _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
-              >
+            <Text fontSize={24} fontWeight={800} color="#212121">
+              Graycase Records
+            </Text>
+            <Flex gap="4" mt={4}>
+              <Flex {...grayStyle} bgImg="/Framee.png" gap="4">
+                <Image
+                  src="/gray2logo.png"
+                  alt="graybook_logo"
+                  w="50px"
+                  borderRadius="full"
+                />
+                <Text>{caseCount?.adminCaseCount} {caseCount?.adminCaseCount! <= 1 ? "Graycase" : "Graycases" } recorded</Text>
+              </Flex>
+
+              <Flex {...grayStyle}  _hover={{ borderWidth: "1px", borderColor: "gray.400" }} cursor="pointer">
                 <Flex
                   color="#343434"
                   bg="#979797"
@@ -87,20 +113,8 @@ const Graycase = () => {
                 </Flex>
                 <Text>Search for a student</Text>
               </Flex>
-            
-            <Flex
-                bg="white"
-                ml={10}
-                px={4}
-                py={10}
-                h="100px"
-                w="300px"
-                borderRadius="md"
-                align="center"
-                cursor="pointer"
-                role="group"
-                _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
-              >
+
+              <Flex {...grayStyle}  _hover={{ borderWidth: "1px", borderColor: "gray.400" }} cursor="pointer" onClick={onGrayOpen}>
                 <Flex
                   color="#8E6930"
                   bg="#FFCE83"
@@ -110,57 +124,63 @@ const Graycase = () => {
                 >
                   <Icon as={AiOutlineFileAdd} w={7} h={7} />
                 </Flex>
-                <Text>Create a new graycase</Text>
+                <Text>Create a Report</Text>
               </Flex>
             </Flex>
-
-
-            <Flex direction="column" mt={5} bg="white" borderRadius="md">
-            <TableContainer>
-              <Table variant='simple'>
-                <TableCaption>Graycase Database</TableCaption>
-                <Thead>
-                  <Tr>
-                    <Th>First Name</Th>
-                    <Th>Last Name</Th>
-                    <Th isNumeric>Age</Th>
-                    <Th>Categorty</Th>
-                    <Th>Grade</Th>
-                    <Th>Gender</Th>
-                    <Th>Status</Th>
-                    <Th>Date Created</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                {cases?.schoolCases?.grayCase?.map((p) => (
-                  <Tr key={p.id}>
-                    <Td>{p.firstName}</Td>
-                    <Td>{p.lastName}</Td>
-                    <Td isNumeric>{p.ageInput}</Td>
-                    <Td>{p.category}</Td>
-                    <Td>{p.gradeClass}</Td>
-                    <Td>{p.gender}</Td>
-                    <Td>{p.isActive === true ? "Active": "Inactive" }</Td>
-                    <Td>{format(new Date(p.createdAt), 'MM/dd/yyyy')}</Td>
-                  </Tr>               
-                ))}
-                </Tbody>
-                <Tfoot>
-                  <Tr>
-                  <Th>First Name</Th>
-                    <Th>Last Name</Th>
-                    <Th isNumeric>Age</Th>
-                    <Th>Categorty</Th>
-                    <Th>Grade</Th>
-                    <Th>Gender</Th>
-                    <Th>Status</Th>
-                    <Th>Date Created</Th>
-                  </Tr>
-                </Tfoot>
-              </Table>
-            </TableContainer>
+            { cases?.schoolCases.grayCase?.length! <= 0 ? (
+              <Text> You have not registered any case yet. </Text>
+            ) : isLoading ? (
+              <Text>Loading...</Text>
+            ): (
+              <Flex direction="column" mt={5} bg="white" borderRadius="md">
+              <TableContainer>
+                <Table variant="simple">
+                  <TableCaption>Graycase Database</TableCaption>
+                  <Thead>
+                    <Tr>
+                      <Th>First Name</Th>
+                      <Th>Last Name</Th>
+                      <Th isNumeric>Age</Th>
+                      <Th>Categorty</Th>
+                      <Th>Grade</Th>
+                      <Th>Gender</Th>
+                      <Th>Status</Th>
+                      <Th>Date Created</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {cases?.schoolCases?.grayCase?.map((p) => (
+                      <Tr key={p.id}>
+                        <Td>{p.firstName}</Td>
+                        <Td>{p.lastName}</Td>
+                        <Td isNumeric>{p.ageInput}</Td>
+                        <Td>{p.category}</Td>
+                        <Td>{p.gradeClass}</Td>
+                        <Td>{p.gender}</Td>
+                        <Td>{p.isActive === true ? "Active" : "Inactive"}</Td>
+                        <Td>{format(new Date(p.createdAt), "MM/dd/yyyy")}</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                  <Tfoot>
+                    <Tr>
+                      <Th>First Name</Th>
+                      <Th>Last Name</Th>
+                      <Th isNumeric>Age</Th>
+                      <Th>Categorty</Th>
+                      <Th>Grade</Th>
+                      <Th>Gender</Th>
+                      <Th>Status</Th>
+                      <Th>Date Created</Th>
+                    </Tr>
+                  </Tfoot>
+                </Table>
+              </TableContainer>
             </Flex>
-{/* 
+            ) }
+
+          
+            {/* 
             <Flex direction="column" mt={5} bg="white" borderRadius="md">
               <RadarChart />
             </Flex> */}

@@ -1,5 +1,5 @@
-query SchoolCases($limit: Float!, $cursor: Float, $sortBy: String) {
-  schoolCases(limit: $limit, cursor: $cursor, sortBy: $sortBy) {
+query SchoolCases($limit: Float!, $sortBy: String, $cursor: Float) {
+  schoolCases(limit: $limit, sortBy: $sortBy, cursor: $cursor) {
     grayCase {
       id
       createdAt
@@ -11,6 +11,8 @@ query SchoolCases($limit: Float!, $cursor: Float, $sortBy: String) {
       gender
       ageInput
       isActive
+      title
+      report
       wasEdited
       creator {
         errors {
@@ -19,14 +21,16 @@ query SchoolCases($limit: Float!, $cursor: Float, $sortBy: String) {
         }
         admin {
           id
+          isSuper
           createdAt
+          token
           adminName
           phoneNumber
           email
           isDisabled
           profileImgUrl
-          schoolImg
           school
+          schoolImg
         }
       }
     }

@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ThemeProvider theme={theme}>
         <Head>
           <link rel="shortcut icon" href="/graylogo.png" />
-          <title>GrayBook</title>
+          <title>GrayBook App</title>
         </Head>
           <ChakraProvider>
             {progress && <TopBarProgress />}

@@ -55,7 +55,7 @@ const Cases: React.FC<CasesProps> = ({ p }) => {
         bg="white"
         _hover={{ borderColor: "gray.400" }}
         pb={2}
-        w={{ base: "full", lg: "650px" }}
+        w={{ base: "full", lg: "750px" }}
         mb={{ base: 2 }}
       >
         <Stack spacing={1}>
@@ -101,12 +101,9 @@ const Cases: React.FC<CasesProps> = ({ p }) => {
             </LinkOverlay>
           </NextLink>
 
-          <Box maxW="full" alignItems="center" mt={2} zIndex={2}>
+          <Box maxW="full" alignItems="center" mt={2} zIndex={2} display={ me?.me?.admin ? "block" : "none" }>
             <CaseInteraction
-              comments={2}
-              postID={p?.id}
               post={p}
-              count={p?.id}
               pageProps={undefined}
             />
           </Box>

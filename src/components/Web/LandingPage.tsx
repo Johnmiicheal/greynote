@@ -61,7 +61,6 @@ const LandingPage = () => {
               src="/web/bouncing.json"
               style={{ width: "500px", height: "500px" }}
             />
-            {/* <Image src="/graylogo.png" alt="gray art" w="330px" h="330px" /> */}
           </Flex>
         </Flex>
         {/* SECTION 2*/}

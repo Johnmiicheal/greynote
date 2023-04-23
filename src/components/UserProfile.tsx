@@ -22,16 +22,7 @@ import {
 
 import NextLink from "next/link";
 import {
-  IoChatbubbleEllipses,
-  IoChatbubbleEllipsesOutline,
-  IoNotificationsOutline,
-  IoNotifications,
-  IoCompassOutline,
-  IoCompass,
-  IoApps,
-  IoCaretDown,
-  IoFlashOutline,
-  IoFlash,
+  IoCaretDown, IoEllipsisHorizontal
 } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { FiSettings, FiBookmark, FiLogOut } from "react-icons/fi";
@@ -45,7 +36,7 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
   const [{ data: me }] = useMeQuery();
   const [,logout] = useLogoutUserMutation();
   function handleLogout(){
-    logout;
+    logout();
     router.push('/');
   }
 
@@ -63,36 +54,35 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
         >
           <Menu>
             <MenuButton
-              py={2}
               transition="all 0.3s"
               _focus={{ boxShadow: "none" }}
+              py={1}
             >
-              <HStack
-                spacing="2"
+              <Flex
                 align="center"
                 cursor="pointer"
-                pb={2}
-                pr={2}
                 display={{ base: "none", md: "flex" }}
+                pr={2}
               >
-                <Avatar name={me?.me?.admin?.school!} src={me?.me?.admin?.schoolImg} size="sm" ml={1} mr={1}>
-                  {" "}
-                  <AvatarBadge boxSize="1.25em" bg="green.500" />{" "}
-                </Avatar>
-                <VStack
-                  flexDir="column"
+                <Avatar name={me?.me?.admin?.school!} src={me?.me?.admin?.schoolImg} size="sm" ml={1} mr={1} />
+                <Flex
+                  direction="column"
+                  textAlign="start"
+                  justify="center"
                   display={{ base: "none", md: "flex" }}
-                  alignItems="flex-start"
-                  spacing="1px"
+                  gap="1px"
                 >
                   <Text fontWeight={600} fontSize="0.9em">
                   {me?.me?.admin?.school} 
                   </Text>
-                </VStack>
-                <Box display={{ base: "none", md: "flex" }}>
-                  <IoCaretDown />
+                  <Text fontWeight={400} fontSize="0.6em">
+                    @{me?.me?.admin?.adminName}
+                  </Text>
+                </Flex>
+                <Box ml={3} display={{ base: "none", md: "flex" }}>
+                  <IoEllipsisHorizontal />
                 </Box>
-              </HStack>
+              </Flex>
             </MenuButton>
             <MenuList
               // fontSize="md"

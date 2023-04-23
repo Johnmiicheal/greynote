@@ -36,7 +36,7 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Select a case</ModalHeader>
+        <ModalHeader>Add a Graycase</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
           <Formik

@@ -88,6 +88,11 @@ export const EditStudent: React.FC<EditStudentProps> = ({
     footer = <p>You selected {format(selected, "PP")}.</p>;
   }
 
+  const handleClose = () => {
+    setTabIndex(0);
+    onClose();
+  }
+
   let maxOffset = 50;
   let thisYear = new Date().getFullYear();
   const startYearList = Array.from(new Array(maxOffset), (v, i) => (
@@ -208,7 +213,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
           motionPreset="slideInBottom"
         >
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent mt={4} minW="35em" maxH="40em" overflowY="auto">
             <Flex w="full" p={1}>
               <IconButton
                 variant="ghost"
@@ -216,7 +221,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                 icon={<IoArrowBackOutline />}
                 onClick={handleGoBack}
               />
-              <ModalCloseButton />
+              <ModalCloseButton onClick={handleClose} />
             </Flex>
             <Tabs index={tabIndex} variant="enclosed" isFitted mt={-2}>
               <TabPanels>
@@ -229,7 +234,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                           <FormControl>
                             <Flex direction="column" align="center">
                               <FormLabel>Upload Student Image</FormLabel>
-                              <Avatar src={data.image} size="xl" mb={1} />
+                              <Avatar src={data.image} borderRadius="7px" size="xl" mb={1} />
                               <Flex
                                 align="center"
                                 ml={20}
@@ -275,7 +280,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                         )}
                       </Field>
 
-                      <Flex direction="row">
+                      <Flex direction="row" gap={5}>
                         <Field name="ageInput">
                           {({ field, form }: any) => (
                             <FormControl mt={4}>
@@ -283,7 +288,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                               <Input
                                 {...field}
                                 type="number"
-                                w={40}
+                                w="220px"
                                 focusBorderColor="#F4B95F"
                               />
                             </FormControl>
@@ -297,7 +302,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                               <Select
                                 {...field}
                                 placeholder="Select Gender"
-                                w={40}
+                                w="220px"
                                 focusBorderColor="#F4B95F"
                               >
                                 {fakegender.map((p, i) => (
@@ -317,7 +322,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                             <FormLabel>Grade</FormLabel>
                             <Select
                               placeholder="Select Grade"
-                              w={40}
+                              w="220px"
                               focusBorderColor="#F4B95F"
                               {...field}
                             >
@@ -340,7 +345,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                                 <Select
                                   placeholder="Month"
                                   name="startDate.month"
-                                  w={40}
+                                  w="220px"
                                   mr={5}
                                   focusBorderColor="#F4B95F"
                                   {...field}
@@ -357,12 +362,12 @@ export const EditStudent: React.FC<EditStudentProps> = ({
 
                           <Field name="startDate.year">
                             {({ field, form }: any) => (
-                              <FormControl mt={2}>
+                              <FormControl ml={2} mt={2}>
                                 <Select
                                   {...field}
                                   name="startDate.year"
                                   placeholder="Year"
-                                  w={40}
+                                  w="220px"
                                   focusBorderColor="#F4B95F"
                                 >
                                   {startYears.map((v, i) => (
@@ -387,8 +392,8 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                                 <Select
                                   placeholder="Month"
                                   name="endDate.month"
-                                  w={40}
-                                  mr={5}
+                                  w="220px"
+                                  mr={7}
                                   focusBorderColor="#F4B95F"
                                   {...field}
                                 >
@@ -409,7 +414,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                                   {...field}
                                   name="endDate.year"
                                   placeholder="Year"
-                                  w={40}
+                                  w="220px"
                                   focusBorderColor="#F4B95F"
                                 >
                                   {endYears.map((v, i) => (
@@ -435,7 +440,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                         >
                           Next
                         </Button>
-                        <Button onClick={onClose}>Cancel</Button>
+                        <Button onClick={handleClose}>Cancel</Button>
                       </Flex>
                     </Form>
                   </ModalBody>{" "}
@@ -483,7 +488,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                             <FormLabel>State</FormLabel>
                             <Select
                               placeholder="Select State"
-                              w={40}
+                              w="220px"
                               focusBorderColor="#F4B95F"
                               {...field}
                             >
