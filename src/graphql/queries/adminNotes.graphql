@@ -1,0 +1,35 @@
+query AdminNotes($limit: Float!, $sortBy: String, $cursor: Float) {
+  adminNotes(limit: $limit, sortBy: $sortBy, cursor: $cursor) {
+    hasMore
+    cursor
+    notes {
+      id
+      createdAt
+      updatedAt
+      title
+      body
+      isDisabled
+      wasEdited
+      bodySnippet
+      creator {
+        errors {
+          field
+          message
+        }
+        admin {
+          id
+          isSuper
+          createdAt
+          token
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+          schoolImg
+        }
+      }
+    }
+  }
+}
