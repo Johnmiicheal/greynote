@@ -564,7 +564,6 @@ export type Student = {
   school: SchoolResponse;
   startDate: Scalars['String'];
   state: Scalars['String'];
-  studentCase: GrayCaseResponse;
 };
 
 export type StudentResponse = {
