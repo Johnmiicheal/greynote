@@ -106,7 +106,7 @@ const LandingPage = () => {
           mt={20}
           mb={20}
         >
-          <Flex direction="column">
+          <Flex direction="column" align="center">
             <Text
               fontSize="2rem"
               color="#8E6930"
@@ -119,8 +119,8 @@ const LandingPage = () => {
               We created Graybook to help you manage your students the{" "}
               <u>simple</u> way
             </Text>
-            <Flex gap="5" px={40}>
-              <VStack spacing="4">
+            <Flex gap="2" w="80rem" pr={10} >
+              <VStack spacing="-2">
                 {row1.map((item, i) => (
                   <Flex align="center" key={i}>
                     <Box>
@@ -137,7 +137,7 @@ const LandingPage = () => {
                   </Flex>
                 ))}
               </VStack>
-              <VStack spacing="4">
+              <VStack spacing="-2">
                 {row2.map((item, i) => (
                   <Flex align="center" key={i}>
                     <Box>
@@ -165,6 +165,7 @@ const LandingPage = () => {
             </Flex>
           </Flex>
         </Center>
+        
         {/* SECTION 3*/}
         <Center bgImg="/web/line.png" mt={20} mb={20}>
           <Flex direction="column">
@@ -350,6 +351,8 @@ const LandingPage = () => {
             </Box>
           </Flex>
         </Center>
+
+        { /* SECTION 5 */ }
 
         <Center bgImg="/web/section5.png" bgRepeat="no-repeat" bgSize="cover" minH="35rem" mb={20}>
           <Flex justify="space-between" mt={-20} gap={24}>
