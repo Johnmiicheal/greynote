@@ -23,12 +23,10 @@ export type Admin = {
   email: Scalars['String'];
   id: Scalars['Float'];
   isDisabled: Scalars['Boolean'];
-  isSuper: Scalars['Boolean'];
   phoneNumber: Scalars['String'];
   profileImgUrl: Scalars['String'];
   school: Scalars['String'];
   schoolImg: Scalars['String'];
-  token: Scalars['String'];
 };
 
 export type AdminResponse = {
@@ -528,8 +526,6 @@ export type School = {
   facebookUrl: Scalars['String'];
   id: Scalars['Float'];
   instagramUrl: Scalars['String'];
-  lgarea: Scalars['String'];
-  license: Scalars['String'];
   linkedinUrl: Scalars['String'];
   logoImgUrl: Scalars['String'];
   rcnumber: Scalars['Float'];
