@@ -42,12 +42,16 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
           <Formik
             initialValues={{
               studentId: id,
+              report: "",
+              title: "",
               category: ""
             }}
             onSubmit={async (values, { setErrors }) => {
               console.log(values);
               const response = await create({
                 studentId: id,
+                report: values.report,
+                title: values.title,
                 category: values.category
               });
               if (response.data?.addGrayCase?.errors) {
