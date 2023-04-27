@@ -1,3 +1,39 @@
+export const row1 = [
+  {
+    img: "/web/chart.svg",
+    title: "Intuitive Dashboard",
+    desc: "We have provided a dashboard that is easy to navigate and communicates relevant information"
+  },
+  {
+    img: "/web/simple.svg",
+    title: "Simplicity",
+    desc: "Our platform prides itself in its simplicity and ease of use"
+  },
+  {
+    img: "/web/secure.svg",
+    title: "Secure",
+    desc: "You can be rest assured that your data and information is secure"
+  }
+]
+
+export const row2 = [
+  {
+    img: "/web/customer.svg",
+    title: "Customer Support",
+    desc: "Our customer support team is ready to listen to all your enquiries and help you get onboard"
+  },
+  {
+    img: "/web/rocket.svg",
+    title: "Performance",
+    desc: "We are releasing quality products to you in the simplest form possible"
+  },
+  {
+    img: "/web/premium.svg",
+    title: "Premium Offers",
+    desc: "Graybook has so much more to offer, why not experience them all!"
+  }
+]
+
 export const fakedb = [
   {
     grade: 1,

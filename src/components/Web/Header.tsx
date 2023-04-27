@@ -18,50 +18,48 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useRouter } from "next/router";
+import { IoChevronForward } from "react-icons/io5";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
+  const links = [
+    { path: "/features", text: "Features" },
+    { path: "/resources", text: "Resources" },
+    { path: "/pricing", text: "Pricing" },
+  ];
 
   return (
     <Flex
       display="flex"
-      px={10}
       zIndex="1"
       top="0"
-      position="fixed"
-      boxShadow="md"
       w="full"
       align="center"
       justify="space-between"
       h={16}
-      bg="white"
     >
-      <Flex justify="start" pointerEvents="none">
-        <Image src="/grayfull.png" alt="Graybook Logo" w="160px" />
+      <Flex justify="start" gap={10}>
+        <Image src="/gray2full.png" alt="Graybook Logo" w="160px" pointerEvents="none" />
+        {links.map((link) => (
+          <Button variant="link" key={link.path} color="white" onClick={() => router.push(link.path)}>
+            {link.text}
+          </Button>
+        ))}
+
       </Flex>
       <Flex justify="end">
-        <ButtonGroup>
-          <Button
-            variant="unstyled"
-            color="#F4B95F"
-            mr="30px"
-            _hover={{ color: "#DAA65D" }}
-            onClick={() => router.push('/login')}
-          >
-            Sign In
-          </Button>
           <Button
             variant="solid"
-            px={2}
+            px={4}
             color="white"
             bg="#F4B95F"
             _hover={{ bg: "#DAA65D" }}
+            rightIcon={<IoChevronForward />}
             onClick={() => router.push('/register')}
           >
-            Join Graybook
+            Sign up
           </Button>
-        </ButtonGroup>
       </Flex>
 
       <Modal isOpen={isOpen} onClose={onClose}>

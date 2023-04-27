@@ -30,7 +30,6 @@ import { useMeQuery } from "../../gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
 import GuageChart from "./GuageChart";
-import MarqueeText from "../MarqueeText";
 import { motion } from "framer-motion";
 
 
