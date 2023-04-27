@@ -35,7 +35,6 @@ import {
 import { useRouter } from "next/router";
 import { format, formatISO } from "date-fns";
 import { RegStudent } from "./Modals/RegStudent";
-import { NewGrayCase } from "./Modals/NewGrayCase";
 
 export default function SchoolCard() {
   const router = useRouter();
@@ -173,7 +172,6 @@ export default function SchoolCard() {
             Create GrayCase
           </Button>
           <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
-          <NewGrayCase isOpen={isOpen} onClose={onClose} />
 
           <Divider mt={3} />
 
