@@ -24,20 +24,38 @@ import { useRouter } from "next/router";
 import GrayLayout from "../../src/components/GrayLayout";
 import { RegStudent } from "../../src/components/Modals/RegStudent";
 import NextLink from "next/link";
-import { useGetStudentFromClassQuery, useMeQuery, useGetClassCountQuery } from "../../src/gql/graphql";
+import { useAdminStudentCountQuery, useMeQuery, useGetClassCountQuery } from "../../src/gql/graphql";
 
 import { fakeclass } from "../../fakedata";
+import Head from "next/head";
 
 const Database = () => {
   const [{ data: me }] = useMeQuery();
+  const [{ data: count }] = useAdminStudentCountQuery();
   const router = useRouter();
   const {
     isOpen: isRegOpen,
     onOpen: onRegOpen,
     onClose: onRegClose,
   } = useDisclosure();
+  const grayStyle = {
+    bg: "white",
+    px: 4,
+    py: 10,
+    h: "100px",
+    w: "300px",
+    borderRadius: "md",
+    align: "center",
+    role: "group",
+  };
   return (
     <Center>
+      <Head>
+        <title>
+          Graybook - My Database
+        </title>
+        <link rel="shortcut icon" href="/graylogo.png" />
+      </Head>
       <Flex direction="row" justify="space-between" w="full" minH="100vh">
         <Flex direction="column">
           <GrayLayout />
@@ -62,17 +80,21 @@ const Database = () => {
               <Text fontSize={24} fontWeight={800} color="#212121">
                 My Student Database
               </Text>
-            <Flex direction="row" mt={4}>
+            <Flex gap={4} mt={4}>
+            <Flex {...grayStyle} bgImg="/Framee.png"  gap="4">
+                <Image
+                  src="/gray2logo.png"
+                  alt="graybook_logo"
+                  w="50px"
+                  borderRadius="full"
+                  // border="2px solid #FFCE83"
+                />
+                <Text>{count?.adminStudentCount} {count?.adminStudentCount! <= 1 ? "Student" : "Students" } registered</Text>
+              </Flex>
+
               <Flex
-                bg="white"
-                px={4}
-                py={10}
-                h="100px"
-                w="300px"
-                borderRadius="md"
-                align="center"
+              {...grayStyle}
                 cursor="pointer"
-                role="group"
                 _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
                 onClick={onRegOpen}
               >
@@ -90,16 +112,8 @@ const Database = () => {
               <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
 
               <Flex
-                bg="white"
-                ml={10}
-                px={4}
-                py={10}
-                h="100px"
-                w="300px"
-                borderRadius="md"
-                align="center"
+                {...grayStyle}
                 cursor="pointer"
-                role="group"
                 _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
               >
                 <Flex

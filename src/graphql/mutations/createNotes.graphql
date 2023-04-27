@@ -1,0 +1,33 @@
+mutation CreateNotes($title: String!, $body: String) {
+  createNotes(title: $title, body: $body) {
+    errors {
+      field
+      message
+    }
+    notes {
+      id
+      createdAt
+      updatedAt
+      title
+      body
+      isDisabled
+      wasEdited
+      bodySnippet
+      creator {
+        admin {
+          id
+          isSuper
+          createdAt
+          token
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+          schoolImg
+        }
+      }
+    }
+  }
+}

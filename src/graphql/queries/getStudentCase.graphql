@@ -10,6 +10,8 @@ query GetStudentCases($studentId: Float!) {
     gender
     ageInput
     isActive
+    title
+    report
     wasEdited
     creator {
       errors {
@@ -18,12 +20,15 @@ query GetStudentCases($studentId: Float!) {
       }
       admin {
         id
+        isSuper
         createdAt
+        token
         adminName
         phoneNumber
         email
         isDisabled
         profileImgUrl
+        school
         schoolImg
       }
     }

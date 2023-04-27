@@ -1,0 +1,3 @@
+mutation DeleteNote($deleteNoteId: Float!) {
+  deleteNote(id: $deleteNoteId)
+}

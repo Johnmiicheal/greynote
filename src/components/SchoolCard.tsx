@@ -84,18 +84,19 @@ export default function SchoolCard() {
   return (
     <Stack spacing={4} direction="column">
       <Box borderRadius="10px" px={1} pt={1} mb={3}>
-        <Box bg="white" borderRadius="10px" pb={3} w={80}>
+        <Box bg="white" borderRadius="10px" pb={3} w="80">
           <Flex
             borderRadius="10px 10px 0 0"
             px={4}
-            bgGradient="linear(to-r, #F4B95F, #7A7A7A, #DAA65D)"
+            h="30px"
+            bgImg="/top-frame.png"
           >
-            <Text fontSize={20} color="white">
+            <Text fontSize={20} color="#FFFFFF">
               About School
             </Text>
           </Flex>
           <Flex px={4} mt={2} direction="column">
-            <Text color="#000a16" fontWeight={400} fontSize={14} w={56}>
+            <Text color="#000a16" fontWeight={400} fontSize={14}>
               {data?.getSchoolByName?.school?.description}
             </Text>
 
@@ -176,7 +177,7 @@ export default function SchoolCard() {
 
           <Divider mt={3} />
 
-          <Accordion allowToggle borderRadius="md" mt={3}>
+          {/* <Accordion allowToggle borderRadius="md" mt={3} borderColor="white">
             <AccordionItem>
               <AccordionButton>
                 <Box flex="1" textAlign="left" borderRadius="md">
@@ -185,8 +186,7 @@ export default function SchoolCard() {
                 <AccordionIcon />
               </AccordionButton>
               <AccordionPanel pb={4}>
-                <UnorderedList>
-                  <ListItem>
+                <Flex direction="column" w="full">
                     <Flex
                       align="center"
                       borderRadius="md"
@@ -216,8 +216,7 @@ export default function SchoolCard() {
                         Website
                       </Text>
                     </Flex>
-                  </ListItem>
-                  <ListItem>
+ 
                     <Flex
                       align="center"
                       borderRadius="md"
@@ -244,8 +243,7 @@ export default function SchoolCard() {
                         Instagram
                       </Text>
                     </Flex>
-                  </ListItem>
-                  <ListItem>
+
                     <Flex
                       align="center"
                       borderRadius="md"
@@ -272,8 +270,7 @@ export default function SchoolCard() {
                         Facebook
                       </Text>
                     </Flex>
-                  </ListItem>
-                  <ListItem>
+
                     <Flex
                       align="center"
                       borderRadius="md"
@@ -300,31 +297,45 @@ export default function SchoolCard() {
                         Youtube
                       </Text>
                     </Flex>
-                  </ListItem>
-                </UnorderedList>
+                </Flex>
               </AccordionPanel>
             </AccordionItem>
-          </Accordion>
+          </Accordion> */}
         </Box>
       </Box>
 
       <Flex borderRadius="10px" px={1}>
-        <Box bg="white" borderRadius="10px" pb={3} w={80}>
-          <Flex borderRadius="10px 10px 0 0" bgImg="/graycard.png" overflow="hidden" h="70px">
+        <Box bg="white" borderRadius="10px" pb={3} w={80} overflow="hidden">
+          <Flex borderRadius="10px 10px 0 0" bgImg="/graypriv.png" bgSize="cover" overflow="hidden" h="70px">
           </Flex>
-          <Flex ml={5} mt={2}>
-            <Text color="#000a16" fontWeight={400} fontSize={14} w={56}>
-              Graybook Guildlines and Privacy Policies
+          <Flex direction="column" px={2} mt={2} gap={1}>
+            <Flex gap={2}>
+              <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
+                Terms of Service
+              </Button>
+              <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
+                Privacy Policy
+              </Button>
+              <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
+                Cookie Policy
+              </Button>
+            </Flex>
+            <Flex gap={2}>
+              <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
+                Graybook Status
+              </Button>
+              <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
+                About Graybook
+              </Button>
+              <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
+                Careers
+              </Button>
+            </Flex>
+
+            <Text mt={2} fontSize={12}>
+              &copy; {year} The Graybook Platform, Inc.
             </Text>
           </Flex>
-          <NextLink href="/" passHref>
-            <Link textDecoration="none">
-              {" "}
-              <Text color="#000a16" align="center">
-                Privacy Policy
-              </Text>
-            </Link>
-          </NextLink>
         </Box>
       </Flex>
       

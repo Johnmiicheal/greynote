@@ -16,6 +16,7 @@ export default function Header({ onOpen, ...rest }: any) {
   return (
     <Flex
       display="flex"
+      py={2}
       zIndex="3"
       top="0"
       bg="white"

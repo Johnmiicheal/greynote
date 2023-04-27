@@ -118,7 +118,7 @@ const Register = () => {
                       duration: 5000,
                       isClosable: true,
                     });
-                    router.push("/onboarding");
+                    router.push("/email-verification");
                   }
                 }}
               >
@@ -138,6 +138,7 @@ const Register = () => {
                             type="text"
                             variant="outline"
                             focusBorderColor="#FFBF5C"
+                            autoComplete="adminName"
                             mb={2}
                           />
                           <FormErrorMessage>
@@ -159,6 +160,7 @@ const Register = () => {
                             type="email"
                             variant="outline"
                             focusBorderColor="#FFBF5C"
+                            autoComplete="new-email"
                             mb={2}
                           />
                           <FormErrorMessage>
@@ -184,6 +186,7 @@ const Register = () => {
                               placeholder="0800-123-4567"
                               variant="outline"
                               focusBorderColor="#FFBF5C"
+                              autoComplete="phoneNumber"
                             />
                           </InputGroup>
                           <FormErrorMessage mb={2}>
@@ -208,6 +211,7 @@ const Register = () => {
                               focusBorderColor="#FFBF5C"
                               type={show ? "text" : "password"}
                               variant="outline"
+                              autoComplete="new-password"
                             />
                             <InputRightElement width="4.5rem">
                               <Button

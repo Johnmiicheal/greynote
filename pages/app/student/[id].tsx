@@ -18,13 +18,13 @@ import {
   TabPanel,
   Badge,
   Portal,
-  Stack,
   Popover,
   PopoverContent,
   PopoverHeader,
   PopoverBody,
   PopoverTrigger,
   PopoverFooter,
+  Stack,
 } from "@chakra-ui/react";
 import GrayLayout from "../../../src/components/GrayLayout";
 import Header from "../../../src/components/Header";
@@ -108,16 +108,38 @@ const Student = () => {
     console.log(error);
     student = (
       <Center>
-        <Box minW="full" mt={{ base: 60, md: 60, lg: 40 }}>
+        <Flex direction="row" justify="space-between" w="full" minH="100vh">
+          <Flex direction="column">
+            <GrayLayout />
+          </Flex>
+
           <Flex
             direction="column"
-            align="center"
-            minW={{ base: "full", lg: "650px" }}
+            ml="130px"
+            w="full"
+            px={{ base: 4, md: 4, lg: 18 }}
           >
-            <Image src="/graylogo.png" alt="zlogo" w={40} mb={3} />
-            <BarLoader color="#ffd880" width="150px" />
+            <Header />
+            <Flex
+              direction="column"
+              mt={2}
+              bg="#E6E6E6"
+              h="full"
+              minW="full"
+              align="center"
+              borderRadius="20px 20px 0 0 "
+              py={5}
+              px={10}
+              gap={4}
+            >
+              <Image src="/server-down.svg" alt="connection_lost" w="300px" />
+              <Text w="400px" textAlign="center">
+                We seem to have lost you there, try checking your internet
+                connection and then refresh the page.
+              </Text>
+            </Flex>
           </Flex>
-        </Box>
+        </Flex>
       </Center>
     );
   } else if (data) {
@@ -136,8 +158,8 @@ const Student = () => {
           >
             <Header />
             <Flex
-              direction="row"
-              justify="start"
+              gap={12}
+              justify="center"
               bg="#E6E6E6"
               h="full"
               mt="5"
@@ -145,50 +167,56 @@ const Student = () => {
               py={5}
               px={10}
             >
-              <Flex direction="row" minH="full" justify="center">
+              <Flex>
                 <Flex
                   pb={2}
                   direction="column"
                   justify="start"
-                  align="center"
-                  minH="full"
+                  h="80vh"
                   bg="white"
                   borderRadius="lg"
-                  p={10}
+                  px={10}
+                  pt={2}
                 >
-                  <Avatar
-                    name={data?.getStudentById?.student?.firstName}
-                    src={data?.getStudentById?.student?.profileImgUrl}
-                    size="2xl"
-                    borderColor="#FFBF5C"
-                    borderWidth="2px"
-                  />
-                  <Flex direction="column" textAlign="center">
-                    <Text mt={2} fontWeight={500} fontSize={24}>
-                      {data?.getStudentById?.student?.firstName +
-                        " " +
-                        data?.getStudentById?.student?.lastName}
-                    </Text>
-                    <Text fontWeight={500} fontSize={20}>
-                      Graybook ID: {data?.getStudentById?.student?.grayId}
-                    </Text>
+                  <Flex gap={2}>
+                    <Avatar
+                      name={data?.getStudentById?.student?.firstName}
+                      src={data?.getStudentById?.student?.profileImgUrl}
+                      size="2xl"
+                      borderRadius="7px"
+                      border="3px solid #FFBF5C"
+                    />
+                    <Flex direction="column" justify="space-between">
+                      <Stack spacing="-1">
+                        <Text fontWeight={600} fontSize={28}>
+                          {data?.getStudentById?.student?.firstName +
+                            " " +
+                            data?.getStudentById?.student?.lastName}
+                        </Text>
+                        <Text fontWeight={700} color="gray.500" fontSize={18}>
+                          {data?.getStudentById?.student?.grayId}
+                        </Text>
+                      </Stack>
+                      <Flex justify="end">
+                        <Text>
+                          <strong>{data?.getStudentById?.student?.ageInput}</strong>{" "}
+                          Years Old |
+                        </Text>
+                        <Text ml={1}>
+                          <strong>{data?.getStudentById?.student?.gender}</strong>{" "}
+                          Student |
+                        </Text>
+                        <Text ml={1}>
+                          <strong>{count?.getCaseCount}</strong>{" "}
+                          {count?.getCaseCount! < 2 ? "GrayCase" : "GrayCases"}
+                        </Text>
+                      </Flex>
+                    </Flex>
                   </Flex>
-                  <Flex justify="space-between" mt={5}>
-                    <Text>
-                      <strong>{data?.getStudentById?.student?.ageInput}</strong>{" "}
-                      Years Old |
-                    </Text>
-                    <Text ml={1}>
-                      <strong>{data?.getStudentById?.student?.gender}</strong>{" "}
-                      Student |
-                    </Text>
-                    <Text ml={1}>
-                      <strong>{count?.getCaseCount}</strong>{" "}
-                      {count?.getCaseCount! < 2 ? "GrayCase" : "GrayCases"}
-                    </Text>
-                  </Flex>
+
                   <Flex
                     mt={5}
+                    gap={2}
                     display={
                       data?.getStudentById?.student?.creator?.admin?.id ===
                       me?.me?.admin?.id
@@ -197,7 +225,6 @@ const Student = () => {
                     }
                   >
                     <Button
-                      mr={2}
                       bg="#F4B95F"
                       _hover={{ bg: "#DAA65D" }}
                       color="white"
@@ -206,29 +233,25 @@ const Student = () => {
                       Edit Student
                     </Button>
                     <Button
-                      variant="ghost"
+                      variant="outline"
+                      color= "#F4B95F"
+                      borderColor="#F4B95F"
+                      _hover={{ color: "#FFFFFF", bg: "#DAA65D", borderColor: "#FFFFFF"  }}
                       onClick={onOpen}
-                      display={
-                        data?.getStudentById?.student?.creator?.admin?.id ===
-                        me?.me?.admin?.id
-                          ? "block"
-                          : "none"
-                      }
                     >
                       Add GrayCase
                     </Button>
                   </Flex>
 
                   <Flex
-                    mt={5}
+                    mt={3}
                     bg="white"
                     direction="column"
-                    align="center"
                     w="full"
                     borderRadius="lg"
+                    overflowY="auto"
                     py={2}
-                    px={5}
-                    // display={ !cases?.getStudentCases ? 'flex' : 'none'}
+                    display={ cases?.getStudentCases.length === 0 ? 'none' : 'block'}
                   >
                     <Text fontWeight="bold" fontSize={22}>
                       Active Graycases
@@ -265,19 +288,20 @@ const Student = () => {
 
               </Flex>
 
-              <Flex direction="column" ml={10}>
+              <Flex direction="column" gap="5">
                 <Flex
                   bg="white"
                   direction="column"
                   w="550px"
                   borderRadius="lg"
-                  py={2}
+                  pt={2}
+                  pb={5}
                   px={5}
                 >
                   <Text fontWeight="bold" fontSize={22} mb={4}>
                     Student Details
                   </Text>
-                  <Flex mb={4} align="start">
+                  <Flex mb={4} ml={-4}>
                     <Popover trigger="hover" isLazy openDelay={650}>
                       <PopoverTrigger>
                         <Button fontSize={{ base: 14, md: 18 }} variant="none">
@@ -286,7 +310,8 @@ const Student = () => {
                               data?.getStudentById?.student?.school?.school
                                 ?.logoImgUrl
                             }
-                            size="md"
+                            w="40px"
+                            h="40px"
                             borderRadius="md"
                             name={
                               data?.getStudentById?.student?.school?.school
@@ -423,7 +448,6 @@ const Student = () => {
                 </Flex>
 
                 <Flex
-                  mt={5}
                   bg="white"
                   direction="column"
                   w="550px"

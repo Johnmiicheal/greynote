@@ -1,0 +1,43 @@
+.marqueeLeft {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .marqueeLeft span {
+    position: absolute;
+    display: inline-block;
+    animation: marquee 10s linear infinite;
+  }
+
+  .marqueeRight {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .marqueeRight span {
+    position: absolute;
+    display: inline-block;
+    animation: marquee 10s linear infinite;
+  }
+  
+  @keyframes marqueeLeft {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes marqueeRight {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }

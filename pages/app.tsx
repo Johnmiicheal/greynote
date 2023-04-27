@@ -1,14 +1,20 @@
 import React from "react";
 import { Center, Flex, Box, Image } from "@chakra-ui/react"
-import { useMeQuery } from "../src/gql/graphql";
+import { useMeQuery, useGetSchoolByNameQuery } from "../src/gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
-import LandingPage from "../src/components/Web/LandingPage";
 import App from "../src/components/Dashboard/App";
+import { useRouter } from "next/router";
 
 const AppPage = () => {
+    const router = useRouter();
     const [{ data, fetching }] = useMeQuery();
+    const [{ data: schoolData, fetching: fetchingSchool }] = useGetSchoolByNameQuery({
+      variables: {
+        schoolName: data?.me?.admin?.school!
+      }
+    })
     let page = null;
-    if(fetching && !data?.me?.admin){
+    if(fetching && fetchingSchool ){
       page = (
        <Center>
           <Box minW="full" mt={{ base: 60, md: 60, lg: 40 }}>
@@ -23,9 +29,11 @@ const AppPage = () => {
           </Box>
         </Center>
       )
-}else if(data){
-    page = ( <App /> )
-  }
+}else if(!data?.me?.admin && !schoolData?.getSchoolByName?.school){
+  router.push('/')
+}else{
+  page = ( <App /> )
+}
 
   return page;
 }

@@ -22,21 +22,16 @@ import {
 } from "react-icons/io5";
 import { FiEdit } from 'react-icons/fi';
 import { RiBookMarkLine } from 'react-icons/ri';
-import { GrayCase, useMeQuery } from "../gql/graphql";
+import { GrayCase } from "../gql/graphql";
 
 interface PostInteractionProps {
-  postID: number;
-  comments: number;
   post: Partial<GrayCase>;
 }
 
 const PostInteraction: React.FC<PostInteractionProps> = ({
-  comments,
-  postID,
   post,
 }) => {
   const toast = useToast();
-  const [{ data: me }] = useMeQuery();
   return (
     <Flex direction="row" justify="end" pr={2}>
         <Flex
