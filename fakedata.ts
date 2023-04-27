@@ -34,6 +34,21 @@ export const row2 = [
   }
 ]
 
+export const row3 = [
+  {
+    img: "/web/create.png",
+    title: "Create Admin Profile",
+  },
+  {
+    img: "/web/school.png",
+    title: "Register your school profile",
+  },
+  {
+    img: "/web/explore.png",
+    title: "Start exploring Graybook",
+  }
+]
+
 export const fakedb = [
   {
     grade: 1,

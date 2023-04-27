@@ -20,12 +20,13 @@ import {
   AlertTitle,
   AlertDescription,
   VStack,
+  HStack,
 } from "@chakra-ui/react";
 import { IoChevronForward } from "react-icons/io5";
 import Head from "next/head";
 import Footer from "./Footer";
 import { useRouter } from "next/router";
-import { row1, row2 } from "../../../fakedata";
+import { row1, row2, row3 } from "../../../fakedata";
 
 const LandingPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -82,7 +83,7 @@ const LandingPage = () => {
                   bg="#F4B95F"
                   _hover={{ bg: "#DAA65D" }}
                   rightIcon={<IoChevronForward />}
-                  onClick={() => router.push("/register")}
+                  onClick={onOpen}
                 >
                   Join Graybook
                 </Button>
@@ -273,11 +274,7 @@ const LandingPage = () => {
         </Center>
 
         {/* SECTION 4 */}
-        <Center
-          bgImg="/web/section4.png"
-          bgRepeat="no-repeat"
-          bgSize="cover"
-        >
+        <Center bgImg="/web/section4.png" bgRepeat="no-repeat" bgSize="cover">
           <Flex direction="column" justify="start" mt={20}>
             <Text
               fontSize="2rem"
@@ -300,18 +297,17 @@ const LandingPage = () => {
             </Text>
 
             <Button
-                  variant="solid"
-                  px={4}
-                  mt="24px"
-                  w="40"
-                  color="white"
-                  bg="#F4B95F"
-                  _hover={{ bg: "#DAA65D" }}
-                  rightIcon={<IoChevronForward />}
-                  onClick={() => router.push("/register")}
-                >
-                  Learn more
-                </Button>
+              variant="solid"
+              px={4}
+              mt="24px"
+              w="40"
+              color="white"
+              bg="#F4B95F"
+              _hover={{ bg: "#DAA65D" }}
+              rightIcon={<IoChevronForward />}
+            >
+              Learn more
+            </Button>
 
             <Box
               py={10}
@@ -327,12 +323,12 @@ const LandingPage = () => {
               <Heading
                 fontSize="2rem"
                 textStyle="text"
-                color="#FFFFFF"
+                color="#8E6930"
                 w="480px"
               >
                 The simplest way to manage your students details
               </Heading>
-              <Text mt="24px" color="white" w="440px" textStyle="text">
+              <Text mt="24px" color="#000" w="440px" textStyle="text">
                 At GrayBook, we're committed to providing our users with the
                 best possible experience. If you need help with any aspect of
                 our platform, our support team is here to assist you.
@@ -342,9 +338,9 @@ const LandingPage = () => {
                 w="200px"
                 mt="30px"
                 px={2}
-                color="#F4B95F"
-                bg="white"
-                _hover={{ bg: "#FFEACA" }}
+                color="#FFF"
+                bg="#8E6930"
+                _hover={{ bg: "#9E6930" }}
                 onClick={() =>
                   (window.location.href = "mailto:graybookacc@gmail.com")
                 }
@@ -354,14 +350,96 @@ const LandingPage = () => {
             </Box>
           </Flex>
         </Center>
+
+        <Center bgImg="/web/section5.png" bgRepeat="no-repeat" bgSize="cover" minH="35rem" mb={20}>
+          <Flex justify="space-between" mt={-20} gap={24}>
+            <Flex direction="column">
+              <Text
+                fontSize="2rem"
+                color="#8E6930"
+                fontWeight={600}
+                textStyle="text"
+                mb={5}
+              >
+                Ready to get started?
+              </Text>
+              <Text w="30rem" textStyle="text" fontSize="1.1rem">
+                Create an account, register your school and start exploring. You
+                can also contact us for any enquiries
+              </Text>
+              <Flex gap={5}>
+                  <Button
+                  variant="solid"
+                  px={4}
+                  mt="24px"
+                  w="40"
+                  color="white"
+                  bg="#F4B95F"
+                  _hover={{ bg: "#DAA65D" }}
+                  rightIcon={<IoChevronForward />}
+                  onClick={onOpen}
+                >
+                  Sign up
+                </Button>
+                <Button
+                  variant="link"
+                  px={4}
+                  mt="24px"
+                  w="40"
+                  color="#F4B95F"
+                  _hover={{ color: "#DAA65D" }}
+                  rightIcon={<IoChevronForward />}
+                  onClick={() => (window.location.href = "mailto:graybookacc@gmail.com")}
+                >
+                  Contact Support
+                </Button>
+                  </Flex>
+            </Flex>
+            <HStack spacing="10">
+              {row3.map((item, i) => (
+                <Flex
+                  direction="column"
+                  justify="center"
+                  align="center"
+                  key={i}
+                  gap={3}
+                >
+                  <Box>
+                    <Image src={item.img} alt={item.title} />
+                  </Box>
+                  <Text
+                    w="10rem"
+                    textAlign="center"
+                    fontWeight={600}
+                    fontSize="1.1rem"
+                  >
+                    {item.title}
+                  </Text>
+                </Flex>
+              ))}
+            </HStack>
+          </Flex>
+        </Center>
+        
+        <Center pb={20}>
+          <Flex direction="column" align="center">
+            <Box mt={-60}>
+              <Image src="/web/gray2mock.png" pointerEvents="none" alt="use_graybook_beta" w="50rem" />
+            </Box>
+            <Text color="#7A7A7A">
+              Free 7 days trial | Exclusive support 
+            </Text>
+          </Flex>
+        </Center>
+
       </Flex>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>GrayBook - Coming Soon</ModalHeader>
+          <ModalHeader>GrayBook - Scheduled Maintainance</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody mb={7}>
             <Alert
               status="info"
               variant="left-accent"
@@ -370,23 +448,18 @@ const LandingPage = () => {
               justifyContent="center"
               textAlign="center"
               height="200px"
+              colorScheme="yellw"
             >
               <AlertTitle mb={1} fontSize="lg">
                 Hi there👋
               </AlertTitle>
-              <AlertDescription maxWidth="sm">
+              <AlertDescription maxWidth="sm" >
                 We are working hard and fast to bring you a seamless experience.
                 Don't worry, we'll be back and better than ever before you know
                 it🚀
               </AlertDescription>
             </Alert>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
 

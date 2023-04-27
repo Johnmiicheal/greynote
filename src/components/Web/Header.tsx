@@ -42,7 +42,7 @@ const Header = () => {
       <Flex justify="start" gap={10}>
         <Image src="/gray2full.png" alt="Graybook Logo" w="160px" pointerEvents="none" />
         {links.map((link) => (
-          <Button variant="link" key={link.path} color="white" onClick={() => router.push(link.path)}>
+          <Button variant="link" key={link.path} color="white">
             {link.text}
           </Button>
         ))}
@@ -56,7 +56,7 @@ const Header = () => {
             bg="#F4B95F"
             _hover={{ bg: "#DAA65D" }}
             rightIcon={<IoChevronForward />}
-            onClick={() => router.push('/register')}
+            onClick={onOpen}
           >
             Sign up
           </Button>
@@ -65,9 +65,9 @@ const Header = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>GrayBook - Coming Soon</ModalHeader>
+          <ModalHeader>GrayBook - Scheduled Maintainance</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody mb={7}>
             <Alert
               status="info"
               variant="left-accent"
@@ -76,23 +76,18 @@ const Header = () => {
               justifyContent="center"
               textAlign="center"
               height="200px"
+              colorScheme="yellw"
             >
               <AlertTitle mb={1} fontSize="lg">
                 Hi there👋
               </AlertTitle>
-              <AlertDescription maxWidth="sm">
+              <AlertDescription maxWidth="sm" >
                 We are working hard and fast to bring you a seamless experience.
                 Don't worry, we'll be back and better than ever before you know
                 it🚀
               </AlertDescription>
             </Alert>
           </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </Flex>
