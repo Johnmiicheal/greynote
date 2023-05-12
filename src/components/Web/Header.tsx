@@ -3,7 +3,13 @@ import {
   Image,
   Button,
   Text,
-  ButtonGroup,
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -15,13 +21,16 @@ import {
   Alert,
   AlertTitle,
   AlertDescription,
+  IconButton,
 } from "@chakra-ui/react";
 import React from "react";
 import { useRouter } from "next/router";
-import { IoChevronForward } from "react-icons/io5";
+import { IoChevronForward, IoMenu } from "react-icons/io5";
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isDrawerOpen, onOpen: onDrawerOpen, onClose: onDrawerClose } = useDisclosure();
+  const btnRef = React.useRef()
   const router = useRouter();
   const links = [
     { path: "/features", text: "Features" },
@@ -42,13 +51,13 @@ const Header = () => {
       <Flex justify="start" gap={10}>
         <Image src="/gray2full.png" alt="Graybook Logo" w="160px" pointerEvents="none" />
         {links.map((link) => (
-          <Button variant="link" key={link.path} color="white">
+          <Button display={{ base: "none", md: "flex" }} variant="link" key={link.path} color="white">
             {link.text}
           </Button>
         ))}
 
       </Flex>
-      <Flex justify="end">
+      <Flex justify="end" ml={10} display={{ base: "none", md: "flex" }}>
           <Button
             variant="solid"
             px={4}
@@ -60,6 +69,10 @@ const Header = () => {
           >
             Sign up
           </Button>
+      </Flex>
+
+      <Flex justify="end" display={{ base: "flex", md: "none" }}>
+        <IconButton variant="ghost" aria-label="menu" icon={<IoMenu />} onClick={onDrawerOpen} />
       </Flex>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -90,6 +103,29 @@ const Header = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
+
+      <Drawer
+        isOpen={isDrawerOpen}
+        placement='right'
+        onClose={onDrawerClose}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Menu</DrawerHeader>
+
+          <DrawerBody>
+            <Text>Links go here</Text>
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant='outline' mr={3} onClick={onDrawerClose}>
+              Cancel
+            </Button>
+            <Button colorScheme='blue'>Save</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </Flex>
   );
 };
