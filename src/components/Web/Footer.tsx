@@ -19,12 +19,12 @@ const Footer = () => {
         {path: "/terms", text: "Terms of Service"}
     ]
     return(
-        <Flex bg="white" direction="column" w="full" align="center" px={24} py={10}>
-            <Flex justify="space-between" w="full" > 
+        <Flex bg="white" direction="column" w="full" align="center" px={{ base: 10, md: 24 }} py={10} overflow="hidden">
+            <Flex justify="space-between" w="full"> 
                 <Box>
                     <Image src="/grayfull.png" pointerEvents="none" alt="graybook_logo" w="160px" />
                 </Box>
-                <Flex gap={5} ml="auto" justify="end" align="center">
+                <Flex direction={{ base: "column", md: "row" }} gap={5} ml="auto" justify="end" align={{ base: "start", md: "center"}}>
                     {socials.map((social) => (
                         <Button variant="link" key={social.path} color="#7A7A7A" leftIcon={<social.iconActive />}>{social.text}</Button>
                     ))}
@@ -34,8 +34,8 @@ const Footer = () => {
                 </Flex>
             </Flex>
             <Box w="full" h="0.3" bgColor="gray.300" mt={6} />
-            <Flex ml="auto" gap={3} mt={6}>
-                <Text textStyle="text" color="#7a7a7a">
+            <Flex ml={{ md: "auto" }} gap={3} mt={6} direction={{ base: "column", md: "row"}}>
+                <Text textStyle="text" color="#7a7a7a" w="full">
                 &#169; {year} GrayBook, Inc.
                 </Text>
                 {foot.map((foots) => (

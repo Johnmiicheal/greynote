@@ -21,6 +21,7 @@ import {
   AlertDescription,
   VStack,
   HStack,
+  Stack,
 } from "@chakra-ui/react";
 import { IoChevronForward } from "react-icons/io5";
 import Head from "next/head";
@@ -38,21 +39,26 @@ const LandingPage = () => {
         <link rel="shortcut icon" href="/gray2logo.png" />
       </Head>
 
-      <Flex direction="column">
+      <Flex direction="column" overflow="hidden">
         <Center
           bgImg="/web/graybgg.png"
           bgRepeat="no-repeat"
           bgSize="cover"
           overflowX="hidden"
           mb={20}
+          px={{ base: 5, lg: 0 }}
         >
           <Flex direction="column">
             <Header />
-            <Flex justify="space-between" pt="4em">
-              <Flex direction="column" textAlign="start" justify="center">
+            <Flex
+              direction={{ base: "column", lg: "row" }}
+              justify="space-between"
+              pt="4em"
+            >
+              <Flex direction="column" textAlign="start" justify="center" maxW={{ base: "sm", md: "md", lg: "lg"}}>
                 <Heading
-                  w="600px"
-                  fontSize="4rem"
+                  w={{ md: "600px" }}
+                  fontSize={{ base: "2.5rem", md: "4rem" }}
                   textStyle="text"
                   color="white"
                 >
@@ -61,14 +67,14 @@ const LandingPage = () => {
                   <Text
                     bgGradient="linear(75deg, #8E6930, #000a16)"
                     bgClip="text"
-                    fontSize="6xl"
+                    fontSize={{ md: "6xl" }}
                     fontWeight="extrabold"
                     textStyle="text"
                   >
                     Graybook
                   </Text>
                 </Heading>
-                <Text mt="24px" w="35rem" textStyle="text">
+                <Text mt="24px" textStyle="text">
                   The intuitive platform that streamlines student data,
                   performance monitoring, and communication with parents. Share
                   information effortlessly with other schools. Graybook - the
@@ -110,7 +116,7 @@ const LandingPage = () => {
             <Text
               fontSize="2rem"
               color="#8E6930"
-              px={80}
+              px={{ base: 32, md: 20, lg: 80 }}
               fontWeight={600}
               textStyle="text"
               textAlign="center"
@@ -119,14 +125,19 @@ const LandingPage = () => {
               We created Graybook to help you manage your students the{" "}
               <u>simple</u> way
             </Text>
-            <Flex gap="2" w="80rem" pr={10} >
-              <VStack spacing="-2">
+            <Flex
+              direction={{ base: "column", lg: "row" }}
+              gap="2"
+              w="40rem"
+              pr={{ base: 10, lg: 10 }}
+            >
+              <VStack spacing={{ base: -8, md: "-2" }}>
                 {row1.map((item, i) => (
                   <Flex align="center" key={i}>
                     <Box>
                       <Image src={item.img} alt={item.title} />
                     </Box>
-                    <Flex direction="column" w="35rem" gap={2}>
+                    <Flex direction="column" w={{ base: "12rem", md: "35rem" }} gap={2}>
                       <Text fontWeight={600} fontSize="1.1rem">
                         {item.title}
                       </Text>
@@ -137,13 +148,13 @@ const LandingPage = () => {
                   </Flex>
                 ))}
               </VStack>
-              <VStack spacing="-2">
+              <VStack spacing={{ base: -8, md: "-2" }}>
                 {row2.map((item, i) => (
                   <Flex align="center" key={i}>
                     <Box>
                       <Image src={item.img} alt={item.title} />
                     </Box>
-                    <Flex direction="column" w="35rem" gap={2}>
+                    <Flex direction="column" w={{ base: "12rem", md: "35rem" }} gap={2}>
                       <Text fontWeight={600} fontSize="1.1rem">
                         {item.title}
                       </Text>
@@ -165,32 +176,43 @@ const LandingPage = () => {
             </Flex>
           </Flex>
         </Center>
-        
+
         {/* SECTION 3*/}
-        <Center bgImg="/web/line.png" mt={20} mb={20}>
-          <Flex direction="column">
+        <Center
+          bgImg="/web/line.png"
+          bgSize="auto"
+          bgPos="right"
+          mt={20}
+          mb={20}
+        >
+          <Flex direction="column" px={{ base: 20, lg: 0 }}>
             <Text
               fontSize="2rem"
               color="#8E6930"
-              px={80}
+              px={{ base: 10, lg: 80 }}
               fontWeight={600}
               textStyle="text"
               textAlign="center"
-              mb={5}
+              mb={{ base: 16, md: 5 }}
             >
               What can I do with <u>Graybook</u>?
             </Text>
-            <Flex direction="row" justify="space-between">
+            <Flex
+              direction={{ base: "column", lg: "row" }}
+              justify="space-between"
+              align={{ base: "center", lg: "start" }}
+            >
               <Flex
                 direction="column"
-                textAlign="start"
+                textAlign={{ base: "center", lg: "start" }}
                 justify="center"
                 bg="white"
+                mb={{ base: 7, lg: 0 }}
               >
                 <Heading fontSize="1.7rem" textStyle="text" color="#F4B95F">
                   Register Students
                 </Heading>
-                <Text mt="24px" w="30rem" textStyle="text">
+                <Text mt="24px" textAlign="justify" w={{ base: "24rem", md: "30rem" }} textStyle="text">
                   At GrayBook, we make registering students a breeze. Our
                   easy-to-use platform allows you to quickly and efficiently
                   register new students in just a few simple steps. With our
@@ -210,7 +232,12 @@ const LandingPage = () => {
               </Flex>
             </Flex>
 
-            <Flex direction="row" justify="space-between" mt={20}>
+            <Flex
+              direction={{ base: "column-reverse", lg: "row" }}
+              justify="space-between"
+              align={{ base: "center", lg: "start" }}
+              mt={20}
+            >
               <Flex>
                 <Image
                   src="/web/grayview.png"
@@ -221,14 +248,15 @@ const LandingPage = () => {
               </Flex>
               <Flex
                 direction="column"
-                textAlign="start"
+                textAlign={{ base: "center", lg: "start" }}
                 justify="center"
                 bg="white"
+                mb={{ base: 7, lg: 0 }}
               >
                 <Heading fontSize="1.7rem" textStyle="text" color="#F4B95F">
                   View & Search Students
                 </Heading>
-                <Text mt="24px" w="30rem" textStyle="text">
+                <Text mt="24px" w={{ base: "24rem", md: "30rem" }}  textAlign="justify" textStyle="text">
                   GrayBook provides quick and efficient access to student
                   information through advanced search capabilities. Our platform
                   allows you to view complete student profiles and receive
@@ -239,22 +267,28 @@ const LandingPage = () => {
               </Flex>
             </Flex>
 
-            <Flex direction="row" justify="space-between" mt={20}>
+            <Flex
+              direction={{ base: "column", lg: "row" }}
+              justify="space-between"
+              align={{ base: "center", lg: "start" }}
+              mt={20}
+            >
               <Flex
                 direction="column"
-                textAlign="start"
-                justify="center"
+                textAlign={{ base: "center", lg: "start" }}
+                align="center"
                 bg="white"
+                mb={{ base: 7, lg: 0 }}
               >
                 <Heading
                   fontSize="1.7rem"
                   textStyle="text"
                   color="#F4B95F"
-                  w="35rem"
+                  w={{ base: "24rem", md: "35rem" }}
                 >
                   Request & Transfer Student Details
                 </Heading>
-                <Text mt="24px" w="30rem" textStyle="text">
+                <Text mt="24px" w={{ base: "24rem", md: "32rem" }} textAlign="justify" textStyle="text">
                   GrayBook simplifies student transfers with its secure transfer
                   request system. The platform enables schools to easily and
                   efficiently transfer student records, including academic
@@ -276,7 +310,7 @@ const LandingPage = () => {
 
         {/* SECTION 4 */}
         <Center bgImg="/web/section4.png" bgRepeat="no-repeat" bgSize="cover">
-          <Flex direction="column" justify="start" mt={20}>
+          <Flex direction="column" justify={{ md: "center" }} maxW={{ base: "sm", md: "md", lg: "lg"}} align={{ md: "center" }} mt={20} >
             <Text
               fontSize="2rem"
               color="#8E6930"
@@ -286,7 +320,7 @@ const LandingPage = () => {
             >
               Bringing <u>simplicity</u> to school management
             </Text>
-            <Text w="50rem" textStyle="text" fontSize="1.1rem">
+            <Text w={{ base: "24rem", md: "35rem" , lg: "50rem" }} textStyle="text" fontSize="1.1rem">
               At Graybook, we believe that school management doesn't have to be
               complicated. With our simple and intuitive platform, we provide
               schools with the tools they need to manage student data, monitor
@@ -311,13 +345,13 @@ const LandingPage = () => {
             </Button>
 
             <Box
-              py={10}
-              px={20}
+              py={{ base: 2, md: 10 }}
+              px={{ base: 5, md: 20 }}
               mt="40"
-              mb="40"
+              mb={{ md: "40" }}
               bgImg="/web/webcard.png"
               h="350px"
-              w="1160px"
+              w={{ base: 'sm', md: '630px', lg: "1160px" }}
               borderRadius="md"
               boxShadow="md"
             >
@@ -325,11 +359,11 @@ const LandingPage = () => {
                 fontSize="2rem"
                 textStyle="text"
                 color="#8E6930"
-                w="480px"
+                w={{ base: "20rem", lg: "480px "}}
               >
                 The simplest way to manage your students details
               </Heading>
-              <Text mt="24px" color="#000" w="440px" textStyle="text">
+              <Text mt="24px" color="#000" w={{ lg: "440px" }} textStyle="text">
                 At GrayBook, we're committed to providing our users with the
                 best possible experience. If you need help with any aspect of
                 our platform, our support team is here to assist you.
@@ -352,11 +386,17 @@ const LandingPage = () => {
           </Flex>
         </Center>
 
-        { /* SECTION 5 */ }
+        {/* SECTION 5 */}
 
-        <Center bgImg="/web/section5.png" bgRepeat="no-repeat" bgSize="cover" minH="35rem" mb={20}>
-          <Flex justify="space-between" mt={-20} gap={24}>
-            <Flex direction="column">
+        <Center
+          bgImg="/web/section5.png"
+          bgRepeat="no-repeat"
+          bgSize="cover"
+          minH={{ base: "70rem", md: "35rem" }}
+          mb={{ lg: 20 }}
+        >
+          <Flex maxW={{ base: "sm", md: "md", lg: "lg"}} direction={{ base: "column", lg: "row" }} justify="space-between" mt={{ md: -20 }} gap={24}>
+            <Flex direction="column" align="center">
               <Text
                 fontSize="2rem"
                 color="#8E6930"
@@ -366,12 +406,12 @@ const LandingPage = () => {
               >
                 Ready to get started?
               </Text>
-              <Text w="30rem" textStyle="text" fontSize="1.1rem">
+              <Text w={{ base: "20rem", md: "30rem" }} textStyle="text" fontSize="1.1rem">
                 Create an account, register your school and start exploring. You
                 can also contact us for any enquiries
               </Text>
               <Flex gap={5}>
-                  <Button
+                <Button
                   variant="solid"
                   px={4}
                   mt="24px"
@@ -392,23 +432,24 @@ const LandingPage = () => {
                   color="#F4B95F"
                   _hover={{ color: "#DAA65D" }}
                   rightIcon={<IoChevronForward />}
-                  onClick={() => (window.location.href = "mailto:graybookacc@gmail.com")}
+                  onClick={() =>
+                    (window.location.href = "mailto:graybookacc@gmail.com")
+                  }
                 >
                   Contact Support
                 </Button>
-                  </Flex>
+              </Flex>
             </Flex>
-            <HStack spacing="10">
+            <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: 8, md: 10 }}>
               {row3.map((item, i) => (
                 <Flex
                   direction="column"
-                  justify="center"
                   align="center"
                   key={i}
                   gap={3}
                 >
                   <Box>
-                    <Image src={item.img} alt={item.title} />
+                    <Image src={item.img} alt={item.title} w={{ base: "4rem" }} />
                   </Box>
                   <Text
                     w="10rem"
@@ -420,21 +461,23 @@ const LandingPage = () => {
                   </Text>
                 </Flex>
               ))}
-            </HStack>
-          </Flex>
-        </Center>
-        
-        <Center pb={20}>
-          <Flex direction="column" align="center">
-            <Box mt={-60}>
-              <Image src="/web/gray2mock.png" pointerEvents="none" alt="use_graybook_beta" w="50rem" />
-            </Box>
-            <Text color="#7A7A7A">
-              Free 7 days trial | Exclusive support 
-            </Text>
+            </Stack>
           </Flex>
         </Center>
 
+        <Center pb={20}>
+          <Flex direction="column" align="center">
+            <Box mt={{ base: -32, lg: -60 }}>
+              <Image
+                src="/web/gray2mock.png"
+                pointerEvents="none"
+                alt="use_graybook_beta"
+                w="50rem"
+              />
+            </Box>
+            <Text color="#7A7A7A">Free 7 days trial | Exclusive support</Text>
+          </Flex>
+        </Center>
       </Flex>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -456,7 +499,7 @@ const LandingPage = () => {
               <AlertTitle mb={1} fontSize="lg">
                 Hi there👋
               </AlertTitle>
-              <AlertDescription maxWidth="sm" >
+              <AlertDescription maxWidth="sm">
                 We are working hard and fast to bring you a seamless experience.
                 Don't worry, we'll be back and better than ever before you know
                 it🚀
