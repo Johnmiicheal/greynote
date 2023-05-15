@@ -24,6 +24,7 @@ query GetStudentById($studentId: Float!) {
           schoolName
           rcnumber
           address
+          lgarea
           state
           country
           description
@@ -34,11 +35,14 @@ query GetStudentById($studentId: Float!) {
           linkedinUrl
           logoImgUrl
           bannerImgUrl
+          license
         }
       }
       creator {
         admin {
           id
+          isSuper
+          premiumAdmin
           createdAt
           adminName
           phoneNumber
@@ -47,6 +51,21 @@ query GetStudentById($studentId: Float!) {
           profileImgUrl
           school
           schoolImg
+        }
+      }
+      studentCase {
+        grayCase {
+          id
+          createdAt
+          updatedAt
+          category
+          firstName
+          lastName
+          gradeClass
+          gender
+          ageInput
+          isActive
+          wasEdited
         }
       }
       grayId

@@ -48,7 +48,6 @@ export type GrayCase = {
   ageInput: Scalars['Float'];
   category: Scalars['String'];
   createdAt: Scalars['DateTime'];
-  creator: AdminResponse;
   firstName: Scalars['String'];
   gender: Scalars['String'];
   gradeClass: Scalars['String'];
@@ -889,7 +888,7 @@ export type GetStudentByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetStudentByIdQuery = { __typename?: 'Query', getStudentById: { __typename?: 'StudentResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, student?: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, startDate: string, endDate: string, birthDate: any, isArchived: boolean, profileImgUrl: string, grayId: string, parentName: string, parentEmail: string, parentNumber: string, homeAddress: string, state: string, academicResult: string, school: { __typename?: 'SchoolResponse', school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, websiteUrl: string, instagramUrl: string, facebookUrl: string, twitterUrl: string, linkedinUrl: string, logoImgUrl: string, bannerImgUrl: string } | null }, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string, schoolImg: string } | null } } | null } };
+export type GetStudentByIdQuery = { __typename?: 'Query', getStudentById: { __typename?: 'StudentResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, student?: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, startDate: string, endDate: string, birthDate: any, isArchived: boolean, profileImgUrl: string, grayId: string, parentName: string, parentEmail: string, parentNumber: string, homeAddress: string, state: string, academicResult: string, school: { __typename?: 'SchoolResponse', school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, lgarea: string, state: string, country: string, description: string, websiteUrl: string, instagramUrl: string, facebookUrl: string, twitterUrl: string, linkedinUrl: string, logoImgUrl: string, bannerImgUrl: string, license: string } | null }, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, isSuper: boolean, premiumAdmin: boolean, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string, schoolImg: string } | null }, studentCase: { __typename?: 'GrayCaseResponse', grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean } | null } } | null } };
 
 export type GetStudentByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
@@ -1955,6 +1954,7 @@ export const GetStudentByIdDocument = gql`
           schoolName
           rcnumber
           address
+          lgarea
           state
           country
           description
@@ -1965,11 +1965,14 @@ export const GetStudentByIdDocument = gql`
           linkedinUrl
           logoImgUrl
           bannerImgUrl
+          license
         }
       }
       creator {
         admin {
           id
+          isSuper
+          premiumAdmin
           createdAt
           adminName
           phoneNumber
@@ -1978,6 +1981,21 @@ export const GetStudentByIdDocument = gql`
           profileImgUrl
           school
           schoolImg
+        }
+      }
+      studentCase {
+        grayCase {
+          id
+          createdAt
+          updatedAt
+          category
+          firstName
+          lastName
+          gradeClass
+          gender
+          ageInput
+          isActive
+          wasEdited
         }
       }
       grayId
