@@ -210,9 +210,10 @@ export const SearchStudent: React.FC<SearchStudentProps> = ({
                       pathname: "/app/student/[id]",
                       query: { id: result.id },
                     }}
+                    key={result.id}
                     passHref
                   >
-                    <Flex align="center" cursor="pointer" gap={2} px={2} py={2} borderRadius="7px" _hover={{ bgColor: "gray.200"}}>
+                    <Flex key={result.id} align="center" cursor="pointer" gap={2} px={2} py={2} borderRadius="7px" _hover={{ bgColor: "gray.200"}}>
                       <Avatar
                         src={result.profileImgUrl}
                         name={result.firstName}
