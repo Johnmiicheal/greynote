@@ -35,11 +35,14 @@ import {
 import { useRouter } from "next/router";
 import { format, formatISO } from "date-fns";
 import { RegStudent } from "./Modals/RegStudent";
+import { CreateNote } from "./Modals/CreateNote";
+import { useState } from "react";
 
 export default function SchoolCard() {
   const router = useRouter();
   const [{ data }] = useGetSchoolFromUrl();
   const [{ data: me }] = useMeQuery();
+  const admin = me?.me?.admin!;  
   const [{ data: numbers }] = useGetSchoolStudentsCountQuery({
     variables: {
       schoolId: data?.getSchoolByName?.school?.id!,
@@ -121,9 +124,9 @@ export default function SchoolCard() {
                 <Badge
                   bgGradient="linear(45deg, green.200, pink.500)"
                   variant="solid"
-                  w='20px'
+                  minW='20px'
                 >
-                  L3
+                  { admin.premiumAdmin === true ? "Premium User" : "Free Trial" }
                 </Badge>
               </Box>
             </Stack>
@@ -169,9 +172,10 @@ export default function SchoolCard() {
             mt={2}
             onClick={onOpen}
           >
-            Create GrayCase
+            Create a Note
           </Button>
           <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
+          <CreateNote isOpen={isOpen} onClose={onClose} />
 
           <Divider mt={3} />
 

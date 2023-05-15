@@ -11,8 +11,6 @@ query SchoolCases($limit: Float!, $sortBy: String, $cursor: Float) {
       gender
       ageInput
       isActive
-      title
-      report
       wasEdited
       creator {
         errors {
@@ -22,8 +20,8 @@ query SchoolCases($limit: Float!, $sortBy: String, $cursor: Float) {
         admin {
           id
           isSuper
+          premiumAdmin
           createdAt
-          token
           adminName
           phoneNumber
           email

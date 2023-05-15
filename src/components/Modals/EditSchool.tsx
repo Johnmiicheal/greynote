@@ -75,6 +75,11 @@ export const EditSchool: React.FC<EditSchoolProps> = ({
 		return setTabIndex(tabIndex - 1);
 	};
 
+	const handleClose = () => {
+		setTabIndex(0);		
+		onClose();
+	  }
+
 	return (
 		<Formik
 			initialValues={{
@@ -142,7 +147,7 @@ export const EditSchool: React.FC<EditSchoolProps> = ({
 					motionPreset="slideInBottom"
 				>
 					<ModalOverlay />
-					<ModalContent>
+					<ModalContent pos="fixed" mt={3} minW="40rem" maxH="45rem">
 						<Flex w="full" p={1}>
 							<IconButton
 								variant="ghost"
@@ -150,9 +155,9 @@ export const EditSchool: React.FC<EditSchoolProps> = ({
 								icon={<IoArrowBackOutline />}
 								onClick={handleGoBack}
 							/>
-							<ModalCloseButton />
+							<ModalCloseButton onClick={handleClose} />
 						</Flex>
-						<Tabs index={tabIndex} variant="enclosed" isFitted mt={-6}>
+						<Tabs index={tabIndex} variant="enclosed" isFitted mt={-10}>
 							<TabPanels>
 								<TabPanel>
 									<ModalHeader textAlign="center">
@@ -190,7 +195,7 @@ export const EditSchool: React.FC<EditSchoolProps> = ({
 												{({ field, form }: any) => (
 													<FormControl mt={4}>
 														<FormLabel>School Name</FormLabel>
-														<Input {...field} ref={initialRef} focusBorderColor="#F4B95F" />
+														<Input {...field} isDisabled ref={initialRef} focusBorderColor="#F4B95F" />
 													</FormControl>
 												)}
 											</Field>
@@ -202,6 +207,7 @@ export const EditSchool: React.FC<EditSchoolProps> = ({
 															<Input
 																{...field}
 																focusBorderColor="#F4B95F"
+																isDisabled
 															/>
 														</FormControl>
 													)}
@@ -239,7 +245,7 @@ export const EditSchool: React.FC<EditSchoolProps> = ({
 												)}
 											</Field>
 
-											<Flex direction="row" justify="end" mt={10}>
+											<Flex direction="row" justify="end" mt={3}>
 												<Button
 													bg="#F4B95F"
 													color="white"
@@ -249,7 +255,7 @@ export const EditSchool: React.FC<EditSchoolProps> = ({
 												>
 													Next
 												</Button>
-												<Button onClick={onClose}>Cancel</Button>
+												<Button onClick={handleClose}>Cancel</Button>
 											</Flex>
 										</Form>
 									</ModalBody>{" "}
@@ -386,7 +392,7 @@ export const EditSchool: React.FC<EditSchoolProps> = ({
 												>
 													Update school
 												</Button>
-												<Button onClick={onClose}>Cancel</Button>
+												<Button onClick={handleClose}>Cancel</Button>
 											</Flex>
 										</Form>
 									</ModalBody>{" "}

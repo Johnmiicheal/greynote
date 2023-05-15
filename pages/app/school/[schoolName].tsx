@@ -21,12 +21,7 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import {
-  IoGridOutline,
-  IoChatbubbleEllipsesOutline,
-  IoBookmarksOutline,
-  IoCaretUpCircleOutline,
-} from "react-icons/io5";
+import { HiOutlinePencilAlt } from "react-icons/hi";
 import {
   MdOutlinePersonPin,
   MdOutlineArchive,
@@ -34,9 +29,10 @@ import {
 } from "react-icons/md";
 import GrayLayout from "../../../src/components/GrayLayout";
 import Header from "../../../src/components/Header";
-import Cases from "../../../src/components/Cases";
+import Cases from "../../../src/components/GrayCases/Cases";
+import Notes from "../../../src/components/GrayNotes/Notes";
 import { useGetSchoolFromUrl } from "../../../src/utils/useGetSchoolFromUrl";
-import { useMeQuery, useSchoolCasesQuery } from "../../../src/gql/graphql";
+import { useAdminNotesQuery, useMeQuery, useSchoolCasesQuery } from "../../../src/gql/graphql";
 import SchoolCard from "../../../src/components/SchoolCard";
 import BarLoader from "react-spinners/BarLoader";
 import { useRouter } from "next/router";
@@ -49,6 +45,12 @@ const School = () => {
       limit: 15,
       cursor: 0,
     },
+  });
+  const [{ data: notes, fetching }] = useAdminNotesQuery({
+    variables: {
+        limit: 15,
+        cursor: 0,
+      },
   });
   const router = useRouter();
   let school = null;
@@ -94,6 +96,7 @@ const School = () => {
               direction="row"
               mt={2}
               bg="#E6E6E6"
+              overflow="auto"
               h="full"
               minW="full"
               justify="center"
@@ -118,8 +121,7 @@ const School = () => {
                     objectFit="cover"
                   ></Box>
                   <Flex direction="column" p={4}>
-
-                    <Flex gap={2} >
+                    <Flex gap={2}>
                       <Avatar
                         name={data?.getSchoolByName?.school?.schoolName}
                         src={data?.getSchoolByName?.school?.logoImgUrl}
@@ -139,26 +141,25 @@ const School = () => {
                         <Text>{data?.getSchoolByName?.school?.address}</Text>
                       </Flex>
                       <Flex
-                          marginLeft="auto"
-                          display={
-                            me?.me?.admin?.id ===
-                            data?.getSchoolByName?.school?.creator?.admin?.id
-                              ? "flex"
-                              : "none"
-                          }
+                        marginLeft="auto"
+                        display={
+                          me?.me?.admin?.id ===
+                          data?.getSchoolByName?.school?.creator?.admin?.id
+                            ? "flex"
+                            : "none"
+                        }
+                      >
+                        <Button
+                          size="sm"
+                          bg="#F4B95F"
+                          color="white"
+                          _hover={{ bg: "#DAA65D" }}
+                          fontWeight={400}
+                          onClick={() => router.push("/app/settings")}
                         >
-                          <Button
-                            size="sm"
-                            bg="#F4B95F"
-                            color="white"
-                            _hover={{ bg: "#DAA65D" }}
-                            fontWeight={400}
-                            onClick={() => router.push("/app/settings")}
-                          >
-                            Edit Profile
-                          </Button>
-                        </Flex>
-
+                          Edit Profile
+                        </Button>
+                      </Flex>
                     </Flex>
                   </Flex>
                 </Flex>
@@ -258,6 +259,29 @@ const School = () => {
                           </Text>
                         </Flex>
                       </Tab>
+
+                      <Tab _selected={{ color: "#F4B95F" }}>
+                        <Flex
+                          align="center"
+                          borderRadius="md"
+                          role="group"
+                          cursor="pointer"
+                          _hover={{
+                            bg: "gray.200",
+                          }}
+                          mr={{ base: 0, md: 2 }}
+                          py={1}
+                          pl={1}
+                        >
+                          <Icon
+                            as={HiOutlinePencilAlt}
+                            fontSize={{ base: 24, md: 26 }}
+                          />
+                          <Text ml="1" pr={2}>
+                            Notes
+                          </Text>
+                        </Flex>
+                      </Tab>
                     </TabList>
                     <TabPanels>
                       {/*** ALL CASES SECTION ***/}
@@ -292,16 +316,73 @@ const School = () => {
                               <SkeletonText mt="4" noOfLines={4} spacing="4" />
                             </Box>
                           </VStack>
-                        ) : !cases?.schoolCases ? (
-                          <Text>No cases registered yet</Text>
+                        ) : !cases ? (
+                          <Flex
+                            direction="column"
+                            align="center"
+                            bg="white"
+                            borderRadius="md"
+                            w={{ base: "370px", md: "768px", lg: "750px" }}
+                            py={10}
+                            px={4}
+                            ml={-3}
+                          >
+                            <Image
+                              src="/empty.png"
+                              alt="empty_database"
+                              w="20%"
+                            />
+                            <Text mt="5">You have not added any cases</Text>
+                          </Flex>
                         ) : (
                           cases?.schoolCases?.grayCase?.map((n) => (
                             <Cases p={n} key={n?.id} />
                           ))
                         )}
                       </TabPanel>
-                      <TabPanel>Nothing to see here</TabPanel>
-                      <TabPanel>No requests yet</TabPanel>
+                      <TabPanel>
+                        <Flex
+                          direction="column"
+                          align="center"
+                          bg="white"
+                          borderRadius="md"
+                          w={{ base: "370px", md: "768px", lg: "750px" }}
+                          py={10}
+                          px={4}
+                          ml={-3}
+                        >
+                          <Image
+                            src="/empty.png"
+                            alt="empty_database"
+                            w="20%"
+                          />
+                          <Text mt="5">You have no active cases</Text>
+                        </Flex>
+                      </TabPanel>
+                      <TabPanel><Flex
+                            direction="column"
+                            align="center"
+                            bg="white"
+                            borderRadius="md"
+                            w={{ base: "370px", md: "768px", lg: "750px" }}
+                            py={10}
+                            px={4}
+                            ml={-3}
+                          >
+                            <Image
+                              src="/requests.png"
+                              alt="empty_requests"
+                              w="20%"
+                            />
+                            <Text mt="5">You have not received any requests</Text>
+                          </Flex></TabPanel>
+                          <TabPanel>
+                            {
+                              notes?.adminNotes?.notes?.map((note) => (
+                                <Notes p={note} key={note.id} />
+                              ))
+                            }
+                          </TabPanel>
                     </TabPanels>
                   </Tabs>
                 </Flex>

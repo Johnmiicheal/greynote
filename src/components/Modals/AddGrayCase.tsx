@@ -42,17 +42,12 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
           <Formik
             initialValues={{
               studentId: id,
-              report: "",
-              title: "",
-              category: ""
             }}
             onSubmit={async (values, { setErrors }) => {
               console.log(values);
               const response = await create({
                 studentId: id,
-                report: values.report,
-                title: values.title,
-                category: values.category
+                category: "",
               });
               if (response.data?.addGrayCase?.errors) {
                 toast({
@@ -83,7 +78,7 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
           >
             {(props) => (
               <Form>
-                 <Field name="category">
+                <Field name="category">
                     {({ field, form }: any) => (
                       <FormControl mt={1} px={4} isRequired>
                         <FormLabel>Graybook Case</FormLabel>

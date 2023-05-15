@@ -30,11 +30,6 @@ mutation CreateRequest($message: String!, $studentId: Float!) {
             state
             country
             description
-            websiteUrl
-            instagramUrl
-            facebookUrl
-            twitterUrl
-            linkedinUrl
             logoImgUrl
             bannerImgUrl
           }

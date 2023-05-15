@@ -6,12 +6,14 @@ query Me {
     }
     admin {
       id
+      isSuper
+      premiumAdmin
       createdAt
       adminName
       phoneNumber
+      email
       isDisabled
       profileImgUrl
-      email
       school
       schoolImg
     }

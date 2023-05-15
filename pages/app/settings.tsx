@@ -73,7 +73,6 @@ const Settings = () => {
     image: getAdmin?.profileImgUrl!,
   });
 
-
   let page = null;
   if (fetching && loading) {
     page = (
@@ -137,7 +136,9 @@ const Settings = () => {
                           bgImg={school?.getSchoolByName?.school?.bannerImgUrl}
                           borderRadius="7px 7px 0 0"
                           overflow="hidden"
-                          objectFit="cover"
+                          bgSize="cover"
+                          bgPos="center"
+                          bgRepeat="no-repeat"
                         ></Box>
                         <Flex gap={4} mt={-7} ml={4}>
                           <Avatar
@@ -158,7 +159,7 @@ const Settings = () => {
                             <Text
                               fontSize={18}
                               fontWeight={500}
-                              color="#292929"
+                              color="#878787"
                             >
                               Created since {d.toDateString()}
                             </Text>
@@ -181,14 +182,6 @@ const Settings = () => {
                               {school?.getSchoolByName?.school?.schoolName}
                             </Text>
                           </Text>
-                          <Button
-                            bg="#F4B95F"
-                            _hover={{ bg: "#DAA65D" }}
-                            color="black"
-                            onClick={onSchoolOpen}
-                          >
-                            Edit
-                          </Button>
                         </Flex>
 
                         <Flex justify="space-between" align="center">
@@ -210,8 +203,25 @@ const Settings = () => {
 
                         <Flex justify="space-between" align="center">
                           <Text fontSize={18} fontWeight={700} color="#898989">
-                            DESCRIPTION
+                            SCHOOL ADDRESS
                             <Text fontSize={18} fontWeight={400} color="white">
+                              {school?.getSchoolByName?.school?.address}
+                            </Text>
+                          </Text>
+                          <Button
+                            bg="#F4B95F"
+                            _hover={{ bg: "#DAA65D" }}
+                            color="black"
+                            isDisabled
+                          >
+                            Edit
+                          </Button>
+                        </Flex>
+
+                        <Flex justify="space-between" align="center">
+                          <Text fontSize={18} fontWeight={700} color="#898989">
+                            DESCRIPTION
+                            <Text fontSize={18} fontWeight={400} w="55em" noOfLines={2} color="white">
                               {school?.getSchoolByName?.school?.description}
                             </Text>
                           </Text>
@@ -225,6 +235,56 @@ const Settings = () => {
                           </Button>
                         </Flex>
                       </Flex>
+
+                      <Text mt={10} fontSize={18} fontWeight={700} color="red">
+                        DANGER ZONE
+                      </Text>
+                      <Flex
+                        bg="white"
+                        border="2px solid red"
+                        borderRadius="md"
+                        p={4}
+                        direction="column"
+                        mt={1}
+                        gap={6}
+                      >
+                        <Flex justify="space-between" align="center">
+                          <Text fontSize={14} fontWeight={700} color="#212121">
+                            Rename School
+                            <Text fontSize={14} fontWeight={400} color="#898989">
+                              Please note that your school would need to be re-verified to complete this process
+                            </Text>
+                          </Text>
+                          <Button
+                            bg="#FF000F"
+                            _hover={{ bg: "#FF112F" }}
+                            color="white"
+                            onClick={onSchoolOpen}
+                            fontSize={14}
+                          >
+                            Rename school
+                          </Button>
+                        </Flex>
+
+                        <Flex justify="space-between" align="center">
+                          <Text fontSize={14} fontWeight={700} color="#212121">
+                            Delete this School
+                            <Text fontSize={14} fontWeight={400} color="#898989">
+                              Note that once deleted, it will be gone forever. Please be certain.
+                            </Text>
+                          </Text>
+                          <Button
+                            bg="#FF000F"
+                            _hover={{ bg: "#FF112F" }}
+                            color="white"
+                            onClick={onSchoolOpen}
+                            fontSize={14}
+                          >
+                            Delete this school
+                          </Button>
+                        </Flex>
+
+                        </Flex>                      
                     </Flex>
                   </TabPanel>
                   <TabPanel>
@@ -238,13 +298,13 @@ const Settings = () => {
                           onClick={onEditOpen}
                         />
                         <Flex direction="column">
-                          <Text fontSize={24} fontWeight={600} color="#212121">
+                          <Text fontSize={24} fontWeight={600} mb={1} color="#212121">
                             {me?.me?.admin?.adminName}
                           </Text>
-                          <Text fontSize={20} fontWeight={600} color="#212121">
+                          <Text fontSize={18} fontWeight={400} color="#212121">
                             {me?.me?.admin?.school}
                           </Text>
-                          <Text fontSize={18} fontWeight={500} color="#292929">
+                          <Text fontSize={16} fontWeight={500} color="#878787">
                             Created since {format(dd, "PP")}
                           </Text>
                         </Flex>

@@ -3,16 +3,17 @@ import {
   InputLeftElement,
   InputGroup,
   Flex,
-  Image,
-  Box,
-  Center,
+  useDisclosure,
 } from "@chakra-ui/react";
 import UserProfile from "./UserProfile";
 import { useRouter } from "next/router";
 import { IoSearch } from "react-icons/io5";
+import { SearchStudent } from "./Modals/SearchStudent";
 
 export default function Header({ onOpen, ...rest }: any) {
   const router = useRouter();
+  const { isOpen: isSearchOpen, onOpen: onSearchOpen, onClose: onSearchClose } = useDisclosure();
+
   return (
     <Flex
       display="flex"
@@ -28,7 +29,7 @@ export default function Header({ onOpen, ...rest }: any) {
       {...rest}
     >
       <Flex justify="flex-start" >
-        <InputGroup>
+        <InputGroup onClick={onSearchOpen}>
           <InputLeftElement
             pointerEvents="none">
               {<IoSearch color="#7A7A7A" />}
@@ -40,6 +41,8 @@ export default function Header({ onOpen, ...rest }: any) {
       <Flex justify="flex-end">
         <UserProfile onOpen={onOpen} />
       </Flex>
+
+      <SearchStudent isOpen={isSearchOpen} onClose={onSearchClose} />
     </Flex>
   );
 }

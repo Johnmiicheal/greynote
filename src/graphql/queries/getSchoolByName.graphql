@@ -10,6 +10,7 @@ query GetSchoolByName($schoolName: String!) {
       schoolName
       rcnumber
       address
+      lgarea
       state
       country
       description
@@ -20,9 +21,12 @@ query GetSchoolByName($schoolName: String!) {
       linkedinUrl
       logoImgUrl
       bannerImgUrl
+      license
       creator {
         admin {
           id
+          isSuper
+          premiumAdmin
           createdAt
           adminName
           phoneNumber

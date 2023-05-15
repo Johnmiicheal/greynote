@@ -30,6 +30,7 @@ import { RiContactsBookLine } from "react-icons/ri";
 import React from "react";
 import { useRouter } from "next/router";
 import { useMeQuery, useLogoutUserMutation } from "../gql/graphql";
+import { SearchStudent } from "./Modals/SearchStudent";
 
 export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
   const router = useRouter();
@@ -64,7 +65,7 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
                 display={{ base: "none", md: "flex" }}
                 pr={2}
               >
-                <Avatar name={me?.me?.admin?.school!} src={me?.me?.admin?.schoolImg} size="sm" ml={1} mr={1} />
+                <Avatar name={me?.me?.admin?.school!} src={me?.me?.admin?.schoolImg} size="sm" ml={1} mr={1} border="1px solid #FFCE83" />
                 <Flex
                   direction="column"
                   textAlign="start"

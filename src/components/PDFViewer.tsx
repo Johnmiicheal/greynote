@@ -19,7 +19,7 @@ export const PDFViewer = ({ isOpen, onClose, path }: any) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size='xl' >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent pos="fixed" mt={3} overflow="auto">
         <ModalHeader>Student Academic Result</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

@@ -1,5 +1,5 @@
-mutation AddGrayCase($studentId: Float!, $report: String!, $title: String!, $category: String!) {
-  addGrayCase(studentId: $studentId, report: $report, title: $title, category: $category) {
+mutation AddGrayCase($studentId: Float!, $category: String!) {
+  addGrayCase(studentId: $studentId, category: $category) {
     errors {
       field
       message
@@ -15,15 +15,13 @@ mutation AddGrayCase($studentId: Float!, $report: String!, $title: String!, $cat
       gender
       ageInput
       isActive
-      title
-      report
       wasEdited
       creator {
         admin {
           id
           isSuper
+          premiumAdmin
           createdAt
-          token
           adminName
           phoneNumber
           email

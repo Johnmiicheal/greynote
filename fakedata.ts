@@ -145,6 +145,7 @@ export const fakeclass = [
 ];
 
 export const fakecase = ['Expulsion', 'Suspension', 'Fees Default'];
+export const fakenotes = ['Report', 'Reminder', 'Post']
 export const fakegender = ['Male', 'Female'];
 
 export const monthDropDown = [
@@ -215,7 +216,7 @@ export const realState = [
   "Edo",
   "Ekiti",
   "Enugu",
-  "FCT - Abuja",
+  "FCT",
   "Gombe",
   "Imo",
   "Jigawa",

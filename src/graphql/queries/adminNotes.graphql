@@ -1,11 +1,10 @@
 query AdminNotes($limit: Float!, $sortBy: String, $cursor: Float) {
   adminNotes(limit: $limit, sortBy: $sortBy, cursor: $cursor) {
-    hasMore
-    cursor
     notes {
       id
       createdAt
       updatedAt
+      category
       title
       body
       isDisabled
@@ -19,8 +18,8 @@ query AdminNotes($limit: Float!, $sortBy: String, $cursor: Float) {
         admin {
           id
           isSuper
+          premiumAdmin
           createdAt
-          token
           adminName
           phoneNumber
           email
@@ -31,5 +30,7 @@ query AdminNotes($limit: Float!, $sortBy: String, $cursor: Float) {
         }
       }
     }
+    hasMore
+    cursor
   }
 }

@@ -47,7 +47,6 @@ query GetStudentByGrayCase($grayId: Float!) {
           profileImgUrl
           school
           schoolImg
-          token
           isSuper
         }
       }

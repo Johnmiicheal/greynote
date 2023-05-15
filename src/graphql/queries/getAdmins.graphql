@@ -1,6 +1,8 @@
 query GetAdmins {
   getAdmins {
     id
+    isSuper
+    premiumAdmin
     createdAt
     adminName
     phoneNumber
@@ -9,6 +11,5 @@ query GetAdmins {
     profileImgUrl
     school
     schoolImg
-    isSuper
   }
 }

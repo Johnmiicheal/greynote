@@ -6,6 +6,8 @@ mutation RegisterAdmin($options: UsernamePasswordInput!) {
     }
     admin {
       id
+      isSuper
+      premiumAdmin
       createdAt
       adminName
       phoneNumber
@@ -13,6 +15,7 @@ mutation RegisterAdmin($options: UsernamePasswordInput!) {
       isDisabled
       profileImgUrl
       school
+      schoolImg
     }
   }
 }

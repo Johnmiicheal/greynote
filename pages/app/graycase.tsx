@@ -22,6 +22,7 @@ import { IoPersonAddOutline } from "react-icons/io5";
 import { AiOutlineFileSearch, AiOutlineFileAdd } from "react-icons/ai";
 import { useRouter } from "next/router";
 import GrayLayout from "../../src/components/GrayLayout";
+import { SearchStudent } from "../../src/components/Modals/SearchStudent";
 import {
   useSchoolCasesQuery,
   useAdminCaseCountQuery,
@@ -31,6 +32,7 @@ import { format } from "date-fns";
 
 import { fakedb } from "../../fakedata";
 import { RadarChart } from "../../src/components/RadarChart";
+import { CreateNote } from "../../src/components/Modals/CreateNote";
 
 const Graycase = () => {
   const router = useRouter();
@@ -39,6 +41,8 @@ const Graycase = () => {
     onOpen: onGrayOpen,
     onClose: onGrayClose,
   } = useDisclosure();
+  const { isOpen: isSearchOpen, onOpen: onSearchOpen, onClose: onSearchClose } = useDisclosure();
+
   const [{ data: cases, fetching: isLoading }] = useSchoolCasesQuery({
     variables: {
       limit: 15,
@@ -101,7 +105,7 @@ const Graycase = () => {
                 <Text>{caseCount?.adminCaseCount} {caseCount?.adminCaseCount! <= 1 ? "Graycase" : "Graycases" } recorded</Text>
               </Flex>
 
-              <Flex {...grayStyle}  _hover={{ borderWidth: "1px", borderColor: "gray.400" }} cursor="pointer">
+              <Flex {...grayStyle}  _hover={{ borderWidth: "1px", borderColor: "gray.400" }} cursor="pointer" onClick={onSearchOpen}>
                 <Flex
                   color="#343434"
                   bg="#979797"
@@ -127,8 +131,11 @@ const Graycase = () => {
                 <Text>Create a Report</Text>
               </Flex>
             </Flex>
-            { cases?.schoolCases.grayCase?.length! <= 0 ? (
-              <Text> You have not registered any case yet. </Text>
+            { caseCount?.adminCaseCount === 0 ? (
+              <Flex direction="column" align="center" bg="white" mt="10" borderRadius="md" py={10} px={4}>
+                <Image src="/empty.png" alt="empty_database" w="20%" />
+                <Text mt="5">It seems you haven't added any cases yet</Text>
+              </Flex>
             ) : isLoading ? (
               <Text>Loading...</Text>
             ): (
@@ -179,7 +186,8 @@ const Graycase = () => {
             </Flex>
             ) }
 
-          
+            <SearchStudent isOpen={isSearchOpen} onClose={onSearchClose} />
+            <CreateNote isOpen={isGrayOpen} onClose={onGrayClose} />
             {/* 
             <Flex direction="column" mt={5} bg="white" borderRadius="md">
               <RadarChart />

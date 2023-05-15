@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Flex,
   Box,
@@ -28,7 +28,7 @@ const Onboarding = () => {
   function validateRCNumber(value: number) {
     let error;
     if (!value) {
-      error = "RCNumber is required";
+      error = "Registration number is required";
     }
     return error;
   }
@@ -71,11 +71,10 @@ const Onboarding = () => {
     variant: "outline",
   };
 
-  const [selectedState, setSelectedState] = useState<string | null>("");
-
+  const [selectedState, setSelectedState] = useState("");
   const handleStateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedState(event.target.value);
-    console.log("Selected State: ", selectedState);
+    const value = event.target.value;
+    setSelectedState(value);
   };
 
   const router = useRouter();
@@ -103,26 +102,26 @@ const Onboarding = () => {
         <Flex direction="column" mt={10} w="full" px={10} pb={10}>
           <Formik
             initialValues={{
+              license: "",
               logoImgUrl: "",
-              schoolName: "",
-              address: "",
-              description: "",
-              rcnumber: 0,
+              lgarea: "",
               state: "",
-              lgarea: "Somewhere",
-              country: "",
+              description: "",
+              address: "",
+              rcnumber: 0,
+              schoolName: "",
             }}
             onSubmit={async (values, { setErrors }) => {
               console.log(values);
               const response = await register({
+                license: file.license,
                 logoImgUrl: data.image,
-                state: values.state,
                 lgarea: values.lgarea,
-                address: values.address,
+                state: values.state,
                 description: values.description,
+                address: values.address,
                 rcnumber: values.rcnumber,
                 schoolName: values.schoolName,
-                license: file.license,
               });
               if (response.error) {
                 toast({
@@ -233,14 +232,15 @@ const Onboarding = () => {
 
                 <Flex mb={2} align="center" justify="start">
                   <Field name="state">
-                    {({ field, form }: any) => (
+                    {({ field } : any) => (
                       <FormControl isRequired>
                         <FormLabel fontSize={14}>State</FormLabel>
                         <Select
                           placeholder="Select State"
-                          value={selectedState}
-                          onChange={handleStateChange}
                           {...field}
+                          onChange={handleStateChange}
+                          value={selectedState}
+                          focusBorderColor="#F4B95F"
                           name="state"
                           mb={2}
                           w={40}
@@ -264,6 +264,7 @@ const Onboarding = () => {
                           name="lgarea"
                           mb={2}
                           w={40}
+                          focusBorderColor="#F4B95F"
                           placeholder="Select LGA"
                           isDisabled={!selectedState}
                         >

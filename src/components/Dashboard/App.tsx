@@ -26,12 +26,13 @@ import { RiContactsBookFill } from "react-icons/ri";
 import { useRouter } from "next/router";
 import GrayLayout from "../../components/GrayLayout";
 import { RegStudent } from "../Modals/RegStudent";
+import { SearchStudent } from "../Modals/SearchStudent";
 import { useMeQuery } from "../../gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
 import GuageChart from "./GuageChart";
 import { motion } from "framer-motion";
-
+import { HomeChart } from "../HomeChart";
 
 const App = () => {
   const router = useRouter();
@@ -86,14 +87,14 @@ const App = () => {
           >
             <Header />
             <Flex w="100%" overflow="hidden" bg="red">
-            <motion.div
-        style={{ width: "100%" }}
-        initial={{ x: "100%" }}
-        animate={{ x: "-100%" }}
-        transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-      >
-        <Text whiteSpace="nowrap"></Text>
-      </motion.div>
+              <motion.div
+                style={{ width: "100%" }}
+                initial={{ x: "100%" }}
+                animate={{ x: "-100%" }}
+                transition={{ duration: 20, ease: "linear", repeat: Infinity }}
+              >
+                <Text whiteSpace="nowrap"></Text>
+              </motion.div>
             </Flex>
             <Flex
               bg="#E6E6E6"
@@ -172,6 +173,7 @@ const App = () => {
                       cursor="pointer"
                       role="group"
                       _hover={{ borderWidth: "1px", borderColor: "gray.500" }}
+                      onClick={onOpen}
                     >
                       <Flex
                         color="#343434"
@@ -187,40 +189,57 @@ const App = () => {
                   </Flex>
                 </Flex>
                 <Flex gap={5}>
-                <Flex direction="column" overflow="hidden" borderRadius="7px" align="center" bg="white" py={2} px={4} h="300px" w="330px" gap={1}>
-                  <GuageChart />
-                  <Flex align="center">
-                    <Icon as={IoIosPeople} w="5" h="5" />
-                    <Text><strong>Total Students Registered:</strong> 80</Text>
+                  <Flex
+                    direction="column"
+                    overflow="hidden"
+                    borderRadius="7px"
+                    align="center"
+                    bg="white"
+                    py={2}
+                    px={4}
+                    h="300px"
+                    w="330px"
+                    gap={1}
+                  >
+                    <GuageChart />
+                    <Flex align="center">
+                      <Icon as={IoIosPeople} w="5" h="5" />
+                      <Text>
+                        <strong>Total Students Registered:</strong> 80
+                      </Text>
+                    </Flex>
+                    <Flex align="center" mt={1}>
+                      <Icon as={RiContactsBookFill} w="4" h="4" />
+                      <Text ml={1}>
+                        <strong>Student Defaults Registered:</strong> 10
+                      </Text>
+                    </Flex>
                   </Flex>
-                  <Flex align="center" mt={1}>
-                    <Icon as={RiContactsBookFill} w="4" h="4" /> 
-                    <Text ml={1}><strong>Student Defaults Registered:</strong> 10</Text>
-                  </Flex>
+                  <Box bg="white" h="300px" w="450px" borderRadius="7px">
+                    <HomeChart />
+                  </Box>
                 </Flex>
-                <Box bg="white" h="300px" w="450px" borderRadius="7px" ></Box>
-              </Flex>
               </Flex>
 
               <Flex
                 overflowY="auto"
                 bg="white"
                 borderRadius="5px"
-                w="300px"
+                w="350px"
                 h="full"
                 align="center"
                 direction="column"
               >
                 <Text textAlign="left">Recent Activities</Text>
-                <Tabs variant="unstyled" mt={2}>
+                <Tabs variant="unstyled" mt={2} align="center">
                   <TabList>
                     <Tab _selected={{ ...tabStyle }}>Students</Tab>
                     <Tab _selected={{ ...tabStyle }}>Graycases</Tab>
                     <Tab _selected={{ ...tabStyle }}>Requests</Tab>
                   </TabList>
                   <TabPanels>
-
                     <TabPanel overflowY="auto" h="240px">
+                      {/*                       
                       <Flex w={60} align="center" mb={5}>
                     <SkeletonCircle h={8} w={10} mr={3} />
                     <Stack w="full">
@@ -241,41 +260,77 @@ const App = () => {
                       <Skeleton h="10px" />  
                       <Skeleton h="10px" w="100px" />
                     </Stack>
-                  </Flex>
+                  </Flex> */}
+                      <Flex
+                        direction="column"
+                        align="center"
+                        bg="white"
+                        borderRadius="md"
+                        px={4}
+                      >
+                        <Image src="/studnet.png" alt="no_student" w="50%" />
+                        <Text mt="5" textAlign="center">
+                          It seems you haven't added any students yet
+                        </Text>
+                      </Flex>
                     </TabPanel>
 
                     <TabPanel overflowY="auto" h="240px">
-                    <Flex w={60} align="center" mb={5}>
-                    <SkeletonCircle h={8} w={10} mr={3} />
-                    <Stack w="full">
-                      <Skeleton h="10px" />  
-                      <Skeleton h="10px" w="100px" />
-                    </Stack>
-                  </Flex>
-                  <Flex w={60} align="center">
-                    <SkeletonCircle h={8} w={10} mr={3} />
-                    <Stack w="full">
-                      <Skeleton h="10px" />  
-                      <Skeleton h="10px" w="100px" />
-                    </Stack>
-                  </Flex>
+                      {/* <Flex w={60} align="center" mb={5}>
+                        <SkeletonCircle h={8} w={10} mr={3} />
+                        <Stack w="full">
+                          <Skeleton h="10px" />
+                          <Skeleton h="10px" w="100px" />
+                        </Stack>
+                      </Flex>
+                      <Flex w={60} align="center">
+                        <SkeletonCircle h={8} w={10} mr={3} />
+                        <Stack w="full">
+                          <Skeleton h="10px" />
+                          <Skeleton h="10px" w="100px" />
+                        </Stack>
+                      </Flex> */}
+                      <Flex
+                        direction="column"
+                        align="center"
+                        bg="white"
+                        borderRadius="md"
+                        px={4}
+                      >
+                        <Image src="/empty.png" alt="no_cases_yet" w="50%" />
+                        <Text mt="5" textAlign="center">
+                          It seems you haven't added any cases yet
+                        </Text>
+                      </Flex>
                     </TabPanel>
 
                     <TabPanel overflowY="auto" h="240px">
-                    <Flex w={60} align="center" mb={5}>
-                    <SkeletonCircle h={8} w={10} mr={3} />
-                    <Stack w="full">
-                      <Skeleton h="10px" />  
-                      <Skeleton h="10px" w="100px" />
-                    </Stack>
-                  </Flex>
-                  <Flex w={60} align="center">
-                    <SkeletonCircle h={8} w={10} mr={3} />
-                    <Stack w="full">
-                      <Skeleton h="10px" />  
-                      <Skeleton h="10px" w="100px" />
-                    </Stack>
-                  </Flex>
+                      {/* <Flex w={60} align="center" mb={5}>
+                        <SkeletonCircle h={8} w={10} mr={3} />
+                        <Stack w="full">
+                          <Skeleton h="10px" />
+                          <Skeleton h="10px" w="100px" />
+                        </Stack>
+                      </Flex>
+                      <Flex w={60} align="center">
+                        <SkeletonCircle h={8} w={10} mr={3} />
+                        <Stack w="full">
+                          <Skeleton h="10px" />
+                          <Skeleton h="10px" w="100px" />
+                        </Stack>
+                      </Flex> */}
+                      <Flex
+                        direction="column"
+                        align="center"
+                        bg="white"
+                        borderRadius="md"
+                        px={4}
+                      >
+                        <Image src="/requests.png" alt="no_requests" w="50%" />
+                        <Text mt="5" textAlign="center">
+                          It seems you haven't received any cases yet
+                        </Text>
+                      </Flex>
                     </TabPanel>
                   </TabPanels>
                 </Tabs>
@@ -311,6 +366,7 @@ const App = () => {
           </Flex>
         </Flex>
         <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
+        <SearchStudent isOpen={isOpen} onClose={onClose} />
       </Center>
     );
   }

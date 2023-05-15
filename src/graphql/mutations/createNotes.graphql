@@ -1,5 +1,5 @@
-mutation CreateNotes($title: String!, $body: String) {
-  createNotes(title: $title, body: $body) {
+mutation CreateNotes($title: String!, $category: String!, $body: String) {
+  createNotes(title: $title, category: $category, body: $body) {
     errors {
       field
       message
@@ -8,6 +8,7 @@ mutation CreateNotes($title: String!, $body: String) {
       id
       createdAt
       updatedAt
+      category
       title
       body
       isDisabled
@@ -17,8 +18,8 @@ mutation CreateNotes($title: String!, $body: String) {
         admin {
           id
           isSuper
+          premiumAdmin
           createdAt
-          token
           adminName
           phoneNumber
           email
