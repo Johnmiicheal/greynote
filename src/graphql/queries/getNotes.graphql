@@ -1,0 +1,34 @@
+query GetNotes($getNotesId: Float!) {
+  getNotes(id: $getNotesId) {
+    errors {
+      field
+      message
+    }
+    notes {
+      id
+      createdAt
+      updatedAt
+      category
+      title
+      body
+      isDisabled
+      wasEdited
+      bodySnippet
+      creator {
+        admin {
+          id
+          isSuper
+          premiumAdmin
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+          schoolImg
+        }
+      }
+    }
+  }
+}
