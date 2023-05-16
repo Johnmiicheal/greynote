@@ -1,0 +1,91 @@
+query SchoolRequests($limit: Float!, $schoolId: Float!, $sortBy: String, $cursor: Float) {
+  schoolRequests(limit: $limit, schoolId: $schoolId, sortBy: $sortBy, cursor: $cursor) {
+    requests {
+      id
+      message
+      student {
+        id
+        createdAt
+        firstName
+        lastName
+        gradeClass
+        gender
+        ageInput
+        startDate
+        endDate
+        birthDate
+        isArchived
+        profileImgUrl
+        school {
+          errors {
+            field
+            message
+          }
+          school {
+            id
+            createdAt
+            schoolName
+            rcnumber
+            address
+            lgarea
+            state
+            country
+            description
+            websiteUrl
+            instagramUrl
+            facebookUrl
+            twitterUrl
+            linkedinUrl
+            logoImgUrl
+            bannerImgUrl
+            license
+          }
+        }
+        creator {
+          admin {
+            id
+            isSuper
+            premiumAdmin
+            createdAt
+            adminName
+            phoneNumber
+            email
+            isDisabled
+            profileImgUrl
+            school
+            schoolImg
+          }
+        }
+        studentCase {
+          grayCase {
+            id
+            createdAt
+            updatedAt
+            category
+            note
+            firstName
+            lastName
+            gradeClass
+            gender
+            ageInput
+            isActive
+            wasEdited
+          }
+        }
+        grayId
+        parentName
+        parentEmail
+        parentNumber
+        homeAddress
+        state
+        academicResult
+      }
+      status
+      accepted
+      createdAt
+      updatedAt
+    }
+    hasMore
+    cursor
+  }
+}
