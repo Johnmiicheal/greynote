@@ -4,25 +4,20 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   FormControl,
   FormLabel,
-  Menu,
-  MenuButton,
-  useControllableState,
+  Text,
   Button,
   Flex,
-  Select,
+  Input,
   useToast,
-  MenuItem,
-  MenuList,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import { fakecase } from "../../../fakedata";
 import { useRouter } from "next/router";
-import { useTransferStudentMutation, useGetSchoolsQuery, useGetAdminsQuery, useGetStudentByIdQuery } from "../../gql/graphql";
+import { useTransferStudentMutation, useGetStudentByIdQuery } from "../../gql/graphql";
 import { IoCaretDown } from "react-icons/io5";
 
 export const TransferStudent = ({ isOpen, onClose, id }: any) => {
@@ -30,25 +25,15 @@ export const TransferStudent = ({ isOpen, onClose, id }: any) => {
   const finalRef = React.useRef(null);
   const router = useRouter();
   const toast = useToast();
-  const [school, setSchool] = useControllableState({ defaultValue: 0 });
-  const [admin, setAdmin] = useControllableState({ defaultValue: 0 });
-  const [{ data: schools }] = useGetSchoolsQuery();
-  const [{ data: admins }] = useGetAdminsQuery();
   const [{ data: student }] = useGetStudentByIdQuery({
     variables: {
       studentId: id
     }
   })
   const [, transfer] = useTransferStudentMutation();
-
-  const [name, setName] = useControllableState({
-    defaultValue: "Select School",
-  });
   const studentName = `${student?.getStudentById?.student?.firstName} ${student?.getStudentById?.student?.lastName}`
-
-  const [adminName, setAdminName] = useControllableState({
-    defaultValue: "Select Admin",
-  });
+  const admin = student?.getStudentById?.student?.creator!;
+  const school = student?.getStudentById?.student?.school!;
 
   return (
     <Modal
@@ -62,17 +47,20 @@ export const TransferStudent = ({ isOpen, onClose, id }: any) => {
         <ModalHeader>Transfer {studentName}</ModalHeader>
         <ModalCloseButton />
         <ModalBody pb={6}>
+          <Text mb={4}>
+            You are about to transfer {studentName}. Take note that the changes are irreversible
+          </Text>
           <Formik
             initialValues={{
               studentId: id,
-              schoolId: school,
-              adminId: admin,
+              schoolId: 0,
+              adminId: 0,
             }}
             onSubmit={async (values, { setErrors }) => {
               const response = await transfer({
                 studentId: id,
-                schoolId: school,
-                adminId: admin,
+                schoolId: school?.school?.id!,
+                adminId: admin?.admin?.id!,
               });
               if (response.data?.transferStudent === false) {
                 console.log(values)
@@ -108,37 +96,9 @@ export const TransferStudent = ({ isOpen, onClose, id }: any) => {
               <Form>
                 <Field name="schoolId">
                   {({ field, form }: any) => (
-                    <FormControl mt={1} px={4} isRequired>
-                      <FormLabel>Select School</FormLabel>
-                      <Menu>
-                        {() => (
-                          <>
-                            <MenuButton
-                              // isActive={isMenuOpen}
-                              as={Button}
-                              rightIcon={<IoCaretDown />}
-                              name="schoolId"
-                            >
-                              {name}
-                            </MenuButton>
-                            <MenuList>
-                              {schools?.getSchools.map((p) => (
-                                <>
-                                  <MenuItem
-                                    name="schoolId"
-                                    onClick={() => {
-                                      setSchool(p.id);
-                                      setName(p.schoolName);
-                                    }}
-                                  >
-                                    {p.schoolName}
-                                  </MenuItem>
-                                </>
-                              ))}
-                            </MenuList>
-                          </>
-                        )}
-                      </Menu>
+                    <FormControl mt={1} px={4}>
+                      <FormLabel>School Name</FormLabel>
+                      <Input {...field} value={school?.school?.schoolName} />
                       
                     </FormControl>
                   )}
@@ -146,38 +106,10 @@ export const TransferStudent = ({ isOpen, onClose, id }: any) => {
 
                 <Field name="adminId">
                   {({ field, form }: any) => (
-                    <FormControl mt={5} px={4} isRequired>
-                      <FormLabel>Select Admin</FormLabel>
-                      <Menu>
-                        {() => (
-                          <>
-                            <MenuButton
-                              // isActive={isMenuOpen}
-                              as={Button}
-                              rightIcon={<IoCaretDown />}
-                              name="adminId"
-                            >
-                              {adminName}
-                            </MenuButton>
-                            <MenuList>
-                              {admins?.getAdmins.map((p) => (
-                                <>
-                                  <MenuItem
-                                    name="adminId"
-                                    onClick={() => {
-                                      setAdmin(p.id);
-                                      setAdminName(p.adminName);
-                                    }}
-                                  >
-                                    {p.adminName}
-                                  </MenuItem>
-                                </>
-                              ))}
-                            </MenuList>
-                          </>
-                        )}
-                      </Menu>
-                    </FormControl>
+                    <FormControl mt={5} px={4}>
+                      <FormLabel>School Admin</FormLabel>
+                      <Input {...field} value={admin?.admin?.adminName} />
+                      </FormControl>
                   )}
                 </Field>
 
@@ -189,7 +121,7 @@ export const TransferStudent = ({ isOpen, onClose, id }: any) => {
                     mr={3}
                     type="submit"
                   >
-                    Submit
+                    Transfer
                   </Button>
                   <Button onClick={onClose}>Cancel</Button>
                 </Flex>

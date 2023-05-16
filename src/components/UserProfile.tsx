@@ -37,7 +37,7 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
   const [{ data: me }] = useMeQuery();
   const [,logout] = useLogoutUserMutation();
   function handleLogout(){
-    logout;
+    logout({});
     router.push('/');
   }
 

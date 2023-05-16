@@ -34,8 +34,8 @@ const Footer = () => {
                 </Flex>
             </Flex>
             <Box w="full" h="0.3" bgColor="gray.300" mt={6} />
-            <Flex ml={{ md: "auto" }} gap={3} mt={6} direction={{ base: "column", md: "row"}}>
-                <Text textStyle="text" color="#7a7a7a" w="full">
+            <Flex ml={{ md: "auto" }} gap={{ base: 3, md: 8}} mt={6} direction={{ base: "column", md: "row"}}>
+                <Text textStyle="text" color="#7a7a7a" w={{ base: "full", md: "10rem"}}>
                 &#169; {year} GrayBook, Inc.
                 </Text>
                 {foot.map((foots) => (

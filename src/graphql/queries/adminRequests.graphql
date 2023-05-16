@@ -1,5 +1,5 @@
-query AdminRequests($limit: Float!, $sortBy: String, $cursor: Float) {
-  adminRequests(limit: $limit, sortBy: $sortBy, cursor: $cursor) {
+query AdminRequests($limit: Float!, $cursor: Float, $sortBy: String) {
+  adminRequests(limit: $limit, cursor: $cursor, sortBy: $sortBy) {
     requests {
       id
       message
@@ -27,6 +27,7 @@ query AdminRequests($limit: Float!, $sortBy: String, $cursor: Float) {
             schoolName
             rcnumber
             address
+            lgarea
             state
             country
             description
@@ -37,11 +38,14 @@ query AdminRequests($limit: Float!, $sortBy: String, $cursor: Float) {
             linkedinUrl
             logoImgUrl
             bannerImgUrl
+            license
           }
         }
         creator {
           admin {
             id
+            isSuper
+            premiumAdmin
             createdAt
             adminName
             phoneNumber
@@ -58,6 +62,7 @@ query AdminRequests($limit: Float!, $sortBy: String, $cursor: Float) {
             createdAt
             updatedAt
             category
+            note
             firstName
             lastName
             gradeClass

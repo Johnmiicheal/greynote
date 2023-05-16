@@ -27,13 +27,14 @@ import { useRouter } from "next/router";
 import GrayLayout from "../../components/GrayLayout";
 import { RegStudent } from "../Modals/RegStudent";
 import { SearchStudent } from "../Modals/SearchStudent";
-import { useMeQuery, useAdminNotesQuery } from "../../gql/graphql";
+import { useMeQuery, useAdminNotesQuery, useAdminRequestsQuery } from "../../gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
 import GuageChart from "./GuageChart";
 import { motion } from "framer-motion";
 import { HomeChart } from "../HomeChart";
 import SmallNotes from "../GrayNotes/SmallNotes";
+import SmallRequests from "../GrayRequests/SmallRequests";
 
 const App = () => {
   const router = useRouter();
@@ -53,9 +54,15 @@ const App = () => {
   };
   const [{ data: notes, fetching: notesFetching }] = useAdminNotesQuery({
     variables: {
-        limit: 15,
+        limit: 5,
         cursor: 0,
       },
+  });
+  const [{ data: admin, fetching: adminFetching }] = useAdminRequestsQuery({
+    variables: {
+      limit: 15,
+      cursor: 0,
+    },
   });
   const panelStyle = {
     maxH: "100px",
@@ -92,16 +99,6 @@ const App = () => {
             px={{ base: 4, md: 4, lg: 10 }}
           >
             <Header />
-            <Flex w="100%" overflow="hidden" bg="red">
-              <motion.div
-                style={{ width: "100%" }}
-                initial={{ x: "100%" }}
-                animate={{ x: "-100%" }}
-                transition={{ duration: 20, ease: "linear", repeat: Infinity }}
-              >
-                <Text whiteSpace="nowrap"></Text>
-              </motion.div>
-            </Flex>
             <Flex
               bg="#E6E6E6"
               gap={10}
@@ -247,9 +244,23 @@ const App = () => {
                   <TabPanels mt={2}>
                   <TabPanel overflow="auto">
                     {
+                      notes?.adminNotes?.notes?.length! < 1 ? (
+                        <Flex
+                        direction="column"
+                        align="center"
+                        bg="white"
+                        borderRadius="md"
+                        px={4}
+                      >
+                        <Image src="/notes.png" alt="no_cases_yet" w="50%" />
+                        <Text mt="5" textAlign="center">
+                          You don't have any notes created
+                        </Text>
+                      </Flex>
+                      ) : (
                               notes?.adminNotes?.notes?.map((note) => (
                                 <SmallNotes p={note} key={note.id} />
-                              ))
+                              )))
                             }
                     </TabPanel>
                     <TabPanel overflowY="auto" h="240px">
@@ -277,24 +288,32 @@ const App = () => {
                       >
                         <Image src="/empty.png" alt="no_cases_yet" w="50%" />
                         <Text mt="5" textAlign="center">
-                          It seems you haven't added any cases yet
+                          You have no active cases in your school
                         </Text>
                       </Flex>
                     </TabPanel>
 
                     <TabPanel overflowY="auto" h="240px">
-                      <Flex
-                        direction="column"
-                        align="center"
-                        bg="white"
-                        borderRadius="md"
-                        px={4}
-                      >
-                        <Image src="/requests.png" alt="no_requests" w="50%" />
-                        <Text mt="5" textAlign="center">
-                          It seems you haven't received any cases yet
-                        </Text>
-                      </Flex>
+                      {
+                        admin?.adminRequests?.requests && admin?.adminRequests?.requests.length > 0 ? (
+                          admin?.adminRequests?.requests?.map((req) => (
+                           <SmallRequests p={req} key={req.id} />
+                          ))
+                        ) : (
+                        <Flex
+                          direction="column"
+                          align="center"
+                          bg="white"
+                          borderRadius="md"
+                          px={4}
+                        >
+                          <Image src="/requests.png" alt="no_requests" w="50%" />
+                          <Text mt="5" textAlign="center">
+                            Yet to receive any requests? Don't fret
+                          </Text>
+                        </Flex>
+                        )
+                      }
                     </TabPanel>
                   </TabPanels>
                 </Tabs>

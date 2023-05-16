@@ -15,6 +15,7 @@ import {
   Flex,
   Select,
   useToast,
+  Textarea,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import { fakecase } from "../../../fakedata";
@@ -43,17 +44,19 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
             initialValues={{
               studentId: id,
               category: "",
+              note: ""
             }}
             onSubmit={async (values, { setErrors }) => {
               console.log(values);
               const response = await create({
                 studentId: id,
                 category: values.category,
+                note: values.note
               });
               if (response.data?.addGrayCase?.errors) {
                 toast({
-                  title: "Error.",
-                  description: "We could not add the graycase",
+                  title: "Oops, an error",
+                  description: "We could not add the case to the student",
                   status: "error",
                   variant: "left-accent",
                   duration: 5000,
@@ -64,16 +67,16 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
                 }, 1000);
               } else if (response.data?.addGrayCase?.grayCase) {
                 toast({
-                  title: "Student registerd Successfully.",
-                  description: "We've registered your Student for you.",
+                  title: "Student case added successfully.",
+                  description: `We have added ${values.category} to the student`,
                   status: "success",
                   variant: "left-accent",
                   duration: 5000,
                   isClosable: true,
                 });
-                // setTimeout(() => {
-                //   router.reload();
-                // }, 1000);
+                setTimeout(() => {
+                  router.reload();
+                }, 1000);
               }
             }}
           >
@@ -93,6 +96,21 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
                             <option key={i} value={p}>{p}</option>
                           ))}
                         </Select>
+                      </FormControl>
+                    )}
+                  </Field>
+
+                  <Field name="note">
+                    {({ field, form }: any) => (
+                      <FormControl mt={3} px={4}>
+                        <FormLabel>Short Note</FormLabel>
+                        <Textarea
+                          {...field}
+                          placeholder="Short note about the case"
+                          w="full"
+                          focusBorderColor="#F4B95F"
+                          maxLength={300}
+                        />
                       </FormControl>
                     )}
                   </Field>

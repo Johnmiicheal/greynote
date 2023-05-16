@@ -94,7 +94,7 @@ const LandingPage = () => {
                   Join Graybook
                 </Button>
               </Flex>
-              <Box overflow="hidden" mr={-80}>
+              <Box overflow="hidden" mr={{ base: -80 , lg: "-30rem"}} ml={{ base: 0, lg: "8rem"}}>
                 <Image
                   src="/web/graymock.png"
                   alt="graybook_app"
@@ -128,7 +128,7 @@ const LandingPage = () => {
             <Flex
               direction={{ base: "column", lg: "row" }}
               gap="2"
-              w="40rem"
+              w={{ base: "40rem", lg: "70rem"}}
               pr={{ base: 10, lg: 10 }}
             >
               <VStack spacing={{ base: -8, md: "-2" }}>
@@ -310,7 +310,7 @@ const LandingPage = () => {
 
         {/* SECTION 4 */}
         <Center bgImg="/web/section4.png" bgRepeat="no-repeat" bgSize="cover">
-          <Flex direction="column" justify={{ md: "center" }} maxW={{ base: "sm", md: "md", lg: "lg"}} align={{ md: "center" }} mt={20} >
+          <Flex direction="column" justify={{ md: "center" }} maxW={{ base: "sm", md: "md", lg: "70rem"}} align={{ md: "center", lg: "start" }} mt={20} >
             <Text
               fontSize="2rem"
               color="#8E6930"
@@ -395,8 +395,8 @@ const LandingPage = () => {
           minH={{ base: "70rem", md: "35rem" }}
           mb={{ lg: 20 }}
         >
-          <Flex maxW={{ base: "sm", md: "md", lg: "lg"}} direction={{ base: "column", lg: "row" }} justify="space-between" mt={{ md: -20 }} gap={24}>
-            <Flex direction="column" align="center">
+          <Flex maxW={{ base: "sm", md: "md", lg: "70rem"}} direction={{ base: "column", lg: "row" }} justify="space-between" mt={{ md: -20 }} gap={24}>
+            <Flex direction="column" align={{base: "center", lg: "start"}}>
               <Text
                 fontSize="2rem"
                 color="#8E6930"
@@ -420,7 +420,7 @@ const LandingPage = () => {
                   bg="#F4B95F"
                   _hover={{ bg: "#DAA65D" }}
                   rightIcon={<IoChevronForward />}
-                  onClick={onOpen}
+                  onClick={() => {router.push('/register')}}
                 >
                   Sign up
                 </Button>

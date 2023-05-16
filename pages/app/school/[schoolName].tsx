@@ -32,10 +32,18 @@ import Header from "../../../src/components/Header";
 import Cases from "../../../src/components/GrayCases/Cases";
 import Notes from "../../../src/components/GrayNotes/Notes";
 import { useGetSchoolFromUrl } from "../../../src/utils/useGetSchoolFromUrl";
-import { useAdminNotesQuery, useMeQuery, useSchoolCasesQuery } from "../../../src/gql/graphql";
+import {
+  useAdminNotesQuery,
+  useMeQuery,
+  useSchoolCasesQuery,
+  useSchoolRequestsQuery,
+  useAdminRequestsQuery
+} from "../../../src/gql/graphql";
 import SchoolCard from "../../../src/components/SchoolCard";
 import BarLoader from "react-spinners/BarLoader";
 import { useRouter } from "next/router";
+import { request } from "http";
+import Requests from "../../../src/components/GrayRequests/Requests";
 
 const School = () => {
   const [{ data, fetching: loading }] = useGetSchoolFromUrl();
@@ -48,9 +56,16 @@ const School = () => {
   });
   const [{ data: notes, fetching }] = useAdminNotesQuery({
     variables: {
-        limit: 15,
-        cursor: 0,
-      },
+      limit: 15,
+      cursor: 0,
+    },
+  });
+  const [{ data: requests, fetching: requestsFetching }] = useSchoolRequestsQuery({
+    variables: {
+      schoolId: data?.getSchoolByName?.school?.id!,
+      limit: 15,
+      cursor: 0,
+    },
   });
   const router = useRouter();
   let school = null;
@@ -286,37 +301,7 @@ const School = () => {
                     <TabPanels>
                       {/*** ALL CASES SECTION ***/}
                       <TabPanel>
-                        {casesFetching ? (
-                          <VStack spacing={{ base: 0, md: 5 }}>
-                            <Box
-                              borderWidth="1px"
-                              borderRadius="lg"
-                              bg="white"
-                              p={4}
-                              boxShadow="lg"
-                              w={{ base: "370px", md: "768px", lg: "650px" }}
-                              minH={40}
-                              mb={{ base: 2 }}
-                            >
-                              <SkeletonCircle size="10" />
-                              <SkeletonText mt="4" noOfLines={4} spacing="4" />
-                            </Box>
-
-                            <Box
-                              borderWidth="1px"
-                              borderRadius="lg"
-                              bg="white"
-                              p={4}
-                              boxShadow="lg"
-                              w={{ base: "370px", md: "768px", lg: "650px" }}
-                              minH={40}
-                              mb={{ base: 2 }}
-                            >
-                              <SkeletonCircle size="10" />
-                              <SkeletonText mt="4" noOfLines={4} spacing="4" />
-                            </Box>
-                          </VStack>
-                        ) : !cases ? (
+                        {cases?.schoolCases?.grayCase?.length! < 1 ? (
                           <Flex
                             direction="column"
                             align="center"
@@ -352,14 +337,45 @@ const School = () => {
                           ml={-3}
                         >
                           <Image
-                            src="/empty.png"
+                            src="/children.png"
                             alt="empty_database"
                             w="20%"
                           />
                           <Text mt="5">You have no active cases</Text>
                         </Flex>
                       </TabPanel>
-                      <TabPanel><Flex
+                      <TabPanel>
+                        {
+                          requests?.schoolRequests?.requests && requests?.schoolRequests?.requests.length > 0 ? (
+                            <Flex direction="column">
+                              {requests?.schoolRequests?.requests?.map((req) => (
+                                <Requests p={req} key={req.id} />
+                              ))}
+                            </Flex>
+                          ) : (
+                            <Flex
+                              direction="column"
+                              align="center"
+                              bg="white"
+                              borderRadius="md"
+                              w={{ base: "370px", md: "768px", lg: "750px" }}
+                              py={10}
+                              px={4}
+                              ml={-3}
+                            >
+                              <Image
+                                src="/requests.png"
+                                alt="empty_requests"
+                                w="20%"
+                              />
+                              <Text mt="5">You have not sent any requests</Text>
+                            </Flex>
+                          )
+                        }
+                      </TabPanel>
+                      <TabPanel>
+                        {notes?.adminNotes?.notes?.length! < 1 ? (
+                          <Flex
                             direction="column"
                             align="center"
                             bg="white"
@@ -369,20 +385,15 @@ const School = () => {
                             px={4}
                             ml={-3}
                           >
-                            <Image
-                              src="/requests.png"
-                              alt="empty_requests"
-                              w="20%"
-                            />
-                            <Text mt="5">You have not received any requests</Text>
-                          </Flex></TabPanel>
-                          <TabPanel>
-                            {
-                              notes?.adminNotes?.notes?.map((note) => (
-                                <Notes p={note} key={note.id} />
-                              ))
-                            }
-                          </TabPanel>
+                            <Image src="/notes.png" alt="empty_notes" w="20%" />
+                            <Text mt="5">You have not created any notes</Text>
+                          </Flex>
+                        ) : (
+                          notes?.adminNotes?.notes?.map((note) => (
+                            <Notes p={note} key={note.id} />
+                          ))
+                        )}
+                      </TabPanel>
                     </TabPanels>
                   </Tabs>
                 </Flex>

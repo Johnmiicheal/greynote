@@ -17,11 +17,11 @@ import { useMeQuery, Exact, Notes } from "../../gql/graphql";
 import { useRouter } from "next/router";
 import { formatDistanceToNow } from "date-fns";
 
-interface CasesProps {
+interface NotesProps {
   p: Exact<Notes>;
 }
 
-const Notes: React.FC<CasesProps> = ({ p }) => {
+const Notes: React.FC<NotesProps> = ({ p }) => {
   const router = useRouter();
   const [{ data: me }] = useMeQuery();
   const admin = me?.me?.admin!;
