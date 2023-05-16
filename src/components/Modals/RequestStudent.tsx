@@ -58,12 +58,12 @@ export const RequestStudent: React.FC<RequestStudentProps> = ({ req, isOpen, onC
                 studentId: req.id!,
                 message: values.message
               });
-              if (response.data?.createRequest.errors) {
+              if (response.error) {
                 console.log(values)
                 console.log(response.error)
                 toast({
                   title: "Error.",
-                  description: "Oops, We could not create the request",
+                  description: `${response.error.message}`,
                   status: "error",
                   variant: "left-accent",
                   duration: 5000,

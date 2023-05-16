@@ -27,12 +27,13 @@ import { useRouter } from "next/router";
 import GrayLayout from "../../components/GrayLayout";
 import { RegStudent } from "../Modals/RegStudent";
 import { SearchStudent } from "../Modals/SearchStudent";
-import { useMeQuery } from "../../gql/graphql";
+import { useMeQuery, useAdminNotesQuery } from "../../gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
 import GuageChart from "./GuageChart";
 import { motion } from "framer-motion";
 import { HomeChart } from "../HomeChart";
+import SmallNotes from "../GrayNotes/SmallNotes";
 
 const App = () => {
   const router = useRouter();
@@ -50,7 +51,12 @@ const App = () => {
     color: "white",
     borderRadius: "4px",
   };
-
+  const [{ data: notes, fetching: notesFetching }] = useAdminNotesQuery({
+    variables: {
+        limit: 15,
+        cursor: 0,
+      },
+  });
   const panelStyle = {
     maxH: "100px",
     overflowY: "auto",
@@ -225,7 +231,7 @@ const App = () => {
                 overflowY="auto"
                 bg="white"
                 borderRadius="5px"
-                w="350px"
+                w="380px"
                 h="full"
                 align="center"
                 direction="column"
@@ -233,34 +239,20 @@ const App = () => {
                 <Text textAlign="left">Recent Activities</Text>
                 <Tabs variant="unstyled" mt={2} align="center">
                   <TabList>
+                    <Tab _selected={{ ...tabStyle }}>Notes</Tab>
                     <Tab _selected={{ ...tabStyle }}>Students</Tab>
                     <Tab _selected={{ ...tabStyle }}>Graycases</Tab>
                     <Tab _selected={{ ...tabStyle }}>Requests</Tab>
                   </TabList>
-                  <TabPanels>
+                  <TabPanels mt={2}>
+                  <TabPanel overflow="auto">
+                    {
+                              notes?.adminNotes?.notes?.map((note) => (
+                                <SmallNotes p={note} key={note.id} />
+                              ))
+                            }
+                    </TabPanel>
                     <TabPanel overflowY="auto" h="240px">
-                      {/*                       
-                      <Flex w={60} align="center" mb={5}>
-                    <SkeletonCircle h={8} w={10} mr={3} />
-                    <Stack w="full">
-                      <Skeleton h="10px" />  
-                      <Skeleton h="10px" w="100px" />
-                    </Stack>
-                  </Flex>
-                  <Flex w={60} align="center" mb={5}>
-                    <SkeletonCircle h={8} w={10} mr={3} />
-                    <Stack w="full">
-                      <Skeleton h="10px" />  
-                      <Skeleton h="10px" w="100px" />
-                    </Stack>
-                  </Flex>
-                  <Flex w={60} align="center" mb={5}>
-                    <SkeletonCircle h={8} w={10} mr={3} />
-                    <Stack w="full">
-                      <Skeleton h="10px" />  
-                      <Skeleton h="10px" w="100px" />
-                    </Stack>
-                  </Flex> */}
                       <Flex
                         direction="column"
                         align="center"
@@ -276,20 +268,6 @@ const App = () => {
                     </TabPanel>
 
                     <TabPanel overflowY="auto" h="240px">
-                      {/* <Flex w={60} align="center" mb={5}>
-                        <SkeletonCircle h={8} w={10} mr={3} />
-                        <Stack w="full">
-                          <Skeleton h="10px" />
-                          <Skeleton h="10px" w="100px" />
-                        </Stack>
-                      </Flex>
-                      <Flex w={60} align="center">
-                        <SkeletonCircle h={8} w={10} mr={3} />
-                        <Stack w="full">
-                          <Skeleton h="10px" />
-                          <Skeleton h="10px" w="100px" />
-                        </Stack>
-                      </Flex> */}
                       <Flex
                         direction="column"
                         align="center"
@@ -305,20 +283,6 @@ const App = () => {
                     </TabPanel>
 
                     <TabPanel overflowY="auto" h="240px">
-                      {/* <Flex w={60} align="center" mb={5}>
-                        <SkeletonCircle h={8} w={10} mr={3} />
-                        <Stack w="full">
-                          <Skeleton h="10px" />
-                          <Skeleton h="10px" w="100px" />
-                        </Stack>
-                      </Flex>
-                      <Flex w={60} align="center">
-                        <SkeletonCircle h={8} w={10} mr={3} />
-                        <Stack w="full">
-                          <Skeleton h="10px" />
-                          <Skeleton h="10px" w="100px" />
-                        </Stack>
-                      </Flex> */}
                       <Flex
                         direction="column"
                         align="center"

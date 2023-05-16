@@ -30,7 +30,7 @@ import { realState, monthDropDown } from "../../../fakedata";
 import {
 	useGetSchoolByNameQuery,
 	useUpdateSchoolDetailsMutation,
-	School
+	School,
 } from "../../gql/graphql";
 import { useRouter } from "next/router";
 import { format } from "date-fns";

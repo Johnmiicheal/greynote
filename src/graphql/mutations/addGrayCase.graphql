@@ -1,5 +1,5 @@
-mutation AddGrayCase($studentId: Float!, $category: String!) {
-  addGrayCase(studentId: $studentId, category: $category) {
+mutation AddGrayCase($studentId: Float!, $category: String!, $note: String!) {
+  addGrayCase(studentId: $studentId, category: $category, note: $note) {
     errors {
       field
       message
@@ -9,6 +9,7 @@ mutation AddGrayCase($studentId: Float!, $category: String!) {
       createdAt
       updatedAt
       category
+      note
       firstName
       lastName
       gradeClass

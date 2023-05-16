@@ -454,6 +454,7 @@ const Student = () => {
                   borderRadius="lg"
                   py={2}
                   px={5}
+                  display={me?.me?.admin?.id != data?.getStudentById?.student?.creator?.admin?.id ? "none" : "flex"}
                 >
                   <Text fontWeight="bold" fontSize={22} mb={4}>
                     Parent Details

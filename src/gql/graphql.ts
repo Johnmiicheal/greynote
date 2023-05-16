@@ -48,6 +48,7 @@ export type GrayCase = {
   ageInput: Scalars['Float'];
   category: Scalars['String'];
   createdAt: Scalars['DateTime'];
+  creator: AdminResponse;
   firstName: Scalars['String'];
   gender: Scalars['String'];
   gradeClass: Scalars['String'];
@@ -849,6 +850,13 @@ export type GetClassCountQueryVariables = Exact<{
 
 
 export type GetClassCountQuery = { __typename?: 'Query', getClassCount: number };
+
+export type GetNotesQueryVariables = Exact<{
+  getNotesId: Scalars['Float'];
+}>;
+
+
+export type GetNotesQuery = { __typename?: 'Query', getNotes: { __typename?: 'NotesResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, notes?: { __typename?: 'Notes', id: number, createdAt: any, updatedAt: any, category: string, title: string, body: string, isDisabled: boolean, wasEdited: boolean, bodySnippet: string, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, isSuper: boolean, premiumAdmin: boolean, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string, schoolImg: string } | null } } | null } };
 
 export type GetSchoolByNameQueryVariables = Exact<{
   schoolName: Scalars['String'];
@@ -1740,6 +1748,46 @@ export const GetClassCountDocument = gql`
 
 export function useGetClassCountQuery(options: Omit<Urql.UseQueryArgs<GetClassCountQueryVariables>, 'query'>) {
   return Urql.useQuery<GetClassCountQuery, GetClassCountQueryVariables>({ query: GetClassCountDocument, ...options });
+};
+export const GetNotesDocument = gql`
+    query GetNotes($getNotesId: Float!) {
+  getNotes(id: $getNotesId) {
+    errors {
+      field
+      message
+    }
+    notes {
+      id
+      createdAt
+      updatedAt
+      category
+      title
+      body
+      isDisabled
+      wasEdited
+      bodySnippet
+      creator {
+        admin {
+          id
+          isSuper
+          premiumAdmin
+          createdAt
+          adminName
+          phoneNumber
+          email
+          isDisabled
+          profileImgUrl
+          school
+          schoolImg
+        }
+      }
+    }
+  }
+}
+    `;
+
+export function useGetNotesQuery(options: Omit<Urql.UseQueryArgs<GetNotesQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetNotesQuery, GetNotesQueryVariables>({ query: GetNotesDocument, ...options });
 };
 export const GetSchoolByNameDocument = gql`
     query GetSchoolByName($schoolName: String!) {

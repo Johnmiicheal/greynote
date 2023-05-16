@@ -42,12 +42,13 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
           <Formik
             initialValues={{
               studentId: id,
+              category: "",
             }}
             onSubmit={async (values, { setErrors }) => {
               console.log(values);
               const response = await create({
                 studentId: id,
-                category: "",
+                category: values.category,
               });
               if (response.data?.addGrayCase?.errors) {
                 toast({
@@ -70,9 +71,9 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
                   duration: 5000,
                   isClosable: true,
                 });
-                setTimeout(() => {
-                  router.reload();
-                }, 1000);
+                // setTimeout(() => {
+                //   router.reload();
+                // }, 1000);
               }
             }}
           >
@@ -80,7 +81,7 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
               <Form>
                 <Field name="category">
                     {({ field, form }: any) => (
-                      <FormControl mt={1} px={4} isRequired>
+                      <FormControl mt={1} px={4}>
                         <FormLabel>Graybook Case</FormLabel>
                         <Select
                           {...field}
@@ -89,7 +90,7 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
                           focusBorderColor="#F4B95F"
                         >
                           {fakecase.map((p, i) => (
-                            <option key={i}>{p}</option>
+                            <option key={i} value={p}>{p}</option>
                           ))}
                         </Select>
                       </FormControl>

@@ -5,6 +5,7 @@ query SchoolCases($limit: Float!, $sortBy: String, $cursor: Float) {
       createdAt
       updatedAt
       category
+      note
       firstName
       lastName
       gradeClass

@@ -4,6 +4,7 @@ query GetStudentCases($studentId: Float!) {
     createdAt
     updatedAt
     category
+    note
     firstName
     lastName
     gradeClass
