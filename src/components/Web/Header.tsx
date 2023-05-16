@@ -65,8 +65,7 @@ const Header = () => {
             bg="#F4B95F"
             _hover={{ bg: "#DAA65D" }}
             rightIcon={<IoChevronForward />}
-            onClick={onOpen}
-          >
+            onClick={() => {router.push('/register')}}          >
             Sign up
           </Button>
       </Flex>
@@ -115,14 +114,14 @@ const Header = () => {
           <DrawerHeader>Menu</DrawerHeader>
 
           <DrawerBody>
-            <Text>Links go here</Text>
+            <Text>Links are under construction...</Text>
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onDrawerClose}>
+            <Button variant='outline' colorScheme="yellow" mr={3} onClick={onDrawerClose}>
               Cancel
             </Button>
-            <Button colorScheme='blue'>Save</Button>
+            <Button colorScheme='yellow'>Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

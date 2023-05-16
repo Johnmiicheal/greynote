@@ -89,7 +89,7 @@ const LandingPage = () => {
                   bg="#F4B95F"
                   _hover={{ bg: "#DAA65D" }}
                   rightIcon={<IoChevronForward />}
-                  onClick={onOpen}
+                  onClick={() => {router.push('/register')}}
                 >
                   Join Graybook
                 </Button>
