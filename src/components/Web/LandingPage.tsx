@@ -480,7 +480,7 @@ const LandingPage = () => {
         </Center>
       </Flex>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      {/* <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>GrayBook - Scheduled Maintainance</ModalHeader>
@@ -507,7 +507,7 @@ const LandingPage = () => {
             </Alert>
           </ModalBody>
         </ModalContent>
-      </Modal>
+      </Modal> */}
 
       <Flex minW="full">
         <Footer />
