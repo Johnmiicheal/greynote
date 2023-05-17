@@ -31,7 +31,6 @@ import { useMeQuery, useAdminNotesQuery, useAdminRequestsQuery } from "../../gql
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
 import GuageChart from "./GuageChart";
-import { motion } from "framer-motion";
 import { HomeChart } from "../HomeChart";
 import SmallNotes from "../GrayNotes/SmallNotes";
 import SmallRequests from "../GrayRequests/SmallRequests";
