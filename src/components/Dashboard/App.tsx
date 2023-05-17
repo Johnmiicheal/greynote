@@ -49,7 +49,7 @@ const App = () => {
     onClose: onRegClose,
   } = useDisclosure();
 
-  const [{ data: me, fetching }] = useMeQuery();
+  const [{ data: me }] = useMeQuery();
   const tabStyle = {
     bg: "#F4B95F",
     color: "white",
@@ -187,7 +187,7 @@ const App = () => {
                   w="330px"
                   gap={1}
                 >
-                  <GuageChart />
+                  {/* <GuageChart /> */}
                   <Flex align="center">
                     <Icon as={IoIosPeople} w="5" h="5" />
                     <Text>
