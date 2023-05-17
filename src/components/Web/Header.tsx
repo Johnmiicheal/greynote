@@ -56,7 +56,7 @@ const Header = () => {
     >
       <Flex justify="start" gap={10}>
         <Image
-          src="/gray2full.png"
+          src="/graywhite.png"
           alt="Graybook Logo"
           w="160px"
           pointerEvents="none"
@@ -133,7 +133,17 @@ const Header = () => {
           <DrawerHeader>Menu</DrawerHeader>
 
           <DrawerBody>
-            <Text>Links are under construction...</Text>
+            <Flex direction="column" textAlign="start" align="start" gap={5}>
+              {links.map((link) => (
+                <Button
+                  variant="link"
+                  key={link.path}
+                  color="#F4B95F"
+                >
+                  {link.text}
+                </Button>
+              ))}
+            </Flex>
           </DrawerBody>
 
           <DrawerFooter>
@@ -145,7 +155,15 @@ const Header = () => {
             >
               Cancel
             </Button>
-            <Button colorScheme="yellow">Save</Button>
+            <Button
+              color="white"
+              bg="#F4B95F"
+              onClick={() => {
+                admin ? router.push("/app") : router.push("/register");
+              }}
+            >
+              Dashboard
+            </Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

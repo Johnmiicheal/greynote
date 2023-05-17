@@ -139,7 +139,7 @@ const Database = () => {
                       <Th>Number of Students</Th>
                     </Tr>
                   </Thead>
-                  <Tbody>
+                  <Tbody> 
                     {fakeclass.map((p, i) => (
                         <NextLink
                         href={{

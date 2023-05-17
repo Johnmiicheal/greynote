@@ -19,12 +19,12 @@ const Footer = () => {
         {path: "/terms", text: "Terms of Service"}
     ]
     return(
-        <Flex bg="white" direction="column" w="full" align="center" px={{ base: 10, md: 24 }} py={10} overflow="hidden">
-            <Flex justify="space-between" w="full"> 
+        <Flex bg="white" direction="column" w="full" align="center" px={{ base: 10, md: 18, lg: 24 }} py={10} overflow="hidden">
+            <Flex justify={{base: "center", md: "space-between"}} direction={{ base: "column", md: "row" }} align={{ base: "start", md: "center" }} w="full"> 
                 <Box>
-                    <Image src="/grayfull.png" pointerEvents="none" alt="graybook_logo" w="160px" />
+                    <Image src="/grayfull.png" pointerEvents="none" mb={{base: 5, md: 0}} alt="graybook_logo" w={{ base: "100px", md: "100px" ,lg: "160px"}} />
                 </Box>
-                <Flex direction={{ base: "column", md: "row" }} gap={5} ml="auto" justify="end" align={{ base: "start", md: "center"}}>
+                <Flex direction={{ base: "column", md: "row" }} gap={5} ml={{base: 0, md: "auto" }} mr={{ base: "auto", md: 0 }} justify={{base: "center", md: "end"}} align={{ base: "start", md: "center"}}>
                     {socials.map((social) => (
                         <Button variant="link" key={social.path} color="#7A7A7A" leftIcon={<social.iconActive />}>{social.text}</Button>
                     ))}
