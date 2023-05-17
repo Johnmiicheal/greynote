@@ -68,20 +68,7 @@ const App = () => {
     },
   });
 
-  return fetching ? (
-    <Center>
-      <Box minW="full" mt={{ base: 60, md: 60, lg: 40 }}>
-        <Flex
-          direction="column"
-          align="center"
-          minW={{ base: "full", lg: "650px" }}
-        >
-          <Image src="/graylogo.png" alt="zlogo" w={40} mb={3} />
-          <BarLoader color="#ffd880" width="150px" />
-        </Flex>
-      </Box>
-    </Center>
-  ) : (
+  return (
     <Center>
       <Flex direction="row" justify="space-between" w="full" minH="100vh">
         <Flex direction="column">

@@ -1,18 +1,13 @@
 import React from "react";
 import { Center, Flex, Box, Image } from "@chakra-ui/react";
-import { useMeQuery, useGetSchoolByNameQuery } from "../src/gql/graphql";
+import { useMeQuery } from "../src/gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
 import App from "../src/components/Dashboard/App";
-import { useRouter } from "next/router";
 
 const AppPage = () => {
-  const router = useRouter();
   const [{ data, fetching }] = useMeQuery();
-  const admin = data?.me?.admin!;
-  let page = null;
-  if (fetching) {
-    page = (
-      <Center>
+  return fetching ? (
+    <Center>
         <Box minW="full" mt={{ base: 60, md: 60, lg: 40 }}>
           <Flex
             direction="column"
@@ -24,12 +19,8 @@ const AppPage = () => {
           </Flex>
         </Box>
       </Center>
-    );
-  } else if (admin) {
-    page = <App />;
-  } else {
-    router.push("/");
-  }
-  return page;
+  ) : (
+    <App />
+  )
 };
 export default AppPage;
