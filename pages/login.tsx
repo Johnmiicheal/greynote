@@ -88,7 +88,10 @@ const Login = () => {
                       duration: 5000,
                       isClosable: true,
                     });
-                    router.push("/app");
+                    router.reload();
+                    setTimeout(() => {
+                      router.push("/app");
+                    }, 500);
                   }
                 }}
               >
