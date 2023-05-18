@@ -89,7 +89,6 @@ const App = () => {
     </Center>
     );
   }else if(me?.me?.admin?.id){
-    router.reload();
     appPage=(
       <Center>
       <Flex direction="row" justify="space-between" w="full" minH="100vh">
