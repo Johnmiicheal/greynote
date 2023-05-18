@@ -184,6 +184,7 @@ export const SearchStudent: React.FC<SearchStudentProps> = ({
                       mr={3}
                       type="submit"
                       leftIcon={<IoSearch />}
+                      isLoading={props.isSubmitting}
                     >
                       Search
                     </Button>

@@ -20,27 +20,42 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Header from "../../../../src/components/Header";
 import { IoEllipsisVertical, IoPersonAddOutline } from "react-icons/io5";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { useRouter } from "next/router";
 import GrayLayout from "../../../../src/components/GrayLayout";
-import { useGetStudentFromSchoolQuery, useMeQuery } from "../../../../src/gql/graphql";
+import {
+  useGetStudentFromSchoolQuery,
+  useMeQuery,
+} from "../../../../src/gql/graphql";
 import NextLink from "next/link";
 import { useGetClassFromUrl } from "../../../../src/utils/useGetClassFromUrl";
 
 import { fakedb, fakestudents } from "../../../../fakedata";
+import {
+  RegStudent,
+} from "../../../../src/components/Modals/RegStudent";
+import { SearchStudent } from "../../../../src/components/Modals/SearchStudent";
 
 const Grade = () => {
   const router = useRouter();
   const [{ data: me }] = useMeQuery();
   const [{ data: student }] = useGetStudentFromSchoolQuery({
     variables: {
-      schoolId: me?.me?.admin?.id!
-    }
-  })
+      schoolId: me?.me?.admin?.id!,
+    },
+  });
   const [{ data: stud }] = useGetClassFromUrl();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isRegOpen,
+    onOpen: onRegOpen,
+    onClose: onRegClose,
+  } = useDisclosure();
+
   return (
     <Center>
       <Flex direction="row" justify="space-between" w="full" minH="100vh">
@@ -86,6 +101,7 @@ const Grade = () => {
                   borderRadius="full"
                   p={3}
                   mr={1}
+                  onClick={onRegOpen}
                 >
                   <Icon as={IoPersonAddOutline} w={7} h={7} />
                 </Flex>
@@ -111,6 +127,7 @@ const Grade = () => {
                   borderRadius="full"
                   p={3}
                   mr={1}
+                  onClick={onOpen}
                 >
                   <Icon as={AiOutlineFileSearch} w={7} h={7} />
                 </Flex>
@@ -132,7 +149,7 @@ const Grade = () => {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    { stud?.getStudentFromClass?.map((p) => (
+                    {stud?.getStudentFromClass?.map((p) => (
                       <Tr key={p.id}>
                         <Th fontWeight={500}>{p.firstName}</Th>
                         <Th fontWeight={500}>{p.lastName}</Th>
@@ -143,12 +160,19 @@ const Grade = () => {
                         <Th>
                           <Menu>
                             <MenuButton
-                               as={IconButton}
-                               aria-label='actions'
-                               icon={<IoEllipsisVertical />}
-                               variant='outline' />
+                              as={IconButton}
+                              aria-label="actions"
+                              icon={<IoEllipsisVertical />}
+                              variant="outline"
+                            />
                             <MenuList>
-                              <NextLink href={{ pathname: '/app/student/[id]', query: { id: p?.id } }} passHref>
+                              <NextLink
+                                href={{
+                                  pathname: "/app/student/[id]",
+                                  query: { id: p?.id },
+                                }}
+                                passHref
+                              >
                                 <MenuItem>View Profile</MenuItem>
                               </NextLink>
                               <MenuItem>Update Details</MenuItem>
@@ -165,6 +189,8 @@ const Grade = () => {
           </Flex>
         </Flex>
       </Flex>
+      <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
+      <SearchStudent isOpen={isOpen} onClose={onClose} />
     </Center>
   );
 };

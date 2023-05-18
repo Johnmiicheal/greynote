@@ -569,6 +569,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                           _hover={{ bg: "#DAA65D" }}
                           mr={3}
                           type="submit"
+                          isLoading={props.isSubmitting}
                         >
                           Complete
                         </Button>

@@ -49,9 +49,6 @@ for (let i = 0; i < 18; i++) {
   
 }
 
-
-
-
 export const data = {
     labels: [
         'KG 1', 'KG 2', 'KG 3',
@@ -62,19 +59,19 @@ export const data = {
   datasets: [
     {
       label: 'Expulsion',
-      data: data1,
+      data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       borderColor: 'rgb(128, 128, 132)',
       backgroundColor: 'rgba(128, 128, 132, 0.5)',
     },
     {
       label: 'Suspension',
-      data: data2,
+      data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
       borderColor: 'rgb(210, 105, 20)',
       backgroundColor: 'rgba(210, 105, 20, 0.5)',
     },
     {
         label: 'Fees Default',
-        data: data3,
+        data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
         borderColor: 'rgb(255, 10, 20)',
         backgroundColor: 'rgba(255, 10, 20, 0.5)',
       },

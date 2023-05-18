@@ -31,6 +31,8 @@ import {
   useMeQuery,
   useAdminNotesQuery,
   useAdminRequestsQuery,
+  useAdminCaseCountQuery,
+  useAdminStudentCountQuery,
 } from "../../gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
@@ -49,7 +51,9 @@ const App = () => {
     onClose: onRegClose,
   } = useDisclosure();
 
-  const [{ data: me }] = useMeQuery();
+  const [{ data: me, fetching }] = useMeQuery();
+  const [{ data: count }] = useAdminStudentCountQuery();
+  const [{ data: caseCount }] = useAdminCaseCountQuery();
   const tabStyle = {
     bg: "#F4B95F",
     color: "white",
@@ -191,13 +195,13 @@ const App = () => {
                   <Flex align="center">
                     <Icon as={IoIosPeople} w="5" h="5" />
                     <Text>
-                      <strong>Total Students Registered:</strong> 80
+                      <strong>Total Students Registered:</strong> {count?.adminStudentCount}
                     </Text>
                   </Flex>
                   <Flex align="center" mt={1}>
                     <Icon as={RiContactsBookFill} w="4" h="4" />
                     <Text ml={1}>
-                      <strong>Student Defaults Registered:</strong> 10
+                      <strong>Student Defaults Registered:</strong> {caseCount?.adminCaseCount}
                     </Text>
                   </Flex>
                 </Flex>

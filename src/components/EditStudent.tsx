@@ -600,6 +600,7 @@ export const EditStudent: React.FC<EditStudentProps> = ({
                           _hover={{ bg: "#DAA65D" }}
                           mr={3}
                           type="submit"
+                          isLoading={props.isSubmitting}
                         >
                           Update Student
                         </Button>
