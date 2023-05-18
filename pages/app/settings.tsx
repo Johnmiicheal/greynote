@@ -22,6 +22,9 @@ import {
   FormControl,
   FormLabel,
   Input,
+  AlertDescription,
+  Alert,
+  AlertTitle,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import {
@@ -62,6 +65,7 @@ const Settings = () => {
     onOpen: onSchoolOpen,
     onClose: onSchoolClose,
   } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   let d = new Date(school?.getSchoolByName?.school?.createdAt!);
   let dd = toDate(parseInt(me?.me?.admin?.createdAt!));
   const initialRef = React.useRef(null);
@@ -221,7 +225,13 @@ const Settings = () => {
                         <Flex justify="space-between" align="center">
                           <Text fontSize={18} fontWeight={700} color="#898989">
                             DESCRIPTION
-                            <Text fontSize={18} fontWeight={400} w="55em" noOfLines={2} color="white">
+                            <Text
+                              fontSize={18}
+                              fontWeight={400}
+                              w="55em"
+                              noOfLines={2}
+                              color="white"
+                            >
                               {school?.getSchoolByName?.school?.description}
                             </Text>
                           </Text>
@@ -251,15 +261,20 @@ const Settings = () => {
                         <Flex justify="space-between" align="center">
                           <Text fontSize={14} fontWeight={700} color="#212121">
                             Rename School
-                            <Text fontSize={14} fontWeight={400} color="#898989">
-                              Please note that your school would need to be re-verified to complete this process
+                            <Text
+                              fontSize={14}
+                              fontWeight={400}
+                              color="#898989"
+                            >
+                              Please note that your school would need to be
+                              re-verified to complete this process
                             </Text>
                           </Text>
                           <Button
                             bg="#FF000F"
                             _hover={{ bg: "#FF112F" }}
                             color="white"
-                            onClick={onSchoolOpen}
+                            onClick={onOpen}
                             fontSize={14}
                           >
                             Rename school
@@ -269,22 +284,26 @@ const Settings = () => {
                         <Flex justify="space-between" align="center">
                           <Text fontSize={14} fontWeight={700} color="#212121">
                             Delete this School
-                            <Text fontSize={14} fontWeight={400} color="#898989">
-                              Note that once deleted, it will be gone forever. Please be certain.
+                            <Text
+                              fontSize={14}
+                              fontWeight={400}
+                              color="#898989"
+                            >
+                              Note that once deleted, it will be gone forever.
+                              Please be certain.
                             </Text>
                           </Text>
                           <Button
                             bg="#FF000F"
                             _hover={{ bg: "#FF112F" }}
                             color="white"
-                            onClick={onSchoolOpen}
+                            onClick={onOpen}
                             fontSize={14}
                           >
                             Delete this school
                           </Button>
                         </Flex>
-
-                        </Flex>                      
+                      </Flex>
                     </Flex>
                   </TabPanel>
                   <TabPanel>
@@ -298,7 +317,12 @@ const Settings = () => {
                           onClick={onEditOpen}
                         />
                         <Flex direction="column">
-                          <Text fontSize={24} fontWeight={600} mb={1} color="#212121">
+                          <Text
+                            fontSize={24}
+                            fontWeight={600}
+                            mb={1}
+                            color="#212121"
+                          >
                             {me?.me?.admin?.adminName}
                           </Text>
                           <Text fontSize={18} fontWeight={400} color="#212121">
@@ -512,10 +536,41 @@ const Settings = () => {
             </Modal>
           )}
         </Formik>
-        
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>GrayBook - Incoming Updates</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody mb={7}>
+              <Alert
+                status="info"
+                variant="left-accent"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                textAlign="center"
+                height="200px"
+                colorScheme="yellw"
+              >
+                <AlertTitle mb={1} fontSize="lg">
+                  Hi there👋
+                </AlertTitle>
+                <AlertDescription maxWidth="sm">
+                  This function is not available at the moment, please stay calm
+                  while we work on providing you with the best and simplest
+                  software to use🤗🙌
+                </AlertDescription>
+              </Alert>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
 
         {/** EDIT SCHOOL MODAL HERE */}
-        <EditSchool s={getSchool} isOpen={isSchoolOpen} onClose={onSchoolClose} />
+        <EditSchool
+          s={getSchool}
+          isOpen={isSchoolOpen}
+          onClose={onSchoolClose}
+        />
       </Center>
     );
   }
