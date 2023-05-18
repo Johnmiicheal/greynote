@@ -35,7 +35,7 @@ const LandingPage = () => {
   return (
     <>
       <Head>
-        <title>Graybook - Simplifying Student Management</title>
+        <title>Greynote - Simplifying Student Management</title>
         <link rel="shortcut icon" href="/gray2logo.png" />
       </Head>
 
@@ -71,13 +71,13 @@ const LandingPage = () => {
                     fontWeight="extrabold"
                     textStyle="text"
                   >
-                    Graybook
+                    Greynote
                   </Text>
                 </Heading>
                 <Text mt="24px" textStyle="text">
                   The intuitive platform that streamlines student data,
                   performance monitoring, and communication with parents. Share
-                  information effortlessly with other schools. Graybook - the
+                  information effortlessly with other schools. Greynote - the
                   simple solution to school management.
                 </Text>
                 <Button
@@ -91,13 +91,13 @@ const LandingPage = () => {
                   rightIcon={<IoChevronForward />}
                   onClick={() => {router.push('/register')}}
                 >
-                  Join Graybook
+                  Join Greynote
                 </Button>
               </Flex>
               <Box overflow="hidden" mr={{ base: "-10rem" , lg: "-30rem"}} ml={{ base: 0, lg: "8rem"}}>
                 <Image
                   src="/web/graymock.png"
-                  alt="graybook_app"
+                  alt="Greynote_app"
                   pointerEvents="none"
                 />
               </Box>
@@ -123,7 +123,7 @@ const LandingPage = () => {
               textAlign="center"
               mb={5}
             >
-              We created Graybook to help you manage your students the{" "}
+              We created Greynote to help you manage your students the{" "}
               <u>simple</u> way
             </Text>
             <Flex
@@ -196,7 +196,7 @@ const LandingPage = () => {
               textAlign="center"
               mb={{ base: 16, md: 5 }}
             >
-              What can I do with <u>Graybook</u>?
+              What can I do with <u>Greynote</u>?
             </Text>
             <Flex
               direction={{ base: "column", lg: "row" }}
@@ -214,7 +214,7 @@ const LandingPage = () => {
                   Register Students
                 </Heading>
                 <Text mt="24px" textAlign="justify" w={{ base: "18rem", md: "30rem" }} textStyle="text">
-                  At GrayBook, we make registering students a breeze. Our
+                  At Greynote, we make registering students a breeze. Our
                   easy-to-use platform allows you to quickly and efficiently
                   register new students in just a few simple steps. With our
                   app, you can enter important information such as their name,
@@ -258,11 +258,11 @@ const LandingPage = () => {
                   View & Search Students
                 </Heading>
                 <Text mt="24px" w={{ base: "18rem", md: "30rem" }}  textAlign="justify" textStyle="text">
-                  GrayBook provides quick and efficient access to student
+                  Greynote provides quick and efficient access to student
                   information through advanced search capabilities. Our platform
                   allows you to view complete student profiles and receive
                   real-time updates on academic results and behavior. With
-                  GrayBook, school management becomes a streamlined and
+                  Greynote, school management becomes a streamlined and
                   organized process.
                 </Text>
               </Flex>
@@ -290,10 +290,10 @@ const LandingPage = () => {
                   Request & Transfer Student Details
                 </Heading>
                 <Text mt="24px" w={{ base: "18rem", md: "32rem" }} textAlign="justify" textStyle="text">
-                  GrayBook simplifies student transfers with its secure transfer
+                  Greynote simplifies student transfers with its secure transfer
                   request system. The platform enables schools to easily and
                   efficiently transfer student records, including academic
-                  history, behavior records, and contact information. GrayBook
+                  history, behavior records, and contact information. Greynote
                   offers a seamless and professional transfer solution.
                 </Text>
               </Flex>
@@ -323,14 +323,14 @@ const LandingPage = () => {
               Bringing <u>simplicity</u> to school management
             </Text>
             <Text w={{ base: "18rem", md: "35rem" , lg: "50rem" }} textStyle="text" fontSize="1.1rem">
-              At Graybook, we believe that school management doesn't have to be
+              At Greynote, we believe that school management doesn't have to be
               complicated. With our simple and intuitive platform, we provide
               schools with the tools they need to manage student data, monitor
               performance, and communicate with parents. Our platform makes it
               easy to share information with other schools, streamlining the
               administrative process and saving valuable time. Say goodbye to
               complicated spreadsheets and frustrating administrative tasks -
-              with Graybook, school management has never been simpler.
+              with Greynote, school management has never been simpler.
             </Text>
 
             <Button
@@ -368,7 +368,7 @@ const LandingPage = () => {
                 The simplest way to manage your students details
               </Heading>
               <Text mt="24px" color="#000" w={{ base: "18rem", md: "28rem", lg: "440px" }} textStyle="text">
-                At GrayBook, we're committed to providing our users with the
+                At Greynote, we're committed to providing our users with the
                 best possible experience. If you need help with any aspect of
                 our platform, our support team is here to assist you.
               </Text>
@@ -382,7 +382,7 @@ const LandingPage = () => {
                 bg="#8E6930"
                 _hover={{ bg: "#9E6930" }}
                 onClick={() =>
-                  (window.location.href = "mailto:graybookacc@gmail.com")
+                  (window.location.href = "mailto:Greynoteacc@gmail.com")
                 }
               >
                 Contact Us
@@ -438,7 +438,7 @@ const LandingPage = () => {
                   _hover={{ color: "#DAA65D" }}
                   rightIcon={<IoChevronForward />}
                   onClick={() =>
-                    (window.location.href = "mailto:graybookacc@gmail.com")
+                    (window.location.href = "mailto:Greynoteacc@gmail.com")
                   }
                 >
                   Contact Support
@@ -476,7 +476,7 @@ const LandingPage = () => {
               <Image
                 src="/web/gray2mock.png"
                 pointerEvents="none"
-                alt="use_graybook_beta"
+                alt="use_Greynote_beta"
                 w="50rem"
               />
             </Box>
@@ -488,7 +488,7 @@ const LandingPage = () => {
       {/* <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>GrayBook - Scheduled Maintainance</ModalHeader>
+          <ModalHeader>Greynote - Scheduled Maintainance</ModalHeader>
           <ModalCloseButton />
           <ModalBody mb={7}>
             <Alert
