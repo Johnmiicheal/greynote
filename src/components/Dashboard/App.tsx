@@ -71,6 +71,7 @@ const App = () => {
       cursor: 0,
     },
   });
+  const [refresh, setRefresh] = useState(false);
 
   let appPage = null;
   if(fetching){
@@ -88,6 +89,7 @@ const App = () => {
       </Box>
     </Center>
     );
+    window.location.reload();
   }else if(me?.me?.admin?.id){
     appPage=(
       <Center>
