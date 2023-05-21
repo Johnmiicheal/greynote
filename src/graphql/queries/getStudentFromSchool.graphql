@@ -7,25 +7,11 @@ query GetStudentFromSchool($schoolId: Float!) {
     gradeClass
     gender
     ageInput
+    startDate
+    endDate
     birthDate
     isArchived
     profileImgUrl
-    creator {
-      errors {
-        field
-        message
-      }
-      admin {
-        id
-        createdAt
-        adminName
-        phoneNumber
-        email
-        isDisabled
-        profileImgUrl
-        school
-      }
-    }
     school {
       errors {
         field
@@ -37,24 +23,57 @@ query GetStudentFromSchool($schoolId: Float!) {
         schoolName
         rcnumber
         address
+        lgarea
         state
         country
         description
+        websiteUrl
+        instagramUrl
+        facebookUrl
+        twitterUrl
+        linkedinUrl
         logoImgUrl
         bannerImgUrl
-        creator {
-          admin {
-            id
-            createdAt
-            adminName
-            phoneNumber
-            email
-            isDisabled
-            profileImgUrl
-            school
-          }
-        }
+        license
       }
     }
+    creator {
+      admin {
+        id
+        isSuper
+        premiumAdmin
+        createdAt
+        adminName
+        phoneNumber
+        email
+        isDisabled
+        profileImgUrl
+        school
+        schoolImg
+      }
+    }
+    studentCase {
+      grayCase {
+        id
+        createdAt
+        updatedAt
+        category
+        note
+        firstName
+        lastName
+        gradeClass
+        gender
+        ageInput
+        isActive
+        wasEdited
+      }
+    }
+    grayId
+    parentName
+    parentEmail
+    parentNumber
+    homeAddress
+    state
+    academicResult
   }
 }

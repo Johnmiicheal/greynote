@@ -40,6 +40,7 @@ import {
   RegStudent,
 } from "../../../../src/components/Modals/RegStudent";
 import { SearchStudent } from "../../../../src/components/Modals/SearchStudent";
+import Head from "next/head";
 
 const Grade = () => {
   const router = useRouter();
@@ -50,6 +51,9 @@ const Grade = () => {
     },
   });
   const [{ data: stud }] = useGetClassFromUrl();
+  const s = stud?.getStudentFromClass!
+  const className = typeof router.query.gradeClass === "string" ? ( router.query.gradeClass).toString() :  "";
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     isOpen: isRegOpen,
@@ -57,14 +61,11 @@ const Grade = () => {
     onClose: onRegClose,
   } = useDisclosure();
 
-  const {
-    isOpen: isEditOpen,
-    onOpen: onEditOpen,
-    onClose: onEditClose,
-  } = useDisclosure();
-
   return (
     <Center>
+      <Head>
+        <title>Greynote - {className} Database</title>
+      </Head>
       <Flex direction="row" justify="space-between" w="full" minH="100vh">
         <Flex direction="column">
           <GrayLayout />
@@ -87,7 +88,7 @@ const Grade = () => {
             px={10}
           >
             <Text fontSize={24} fontWeight={600} color="black">
-              Grade Database
+              Database for {className}
             </Text>
             <Flex direction="row" mt={4}>
               <Flex
@@ -183,13 +184,12 @@ const Grade = () => {
                               >
                                 <MenuItem>View Profile</MenuItem>
                               </NextLink>
-                              <MenuItem onClick={onEditOpen}>Update Details</MenuItem>
+                              <MenuItem onClick={() => router.push(`/app/student/${p.id}`)}>Update Details</MenuItem>
                               <MenuItem>Archive Student</MenuItem>
                             </MenuList>
                           </Menu>
                         </Th>
                       </Tr>
-                      <EditStudent isOpen={isEditOpen} onClose={onEditClose} s={p} />
                       </>
                     ))}
                   </Tbody>
@@ -198,9 +198,9 @@ const Grade = () => {
             </Flex>
           </Flex>
         </Flex>
-      </Flex>
       <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
       <SearchStudent isOpen={isOpen} onClose={onClose} />
+      </Flex>
     </Center>
   );
 };

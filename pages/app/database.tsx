@@ -32,6 +32,7 @@ import Head from "next/head";
 const Database = () => {
   const [{ data: me }] = useMeQuery();
   const [{ data: count }] = useAdminStudentCountQuery();
+  const school = me?.me?.admin?.school!
   const router = useRouter();
   const {
     isOpen: isRegOpen,
@@ -140,19 +141,10 @@ const Database = () => {
                   </Thead>
                   <Tbody> 
                     {fakeclass.map((p, i) => (
-                        <NextLink
-                        href={{
-                          pathname: "/app/school/[schoolName]/[gradeClass]",
-                          query: { schoolName: me?.me?.admin?.school, gradeClass: p },
-                        }}
-                        passHref
-                        key={i}
-                      >
-                      <Tr key={i}>
-                        <Th fontWeight={500} _hover={{ color: "#8E6930", fontWeight: 'bold' }} cursor='pointer'> {p} </Th>
-                        <Th fontWeight={500}>{ NumCount(p)?.getClassCount }</Th>
-                      </Tr>
-                      </NextLink>
+                          <Tr key={i} onClick={() => router.push(`/app/school/${school}/${p}`)}>
+                            <Th fontWeight={500} _hover={{ color: "#8E6930", fontWeight: 'bold' }}  cursor='pointer'> {p} </Th>
+                            <Th fontWeight={500}>{ NumCount(p)?.getClassCount }</Th>
+                          </Tr>
                     ))}
                   </Tbody>
                   <Tfoot>
