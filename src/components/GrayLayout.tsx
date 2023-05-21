@@ -28,7 +28,7 @@ const GrayLayout = () => {
       justify="start"
       zIndex={5}
     >
-      <Image src="/grayaxis.png" alt="grayaxis" minW="80px" pointerEvents='none' />
+      <Image src="/app/greydash.png" alt="grayaxis" minW="80px" pointerEvents='none' />
 
       {links.map((link) => (
         (link.isAdmin && me?.me?.admin) || !link.isAdmin ?

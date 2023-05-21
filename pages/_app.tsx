@@ -33,8 +33,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <ThemeProvider theme={theme}>
         <Head>
-          <link rel="shortcut icon" href="/graylogo.png" />
-          <title>Greynote App</title>
+          <link rel="shortcut icon" href="/icons/greydark.png" />
+          <title>The Greynote Database</title>
         </Head>
           <ChakraProvider>
             {progress && <TopBarProgress />}

@@ -17,13 +17,10 @@ import {
   useToast,
   InputRightElement,
 } from "@chakra-ui/react";
-import styles from "../styles/Register.module.css";
-import { FcGoogle } from "react-icons/fc";
 import { Formik, Form, Field } from "formik";
-import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { Layout } from "../src/components/Layout";
-
+import Head from "next/head";
 import { useRegisterAdminMutation } from "../src/gql/graphql";
 import { toErrorMap } from "../src/utils/toErrorMap";
 import Header from "../src/components/Registration/Header";
@@ -70,6 +67,9 @@ const Register = () => {
   const toast = useToast();
   return (
     <Layout>
+      <Head>
+        <title>Greynote - Register</title>
+      </Head>
       <Header />
       <Flex direction="row" minW="full" justify="center" >
           <Flex direction="row" justify="space-between">
@@ -84,7 +84,7 @@ const Register = () => {
             h="100vh"
           >
             <Text fontSize={'1.8rem'} fontWeight={500}>
-              Register to GrayBook
+              Register to Greynote
             </Text>
             <Text fontSize='0.8rem' w='240px' textAlign='center'>
               Please fill in the details correctly to ensure that your account is verified

@@ -56,7 +56,7 @@ const Header = () => {
     >
       <Flex justify="start" gap={10}>
         <Image
-          src="/graywhite.png"
+          src="/icons/grey2white.png"
           alt="Graybook Logo"
           w="160px"
           pointerEvents="none"

@@ -66,9 +66,9 @@ const Graycase = () => {
     <Center>
       <Head>
         <title>
-          Graybook - Graycase Records
+          Greynote - Student Case Records
         </title>
-        <link rel="shortcut icon" href="/graylogo.png" />
+        <link rel="shortcut icon" href="/icons/greyicon.png" />
       </Head>
       <Flex justify="space-between" w="full" minH="100vh">
         <Flex direction="column">
@@ -92,12 +92,12 @@ const Graycase = () => {
             px={10}
           >
             <Text fontSize={24} fontWeight={800} color="#212121">
-              Graycase Records
+              Student Case Records
             </Text>
             <Flex gap="4" mt={4}>
               <Flex {...grayStyle} bgImg="/Framee.png" gap="4">
                 <Image
-                  src="/gray2logo.png"
+                  src="/app/greycircle.png"
                   alt="graybook_logo"
                   w="50px"
                   borderRadius="full"

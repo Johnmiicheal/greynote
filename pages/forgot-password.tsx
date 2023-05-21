@@ -58,7 +58,7 @@ import theme from "../themes";
   
             <Text align='center'>
               {" "}
-              Don't fret, let's get you back into your account. 
+              Don't be embarrased, it happens. Let's get you back into your account. 
               Enter the email address you signed up with, 
               and we'll send you an email to reset your password.
             </Text>

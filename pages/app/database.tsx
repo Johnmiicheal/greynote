@@ -52,7 +52,7 @@ const Database = () => {
     <Center>
       <Head>
         <title>
-          Graybook - My Database
+          Greynote - My Database
         </title>
         <link rel="shortcut icon" href="/graylogo.png" />
       </Head>
@@ -83,11 +83,10 @@ const Database = () => {
             <Flex gap={4} mt={4}>
             <Flex {...grayStyle} bgImg="/Framee.png"  gap="4">
                 <Image
-                  src="/gray2logo.png"
-                  alt="graybook_logo"
+                  src="/app/greycircle.png"
+                  alt="greynote_icon"
                   w="50px"
                   borderRadius="full"
-                  // border="2px solid #FFCE83"
                 />
                 <Text>{count?.adminStudentCount} {count?.adminStudentCount! <= 1 ? "Student" : "Students" } registered</Text>
               </Flex>
@@ -129,7 +128,7 @@ const Database = () => {
               </Flex>
             </Flex>
 
-            <Flex direction="column" mt={5}>
+            <Flex direction="column" mt={5} maxW={{ lg: "77rem"}}>
               <TableContainer borderRadius="md" bg="white">
                 <Table variant="simple">
                   <TableCaption>Graybook Database</TableCaption>

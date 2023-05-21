@@ -24,7 +24,7 @@ export default function Header({ onOpen, ...rest }: any) {
       {...rest}
     >
       <Flex justify='flex-start' onClick={() => router.push('/')} cursor='pointer'>
-        <Image src="/grayfull.png" alt="graybook logo" w={40} pointerEvents='none' />
+        <Image src="/icons/greyfull.png" alt="graybook logo" w={40} pointerEvents='none' />
       </Flex>
       
       <Flex justify='flex-end'>

@@ -14,9 +14,6 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Skeleton,
-  SkeletonCircle,
-  Stack,
 } from "@chakra-ui/react";
 import Header from "../../components/Header";
 import { IoPersonAddOutline } from "react-icons/io5";
@@ -36,7 +33,6 @@ import {
 } from "../../gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
-import GuageChart from "./GuageChart";
 import { HomeChart } from "../HomeChart";
 import SmallNotes from "../GrayNotes/SmallNotes";
 import SmallRequests from "../GrayRequests/SmallRequests";
@@ -84,7 +80,7 @@ const App = () => {
             align="center"
             minW={{ base: "full", lg: "650px" }}
           >
-            <Image src="/graylogo.png" alt="zlogo" w={40} mb={3} />
+            <Image src="/icons/greyicon.png" alt="zlogo" w={40} mb={3} />
             <BarLoader color="#ffd880" width="150px" />
           </Flex>
         </Box>
@@ -123,7 +119,7 @@ const App = () => {
                   px={4}
                   py={2}
                   borderRadius="5px"
-                  bgImg="/grayapppp.png"
+                  bgImg="/app/greyframe.png"
                   w="800px"
                   h="250px"
                 >

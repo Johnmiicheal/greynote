@@ -14,7 +14,7 @@ const AppPage = () => {
             align="center"
             minW={{ base: "full", lg: "650px" }}
           >
-            <Image src="/graylogo.png" alt="zlogo" w={40} mb={3} />
+            <Image src="/icons/greyicon.png" alt="zlogo" w={40} mb={3} />
             <BarLoader color="#ffd880" width="150px" />
           </Flex>
         </Box>

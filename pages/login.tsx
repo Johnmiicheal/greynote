@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import NextLink from "next/link";
+import Head from "next/head";
 import { Layout } from "../src/components/Layout";
 import { useRouter } from "next/router";
 import Header from "../src/components/Registration/Header";
@@ -42,6 +43,9 @@ const Login = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Greynote - Login to your account</title>
+      </Head>
       <Header />
       <Flex direction="row" minW="full" justify="center">
         <Flex direction="row" justify="space-between">
@@ -58,7 +62,7 @@ const Login = () => {
             borderRadius="md"
           >
             <Heading mt={2} fontSize="2rem" fontWeight={500}>
-              Login to GrayBook
+              Login to Greynote
             </Heading>
 
             <Flex direction="column" mt={10}>

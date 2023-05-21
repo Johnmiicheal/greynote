@@ -81,7 +81,7 @@ const Onboarding = () => {
   return (
     <Layout>
       <Head>
-        <title>Graybook - Create School Profile</title>
+        <title>Greynote - Create School Profile</title>
       </Head>
       <Header />
       <Flex

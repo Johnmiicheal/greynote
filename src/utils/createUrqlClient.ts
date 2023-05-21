@@ -13,7 +13,8 @@ import { betterUpdateQuery } from "./betterUpdateQuery";
 import { cacheExchange, Cache } from "@urql/exchange-graphcache";
 
 export const createUrqlClient = (ssrExchange: any) => ({
-  url: "https://api.graybook.app/graphql",
+  // url: "https://api.greynote.app/graphql",
+  url: "http://localhost:4000/graphql",
   fetchOptions: {
     credentials: "include" as const,
   },

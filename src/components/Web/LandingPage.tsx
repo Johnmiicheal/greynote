@@ -36,7 +36,7 @@ const LandingPage = () => {
     <>
       <Head>
         <title>Greynote - Simplifying Student Management</title>
-        <link rel="shortcut icon" href="/gray2logo.png" />
+        <link rel="shortcut icon" href="/icons/greyicon.png" />
       </Head>
 
       <Flex direction="column" overflow="hidden">
@@ -96,7 +96,7 @@ const LandingPage = () => {
               </Flex>
               <Box overflow="hidden" mr={{ base: "-10rem" , lg: "-30rem"}} ml={{ base: 0, lg: "8rem"}}>
                 <Image
-                  src="/web/graymock.png"
+                  src="/web/greymock.png"
                   alt="Greynote_app"
                   pointerEvents="none"
                 />
@@ -474,7 +474,7 @@ const LandingPage = () => {
           <Flex direction="column" align="center">
             <Box mt={{ base: -28, lg: -60 }}>
               <Image
-                src="/web/gray2mock.png"
+                src="/web/grey2mock.png"
                 pointerEvents="none"
                 alt="use_Greynote_beta"
                 w="50rem"

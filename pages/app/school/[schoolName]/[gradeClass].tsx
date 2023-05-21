@@ -33,6 +33,7 @@ import {
 } from "../../../../src/gql/graphql";
 import NextLink from "next/link";
 import { useGetClassFromUrl } from "../../../../src/utils/useGetClassFromUrl";
+import { EditStudent } from "../../../../src/components/EditStudent";
 
 import { fakedb, fakestudents } from "../../../../fakedata";
 import {
@@ -54,6 +55,12 @@ const Grade = () => {
     isOpen: isRegOpen,
     onOpen: onRegOpen,
     onClose: onRegClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isEditOpen,
+    onOpen: onEditOpen,
+    onClose: onEditClose,
   } = useDisclosure();
 
   return (
@@ -150,6 +157,7 @@ const Grade = () => {
                   </Thead>
                   <Tbody>
                     {stud?.getStudentFromClass?.map((p) => (
+                      <>
                       <Tr key={p.id}>
                         <Th fontWeight={500}>{p.firstName}</Th>
                         <Th fontWeight={500}>{p.lastName}</Th>
@@ -175,12 +183,14 @@ const Grade = () => {
                               >
                                 <MenuItem>View Profile</MenuItem>
                               </NextLink>
-                              <MenuItem>Update Details</MenuItem>
+                              <MenuItem onClick={onEditOpen}>Update Details</MenuItem>
                               <MenuItem>Archive Student</MenuItem>
                             </MenuList>
                           </Menu>
                         </Th>
                       </Tr>
+                      <EditStudent isOpen={isEditOpen} onClose={onEditClose} s={p} />
+                      </>
                     ))}
                   </Tbody>
                 </Table>
