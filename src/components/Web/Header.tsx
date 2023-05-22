@@ -61,7 +61,7 @@ const Header = () => {
           w="160px"
           pointerEvents="none"
         />
-        {links.map((link) => (
+        {/* {links.map((link) => (
           <Button
             display={{ base: "none", md: "flex" }}
             variant="link"
@@ -70,7 +70,7 @@ const Header = () => {
           >
             {link.text}
           </Button>
-        ))}
+        ))} */}
       </Flex>
       <Flex justify="end" ml={10} display={{ base: "none", md: "flex" }}>
         <Button

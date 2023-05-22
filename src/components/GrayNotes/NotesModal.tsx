@@ -22,7 +22,7 @@ import {
 import { Formik, Form, Field } from "formik";
 import { fakenotes } from "../../../fakedata";
 import { useRouter } from "next/router";
-import { useGetNotesQuery, useMeQuery } from "../../gql/graphql";
+import { useDeleteNoteMutation, useGetNotesQuery, useMeQuery } from "../../gql/graphql";
 import { IoCaretDown, IoTrashBin } from "react-icons/io5";
 
 interface NotesModalProps{
@@ -36,6 +36,7 @@ export const NotesModal: React.FC<NotesModalProps> = ({ isOpen, onClose, id}) =>
   const finalRef = React.useRef(null);
   const router = useRouter();
   const toast = useToast();
+  const [, deleteNote] = useDeleteNoteMutation();
   const [{ data: notes }] = useGetNotesQuery({
     variables: {
         getNotesId: id
@@ -44,6 +45,36 @@ export const NotesModal: React.FC<NotesModalProps> = ({ isOpen, onClose, id}) =>
   const [{ data }] = useMeQuery();
   const admin = data?.me?.admin!;
   const note = notes?.getNotes?.notes!;
+  const handleDeleteNote = async () => {
+    const response =  await deleteNote({deleteNoteId: id});
+    if (response.error) {
+      toast({
+        title: "Error.",
+        description: "We could not delete this note",
+        status: "error",
+        variant: "left-accent",
+        duration: 5000,
+        isClosable: true,
+      });
+      setTimeout(() => {
+        router.reload();
+      }, 1000)
+    } else if (response.data?.deleteNote === true) {
+      toast({
+        title: "Note deleted.",
+        description: "We've deleted your note.",
+        status: "success",
+        variant: "left-accent",
+        duration: 5000,
+        isClosable: true,
+      });
+      setTimeout(() => {
+        router.reload();
+      }, 1000)
+    }
+    
+    
+  }
 
   return (
     <Modal
@@ -63,7 +94,7 @@ export const NotesModal: React.FC<NotesModalProps> = ({ isOpen, onClose, id}) =>
             </Flex>
         </ModalBody>
         <ModalFooter>
-            <IconButton icon={<IoTrashBin />} colorScheme="red" aria-label="delete note" />
+            <IconButton icon={<IoTrashBin />} colorScheme="red" aria-label="delete note" onClick={handleDeleteNote} />
         </ModalFooter>
       </ModalContent>
     </Modal>

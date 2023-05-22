@@ -28,9 +28,9 @@ const Footer = () => {
                     {socials.map((social) => (
                         <Button variant="link" key={social.path} color="#7A7A7A" leftIcon={<social.iconActive />}>{social.text}</Button>
                     ))}
-                    {links.map((link) => (
+                    {/* {links.map((link) => (
                         <Button variant="link" key={link.path} color="#7A7A7A">{link.text}</Button>
-                    ))}
+                    ))} */}
                 </Flex>
             </Flex>
             <Box w="full" h="0.3" bgColor="gray.300" mt={6} />

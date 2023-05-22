@@ -36,6 +36,7 @@ import { format } from "date-fns";
 import { HomeChart } from "../HomeChart";
 import SmallNotes from "../GrayNotes/SmallNotes";
 import SmallRequests from "../GrayRequests/SmallRequests";
+import { CreateNote } from "../Modals/CreateNote";
 
 const App = () => {
   const router = useRouter();
@@ -45,6 +46,11 @@ const App = () => {
     isOpen: isRegOpen,
     onOpen: onRegOpen,
     onClose: onRegClose,
+  } = useDisclosure();
+  const {
+    isOpen: isNoteOpen,
+    onOpen: onNoteOpen,
+    onClose: onNoteClose,
   } = useDisclosure();
 
   const [{ data: me, fetching }] = useMeQuery();
@@ -261,6 +267,17 @@ const App = () => {
                           <Text mt="5" textAlign="center">
                             You don't have any notes created
                           </Text>
+                          <Button
+                    mt={3}
+                    bg="#F4B95F"
+                    color="white"
+                    _hover={{ bg: "#DAA65D" }}
+                    w={40}
+                    onClick={onNoteOpen}
+                  >
+                    Create Note
+                  </Button>
+                          
                         </Flex>
                       ) : (
                         notes?.adminNotes?.notes?.map((note) => (
@@ -333,13 +350,13 @@ const App = () => {
                   h="200px"
                   color="white"
                   p={3}
-                  bgImg="/gray2box.png"
+                  bgImg="/app/greybox.png"
                   pos="fixed"
                   borderRadius="7px"
                   bottom={10}
                 >
                   <Text fontWeight={600} fontSize={20} textAlign="center">
-                    Experience more with Graybook Premium
+                    Experience more with Greynote Premium
                   </Text>
 
                   <Button
@@ -358,6 +375,7 @@ const App = () => {
         </Flex>
         <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
         <SearchStudent isOpen={isOpen} onClose={onClose} />
+        <CreateNote isOpen={isNoteOpen} onClose={onNoteClose} />
       </Center>
     );
   }

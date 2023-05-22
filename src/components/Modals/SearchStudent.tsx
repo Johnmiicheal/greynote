@@ -100,7 +100,7 @@ export const SearchStudent: React.FC<SearchStudentProps> = ({
                   <Flex>
                     <Field name="firstName">
                       {({ field, form }: any) => (
-                        <FormControl px={4}>
+                        <FormControl px={4} isRequired>
                           <FormLabel>First Name</FormLabel>
                           <Input
                             {...field}

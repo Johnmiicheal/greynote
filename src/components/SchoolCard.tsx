@@ -308,7 +308,7 @@ export default function SchoolCard() {
 
       <Flex borderRadius="10px" px={1}>
         <Box bg="white" borderRadius="10px" pb={3} w={80} overflow="hidden">
-          <Flex borderRadius="10px 10px 0 0" bgImg="/graypriv.png" bgSize="cover" overflow="hidden" h="70px">
+          <Flex borderRadius="10px 10px 0 0" bgImg="/app/greypriv.png" bgSize="cover" overflow="hidden" h="70px">
           </Flex>
           <Flex direction="column" px={2} mt={2} gap={1}>
             <Flex gap={2}>
@@ -324,10 +324,10 @@ export default function SchoolCard() {
             </Flex>
             <Flex gap={2}>
               <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
-                Graybook Status
+                Greynote Status
               </Button>
               <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
-                About Graybook
+                About Greynote
               </Button>
               <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
                 Careers
@@ -335,7 +335,7 @@ export default function SchoolCard() {
             </Flex>
 
             <Text mt={2} fontSize={12}>
-              &copy; {year} The Graybook Platform, Inc.
+              &copy; {year} The Greynote Database, Inc.
             </Text>
           </Flex>
         </Box>

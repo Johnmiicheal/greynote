@@ -164,9 +164,9 @@ const LandingPage = () => {
                         {i === 2 && (
                           <>
                             {" "}
-                            <Button variant="link" color="#F4B95F">
+                            {/* <Button variant="link" color="#F4B95F">
                               Learn more
-                            </Button>
+                            </Button> */}
                           </>
                         )}
                       </Text>
@@ -333,7 +333,7 @@ const LandingPage = () => {
               with Greynote, school management has never been simpler.
             </Text>
 
-            <Button
+            {/* <Button
               variant="solid"
               px={4}
               mt="24px"
@@ -344,7 +344,7 @@ const LandingPage = () => {
               rightIcon={<IoChevronForward />}
             >
               Learn more
-            </Button>
+            </Button> */}
 
             <Box
               py={{ base: 2, md: 10 }}
@@ -480,7 +480,7 @@ const LandingPage = () => {
                 w="50rem"
               />
             </Box>
-            <Text color="#7A7A7A">Free 7 days trial | Exclusive support</Text>
+            {/* <Text color="#7A7A7A">Free 7 days trial | Exclusive support</Text> */}
           </Flex>
         </Center>
       </Flex>

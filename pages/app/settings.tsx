@@ -246,7 +246,7 @@ const Settings = () => {
                         </Flex>
                       </Flex>
 
-                      <Text mt={10} fontSize={18} fontWeight={700} color="red">
+                      {/* <Text mt={10} fontSize={18} fontWeight={700} color="red">
                         DANGER ZONE
                       </Text>
                       <Flex
@@ -303,7 +303,7 @@ const Settings = () => {
                             Delete this school
                           </Button>
                         </Flex>
-                      </Flex>
+                      </Flex> */}
                     </Flex>
                   </TabPanel>
                   <TabPanel>
