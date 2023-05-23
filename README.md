@@ -3,7 +3,7 @@
 
 
 ## Getting Started
-[![Netlify Status](https://api.netlify.com/api/v1/badges/77dbeb17-e087-4fb8-b2fb-8851107ebff2/deploy-status)](https://app.netlify.com/sites/graybook/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/77dbeb17-e087-4fb8-b2fb-8851107ebff2/deploy-status)](https://app.netlify.com/sites/greynote-2/deploys)
 
 Open [https://greynote.app](https://greynote.app) for live site.
 
