@@ -85,7 +85,7 @@ const Login = () => {
                     });
                   } else if (response.data?.loginAdmin?.admin) {
                     toast({
-                      title: "Login Successfull" ,
+                      title: "Login Successful" ,
                       description: `Welcome Back, ${response.data?.loginAdmin?.admin?.adminName}`,
                       status: "success",
                       variant: "left-accent",
