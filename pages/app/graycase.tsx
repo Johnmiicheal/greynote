@@ -18,7 +18,6 @@ import {
 } from "@chakra-ui/react";
 import Head from "next/head";
 import Header from "../../src/components/Header";
-import { IoPersonAddOutline } from "react-icons/io5";
 import { AiOutlineFileSearch, AiOutlineFileAdd } from "react-icons/ai";
 import { useRouter } from "next/router";
 import GrayLayout from "../../src/components/GrayLayout";
@@ -33,6 +32,7 @@ import { format } from "date-fns";
 import { fakedb } from "../../fakedata";
 import { RadarChart } from "../../src/components/RadarChart";
 import { CreateNote } from "../../src/components/Modals/CreateNote";
+import { CaseModal } from "../../src/components/GrayCases/CaseModal";
 
 const Graycase = () => {
   const router = useRouter();
@@ -41,7 +41,16 @@ const Graycase = () => {
     onOpen: onGrayOpen,
     onClose: onGrayClose,
   } = useDisclosure();
-  const { isOpen: isSearchOpen, onOpen: onSearchOpen, onClose: onSearchClose } = useDisclosure();
+  const {
+    isOpen: isSearchOpen,
+    onOpen: onSearchOpen,
+    onClose: onSearchClose,
+  } = useDisclosure();
+  const {
+    isOpen: isCaseOpen,
+    onOpen: onCaseOpen,
+    onClose: onCaseClose,
+  } = useDisclosure();
 
   const [{ data: cases, fetching: isLoading }] = useSchoolCasesQuery({
     variables: {
@@ -65,9 +74,7 @@ const Graycase = () => {
   return (
     <Center>
       <Head>
-        <title>
-          Greynote - Student Case Records
-        </title>
+        <title>Greynote - Student Case Records</title>
         <link rel="shortcut icon" href="/icons/greyicon.png" />
       </Head>
       <Flex justify="space-between" w="full" minH="100vh">
@@ -102,10 +109,19 @@ const Graycase = () => {
                   w="50px"
                   borderRadius="full"
                 />
-                <Text>{caseCount?.adminCaseCount} {caseCount?.adminCaseCount! <= 1 ? "Graycase" : "Graycases" } recorded</Text>
+                <Text>
+                  {caseCount?.adminCaseCount}{" "}
+                  {caseCount?.adminCaseCount! <= 1 ? "Graycase" : "Graycases"}{" "}
+                  recorded
+                </Text>
               </Flex>
 
-              <Flex {...grayStyle}  _hover={{ borderWidth: "1px", borderColor: "gray.400" }} cursor="pointer" onClick={onSearchOpen}>
+              <Flex
+                {...grayStyle}
+                _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
+                cursor="pointer"
+                onClick={onSearchOpen}
+              >
                 <Flex
                   color="#343434"
                   bg="#979797"
@@ -118,7 +134,12 @@ const Graycase = () => {
                 <Text>Search for a student</Text>
               </Flex>
 
-              <Flex {...grayStyle}  _hover={{ borderWidth: "1px", borderColor: "gray.400" }} cursor="pointer" onClick={onGrayOpen}>
+              <Flex
+                {...grayStyle}
+                _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
+                cursor="pointer"
+                onClick={onGrayOpen}
+              >
                 <Flex
                   color="#8E6930"
                   bg="#FFCE83"
@@ -131,63 +152,88 @@ const Graycase = () => {
                 <Text>Create a Report</Text>
               </Flex>
             </Flex>
-            { caseCount?.adminCaseCount === 0 ? (
-              <Flex direction="column" align="center" bg="white" mt="10" borderRadius="md" py={10} px={4}>
+            {caseCount?.adminCaseCount === 0 ? (
+              <Flex
+                direction="column"
+                align="center"
+                bg="white"
+                mt="10"
+                borderRadius="md"
+                py={10}
+                px={4}
+              >
                 <Image src="/empty.png" alt="empty_database" w="20%" />
                 <Text mt="5">It seems you haven't added any cases yet</Text>
               </Flex>
             ) : isLoading ? (
               <Text>Loading...</Text>
-            ): (
+            ) : (
               <Flex direction="column" mt={5} bg="white" borderRadius="md">
-              <TableContainer>
-                <Table variant="simple">
-                  <TableCaption>Graycase Database</TableCaption>
-                  <Thead>
-                    <Tr>
-                      <Th>First Name</Th>
-                      <Th>Last Name</Th>
-                      <Th isNumeric>Age</Th>
-                      <Th>Categorty</Th>
-                      <Th>Grade</Th>
-                      <Th>Gender</Th>
-                      <Th>Status</Th>
-                      <Th>Date Created</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {cases?.schoolCases?.grayCase?.map((p) => (
-                      <Tr key={p.id}>
-                        <Td>{p.firstName}</Td>
-                        <Td>{p.lastName}</Td>
-                        <Td isNumeric>{p.ageInput}</Td>
-                        <Td>{p.category}</Td>
-                        <Td>{p.gradeClass}</Td>
-                        <Td>{p.gender}</Td>
-                        <Td>{p.isActive === true ? "Active" : "Inactive"}</Td>
-                        <Td>{format(new Date(p.createdAt), "MM/dd/yyyy")}</Td>
+                <TableContainer>
+                  <Table variant="simple">
+                    <TableCaption>Graycase Database</TableCaption>
+                    <Thead>
+                      <Tr>
+                        <Th>First Name</Th>
+                        <Th>Last Name</Th>
+                        <Th isNumeric>Age</Th>
+                        <Th>Categorty</Th>
+                        <Th>Grade</Th>
+                        <Th>Gender</Th>
+                        <Th>Status</Th>
+                        <Th>Date Created</Th>
                       </Tr>
-                    ))}
-                  </Tbody>
-                  <Tfoot>
-                    <Tr>
-                      <Th>First Name</Th>
-                      <Th>Last Name</Th>
-                      <Th isNumeric>Age</Th>
-                      <Th>Categorty</Th>
-                      <Th>Grade</Th>
-                      <Th>Gender</Th>
-                      <Th>Status</Th>
-                      <Th>Date Created</Th>
-                    </Tr>
-                  </Tfoot>
-                </Table>
-              </TableContainer>
-            </Flex>
-            ) }
+                    </Thead>
+                    <Tbody>
+                      {cases?.schoolCases?.grayCase?.map((p) => (
+                        <>
+                          <Tr
+                            key={p.id}
+                            _hover={{ bg: "gray.200" }}
+                            cursor="pointer"
+                            onClick={onCaseOpen}
+                          >
+                            <Td>{p.firstName}</Td>
+                            <Td>{p.lastName}</Td>
+                            <Td isNumeric>{p.ageInput}</Td>
+                            <Td>{p.category}</Td>
+                            <Td>{p.gradeClass}</Td>
+                            <Td>{p.gender}</Td>
+                            <Td>
+                              {p.isActive === true ? "Active" : "Inactive"}
+                            </Td>
+                            <Td>
+                              {format(new Date(p.createdAt), "MM/dd/yyyy")}
+                            </Td>
+                          </Tr>
+                          <CaseModal
+                            isOpen={isCaseOpen}
+                            onClose={onCaseClose}
+                            id={p.id}
+                          />
+                        </>
+                      ))}
+                    </Tbody>
+                    <Tfoot>
+                      <Tr>
+                        <Th>First Name</Th>
+                        <Th>Last Name</Th>
+                        <Th isNumeric>Age</Th>
+                        <Th>Categorty</Th>
+                        <Th>Grade</Th>
+                        <Th>Gender</Th>
+                        <Th>Status</Th>
+                        <Th>Date Created</Th>
+                      </Tr>
+                    </Tfoot>
+                  </Table>
+                </TableContainer>
+              </Flex>
+            )}
 
             <SearchStudent isOpen={isSearchOpen} onClose={onSearchClose} />
             <CreateNote isOpen={isGrayOpen} onClose={onGrayClose} />
+
             {/* 
             <Flex direction="column" mt={5} bg="white" borderRadius="md">
               <RadarChart />
