@@ -1,4 +1,5 @@
-![image](https://user-images.githubusercontent.com/69642932/233850881-ee6628da-5b7e-4b77-b44f-0b99dccee788.png)
+![image](https://github.com/greynotedb/greynote/assets/69642932/7c900aa3-d2c8-45e1-90cb-864b0438599b)
+
 
 
 
