@@ -291,13 +291,13 @@ const Student = () => {
                               | boolean
                               | React.ReactElement<
                                   any,
-                                  string | React.JSXElementConstructor<any>
-                                >
+                                  string | React.JSXElementConstructor<any>>
                               | React.ReactFragment
                               | React.ReactPortal
                               | null
                               | undefined;
                             createdAt: string | number | Date;
+                            id: number;
                           },
                           i: React.Key | null | undefined
                         ) => (
