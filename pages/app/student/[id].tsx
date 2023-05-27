@@ -11,7 +11,6 @@ import {
   useDisclosure,
   UnorderedList,
   ListItem,
-  Tabs,
   TabList,
   TabPanels,
   Tab,
@@ -43,6 +42,7 @@ import { format } from "date-fns";
 import { TransferStudent } from "../../../src/components/Modals/TransferStudent";
 import NextLink from "next/link";
 import { RequestStudent } from "../../../src/components/Modals/RequestStudent";
+import { CaseModal } from "../../../src/components/GrayCases/CaseModal";
 
 const Student = () => {
   const [{ data, fetching, error }] = useGetStudentById();
@@ -80,6 +80,11 @@ const Student = () => {
     isOpen: isReqOpen,
     onOpen: onReqOpen,
     onClose: onReqClose,
+  } = useDisclosure();
+  const {
+    isOpen: isCaseOpen,
+    onOpen: onCaseOpen,
+    onClose: onCaseClose,
   } = useDisclosure();
 
   const handleStudent = () => {
@@ -220,6 +225,25 @@ const Student = () => {
                     display={
                       data?.getStudentById?.student?.creator?.admin?.id ===
                       me?.me?.admin?.id
+                        ? "none"
+                        : "flex"
+                    }
+                  ><Button
+                  bg="#F4B95F"
+                  _hover={{ bg: "#DAA65D" }}
+                  color="white"
+                  onClick={onReqOpen}
+                >
+                  Request Student
+                </Button>
+                </Flex>
+
+                  <Flex
+                    mt={5}
+                    gap={2}
+                    display={
+                      data?.getStudentById?.student?.creator?.admin?.id ===
+                      me?.me?.admin?.id
                         ? "flex"
                         : "none"
                     }
@@ -253,7 +277,7 @@ const Student = () => {
                     py={2}
                     display={ cases?.getStudentCases.length === 0 ? 'none' : 'block'}
                   >
-                    <Text fontWeight="bold" fontSize={22}>
+                    <Text fontWeight="bold" fontSize={22}>  
                       Active Graycases
                     </Text>
                     <UnorderedList px={2}>
@@ -266,20 +290,23 @@ const Student = () => {
                               | boolean
                               | React.ReactElement<
                                   any,
-                                  string | React.JSXElementConstructor<any>
-                                >
+                                  string | React.JSXElementConstructor<any>>
                               | React.ReactFragment
                               | React.ReactPortal
                               | null
                               | undefined;
                             createdAt: string | number | Date;
+                            id: number;
                           },
                           i: React.Key | null | undefined
                         ) => (
-                          <ListItem key={i}>
+                          <Box key={i}>
+                          <ListItem key={i} _hover={{ color: "#F4B95F", fontWeight: 600 }} cursor="pointer" onClick={onCaseOpen}>
                             {p.category} created on{" "}
                             {format(new Date(p.createdAt), "PP")}
                           </ListItem>
+                          <CaseModal isOpen={isCaseOpen} onClose={onCaseClose} id={p.id} />
+                          </Box>
                         )
                       )}
                     </UnorderedList>

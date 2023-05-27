@@ -98,13 +98,12 @@ const Cases: React.FC<CasesProps> = ({ p }) => {
             </Flex>
             </LinkOverlay>
           </NextLink>
-
-          <Box maxW="full" alignItems="center" mt={2} zIndex={2} display={ me?.me?.admin ? "block" : "none" }>
+          {/* <Box maxW="full" alignItems="center" mt={2} zIndex={2} display={ me?.me?.admin ? "block" : "none" }>
             <CaseInteraction
               post={p}
               pageProps={undefined}
             />
-          </Box>
+          </Box> */}
         </Stack>
       </LinkBox>
     </VStack>

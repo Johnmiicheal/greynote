@@ -53,6 +53,22 @@ query GetStudentById($studentId: Float!) {
           schoolImg
         }
       }
+      studentCase {
+        grayCase {
+          id
+          createdAt
+          updatedAt
+          category
+          note
+          firstName
+          lastName
+          gradeClass
+          gender
+          ageInput
+          isActive
+          wasEdited
+        }
+      }
       grayId
       parentName
       parentEmail

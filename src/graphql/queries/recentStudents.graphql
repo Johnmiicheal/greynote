@@ -1,0 +1,63 @@
+query RecentStudents {
+  recentStudents {
+    id
+    createdAt
+    firstName
+    lastName
+    gradeClass
+    gender
+    ageInput
+    startDate
+    endDate
+    birthDate
+    isArchived
+    profileImgUrl
+    school {
+      errors {
+        field
+        message
+      }
+      school {
+        id
+        createdAt
+        schoolName
+        rcnumber
+        address
+        lgarea
+        state
+        country
+        description
+        websiteUrl
+        instagramUrl
+        facebookUrl
+        twitterUrl
+        linkedinUrl
+        logoImgUrl
+        bannerImgUrl
+        license
+      }
+    }
+    creator {
+      admin {
+        id
+        isSuper
+        premiumAdmin
+        createdAt
+        adminName
+        phoneNumber
+        email
+        isDisabled
+        profileImgUrl
+        school
+        schoolImg
+      }
+    }
+    grayId
+    parentName
+    parentEmail
+    parentNumber
+    homeAddress
+    state
+    academicResult
+  }
+}

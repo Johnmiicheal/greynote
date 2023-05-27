@@ -63,15 +63,15 @@ export const RequestStudent: React.FC<RequestStudentProps> = ({ req, isOpen, onC
                 console.log(response.error)
                 toast({
                   title: "Error.",
-                  description: `${response.error.message}`,
+                  description: 'Oops, an error occured.',
                   status: "error",
                   variant: "left-accent",
                   duration: 5000,
                   isClosable: true,
                 });
-                // setTimeout(() => {
-                //   router.reload();
-                // }, 1000);
+                setTimeout(() => {
+                  router.reload();
+                }, 1000);
               } else if (response.data?.createRequest?.requests) {
                 console.log(values)
                 toast({
@@ -82,9 +82,9 @@ export const RequestStudent: React.FC<RequestStudentProps> = ({ req, isOpen, onC
                   duration: 5000,
                   isClosable: true,
                 });
-                // setTimeout(() => {
-                //   router.reload();
-                // }, 1000);
+                setTimeout(() => {
+                  router.reload();
+                }, 1000);
               }
             }}
           >

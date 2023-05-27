@@ -16,20 +16,19 @@ import {
   Textarea,
   Avatar,
   Input,
-  Select
+  Select,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import { fakenotes } from "../../../fakedata";
 import { useRouter } from "next/router";
 import { useCreateNotesMutation, useMeQuery } from "../../gql/graphql";
-import { IoCaretDown } from "react-icons/io5";
 
-interface CreateNotesProps{
-    isOpen: any,
-    onClose: any
+interface CreateNotesProps {
+  isOpen: any;
+  onClose: any;
 }
 
-export const CreateNote: React.FC<CreateNotesProps> = ({ isOpen, onClose}) => {
+export const CreateNote: React.FC<CreateNotesProps> = ({ isOpen, onClose }) => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const router = useRouter();
@@ -54,17 +53,17 @@ export const CreateNote: React.FC<CreateNotesProps> = ({ isOpen, onClose}) => {
             initialValues={{
               category: "",
               title: "",
-              body: ""
+              body: "",
             }}
             onSubmit={async (values, { setErrors }) => {
               const response = await notes({
                 category: values.category,
                 body: values.body,
-                title: values.title
+                title: values.title,
               });
               if (response.data?.createNotes.errors) {
-                console.log(values)
-                console.log(response.error)
+                console.log(values);
+                console.log(response.error);
                 toast({
                   title: "Error",
                   description: `${response.data.createNotes.errors}`,
@@ -77,7 +76,7 @@ export const CreateNote: React.FC<CreateNotesProps> = ({ isOpen, onClose}) => {
                   router.reload();
                 }, 1000);
               } else if (response.data?.createNotes?.notes) {
-                console.log(values)
+                console.log(values);
                 toast({
                   title: "Notes saved",
                   description: "We've successfully saved your notes",
@@ -94,42 +93,49 @@ export const CreateNote: React.FC<CreateNotesProps> = ({ isOpen, onClose}) => {
           >
             {(props) => (
               <Form>
-               <Flex gap="5" bg="gray.100" justify="center" py={2} borderRadius="md" align="center">
-                <Avatar src={admin.profileImgUrl} size="lg" />
-                <Flex direction="column">
-                  <Text textStyle="text" fontSize="1.1rem" fontWeight="500">
-                    {admin.adminName}
-                  </Text>
-                  <Text fontSize="0.9rem" fontWeight="600" color="gray.600">
-                    {admin.school}
-                  </Text>
+                <Flex
+                  gap="5"
+                  bg="gray.100"
+                  justify="center"
+                  py={2}
+                  borderRadius="md"
+                  align="center"
+                >
+                  <Avatar src={admin.profileImgUrl} size="lg" />
+                  <Flex direction="column">
+                    <Text textStyle="text" fontSize="1.1rem" fontWeight="500">
+                      {admin.adminName}
+                    </Text>
+                    <Text fontSize="0.9rem" fontWeight="600" color="gray.600">
+                      {admin.school}
+                    </Text>
+                  </Flex>
                 </Flex>
-               </Flex>
-               <Field name="category">
-                    {({ field, form }: any) => (
-                      <FormControl mt={1} px={4} isRequired>
-                        <FormLabel>Notes Category</FormLabel>
-                        <Select
-                          {...field}
-                          placeholder="Select Case"
-                          w="full"
-                          focusBorderColor="#F4B95F"
-                        >
-                          {fakenotes.map((p, i) => (
-                            <option key={i}>{p}</option>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    )}
-                  </Field>
-               <Field name="title">
+                <Field name="category">
+                  {({ field, form }: any) => (
+                    <FormControl mt={1} px={4} isRequired>
+                      <FormLabel>Notes Category</FormLabel>
+                      <Select
+                        {...field}
+                        placeholder="Select Category"
+                        w="full"
+                        focusBorderColor="#F4B95F"
+                      >
+                        {fakenotes.map((p, i) => (
+                          <option key={i}>{p}</option>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  )}
+                </Field>
+                <Field name="title">
                   {({ field, form }: any) => (
                     <FormControl mt={5} px={4} isRequired>
                       <FormLabel>Title</FormLabel>
                       <Input
-                      {...field}
-                      placeholder="Enter Title"
-                      focusBorderColor="#F4B95F"
+                        {...field}
+                        placeholder="Enter Title"
+                        focusBorderColor="#F4B95F"
                       />
                     </FormControl>
                   )}
@@ -140,9 +146,9 @@ export const CreateNote: React.FC<CreateNotesProps> = ({ isOpen, onClose}) => {
                     <FormControl mt={5} px={4}>
                       <FormLabel>Body</FormLabel>
                       <Textarea
-                      {...field}
-                      placeholder="(Optional)"
-                      focusBorderColor="#F4B95F"
+                        {...field}
+                        placeholder="(Optional)"
+                        focusBorderColor="#F4B95F"
                       />
                     </FormControl>
                   )}

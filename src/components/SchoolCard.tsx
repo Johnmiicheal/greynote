@@ -126,7 +126,7 @@ export default function SchoolCard() {
                   variant="solid"
                   minW='20px'
                 >
-                  { admin.premiumAdmin === true ? "Premium User" : "Free Trial" }
+                  { admin?.premiumAdmin === true ? "Premium User" : "Free Trial" }
                 </Badge>
               </Box>
             </Stack>

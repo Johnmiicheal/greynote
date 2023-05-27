@@ -1,0 +1,35 @@
+query RecentCases {
+  recentCases {
+    id
+    createdAt
+    updatedAt
+    category
+    note
+    firstName
+    lastName
+    gradeClass
+    gender
+    ageInput
+    isActive
+    wasEdited
+    creator {
+      errors {
+        field
+        message
+      }
+      admin {
+        id
+        isSuper
+        premiumAdmin
+        createdAt
+        adminName
+        phoneNumber
+        email
+        isDisabled
+        profileImgUrl
+        school
+        schoolImg
+      }
+    }
+  }
+}
