@@ -30,6 +30,8 @@ import {
   useAdminRequestsQuery,
   useAdminCaseCountQuery,
   useAdminStudentCountQuery,
+  useRecentCasesQuery,
+  useRecentStudentsQuery,
 } from "../../gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
@@ -37,6 +39,8 @@ import { HomeChart } from "../HomeChart";
 import SmallNotes from "../GrayNotes/SmallNotes";
 import SmallRequests from "../GrayRequests/SmallRequests";
 import { CreateNote } from "../Modals/CreateNote";
+import SmallCases from "../GrayCases/SmallCases";
+import RecentStudent from "./RecentStudent";
 
 const App = () => {
   const router = useRouter();
@@ -73,7 +77,8 @@ const App = () => {
       cursor: 0,
     },
   });
-  const [refresh, setRefresh] = useState(false);
+  const [{ data: cases }] = useRecentCasesQuery();
+  const [{ data: student }] = useRecentStudentsQuery();
 
   let appPage = null;
   if (fetching) {
@@ -286,21 +291,32 @@ const App = () => {
                       )}
                     </TabPanel>
                     <TabPanel overflowY="auto" h="240px">
-                      <Flex
-                        direction="column"
-                        align="center"
-                        bg="white"
-                        borderRadius="md"
-                        px={4}
-                      >
-                        <Image src="/studnet.png" alt="no_student" w="50%" />
-                        <Text mt="5" textAlign="center">
-                          It seems you haven't added any students yet
-                        </Text>
-                      </Flex>
+                      {student?.recentStudents?.length! > 0 ? (
+                        student?.recentStudents?.map((s) => (
+                          <RecentStudent p={s} key={s.id} />
+                        ))
+                      ) : (
+                        <Flex
+                          direction="column"
+                          align="center"
+                          bg="white"
+                          borderRadius="md"
+                          px={4}
+                        >
+                          <Image src="/studnet.png" alt="no_student" w="50%" />
+                          <Text mt="5" textAlign="center">
+                            It seems you haven't added any students yet
+                          </Text>
+                        </Flex>
+                      )}
                     </TabPanel>
 
                     <TabPanel overflowY="auto" h="240px">
+                      {cases?.recentCases?.length! > 0 ? (
+                        cases?.recentCases?.map((c) => (
+                          <SmallCases p={c} key={c.id} />
+                        ))
+                      ): (
                       <Flex
                         direction="column"
                         align="center"
@@ -313,6 +329,7 @@ const App = () => {
                           You have no active cases in your school
                         </Text>
                       </Flex>
+                      )}
                     </TabPanel>
 
                     <TabPanel overflowY="auto" h="240px">

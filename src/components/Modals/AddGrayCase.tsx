@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -16,6 +16,10 @@ import {
   Select,
   useToast,
   Textarea,
+  InputGroup,
+  InputLeftElement,
+  Icon,
+  InputLeftAddon,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import { fakecase } from "../../../fakedata";
@@ -28,6 +32,12 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
   const router = useRouter();
   const toast = useToast();
   const [, create] = useAddGrayCaseMutation();
+
+  const [greyCase, setGreyCase] = useState("");
+  const handleStateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setGreyCase(value);
+  };
   return (
     <Modal
       initialFocusRef={initialRef}
@@ -44,16 +54,17 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
             initialValues={{
               studentId: id,
               category: "",
-              note: ""
+              note: "",
+              amount: 0,
             }}
             onSubmit={async (values, { setErrors }) => {
               console.log(values);
               const response = await create({
                 studentId: id,
                 category: values.category,
-                note: values.note
+                note: values.note,
               });
-              if (response.data?.addGrayCase?.errors) {
+              if (response.error) {
                 toast({
                   title: "Oops, an error",
                   description: "We could not add the case to the student",
@@ -83,38 +94,40 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
             {(props) => (
               <Form>
                 <Field name="category">
-                    {({ field, form }: any) => (
-                      <FormControl mt={1} px={4}>
-                        <FormLabel>Graybook Case</FormLabel>
-                        <Select
-                          {...field}
-                          placeholder="Select Case"
-                          w="full"
-                          focusBorderColor="#F4B95F"
-                        >
-                          {fakecase.map((p, i) => (
-                            <option key={i} value={p}>{p}</option>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    )}
-                  </Field>
+                  {({ field, form }: any) => (
+                    <FormControl mt={1} px={4}>
+                      <FormLabel>Graybook Case</FormLabel>
+                      <Select
+                        {...field}
+                        placeholder="Select Case"
+                        w="full"
+                        focusBorderColor="#F4B95F"
+                      >
+                        {fakecase.map((p, i) => (
+                          <option key={i} value={p}>
+                            {p}
+                          </option>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  )}
+                </Field>
 
-                  <Field name="note">
-                    {({ field, form }: any) => (
-                      <FormControl mt={3} px={4}>
-                        <FormLabel>Short Note</FormLabel>
-                        <Textarea
-                          {...field}
-                          placeholder="Short note about the case"
-                          w="full"
-                          focusBorderColor="#F4B95F"
-                          maxLength={300}
-                        />
-                      </FormControl>
-                    )}
-                  </Field>
-                
+                <Field name="note">
+                  {({ field, form }: any) => (
+                    <FormControl mt={3} px={4}>
+                      <FormLabel>Short Note</FormLabel>
+                      <Textarea
+                        {...field}
+                        placeholder="Short note about the case"
+                        w="full"
+                        focusBorderColor="#F4B95F"
+                        maxLength={300}
+                      />
+                    </FormControl>
+                  )}
+                </Field>
+
                 <Flex direction="row" justify="end" mt={10}>
                   <Button
                     bg="#F4B95F"
@@ -127,8 +140,7 @@ export const AddGrayCase = ({ isOpen, onClose, id }: any) => {
                     Submit
                   </Button>
                   <Button onClick={onClose}>Cancel</Button>
-                </Flex>               
-                
+                </Flex>
               </Form>
             )}
           </Formik>

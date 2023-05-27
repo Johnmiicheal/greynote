@@ -20,11 +20,11 @@ import { useRouter } from "next/router";
 import { formatDistanceToNow } from "date-fns";
 import { NotesModal } from "./NotesModal";
 
-interface CasesProps {
+interface SmallNotesProps {
   p: Exact<Notes>;
 }
 
-const SmallNotes: React.FC<CasesProps> = ({ p }) => {
+const SmallNotes: React.FC<SmallNotesProps> = ({ p }) => {
   const router = useRouter();
   const [{ data: me }] = useMeQuery();
   const admin = me?.me?.admin!;

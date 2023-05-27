@@ -41,21 +41,6 @@ query SchoolRequests($limit: Float!, $schoolId: Float!, $sortBy: String, $cursor
             license
           }
         }
-        creator {
-          admin {
-            id
-            isSuper
-            premiumAdmin
-            createdAt
-            adminName
-            phoneNumber
-            email
-            isDisabled
-            profileImgUrl
-            school
-            schoolImg
-          }
-        }
         studentCase {
           grayCase {
             id

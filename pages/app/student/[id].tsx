@@ -11,7 +11,6 @@ import {
   useDisclosure,
   UnorderedList,
   ListItem,
-  Tabs,
   TabList,
   TabPanels,
   Tab,
@@ -301,13 +300,13 @@ const Student = () => {
                           },
                           i: React.Key | null | undefined
                         ) => (
-                          <>
+                          <Box key={i}>
                           <ListItem key={i} _hover={{ color: "#F4B95F", fontWeight: 600 }} cursor="pointer" onClick={onCaseOpen}>
                             {p.category} created on{" "}
                             {format(new Date(p.createdAt), "PP")}
                           </ListItem>
                           <CaseModal isOpen={isCaseOpen} onClose={onCaseClose} id={p.id} />
-                          </>
+                          </Box>
                         )
                       )}
                     </UnorderedList>

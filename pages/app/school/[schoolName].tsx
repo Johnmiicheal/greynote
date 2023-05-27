@@ -190,6 +190,12 @@ const School = () => {
                     w={{ lg: "780px" }}
                     minW={{ lg: "600px" }}
                     px={3}
+                    display={
+                      me?.me?.admin?.id ===
+                      data?.getSchoolByName?.school?.creator?.admin?.id
+                        ? "block"
+                        : "none"
+                    }
                   >
                     <TabList
                       bg="white"
