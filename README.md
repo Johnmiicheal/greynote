@@ -5,6 +5,7 @@
 
 ## Getting Started
 [![Netlify Status](https://api.netlify.com/api/v1/badges/77dbeb17-e087-4fb8-b2fb-8851107ebff2/deploy-status)](https://app.netlify.com/sites/greynote-2/deploys)
+[![Lines of code](https://img.shields.io/tokei/lines/github/greynotedb/greynote)](https://github.com/greynotedb/greynote)
 
 Open [https://greynote.app](https://greynote.app) for live site.
 
