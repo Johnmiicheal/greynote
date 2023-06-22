@@ -9,18 +9,9 @@
 
 Open [https://greynote.app](https://greynote.app) for live site.
 
-## Run Locally
-fork the [server code](https://github.com/johnmiicheal/greynote-server) and run the following code:
-
-```
-npm install or yarn install
-
-npm run dev or yarn dev
-```
-
 Requirements: 
   - Redis
   - Postgresql database
 
 
-&copy; 2023 Greynote Inc.
+&copy; 2023 Greynote Ltd.
