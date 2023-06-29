@@ -48,6 +48,7 @@ export type GrayCase = {
   ageInput: Scalars['Float'];
   category: Scalars['String'];
   createdAt: Scalars['DateTime'];
+  creator: AdminResponse;
   firstName: Scalars['String'];
   gender: Scalars['String'];
   gradeClass: Scalars['String'];
@@ -180,9 +181,9 @@ export type MutationRegisterSchoolArgs = {
   address: Scalars['String'];
   description: Scalars['String'];
   lgarea: Scalars['String'];
-  license: Scalars['String'];
-  logoImgUrl: Scalars['String'];
-  rcnumber: Scalars['Float'];
+  license?: InputMaybe<Scalars['String']>;
+  logoImgUrl?: InputMaybe<Scalars['String']>;
+  rcnumber?: InputMaybe<Scalars['Float']>;
   schoolName: Scalars['String'];
   state: Scalars['String'];
 };
@@ -368,6 +369,7 @@ export type Query = {
   getRequests: RequestsResponse;
   getSchoolByName: SchoolResponse;
   getSchoolCasesCount: Scalars['Float'];
+  getSchoolRequestCount: Scalars['Float'];
   getSchoolStudentsCount: Scalars['Float'];
   getSchools: Array<School>;
   getStudent: Array<Student>;
@@ -440,6 +442,11 @@ export type QueryGetSchoolByNameArgs = {
 
 
 export type QueryGetSchoolCasesCountArgs = {
+  schoolId: Scalars['Float'];
+};
+
+
+export type QueryGetSchoolRequestCountArgs = {
   schoolId: Scalars['Float'];
 };
 
@@ -529,6 +536,9 @@ export type Requests = {
   createdAt: Scalars['DateTime'];
   id: Scalars['Float'];
   message: Scalars['String'];
+  reqAdmin: Scalars['String'];
+  school: Scalars['String'];
+  schoolImg: Scalars['String'];
   status: Scalars['String'];
   student: Student;
   updatedAt: Scalars['DateTime'];
@@ -833,7 +843,7 @@ export type AdminRequestsQueryVariables = Exact<{
 }>;
 
 
-export type AdminRequestsQuery = { __typename?: 'Query', adminRequests: { __typename?: 'PaginatedRequests', hasMore: boolean, cursor: number, requests?: Array<{ __typename?: 'Requests', id: number, message: string, status: string, accepted: boolean, createdAt: any, updatedAt: any, student: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, startDate: string, endDate: string, birthDate: any, isArchived: boolean, profileImgUrl: string, grayId: string, parentName: string, parentEmail: string, parentNumber: string, homeAddress: string, state: string, academicResult: string, school: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, lgarea: string, state: string, country: string, description: string, websiteUrl: string, instagramUrl: string, facebookUrl: string, twitterUrl: string, linkedinUrl: string, logoImgUrl: string, bannerImgUrl: string, license: string } | null }, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, isSuper: boolean, premiumAdmin: boolean, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string, schoolImg: string } | null }, studentCase: { __typename?: 'GrayCaseResponse', grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, note: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean } | null } } }> | null } };
+export type AdminRequestsQuery = { __typename?: 'Query', adminRequests: { __typename?: 'PaginatedRequests', hasMore: boolean, cursor: number, requests?: Array<{ __typename?: 'Requests', id: number, message: string, school: string, schoolImg: string, reqAdmin: string, status: string, accepted: boolean, createdAt: any, updatedAt: any, student: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, startDate: string, endDate: string, birthDate: any, isArchived: boolean, profileImgUrl: string, grayId: string, parentName: string, parentEmail: string, parentNumber: string, homeAddress: string, state: string, academicResult: string, school: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, lgarea: string, state: string, country: string, description: string, websiteUrl: string, instagramUrl: string, facebookUrl: string, twitterUrl: string, linkedinUrl: string, logoImgUrl: string, bannerImgUrl: string, license: string } | null }, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, isSuper: boolean, premiumAdmin: boolean, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string, schoolImg: string } | null }, studentCase: { __typename?: 'GrayCaseResponse', grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, note: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean } | null } } }> | null } };
 
 export type AdminStudentCountQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -886,6 +896,13 @@ export type GetSchoolCasesCountQueryVariables = Exact<{
 
 
 export type GetSchoolCasesCountQuery = { __typename?: 'Query', getSchoolCasesCount: number };
+
+export type SchoolRequestCountQueryVariables = Exact<{
+  schoolId: Scalars['Float'];
+}>;
+
+
+export type SchoolRequestCountQuery = { __typename?: 'Query', getSchoolRequestCount: number };
 
 export type GetSchoolStudentsCountQueryVariables = Exact<{
   schoolId: Scalars['Float'];
@@ -973,7 +990,7 @@ export type SchoolRequestsQueryVariables = Exact<{
 }>;
 
 
-export type SchoolRequestsQuery = { __typename?: 'Query', schoolRequests: { __typename?: 'PaginatedRequests', hasMore: boolean, cursor: number, requests?: Array<{ __typename?: 'Requests', id: number, message: string, status: string, accepted: boolean, createdAt: any, updatedAt: any, student: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, startDate: string, endDate: string, birthDate: any, isArchived: boolean, profileImgUrl: string, grayId: string, parentName: string, parentEmail: string, parentNumber: string, homeAddress: string, state: string, academicResult: string, school: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, lgarea: string, state: string, country: string, description: string, websiteUrl: string, instagramUrl: string, facebookUrl: string, twitterUrl: string, linkedinUrl: string, logoImgUrl: string, bannerImgUrl: string, license: string } | null }, studentCase: { __typename?: 'GrayCaseResponse', grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, note: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean } | null } } }> | null } };
+export type SchoolRequestsQuery = { __typename?: 'Query', schoolRequests: { __typename?: 'PaginatedRequests', hasMore: boolean, cursor: number, requests?: Array<{ __typename?: 'Requests', id: number, message: string, school: string, schoolImg: string, reqAdmin: string, status: string, accepted: boolean, createdAt: any, updatedAt: any, student: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, startDate: string, endDate: string, birthDate: any, isArchived: boolean, profileImgUrl: string, grayId: string, parentName: string, parentEmail: string, parentNumber: string, homeAddress: string, state: string, academicResult: string, school: { __typename?: 'SchoolResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, lgarea: string, state: string, country: string, description: string, websiteUrl: string, instagramUrl: string, facebookUrl: string, twitterUrl: string, linkedinUrl: string, logoImgUrl: string, bannerImgUrl: string, license: string } | null }, studentCase: { __typename?: 'GrayCaseResponse', grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, note: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean } | null } } }> | null } };
 
 
 export const AcceptRequestDocument = gql`
@@ -1651,6 +1668,9 @@ export const AdminRequestsDocument = gql`
     requests {
       id
       message
+      school
+      schoolImg
+      reqAdmin
       student {
         id
         createdAt
@@ -1927,6 +1947,15 @@ export const GetSchoolCasesCountDocument = gql`
 
 export function useGetSchoolCasesCountQuery(options: Omit<Urql.UseQueryArgs<GetSchoolCasesCountQueryVariables>, 'query'>) {
   return Urql.useQuery<GetSchoolCasesCountQuery, GetSchoolCasesCountQueryVariables>({ query: GetSchoolCasesCountDocument, ...options });
+};
+export const SchoolRequestCountDocument = gql`
+    query SchoolRequestCount($schoolId: Float!) {
+  getSchoolRequestCount(schoolId: $schoolId)
+}
+    `;
+
+export function useSchoolRequestCountQuery(options: Omit<Urql.UseQueryArgs<SchoolRequestCountQueryVariables>, 'query'>) {
+  return Urql.useQuery<SchoolRequestCountQuery, SchoolRequestCountQueryVariables>({ query: SchoolRequestCountDocument, ...options });
 };
 export const GetSchoolStudentsCountDocument = gql`
     query getSchoolStudentsCount($schoolId: Float!) {
@@ -2585,6 +2614,9 @@ export const SchoolRequestsDocument = gql`
     requests {
       id
       message
+      school
+      schoolImg
+      reqAdmin
       student {
         id
         createdAt

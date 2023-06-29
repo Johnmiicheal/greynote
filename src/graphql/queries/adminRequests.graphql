@@ -3,6 +3,9 @@ query AdminRequests($limit: Float!, $cursor: Float, $sortBy: String) {
     requests {
       id
       message
+      school
+      schoolImg
+      reqAdmin
       student {
         id
         createdAt

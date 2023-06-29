@@ -28,6 +28,7 @@ import {
   useMeQuery,
   useAdminNotesQuery,
   useAdminRequestsQuery,
+  useSchoolRequestsQuery,
   useAdminCaseCountQuery,
   useAdminStudentCountQuery,
   useRecentCasesQuery,
@@ -77,6 +78,13 @@ const App = () => {
       cursor: 0,
     },
   });
+  const [{ data: school }] = useSchoolRequestsQuery({
+    variables: {
+      schoolId: me?.me?.admin?.id!,
+      limit: 15,
+      cursor: 0,
+    },
+  });
   const [{ data: cases }] = useRecentCasesQuery();
   const [{ data: student }] = useRecentStudentsQuery();
 
@@ -102,7 +110,7 @@ const App = () => {
   } else if (me?.me?.admin?.id) {
     appPage = (
       <Center>
-        <Flex direction="row" justify="space-between" w="full" minH="100vh">
+        <Flex direction="row" justify="space-between" overflowX={"hidden"} w="full" minH="100vh">
           <Flex direction="column">
             <GrayLayout />
           </Flex>
@@ -333,9 +341,9 @@ const App = () => {
                     </TabPanel>
 
                     <TabPanel overflowY="auto" h="240px">
-                      {admin?.adminRequests?.requests &&
-                      admin?.adminRequests?.requests.length > 0 ? (
-                        admin?.adminRequests?.requests?.map((req) => (
+                      {school?.schoolRequests?.requests &&
+                      school?.schoolRequests?.requests.length > 0 ? (
+                        school?.schoolRequests?.requests?.map((req) => (
                           <SmallRequests p={req} key={req.id} />
                         ))
                       ) : (
