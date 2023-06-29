@@ -67,16 +67,18 @@ import { TransferStudent } from "../Modals/TransferStudent";
           <Stack spacing={1} px={2}>
             <Flex py={2} px={1} align="center" overflow="hidden">
               <Avatar
-                src={p?.student?.school?.school?.logoImgUrl}
+                src={p?.schoolImg}
                 size="md"
                 mr={1}
+                cursor="pointer"
+                onClick={() => router.push(`app/school/${p?.school}`)}
               />
               <Flex direction="column" textAlign="start">
                 <Text fontWeight={600} fontSize={13}>
-                  {p?.student?.school?.school?.schoolName}
+                  {p?.school}
                 </Text>
                 <Text fontSize={12}>
-                  Request for {p?.student?.firstName} {p?.student?.lastName}
+                  Requesting for {p?.student?.firstName} {p?.student?.lastName}
                 </Text>
               </Flex>
             </Flex>
@@ -130,7 +132,7 @@ import { TransferStudent } from "../Modals/TransferStudent";
           </Stack>
         </Box>
       </VStack>
-      <TransferStudent isOpen={isOpen} onClose={onClose} id={p?.student?.id} />
+      <TransferStudent isOpen={isOpen} onClose={onClose} id={p?.student?.id} schoolName={p?.school} adminName={p?.reqAdmin} message={p?.message} />
       </>
     );
   };

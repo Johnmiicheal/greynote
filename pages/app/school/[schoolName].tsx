@@ -36,8 +36,7 @@ import {
   useAdminNotesQuery,
   useMeQuery,
   useSchoolCasesQuery,
-  useSchoolRequestsQuery,
-  useAdminRequestsQuery
+  useAdminRequestsQuery,
 } from "../../../src/gql/graphql";
 import SchoolCard from "../../../src/components/SchoolCard";
 import BarLoader from "react-spinners/BarLoader";
@@ -60,9 +59,9 @@ const School = () => {
       cursor: 0,
     },
   });
-  const [{ data: requests, fetching: requestsFetching }] = useSchoolRequestsQuery({
+  const [{ data: requests, fetching: requestsFetching }] = useAdminRequestsQuery({
     variables: {
-      schoolId: data?.getSchoolByName?.school?.id!,
+      // schoolId: data?.getSchoolByName?.school?.id!,
       limit: 15,
       cursor: 0,
     },
@@ -352,9 +351,9 @@ const School = () => {
                       </TabPanel>
                       <TabPanel>
                         {
-                          requests?.schoolRequests?.requests && requests?.schoolRequests?.requests.length > 0 ? (
+                          requests?.adminRequests?.requests && requests?.adminRequests?.requests.length > 0 ? (
                             <Flex direction="column">
-                              {requests?.schoolRequests?.requests?.map((req) => (
+                              {requests?.adminRequests?.requests?.map((req) => (
                                 <Requests p={req} key={req.id} />
                               ))}
                             </Flex>

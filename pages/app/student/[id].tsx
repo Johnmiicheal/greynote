@@ -36,10 +36,8 @@ import {
   useGetCaseCountQuery,
   useMeQuery,
   useGetStudentCasesQuery,
-  useTransferStudentMutation,
 } from "../../../src/gql/graphql";
 import { format } from "date-fns";
-import { TransferStudent } from "../../../src/components/Modals/TransferStudent";
 import NextLink from "next/link";
 import { RequestStudent } from "../../../src/components/Modals/RequestStudent";
 import { CaseModal } from "../../../src/components/GrayCases/CaseModal";
@@ -58,13 +56,7 @@ const Student = () => {
     },
   });
 
-  const [, transfer] = useTransferStudentMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: isTransferOpen,
-    onOpen: onTransferOpen,
-    onClose: onTransferClose,
-  } = useDisclosure();
 
   const {
     isOpen: isEditOpen,
@@ -87,12 +79,6 @@ const Student = () => {
     onClose: onCaseClose,
   } = useDisclosure();
 
-  const handleStudent = () => {
-    data?.getStudentById?.student?.school?.school?.schoolName ===
-    me?.me?.admin?.school
-      ? onTransferOpen
-      : onReqOpen;
-  };
   let student = null;
   if (fetching) {
     student = (
@@ -420,11 +406,10 @@ const Student = () => {
                                 variant="outline"
                                 ml={5}
                                 onClick={onReqOpen}
+                                display={data?.getStudentById?.student?.school?.school
+                                  ?.schoolName === me?.me?.admin?.school ? 'none' : 'block'}
                               >
-                                {data?.getStudentById?.student?.school?.school
-                                  ?.schoolName === me?.me?.admin?.school
-                                  ? "Transfer Student"
-                                  : "Request Student"}
+                                Request Student
                               </Button>
                             </Flex>
                           </PopoverFooter>
@@ -520,11 +505,6 @@ const Student = () => {
               onClose={onReqClose}
             />
 
-            <TransferStudent
-              id={data?.getStudentById?.student?.id!}
-              isOpen={isTransferOpen}
-              onClose={onTransferClose}
-            />
             <AddGrayCase
               id={data?.getStudentById?.student?.id!}
               isOpen={isOpen}

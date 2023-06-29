@@ -1,0 +1,3 @@
+query SchoolRequestCount($schoolId: Float!) {
+  getSchoolRequestCount(schoolId: $schoolId)
+}

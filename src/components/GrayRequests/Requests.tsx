@@ -60,7 +60,7 @@ const Requests: React.FC<RequestProps> = ({ p }) => {
                 {p?.student?.school?.school?.schoolName}
               </Text>
               <Text>
-                Request for {p?.student?.firstName} {p?.student?.lastName}
+                Requested for {p?.student?.firstName} {p?.student?.lastName}
               </Text>
             </Flex>
             <Flex justify="center" gap={2} ml="auto">
