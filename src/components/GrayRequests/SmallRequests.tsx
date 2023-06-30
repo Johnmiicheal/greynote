@@ -93,9 +93,9 @@ import { TransferStudent } from "../Modals/TransferStudent";
             duration: 5000,
             isClosable: true,
           });
-          // setTimeout(() => {
-          //   router.reload();
-          // }, 1000)
+          setTimeout(() => {
+            router.reload();
+          }, 1000)
         } else if (response.data?.rejectRequest === true) {
           toast({
             title: "Case Rejected.",
@@ -105,9 +105,9 @@ import { TransferStudent } from "../Modals/TransferStudent";
             duration: 5000,
             isClosable: true,
           });
-          // setTimeout(() => {
-          //   router.reload();
-          // }, 1000)
+          setTimeout(() => {
+            router.reload();
+          }, 1000)
         }  
         
     }
