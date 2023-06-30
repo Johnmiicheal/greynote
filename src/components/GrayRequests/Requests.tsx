@@ -9,11 +9,11 @@ import {
   Stack,
   VStack,
   Button,
-  LinkBox,
+  useToast,
   LinkOverlay,
 } from "@chakra-ui/react";
 import React from "react";
-import { useMeQuery, Exact, Requests } from "../../gql/graphql";
+import { useMeQuery, Exact, Requests, useDeleteRequestMutation } from "../../gql/graphql";
 import { useRouter } from "next/router";
 import { formatDistanceToNow } from "date-fns";
 
@@ -22,6 +22,7 @@ interface RequestProps {
 }
 
 const Requests: React.FC<RequestProps> = ({ p }) => {
+  const toast = useToast();
   const router = useRouter();
   const [{ data: me }] = useMeQuery();
   const admin = me?.me?.admin!;
@@ -36,6 +37,37 @@ const Requests: React.FC<RequestProps> = ({ p }) => {
       return "green";
     }
   };
+  const [, deleteRequest] = useDeleteRequestMutation();
+
+  const handleDeleteRequest = async () => {
+    const response =  await deleteRequest({deleteRequestId: p?.id});
+    if (response.error) {
+      toast({
+        title: "Error.",
+        description: "We could not withdraw this request",
+        status: "error",
+        variant: "left-accent",
+        duration: 5000,
+        isClosable: true,
+      });
+      setTimeout(() => {
+        router.reload();
+      }, 1000)
+    } else if (response.data?.deleteRequest === true) {
+      toast({
+        title: "Request Withdrawn.",
+        description: "You've successfully withdrawn the request.",
+        status: "success",
+        variant: "left-accent",
+        duration: 5000,
+        isClosable: true,
+      });
+      setTimeout(() => {
+        router.reload();
+      }, 1000)
+    }  
+  }
+
   return (
     <VStack spacing={{ base: 0, md: 5 }}>
       <Box
@@ -98,7 +130,7 @@ const Requests: React.FC<RequestProps> = ({ p }) => {
                 _hover={{ bg: "#DAA65D" }}
                 fontWeight={400}
                 borderRadius="3px"
-                onClick={() => router.push("/app/settings")}
+                onClick={handleDeleteRequest}
               >
                 Withdraw Request
               </Button>
