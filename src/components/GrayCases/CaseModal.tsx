@@ -19,8 +19,8 @@ import {
   IconButton
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useGetGrayCaseQuery, useMeQuery, useGetStudentByGrayCaseQuery } from "../../gql/graphql";
-import { IoArchive, IoCaretDown, IoTrashBin } from "react-icons/io5";
+import { useGetGrayCaseQuery, useMeQuery, useGetStudentByGrayCaseQuery, useDeleteGrayCaseMutation } from "../../gql/graphql";
+import { IoTrash, IoCaretDown, IoTrashBin } from "react-icons/io5";
 
 interface CaseModalProps{
     id: number,
@@ -44,38 +44,39 @@ const cases = greyCases?.getGrayCase?.grayCase!;
         grayId: cases?.id!
     }
   })
+  const [, deleteCase] = useDeleteGrayCaseMutation();
   const [{ data }] = useMeQuery();
   const admin = data?.me?.admin!;
   const student = `${cases?.firstName} ${cases?.lastName}`;
   const _student = findStudent?.getStudentByGrayCase?.student!;
-//   const handleArchiveCase = async () => {
-//     const response =  await archiveCase({grayCaseId: id});
-//     if (response.error) {
-//       toast({
-//         title: "Error.",
-//         description: "We could not archive this note",
-//         status: "error",
-//         variant: "left-accent",
-//         duration: 5000,
-//         isClosable: true,
-//       });
-//       setTimeout(() => {
-//         router.reload();
-//       }, 1000)
-//     } else if (response.data?.archiveCase === true) {
-//       toast({
-//         title: "Case Archived.",
-//         description: "We've archived your note.",
-//         status: "success",
-//         variant: "left-accent",
-//         duration: 5000,
-//         isClosable: true,
-//       });
-//       setTimeout(() => {
-//         router.reload();
-//       }, 1000)
-//     }  
-//   }
+  const handleDeleteCase = async () => {
+    const response =  await deleteCase({deleteGrayCaseId: id});
+    if (response.error) {
+      toast({
+        title: "Error.",
+        description: "We could not deactivate this case",
+        status: "error",
+        variant: "left-accent",
+        duration: 5000,
+        isClosable: true,
+      });
+      setTimeout(() => {
+        router.reload();
+      }, 1000)
+    } else if (response.data?.deleteGrayCase === true) {
+      toast({
+        title: "Case Deactivated.",
+        description: "We've deactivated the Case.",
+        status: "success",
+        variant: "left-accent",
+        duration: 5000,
+        isClosable: true,
+      });
+      setTimeout(() => {
+        router.reload();
+      }, 1000)
+    }  
+  }
 
   return (
     <Modal
@@ -101,11 +102,11 @@ const cases = greyCases?.getGrayCase?.grayCase!;
                 <Text>{cases?.note}</Text>
             </Flex>
         </ModalBody>
-        {/* <ModalFooter>
-            <Tooltip label="archive case">
-                <IconButton icon={<IoArchive />} bg="#F4B95F" color="white" _hover={{ bg: "#8E6930"}} aria-label="archive case" />
+        <ModalFooter>
+            <Tooltip label="deactivate case">
+                <IconButton icon={<IoTrash />} bg="#F4B95F" onClick={handleDeleteCase} color="white" _hover={{ bg: "#8E6930"}} aria-label="deactivate case" />
             </Tooltip>
-        </ModalFooter> */}
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );    

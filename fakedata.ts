@@ -45,7 +45,7 @@ export const row3 = [
   },
   {
     img: "/web/explore.png",
-    title: "Start exploring Graybook",
+    title: "Start exploring Greynote",
   }
 ]
 
