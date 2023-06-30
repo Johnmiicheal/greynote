@@ -48,7 +48,6 @@ export type GrayCase = {
   ageInput: Scalars['Float'];
   category: Scalars['String'];
   createdAt: Scalars['DateTime'];
-  creator: AdminResponse;
   firstName: Scalars['String'];
   gender: Scalars['String'];
   gradeClass: Scalars['String'];
@@ -673,6 +672,13 @@ export type CreateRequestMutationVariables = Exact<{
 
 export type CreateRequestMutation = { __typename?: 'Mutation', createRequest: { __typename?: 'RequestsResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, requests?: { __typename?: 'Requests', id: number, message: string, status: string, accepted: boolean, createdAt: any, updatedAt: any, student: { __typename?: 'Student', id: number, createdAt: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, startDate: string, endDate: string, birthDate: any, isArchived: boolean, profileImgUrl: string, grayId: string, parentName: string, parentEmail: string, parentNumber: string, homeAddress: string, state: string, academicResult: string, school: { __typename?: 'SchoolResponse', school?: { __typename?: 'School', id: number, createdAt: any, schoolName: string, rcnumber: number, address: string, state: string, country: string, description: string, logoImgUrl: string, bannerImgUrl: string } | null }, creator: { __typename?: 'AdminResponse', admin?: { __typename?: 'Admin', id: number, createdAt: string, adminName: string, phoneNumber: string, email: string, isDisabled: boolean, profileImgUrl: string, school: string, schoolImg: string } | null }, studentCase: { __typename?: 'GrayCaseResponse', grayCase?: { __typename?: 'GrayCase', id: number, createdAt: any, updatedAt: any, category: string, firstName: string, lastName: string, gradeClass: string, gender: string, ageInput: number, isActive: boolean, wasEdited: boolean } | null } } } | null } };
 
+export type DeleteGrayCaseMutationVariables = Exact<{
+  deleteGrayCaseId: Scalars['Float'];
+}>;
+
+
+export type DeleteGrayCaseMutation = { __typename?: 'Mutation', deleteGrayCase: boolean };
+
 export type DeleteNoteMutationVariables = Exact<{
   deleteNoteId: Scalars['Float'];
 }>;
@@ -1195,6 +1201,15 @@ export const CreateRequestDocument = gql`
 
 export function useCreateRequestMutation() {
   return Urql.useMutation<CreateRequestMutation, CreateRequestMutationVariables>(CreateRequestDocument);
+};
+export const DeleteGrayCaseDocument = gql`
+    mutation DeleteGrayCase($deleteGrayCaseId: Float!) {
+  deleteGrayCase(id: $deleteGrayCaseId)
+}
+    `;
+
+export function useDeleteGrayCaseMutation() {
+  return Urql.useMutation<DeleteGrayCaseMutation, DeleteGrayCaseMutationVariables>(DeleteGrayCaseDocument);
 };
 export const DeleteNoteDocument = gql`
     mutation DeleteNote($deleteNoteId: Float!) {
