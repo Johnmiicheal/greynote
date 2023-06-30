@@ -48,6 +48,7 @@ export type GrayCase = {
   ageInput: Scalars['Float'];
   category: Scalars['String'];
   createdAt: Scalars['DateTime'];
+  creator: AdminResponse;
   firstName: Scalars['String'];
   gender: Scalars['String'];
   gradeClass: Scalars['String'];
@@ -583,6 +584,7 @@ export type Student = {
   ageInput: Scalars['Float'];
   birthDate: Scalars['DateTime'];
   createdAt: Scalars['String'];
+  // creator: AdminResponse;
   endDate: Scalars['String'];
   firstName: Scalars['String'];
   gender: Scalars['String'];
@@ -599,6 +601,7 @@ export type Student = {
   school: SchoolResponse;
   startDate: Scalars['String'];
   state: Scalars['String'];
+  // studentCase: GrayCaseResponse;
 };
 
 export type StudentResponse = {
@@ -685,6 +688,13 @@ export type DeleteNoteMutationVariables = Exact<{
 
 
 export type DeleteNoteMutation = { __typename?: 'Mutation', deleteNote: boolean };
+
+export type DeleteRequestMutationVariables = Exact<{
+  deleteRequestId: Scalars['Float'];
+}>;
+
+
+export type DeleteRequestMutation = { __typename?: 'Mutation', deleteRequest: boolean };
 
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
@@ -1219,6 +1229,15 @@ export const DeleteNoteDocument = gql`
 
 export function useDeleteNoteMutation() {
   return Urql.useMutation<DeleteNoteMutation, DeleteNoteMutationVariables>(DeleteNoteDocument);
+};
+export const DeleteRequestDocument = gql`
+    mutation DeleteRequest($deleteRequestId: Float!) {
+  deleteRequest(id: $deleteRequestId)
+}
+    `;
+
+export function useDeleteRequestMutation() {
+  return Urql.useMutation<DeleteRequestMutation, DeleteRequestMutationVariables>(DeleteRequestDocument);
 };
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {

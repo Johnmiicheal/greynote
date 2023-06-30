@@ -11,9 +11,10 @@ import {
     Button,
     useDisclosure,
     LinkOverlay,
+    useToast,
   } from "@chakra-ui/react";
   import React from "react";
-  import { useMeQuery, Exact, Requests, useAcceptRequestMutation, useRejectRequestMutation } from "../../gql/graphql";
+  import { useMeQuery, Exact, Requests, useAcceptRequestMutation, useRejectRequestMutation, useDeleteRequestMutation } from "../../gql/graphql";
   import { useRouter } from "next/router";
   import { formatDistanceToNow } from "date-fns";
 import { TransferStudent } from "../Modals/TransferStudent";
@@ -23,6 +24,7 @@ import { TransferStudent } from "../Modals/TransferStudent";
   }
   
   const SmallRequests: React.FC<RequestProps> = ({ p }) => {
+    const toast = useToast();
     const router = useRouter();
     const [{ data: me }] = useMeQuery();
     const [, accepted] = useAcceptRequestMutation();
@@ -46,10 +48,68 @@ import { TransferStudent } from "../Modals/TransferStudent";
             acceptRequestId: p.id
         })
     };
-    const handleRejectRequest = () => {
-        rejected({
+
+    const [, deleteRequest] = useDeleteRequestMutation();
+
+    // const handleDeleteRequest = async () => {
+    //   const response =  await deleteRequest({deleteRequestId: p?.id});
+    //   if (response.error) {
+    //     toast({
+    //       title: "Error.",
+    //       description: "We could not withdraw this request",
+    //       status: "error",
+    //       variant: "left-accent",
+    //       duration: 5000,
+    //       isClosable: true,
+    //     });
+    //     setTimeout(() => {
+    //       router.reload();
+    //     }, 1000)
+    //   } else if (response.data?.deleteRequest === true) {
+    //     toast({
+    //       title: "Request Withdrawn.",
+    //       description: "You've successfully withdrawn the request.",
+    //       status: "success",
+    //       variant: "left-accent",
+    //       duration: 5000,
+    //       isClosable: true,
+    //     });
+    //     setTimeout(() => {
+    //       router.reload();
+    //     }, 1000)
+    //   }  
+    // }
+
+    const handleRejectRequest = async () => {
+        const response = await rejected({
             rejectRequestId: p.id
-        })
+        });
+        if (response.error) {
+          toast({
+            title: "Error.",
+            description: "We could not reject this request",
+            status: "error",
+            variant: "left-accent",
+            duration: 5000,
+            isClosable: true,
+          });
+          // setTimeout(() => {
+          //   router.reload();
+          // }, 1000)
+        } else if (response.data?.rejectRequest === true) {
+          toast({
+            title: "Case Rejected.",
+            description: "You have rejected this request",
+            status: "success",
+            variant: "left-accent",
+            duration: 5000,
+            isClosable: true,
+          });
+          // setTimeout(() => {
+          //   router.reload();
+          // }, 1000)
+        }  
+        
     }
     return (
         <>
@@ -63,6 +123,7 @@ import { TransferStudent } from "../Modals/TransferStudent";
           _hover={{ borderColor: "gray.400" }}
           w={{ base: "full", lg: "320px" }}
           mb={{ base: 2 }}
+          display={p?.status === "PENDING" ? 'block' : 'none'}
         >
           <Stack spacing={1} px={2}>
             <Flex py={2} px={1} align="center" overflow="hidden">
