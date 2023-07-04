@@ -201,7 +201,7 @@ const LandingPage = () => {
             <Flex
               direction={{ base: "column", lg: "row" }}
               justify="space-between"
-              align={{ base: "center", lg: "start" }}
+              align={{ base: "center", lg: "center" }}
             >
               <Flex
                 direction="column"
@@ -236,7 +236,7 @@ const LandingPage = () => {
             <Flex
               direction={{ base: "column-reverse", lg: "row" }}
               justify="space-between"
-              align={{ base: "center", lg: "start" }}
+              align={{ base: "center", lg: "center" }}
               mt={20}
             >
               <Flex>
@@ -271,13 +271,13 @@ const LandingPage = () => {
             <Flex
               direction={{ base: "column", lg: "row" }}
               justify="space-between"
-              align={{ base: "center", lg: "start" }}
+              align={{ base: "center", lg: "center" }}
               mt={20}
             >
               <Flex
                 direction="column"
                 textAlign={{ base: "center", lg: "start" }}
-                align="center"
+                align="start"
                 bg="white"
                 mb={{ base: 7, lg: 0 }}
               >
@@ -438,7 +438,7 @@ const LandingPage = () => {
                   _hover={{ color: "#DAA65D" }}
                   rightIcon={<IoChevronForward />}
                   onClick={() =>
-                    (window.location.href = "mailto:Greynoteacc@gmail.com")
+                    (window.location.href = "mailto:graybookacc@gmail.com")
                   }
                 >
                   Contact Support

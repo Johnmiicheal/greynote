@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Flex,
   Text,
@@ -78,13 +78,39 @@ const App = () => {
       cursor: 0,
     },
   });
+
   const [{ data: school }] = useSchoolRequestsQuery({
-    variables: {
-      schoolId: me?.me?.admin?.id!,
-      limit: 15,
-      cursor: 0,
-    },
-  });
+        variables: {
+          schoolId: me?.me?.admin?.id!,
+          limit: 15,
+          cursor: 0,
+        },
+      });
+  // const [schoolData, setSchoolData] = useState(null);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     fetchSchoolRequests();
+  //   }, 1000); // Query every second (adjust the interval as needed)
+  
+  //   return () => {
+  //     clearInterval(interval); // Clean up the interval when the component unmounts
+  //   };
+  // }, []);
+  
+  // const fetchSchoolRequests = async () => {
+  //   const [{data}] = await useSchoolRequestsQuery({
+  //     variables: {
+  //       schoolId: me?.me?.admin?.id!,
+  //       limit: 15,
+  //       cursor: 0,
+  //     },
+  //   });
+  
+  //   if (data) {
+  //     setSchoolData(data.schoolRequests);
+  //   }
+  // };
   const [{ data: cases }] = useRecentCasesQuery();
   const [{ data: student }] = useRecentStudentsQuery();
 
