@@ -9,18 +9,7 @@ import {
   Image,
   Box,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Alert,
-  AlertTitle,
-  AlertDescription,
   VStack,
-  HStack,
   Stack,
 } from "@chakra-ui/react";
 import { IoChevronForward } from "react-icons/io5";
@@ -28,6 +17,7 @@ import Head from "next/head";
 import Footer from "./Footer";
 import { useRouter } from "next/router";
 import { row1, row2, row3 } from "../../../fakedata";
+import { motion } from "framer-motion";
 
 const LandingPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,7 +45,17 @@ const LandingPage = () => {
               justify="space-between"
               pt="4em"
             >
-              <Flex direction="column" textAlign="start" justify="center" maxW={{ base: "sm", md: "md", lg: "lg"}}>
+               <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
+              <Flex
+                direction="column"
+                textAlign="start"
+                justify="center"
+                maxW={{ base: "sm", md: "md", lg: "lg" }}
+              >
                 <Heading
                   w={{ md: "600px" }}
                   fontSize={{ base: "2.5rem", md: "4rem" }}
@@ -89,18 +89,37 @@ const LandingPage = () => {
                   bg="#F4B95F"
                   _hover={{ bg: "#DAA65D" }}
                   rightIcon={<IoChevronForward />}
-                  onClick={() => {router.push('/register')}}
+                  onClick={() => {
+                    router.push("/register");
+                  }}
                 >
                   Join Greynote
                 </Button>
               </Flex>
-              <Box overflow="hidden" mr={{ base: "-10rem" , lg: "-30rem"}} ml={{ base: 0, lg: "8rem"}}>
-                <Image
-                  src="/web/greymock.png"
-                  alt="Greynote_app"
-                  pointerEvents="none"
-                />
-              </Box>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: -50 }}
+                transition={{ duration: 1, delay: 0.4 }}
+              >
+                <Box
+                  overflow="hidden"
+                  mr={{ base: "-10rem", lg: "-30rem" }}
+                  ml={{ base: 0, lg: "8rem" }}
+                >
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 2 }}
+                  >
+                    <Image
+                      src="/web/greymock.png"
+                      alt="Greynote_app"
+                      pointerEvents="none"
+                    />
+                  </motion.div>
+                </Box>
+              </motion.div>
             </Flex>
           </Flex>
         </Center>
@@ -114,8 +133,7 @@ const LandingPage = () => {
         >
           <Flex direction="column" align="center">
             <Text
-              fontSize={{base: "1.6rem", md: "2rem"}}
-              
+              fontSize={{ base: "1.6rem", md: "2rem" }}
               color="#8E6930"
               px={{ base: 16, md: 20, lg: 80 }}
               fontWeight={600}
@@ -129,7 +147,7 @@ const LandingPage = () => {
             <Flex
               direction={{ base: "column", lg: "row" }}
               gap="2"
-              w={{ base: "25rem", lg: "70rem"}}
+              w={{ base: "25rem", lg: "70rem" }}
               pr={{ base: 10, lg: 10 }}
             >
               <VStack spacing={{ base: -8, md: "-2" }}>
@@ -138,7 +156,11 @@ const LandingPage = () => {
                     <Box>
                       <Image src={item.img} alt={item.title} />
                     </Box>
-                    <Flex direction="column" w={{ base: "12rem", md: "35rem" }} gap={2}>
+                    <Flex
+                      direction="column"
+                      w={{ base: "12rem", md: "35rem" }}
+                      gap={2}
+                    >
                       <Text fontWeight={600} fontSize="1.1rem">
                         {item.title}
                       </Text>
@@ -155,7 +177,11 @@ const LandingPage = () => {
                     <Box>
                       <Image src={item.img} alt={item.title} />
                     </Box>
-                    <Flex direction="column" w={{ base: "12rem", md: "35rem" }} gap={2}>
+                    <Flex
+                      direction="column"
+                      w={{ base: "12rem", md: "35rem" }}
+                      gap={2}
+                    >
                       <Text fontWeight={600} fontSize="1.1rem">
                         {item.title}
                       </Text>
@@ -213,7 +239,12 @@ const LandingPage = () => {
                 <Heading fontSize="1.7rem" textStyle="text" color="#F4B95F">
                   Register Students
                 </Heading>
-                <Text mt="24px" textAlign="justify" w={{ base: "18rem", md: "30rem" }} textStyle="text">
+                <Text
+                  mt="24px"
+                  textAlign="justify"
+                  w={{ base: "18rem", md: "30rem" }}
+                  textStyle="text"
+                >
                   At Greynote, we make registering students a breeze. Our
                   easy-to-use platform allows you to quickly and efficiently
                   register new students in just a few simple steps. With our
@@ -227,8 +258,8 @@ const LandingPage = () => {
                 <Image
                   src="/web/grayreg.png"
                   alt="Register students"
-                  w={{ base:" 270px" , md: "330px"}}
-                  h={{ base:" 270px" , md: "330px"}}
+                  w={{ base: " 270px", md: "330px" }}
+                  h={{ base: " 270px", md: "330px" }}
                 />
               </Flex>
             </Flex>
@@ -243,8 +274,8 @@ const LandingPage = () => {
                 <Image
                   src="/web/grayview.png"
                   alt="View student profile"
-                  w={{ base:" 270px" , md: "330px"}}
-                  h={{ base:" 270px" , md: "330px"}}
+                  w={{ base: " 270px", md: "330px" }}
+                  h={{ base: " 270px", md: "330px" }}
                 />
               </Flex>
               <Flex
@@ -257,7 +288,12 @@ const LandingPage = () => {
                 <Heading fontSize="1.7rem" textStyle="text" color="#F4B95F">
                   View & Search Students
                 </Heading>
-                <Text mt="24px" w={{ base: "18rem", md: "30rem" }}  textAlign="justify" textStyle="text">
+                <Text
+                  mt="24px"
+                  w={{ base: "18rem", md: "30rem" }}
+                  textAlign="justify"
+                  textStyle="text"
+                >
                   Greynote provides quick and efficient access to student
                   information through advanced search capabilities. Our platform
                   allows you to view complete student profiles and receive
@@ -289,7 +325,12 @@ const LandingPage = () => {
                 >
                   Request & Transfer Student Details
                 </Heading>
-                <Text mt="24px" w={{ base: "18rem", md: "32rem" }} textAlign="justify" textStyle="text">
+                <Text
+                  mt="24px"
+                  w={{ base: "18rem", md: "32rem" }}
+                  textAlign="justify"
+                  textStyle="text"
+                >
                   Greynote simplifies student transfers with its secure transfer
                   request system. The platform enables schools to easily and
                   efficiently transfer student records, including academic
@@ -301,8 +342,8 @@ const LandingPage = () => {
                 <Image
                   src="/web/graynew.png"
                   alt="Request for student details"
-                  w={{ base:" 270px" , md: "330px"}}
-                  h={{ base:" 270px" , md: "330px"}}
+                  w={{ base: " 270px", md: "330px" }}
+                  h={{ base: " 270px", md: "330px" }}
                 />
               </Flex>
             </Flex>
@@ -311,18 +352,28 @@ const LandingPage = () => {
 
         {/* SECTION 4 */}
         <Center bgImg="/web/section4.png" bgRepeat="no-repeat" bgSize="cover">
-          <Flex direction="column" px={{ base: 3, md: 0}} justify={{ md: "center" }} maxW={{ base: "20rem", md: "40rem", lg: "70rem"}} align={{ md: "center", lg: "start" }} mt={20} >
+          <Flex
+            direction="column"
+            px={{ base: 3, md: 0 }}
+            justify={{ md: "center" }}
+            maxW={{ base: "20rem", md: "40rem", lg: "70rem" }}
+            align={{ md: "center", lg: "start" }}
+            mt={20}
+          >
             <Text
               fontSize="2rem"
               color="#8E6930"
               fontWeight={600}
               textStyle="text"
               mb={5}
-              
             >
               Bringing <u>simplicity</u> to school management
             </Text>
-            <Text w={{ base: "18rem", md: "35rem" , lg: "50rem" }} textStyle="text" fontSize="1.1rem">
+            <Text
+              w={{ base: "18rem", md: "35rem", lg: "50rem" }}
+              textStyle="text"
+              fontSize="1.1rem"
+            >
               At Greynote, we believe that school management doesn't have to be
               complicated. With our simple and intuitive platform, we provide
               schools with the tools they need to manage student data, monitor
@@ -355,7 +406,7 @@ const LandingPage = () => {
               bgRepeat="no-repeat"
               bgSize="cover"
               minH="350px"
-              w={{ base: 'full', sm: '630px', lg: "1160px" }}
+              w={{ base: "full", sm: "630px", lg: "1160px" }}
               borderRadius="md"
               boxShadow="md"
             >
@@ -363,11 +414,16 @@ const LandingPage = () => {
                 fontSize="2rem"
                 textStyle="text"
                 color="#8E6930"
-                w={{ base: "18rem", md: "28rem", lg: "480px "}}
+                w={{ base: "18rem", md: "28rem", lg: "480px " }}
               >
                 The simplest way to manage your students details
               </Heading>
-              <Text mt="24px" color="#000" w={{ base: "18rem", md: "28rem", lg: "440px" }} textStyle="text">
+              <Text
+                mt="24px"
+                color="#000"
+                w={{ base: "18rem", md: "28rem", lg: "440px" }}
+                textStyle="text"
+              >
                 At Greynote, we're committed to providing our users with the
                 best possible experience. If you need help with any aspect of
                 our platform, our support team is here to assist you.
@@ -400,8 +456,15 @@ const LandingPage = () => {
           minH={{ base: "70rem", md: "35rem" }}
           mb={{ lg: 20 }}
         >
-          <Flex maxW={{ base: "18rem", md: "md", lg: "70rem"}} direction={{ base: "column", lg: "row" }} align={{ base: "center", lg: "start"}} justify="space-between" mt={{ md: -20 }} gap={24}>
-            <Flex direction="column"  align={{base: "center", lg: "start"}}>
+          <Flex
+            maxW={{ base: "18rem", md: "md", lg: "70rem" }}
+            direction={{ base: "column", lg: "row" }}
+            align={{ base: "center", lg: "start" }}
+            justify="space-between"
+            mt={{ md: -20 }}
+            gap={24}
+          >
+            <Flex direction="column" align={{ base: "center", lg: "start" }}>
               <Text
                 fontSize="2rem"
                 color="#8E6930"
@@ -411,7 +474,12 @@ const LandingPage = () => {
               >
                 Ready to get started?
               </Text>
-              <Text w={{ base: "18rem", md: "30rem" }} textAlign={{ md: "center", lg: "start" }} textStyle="text" fontSize="1.1rem">
+              <Text
+                w={{ base: "18rem", md: "30rem" }}
+                textAlign={{ md: "center", lg: "start" }}
+                textStyle="text"
+                fontSize="1.1rem"
+              >
                 Create an account, register your school and start exploring. You
                 can also contact us for any enquiries
               </Text>
@@ -420,12 +488,14 @@ const LandingPage = () => {
                   variant="solid"
                   px={4}
                   mt="24px"
-                  w={{ md: "40"}}
+                  w={{ md: "40" }}
                   color="white"
                   bg="#F4B95F"
                   _hover={{ bg: "#DAA65D" }}
                   rightIcon={<IoChevronForward />}
-                  onClick={() => {router.push('/register')}}
+                  onClick={() => {
+                    router.push("/register");
+                  }}
                 >
                   Sign up
                 </Button>
@@ -433,7 +503,7 @@ const LandingPage = () => {
                   variant="link"
                   px={4}
                   mt="24px"
-                  w={{ md: "40"}}
+                  w={{ md: "40" }}
                   color="#F4B95F"
                   _hover={{ color: "#DAA65D" }}
                   rightIcon={<IoChevronForward />}
@@ -445,16 +515,19 @@ const LandingPage = () => {
                 </Button>
               </Flex>
             </Flex>
-            <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: 8, md: 5, lg: 10 }} mt={{ md: -8, lg: 0 }}>
+            <Stack
+              direction={{ base: "column", md: "row" }}
+              spacing={{ base: 8, md: 5, lg: 10 }}
+              mt={{ md: -8, lg: 0 }}
+            >
               {row3.map((item, i) => (
-                <Flex
-                  direction="column"
-                  align="center"
-                  key={i}
-                  gap={3}
-                >
+                <Flex direction="column" align="center" key={i} gap={3}>
                   <Box>
-                    <Image src={item.img} alt={item.title} w={{ base: "4rem" }} />
+                    <Image
+                      src={item.img}
+                      alt={item.title}
+                      w={{ base: "4rem" }}
+                    />
                   </Box>
                   <Text
                     w="10rem"

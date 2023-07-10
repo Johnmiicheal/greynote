@@ -28,9 +28,6 @@ import {
 } from "../../src/gql/graphql";
 import NextLink from "next/link";
 import { format } from "date-fns";
-
-import { fakedb } from "../../fakedata";
-import { RadarChart } from "../../src/components/RadarChart";
 import { CreateNote } from "../../src/components/Modals/CreateNote";
 import { CaseModal } from "../../src/components/GrayCases/CaseModal";
 
