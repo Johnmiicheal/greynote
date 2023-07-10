@@ -39,9 +39,9 @@ const Footer: React.FC<FooterProps> = ({bgColor}) => {
                 </Flex>
             </Flex>
             <Box w="full" h="0.3" bgColor="gray.300" mt={6} />
-            <Flex ml={{ md: "auto" }} gap={{ base: 3, md: 8}} mt={6} direction={{ base: "column", md: "row"}}>
-                <Text textStyle="text" color="#7a7a7a" w={{ base: "full", md: "10rem"}}>
-                &#169; {year} Greynote, Inc.
+            <Flex ml={{ md: "auto" }} gap={{ base: 3, md: 6}} mt={6} direction={{ base: "column", md: "row"}}>
+                <Text textStyle="text" color="#7a7a7a" mr={-2} w={{ base: "full", md: "14rem"}}>
+                &#169; {year} Greynote Nigeria, Ltd.
                 </Text>
                 {foot.map((foots) => (
                         <Button variant="link" key={foots.path} color="#7A7A7A" fontWeight={400} onClick={() => router.push(foots.path)}>{foots.text}</Button>

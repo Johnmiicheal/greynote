@@ -85,23 +85,20 @@ const Terms = () => {
             Greynote Terms & Conditions
           </Text>
           {terms.map((t) => (
-            <Box>
+            <Box key={t.title}>
               <Text fontWeight="bold" fontSize={30} color="#001515">
                 {t.title}
               </Text>
               <Text>{t.message}</Text>
             </Box>
           ))}
-
-          <Box>
-            <Text fontWeight="bold" fontSize={30} color="#001515">
-              Note
-            </Text>
-            <Text>
+          <Divider bg="#001515" h="1px" />
+          <Box mt={5}>
+            <Text fontWeight="600" color="#001515">
               By using the Greynote app, you acknowledge that you have read,
               understood, and agreed to the terms and conditions outlined in
               this legal disclaimer. If you do not agree with these terms, you
-              must refrain from using the Greynote app. <br />
+              must refrain from using the Greynote app. <br /><br/>
               This legal disclaimer shall be governed by and construed in
               accordance with the laws of Nigeria, and any disputes arising out
               of or in connection with this disclaimer shall be subject to the
