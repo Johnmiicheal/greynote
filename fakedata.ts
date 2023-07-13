@@ -1,38 +1,66 @@
+export const terms = [
+  {
+    title: "1. User Responsibility",
+    message:
+      "You understand and accept that any data you input into the Greynote app, including but not limited to personal information, documents, images, or any other form of data, is your sole responsibility. Greynote does not assume any liability or ownership over the data you input.",
+  },
+  {
+    title: "2. Data Sharing",
+    message: "The decision to share your data, whether with other users of the Greynote app, third-party service providers, or any other individuals or entities, is entirely at your discretion. Greynote does not control, monitor, or endorse the manner in which you choose to share your data. Consequently, Greynote will not be held liable for any misuse, unauthorised access, or distribution of the data you share.",
+  },
+  {
+    title: "3. Indemnification",
+    message: "You agree to indemnify, defend, and hold Greynote, its officers, directors, employees, and affiliates harmless from any claims, damages, losses, liabilities, costs, or expenses (including reasonable attorney fees) arising out of or relating to your use of the Greynote app, including but not limited to any misuse or unauthorised sharing of data.",
+  },
+  {
+    title: "4. Limitation of Liability",
+    message: " In no event shall Greynote be liable to you or any third party for any direct, indirect, incidental, special, consequential, or punitive damages arising from or related to your use of the Greynote app, including any issues or consequences resulting from the data you input or share. This limitation of liability applies to all claims, whether based on warranty, contract, tort, or any other legal theory.",
+  },
+  {
+    title: "5. No Warranty",
+    message: "Greynote provides the app on an 'as is' and 'as available' basis. While Greynote strives to provide accurate and reliable services, it does not make any warranties or representations regarding the app's accuracy, reliability, completeness, or fitness for a particular purpose. Greynote disclaims all warranties, express or implied, including but not limited to warranties of merchantability and fitness for a particular purpose.",
+  },
+  {
+    title: "6. Modifications",
+    message: "Greynote reserves the right to modify or discontinue the app, or any part thereof, at any time without prior notice. Greynote shall not be liable to you or any third party for any modification, suspension, or termination of the app.",
+  },
+];
+
 export const row1 = [
   {
     img: "/web/chart.svg",
     title: "Intuitive Dashboard",
-    desc: "We have provided a dashboard that is easy to navigate and communicates relevant information"
+    desc: "We have provided a dashboard that is easy to navigate and communicates relevant information",
   },
   {
     img: "/web/simple.svg",
     title: "Simplicity",
-    desc: "Our platform prides itself in its simplicity and ease of use"
+    desc: "Our platform prides itself in its simplicity and ease of use",
   },
   {
     img: "/web/secure.svg",
     title: "Secure",
-    desc: "You can be rest assured that your data and information is secure"
-  }
-]
+    desc: "You can be rest assured that your data and information is secure",
+  },
+];
 
 export const row2 = [
   {
     img: "/web/customer.svg",
     title: "Customer Support",
-    desc: "Our customer support team is ready to listen to all your enquiries and help you get onboard"
+    desc: "Our customer support team is ready to listen to all your enquiries and help you get onboard",
   },
   {
     img: "/web/rocket.svg",
     title: "Performance",
-    desc: "We are releasing quality products to you in the simplest form possible"
+    desc: "We are releasing quality products to you in the simplest form possible",
   },
   {
     img: "/web/premium.svg",
     title: "Premium Offers",
-    desc: "Graybook has so much more to offer, why not experience them all!"
-  }
-]
+    desc: "Graybook has so much more to offer, why not experience them all!",
+  },
+];
 
 export const row3 = [
   {
@@ -46,160 +74,171 @@ export const row3 = [
   {
     img: "/web/explore.png",
     title: "Start exploring Greynote",
-  }
-]
+  },
+];
 
 export const fakedb = [
   {
     grade: 1,
     cases: 1,
-    status: 'inactive',
-    flair: 'gray',
-    variant: 'outline',
+    status: "inactive",
+    flair: "gray",
+    variant: "outline",
   },
   {
     grade: 2,
     cases: 3,
-    status: '4 days ago',
-    flair: 'green',
-    variant: 'solid',
+    status: "4 days ago",
+    flair: "green",
+    variant: "solid",
   },
   {
     grade: 3,
     cases: 0,
-    status: 'inactive',
-    flair: 'gray',
-    variant: 'outline',
+    status: "inactive",
+    flair: "gray",
+    variant: "outline",
   },
   {
     grade: 4,
     cases: 2,
-    status: '11 days ago',
-    flair: 'green',
-    variant: 'solid',
+    status: "11 days ago",
+    flair: "green",
+    variant: "solid",
   },
   {
     grade: 5,
     cases: 1,
-    status: '1 day ago',
-    flair: 'green',
-    variant: 'solid',
+    status: "1 day ago",
+    flair: "green",
+    variant: "solid",
   },
   {
     grade: 6,
     cases: 2,
-    status: '13 days ago',
-    flair: 'green',
-    variant: 'solid',
+    status: "13 days ago",
+    flair: "green",
+    variant: "solid",
   },
   {
     grade: 7,
     cases: 4,
-    status: '13 days ago',
-    flair: 'green',
-    variant: 'solid',
+    status: "13 days ago",
+    flair: "green",
+    variant: "solid",
   },
   {
     grade: 8,
     cases: 3,
-    status: '4 days ago',
-    flair: 'gray',
-    variant: 'solid',
+    status: "4 days ago",
+    flair: "gray",
+    variant: "solid",
   },
   {
     grade: 9,
     cases: 3,
-    status: '4 days ago',
-    flair: 'red',
-    variant: 'solid',
+    status: "4 days ago",
+    flair: "red",
+    variant: "solid",
   },
   {
     grade: 10,
     cases: 4,
-    status: '10 days ago',
-    flair: 'gray',
-    variant: 'solid',
+    status: "10 days ago",
+    flair: "gray",
+    variant: "solid",
   },
   {
     grade: 11,
     cases: 3,
-    status: '3 days ago',
-    flair: 'green',
-    variant: 'solid',
+    status: "3 days ago",
+    flair: "green",
+    variant: "solid",
   },
   {
     grade: 12,
     cases: 2,
-    status: '29 days ago',
-    flair: 'red',
-    variant: 'solid',
+    status: "29 days ago",
+    flair: "red",
+    variant: "solid",
   },
-
 ];
 
 export const fakeclass = [
-  'KG 1', 'KG 2', 'KG 3',
-  'Nursery 1', 'Nursery 2', 'Nursery 3',
-  'Primary 1', 'Primary 2', 'Primary 3', 'Primary 4', 'Primary 5', 'Primary 6',
-  'JSS 1', 'JSS 2', 'JSS 3', 'SSS 1', 'SSS 2', 'SSS 3',
+  "KG 1",
+  "KG 2",
+  "KG 3",
+  "Nursery 1",
+  "Nursery 2",
+  "Nursery 3",
+  "Primary 1",
+  "Primary 2",
+  "Primary 3",
+  "Primary 4",
+  "Primary 5",
+  "Primary 6",
+  "JSS 1",
+  "JSS 2",
+  "JSS 3",
+  "SSS 1",
+  "SSS 2",
+  "SSS 3",
 ];
 
-export const fakecase = ['Expulsion', 'Suspension', 'Fees Default'];
-export const fakenotes = ['Report', 'Reminder', 'Post']
-export const fakegender = ['Male', 'Female'];
+export const fakecase = ["Expulsion", "Suspension", "Fees Default"];
+export const fakenotes = ["Report", "Reminder", "Post"];
+export const fakegender = ["Male", "Female"];
 
 export const monthDropDown = [
-
-	{
-		"abbreviation": "Jan",
-		"name": "January"
-	},
-	{
-		"abbreviation": "Feb",
-		"name": "February"
-	},
-	{
-		"abbreviation": "Mar",
-		"name": "March"
-	},
-	{
-		"abbreviation": "Apr",
-		"name": "April"
-	},
-	{
-		"abbreviation": "May",
-		"name": "May"
-	},
-	{
-		"abbreviation": "Jun",
-		"name": "June"
-	},
-	{
-		"abbreviation": "Jul",
-		"name": "July"
-	},
-	{
-		"abbreviation": "Aug",
-		"name": "August"
-	},
-	{
-		"abbreviation": "Sep",
-		"name": "September"
-	},
-	{
-		"abbreviation": "Oct",
-		"name": "October"
-	},
-	{
-		"abbreviation": "Nov",
-		"name": "November"
-	},
-	{
-		"abbreviation": "Dec",
-		"name": "December"
-	}
-
-]
+  {
+    abbreviation: "Jan",
+    name: "January",
+  },
+  {
+    abbreviation: "Feb",
+    name: "February",
+  },
+  {
+    abbreviation: "Mar",
+    name: "March",
+  },
+  {
+    abbreviation: "Apr",
+    name: "April",
+  },
+  {
+    abbreviation: "May",
+    name: "May",
+  },
+  {
+    abbreviation: "Jun",
+    name: "June",
+  },
+  {
+    abbreviation: "Jul",
+    name: "July",
+  },
+  {
+    abbreviation: "Aug",
+    name: "August",
+  },
+  {
+    abbreviation: "Sep",
+    name: "September",
+  },
+  {
+    abbreviation: "Oct",
+    name: "October",
+  },
+  {
+    abbreviation: "Nov",
+    name: "November",
+  },
+  {
+    abbreviation: "Dec",
+    name: "December",
+  },
+];
 
 export const realState = [
   "Abia",
@@ -238,8 +277,8 @@ export const realState = [
   "Sokoto",
   "Taraba",
   "Yobe",
-  "Zamfara"
-]
+  "Zamfara",
+];
 
 type LgaList = {
   [key: string]: string[];
@@ -263,7 +302,7 @@ export const lgaList: LgaList = {
     "Ukwa West",
     "Umuahia North",
     "muahia South",
-    "Umu Nneochi"
+    "Umu Nneochi",
   ],
   Adamawa: [
     "Demsa",
@@ -286,7 +325,7 @@ export const lgaList: LgaList = {
     "Song",
     "Toungo",
     "Yola North",
-    "Yola South"
+    "Yola South",
   ],
   AkwaIbom: [
     "Abak",
@@ -319,7 +358,7 @@ export const lgaList: LgaList = {
     "Ukanafun",
     "Uruan",
     "Urue-Offong Oruko",
-    "Uyo"
+    "Uyo",
   ],
   Anambra: [
     "Aguata",
@@ -342,7 +381,7 @@ export const lgaList: LgaList = {
     "Onitsha South",
     "Orumba North",
     "Orumba South",
-    "Oyi"
+    "Oyi",
   ],
 
   Bauchi: [
@@ -365,7 +404,7 @@ export const lgaList: LgaList = {
     "Tafawa Balewa",
     " Toro",
     " Warji",
-    " Zaki"
+    " Zaki",
   ],
 
   Bayelsa: [
@@ -376,7 +415,7 @@ export const lgaList: LgaList = {
     "Ogbia",
     "Sagbama",
     "Southern Ijaw",
-    "Yenagoa"
+    "Yenagoa",
   ],
   Benue: [
     "Agatu",
@@ -401,7 +440,7 @@ export const lgaList: LgaList = {
     "Tarka",
     "Ukum",
     "Ushongo",
-    "Vandeikya"
+    "Vandeikya",
   ],
   Borno: [
     "Abadam",
@@ -430,7 +469,7 @@ export const lgaList: LgaList = {
     "Monguno",
     "Ngala",
     "Nganzai",
-    "Shani"
+    "Shani",
   ],
   "Cross River": [
     "Abi",
@@ -450,7 +489,7 @@ export const lgaList: LgaList = {
     "Odukpani",
     "Ogoja",
     "Yakuur",
-    "Yala"
+    "Yala",
   ],
 
   Delta: [
@@ -478,7 +517,7 @@ export const lgaList: LgaList = {
     "Uvwie",
     "Warri North",
     "Warri South",
-    "Warri South West"
+    "Warri South West",
   ],
 
   Ebonyi: [
@@ -494,7 +533,7 @@ export const lgaList: LgaList = {
     "Izzi",
     "Ohaozara",
     "Ohaukwu",
-    "Onicha"
+    "Onicha",
   ],
   Edo: [
     "Akoko-Edo",
@@ -514,7 +553,7 @@ export const lgaList: LgaList = {
     "Ovia South-West",
     "Owan East",
     "Owan West",
-    "Uhunmwonde"
+    "Uhunmwonde",
   ],
 
   Ekiti: [
@@ -533,7 +572,7 @@ export const lgaList: LgaList = {
     "Irepodun-Ifelodun",
     "Ise-Orun",
     "Moba",
-    "Oye"
+    "Oye",
   ],
   Rivers: [
     "Port Harcourt",
@@ -558,7 +597,7 @@ export const lgaList: LgaList = {
     "Emohua",
     "Ikwerre",
     "Etche",
-    "Omuma"
+    "Omuma",
   ],
   Enugu: [
     "Aninri",
@@ -577,7 +616,7 @@ export const lgaList: LgaList = {
     "Oji River",
     "Udenu",
     "Udi",
-    "Uzo Uwani"
+    "Uzo Uwani",
   ],
   FCT: [
     "Abaji",
@@ -585,7 +624,7 @@ export const lgaList: LgaList = {
     "Gwagwalada",
     "Kuje",
     "Kwali",
-    "Municipal Area Council"
+    "Municipal Area Council",
   ],
   Gombe: [
     "Akko",
@@ -598,7 +637,7 @@ export const lgaList: LgaList = {
     "Kwami",
     "Nafada",
     "Shongom",
-    "Yamaltu-Deba"
+    "Yamaltu-Deba",
   ],
   Imo: [
     "Aboh Mbaise",
@@ -627,7 +666,7 @@ export const lgaList: LgaList = {
     "Owerri Municipal",
     "Owerri North",
     "Owerri West",
-    "Unuimo"
+    "Unuimo",
   ],
   Jigawa: [
     "Auyo",
@@ -656,7 +695,7 @@ export const lgaList: LgaList = {
     "Roni",
     "Sule Tankarkar",
     "Taura",
-    "Yankwashi"
+    "Yankwashi",
   ],
   Kaduna: [
     "Birnin Gwari",
@@ -681,7 +720,7 @@ export const lgaList: LgaList = {
     "Sanga",
     "Soba",
     "Zangon Kataf",
-    "Zaria"
+    "Zaria",
   ],
   Kano: [
     "Ajingi",
@@ -727,7 +766,7 @@ export const lgaList: LgaList = {
     "Tudun Wada",
     "Ungogo",
     "Warawa",
-    "Wudil"
+    "Wudil",
   ],
   Katsina: [
     "Bakori",
@@ -763,7 +802,7 @@ export const lgaList: LgaList = {
     "Sabuwa",
     "Safana",
     "Sandamu",
-    "Zango"
+    "Zango",
   ],
   Kebbi: [
     "Aleiro",
@@ -786,7 +825,7 @@ export const lgaList: LgaList = {
     "Suru",
     "Wasagu Danko",
     "Yauri",
-    "Zuru"
+    "Zuru",
   ],
   Kogi: [
     "Adavi",
@@ -809,7 +848,7 @@ export const lgaList: LgaList = {
     "Olamaboro",
     "Omala",
     "Yagba East",
-    "Yagba West"
+    "Yagba West",
   ],
   Kwara: [
     "Asa",
@@ -827,7 +866,7 @@ export const lgaList: LgaList = {
     "Offa",
     "Oke Ero",
     "Oyun",
-    "Pategi"
+    "Pategi",
   ],
   Lagos: [
     "Agege",
@@ -849,7 +888,7 @@ export const lgaList: LgaList = {
     "Ojo",
     "Oshodi-Isolo",
     "Shomolu",
-    "Surulere"
+    "Surulere",
   ],
   Nasarawa: [
     "Akwanga",
@@ -864,7 +903,7 @@ export const lgaList: LgaList = {
     "Nasarawa Egon",
     "Obi",
     "Toto",
-    "Wamba"
+    "Wamba",
   ],
   Niger: [
     "Agaie",
@@ -891,7 +930,7 @@ export const lgaList: LgaList = {
     "Shiroro",
     "Suleja",
     "Tafa",
-    "Wushishi"
+    "Wushishi",
   ],
   Ogun: [
     "Abeokuta North",
@@ -913,7 +952,7 @@ export const lgaList: LgaList = {
     "Odogbolu",
     "Ogun Waterside",
     "Remo North",
-    "Shagamu"
+    "Shagamu",
   ],
   Ondo: [
     "Akoko North-East",
@@ -933,7 +972,7 @@ export const lgaList: LgaList = {
     "Ondo East",
     "Ondo West",
     "Ose",
-    "Owo"
+    "Owo",
   ],
   Osun: [
     "Atakunmosa East",
@@ -965,7 +1004,7 @@ export const lgaList: LgaList = {
     "Olorunda",
     "Oriade",
     "Orolu",
-    "Osogbo"
+    "Osogbo",
   ],
   Oyo: [
     "Afijio",
@@ -1000,7 +1039,7 @@ export const lgaList: LgaList = {
     "Oyo East",
     "Saki East",
     "Saki West",
-    "Surulere"
+    "Surulere",
   ],
   Plateau: [
     "Bokkos",
@@ -1019,7 +1058,7 @@ export const lgaList: LgaList = {
     "Qua an Pan",
     "Riyom",
     "Shendam",
-    "Wase"
+    "Wase",
   ],
   Sokoto: [
     "Binji",
@@ -1044,7 +1083,7 @@ export const lgaList: LgaList = {
     "Tureta",
     "Wamako",
     "Wurno",
-    "Yabo"
+    "Yabo",
   ],
   Taraba: [
     "Ardo Kola",
@@ -1062,7 +1101,7 @@ export const lgaList: LgaList = {
     "Ussa",
     "Wukari",
     "Yorro",
-    "Zing"
+    "Zing",
   ],
   Yobe: [
     "Bade",
@@ -1081,7 +1120,7 @@ export const lgaList: LgaList = {
     "Potiskum",
     "Tarmuwa",
     "Yunusari",
-    "Yusufari"
+    "Yusufari",
   ],
   Zamfara: [
     "Anka",
@@ -1097,59 +1136,57 @@ export const lgaList: LgaList = {
     "Shinkafi",
     "Talata Mafara",
     "Chafe",
-    "Zurmi"
-  ]
-}
-
+    "Zurmi",
+  ],
+};
 
 export const fakestudents = [
   {
-    name: 'Toluwade Oresanya',
+    name: "Toluwade Oresanya",
     age: 15,
-    case: 'Expulsion',
-    gender: 'Male',
-    variant: 'solid',
-    flair: 'gray',
+    case: "Expulsion",
+    gender: "Male",
+    variant: "solid",
+    flair: "gray",
   },
   {
-    name: 'Kunle David',
+    name: "Kunle David",
     age: 15,
-    case: 'Fees Default',
-    gender: 'Male',
-    flair: 'red',
-    variant: 'solid',
+    case: "Fees Default",
+    gender: "Male",
+    flair: "red",
+    variant: "solid",
   },
   {
-    name: 'Sharon Nelson',
+    name: "Sharon Nelson",
     age: 17,
-    case: 'Fees Default',
-    gender: 'Female',
-    flair: 'red',
-    variant: 'solid',
+    case: "Fees Default",
+    gender: "Female",
+    flair: "red",
+    variant: "solid",
   },
   {
-    name: 'Zainab Ali',
+    name: "Zainab Ali",
     age: 16,
-    case: 'Suspension',
-    gender: 'Female',
-    flair: 'orange',
-    variant: 'solid',
+    case: "Suspension",
+    gender: "Female",
+    flair: "orange",
+    variant: "solid",
   },
   {
-    name: 'Sarah Oresanya',
+    name: "Sarah Oresanya",
     age: 15,
-    case: 'Inactive',
-    gender: 'Female',
-    flair: 'green',
-    variant: 'solid',
+    case: "Inactive",
+    gender: "Female",
+    flair: "green",
+    variant: "solid",
   },
   {
-    name: 'Charles Kayode',
+    name: "Charles Kayode",
     age: 15,
-    case: 'Fees Default',
-    gender: 'Male',
-    flair: 'red',
-    variant: 'solid',
+    case: "Fees Default",
+    gender: "Male",
+    flair: "red",
+    variant: "solid",
   },
-
 ];

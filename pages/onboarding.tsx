@@ -25,13 +25,13 @@ import { realState, lgaList } from "../fakedata";
 import Head from "next/head";
 
 const Onboarding = () => {
-  function validateRCNumber(value: number) {
-    let error;
-    if (!value) {
-      error = "Registration number is required";
-    }
-    return error;
-  }
+  // function validateRCNumber(value: number) {
+  //   let error;
+  //   if (!value) {
+  //     error = "Registration number is required";
+  //   }
+  //   return error;
+  // }
 
   function validateName(value: string) {
     let error;
@@ -314,12 +314,12 @@ const Onboarding = () => {
                   )}
                 </Field>
 
-                <Field name="rcnumber" validate={validateRCNumber}>
+                <Field name="rcnumber">
                   {({ field, form }: any) => (
                     <FormControl
                       isInvalid={form.errors.rcnumber && form.touched.rcnumber}
                     >
-                      <FormLabel fontSize={14}>RC Number</FormLabel>
+                      <FormLabel fontSize={14}>RC/BN Number</FormLabel>
                       <Input
                         {...field}
                         type="number"
