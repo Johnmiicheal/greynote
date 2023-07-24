@@ -62,11 +62,12 @@ export const SearchStudent: React.FC<SearchStudentProps> = ({
       finalFocusRef={finalRef}
       isOpen={isOpen}
       onClose={onClose}
+      size={{ base: "sm", md: "md", lg: "lg" }}
     >
       <ModalOverlay />
       <ModalContent
         pos="fixed"
-        minW="40rem"
+        minW={{ lg: "40rem" }}
         maxH="40rem"
         overflow="auto"
         mt={3}
@@ -204,7 +205,7 @@ export const SearchStudent: React.FC<SearchStudentProps> = ({
               Search Result
             </Text>
             {searchResults.length > 0 ? (
-              <Flex direction="column" gap={2}>
+              <Flex direction="column" gap={2} overflowY="auto" h="20vh">
                 {searchResults.map((result) => (
                   <NextLink
                     href={{
@@ -214,6 +215,32 @@ export const SearchStudent: React.FC<SearchStudentProps> = ({
                     key={result.id}
                     passHref
                   >
+                    <Flex key={result.id} align="center" cursor="pointer" gap={2} px={2} py={2} borderRadius="7px" _hover={{ bgColor: "gray.200"}}>
+                      <Avatar
+                        src={result.profileImgUrl}
+                        name={result.firstName}
+                        size="md"
+                      />
+                      <Flex direction="column">
+                        <Text>
+                          {result.firstName} {result.lastName}
+                        </Text>
+                        <Text>{result.grayId}</Text>
+                      </Flex>
+                    </Flex>
+                    <Flex key={result.id} align="center" cursor="pointer" gap={2} px={2} py={2} borderRadius="7px" _hover={{ bgColor: "gray.200"}}>
+                      <Avatar
+                        src={result.profileImgUrl}
+                        name={result.firstName}
+                        size="md"
+                      />
+                      <Flex direction="column">
+                        <Text>
+                          {result.firstName} {result.lastName}
+                        </Text>
+                        <Text>{result.grayId}</Text>
+                      </Flex>
+                    </Flex>
                     <Flex key={result.id} align="center" cursor="pointer" gap={2} px={2} py={2} borderRadius="7px" _hover={{ bgColor: "gray.200"}}>
                       <Avatar
                         src={result.profileImgUrl}

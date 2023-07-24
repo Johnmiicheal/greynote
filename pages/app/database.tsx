@@ -132,7 +132,7 @@ const Database = () => {
             <Flex direction="column" mt={5} maxW={{ lg: "77rem"}}>
               <TableContainer borderRadius="md" bg="white">
                 <Table variant="simple">
-                  <TableCaption>Graybook Database</TableCaption>
+                  <TableCaption>Greynote Database</TableCaption>
                   <Thead bg="#F0F0F0">
                     <Tr>
                       <Th>Grade Classes</Th>

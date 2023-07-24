@@ -46,7 +46,9 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
       <Flex display={{ base: "none", md: "flex" }}>
         <Flex
           _hover={{ bg: "#E6E6E6", color: "#000a16" }}
-          borderRadius="md"
+          border="1px solid #E6E6E6"
+          borderRadius="full"
+          pr={3}
           bg={{ base: "none", md: "none" }}
           minW={{ base: 0, md: 40 }}
           h={{ base: 0, md: 12 }}
@@ -80,9 +82,9 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
                     @{me?.me?.admin?.adminName}
                   </Text>
                 </Flex>
-                <Box ml={3} display={{ base: "none", md: "flex" }}>
+                {/* <Box ml={3} display={{ base: "none", md: "flex" }}>
                   <IoEllipsisHorizontal />
-                </Box>
+                </Box> */}
               </Flex>
             </MenuButton>
             <MenuList
@@ -151,10 +153,7 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
           p={2}
           display={{ base: "flex", md: "none" }}
         >
-          <Avatar name="School Name" size="sm" ml={1} mr={1}>
-            {" "}
-            <AvatarBadge boxSize="1.25em" bg="green.500" />{" "}
-          </Avatar>
+          <Avatar name={me?.me?.admin?.school!} src={me?.me?.admin?.schoolImg} size="sm" />
           <VStack
             flexDir="column"
             // ml={2}

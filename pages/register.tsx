@@ -71,13 +71,13 @@ const Register = () => {
         <title>Greynote - Register</title>
       </Head>
       <Header />
-      <Flex direction="row" minW="full" justify="center" >
-          <Flex direction="row" justify="space-between">
+      <Flex direction="row" w="full" justify="center" >
+          <Flex direction="row" justify="space-between" w="40rem">
           <Flex
             direction="column"
             align='center'
             bg="white"
-            w={{ base: "full", md: "500px" }}
+            w={{ base: "full", lg: "600px" }}
             pb={5}
             py={20}
             px={{ base: 2, md: 5, lg: 10 }}
