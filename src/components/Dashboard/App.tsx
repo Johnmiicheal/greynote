@@ -385,12 +385,7 @@ const App = () => {
                       {school?.schoolRequests?.requests &&
                       school?.schoolRequests?.requests.length > 0 ? (
                         school?.schoolRequests?.requests?.map((req) => (
-                        <>
                           <SmallRequests p={req} key={req.id} />
-                          <SmallRequests p={req} key={req.id} />
-                          <SmallRequests p={req} key={req.id} />
-                          <SmallRequests p={req} key={req.id} />
-                          </>
                         ))
                       ) : (
                         <Flex
