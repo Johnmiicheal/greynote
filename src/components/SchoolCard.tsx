@@ -43,6 +43,7 @@ export default function SchoolCard() {
   const [{ data }] = useGetSchoolFromUrl();
   const [{ data: me }] = useMeQuery();
   const admin = me?.me?.admin!;  
+  const school = data?.getSchoolByName?.school!;
   const [{ data: numbers }] = useGetSchoolStudentsCountQuery({
     variables: {
       schoolId: data?.getSchoolByName?.school?.id!,
@@ -154,8 +155,9 @@ export default function SchoolCard() {
             ml={4}
             mt={2}
             onClick={onRegOpen}
+            display={admin?.id === school?.creator?.admin?.id ? 'flex': 'none'}
           >
-            Register Student
+            {admin?.id === school?.creator?.admin?.id ? "Register Student" : "Contact School"}
           </Button>
 
           <Button
@@ -171,8 +173,9 @@ export default function SchoolCard() {
             ml={4}
             mt={2}
             onClick={onOpen}
+            display={admin?.id === school?.creator?.admin?.id ? 'flex': 'none'}
           >
-            Create a Note
+            {admin?.id === school?.creator?.admin?.id ? "Create a Note" : "Send a note"}
           </Button>
           <RegStudent isOpen={isRegOpen} onClose={onRegClose} />
           <CreateNote isOpen={isOpen} onClose={onClose} />
@@ -312,7 +315,7 @@ export default function SchoolCard() {
           </Flex>
           <Flex direction="column" px={2} mt={2} gap={1}>
             <Flex gap={2}>
-              <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
+              <Button variant="link" color="#000a16" fontWeight={400} fontSize={12} onClick={() => router.push('/gn/terms')}>
                 Terms of Service
               </Button>
               <Button variant="link" color="#000a16" fontWeight={400} fontSize={12}>
@@ -335,7 +338,7 @@ export default function SchoolCard() {
             </Flex>
 
             <Text mt={2} fontSize={12}>
-              &copy; {year} The Greynote Database, Inc.
+              &copy; {year} Greynote NG
             </Text>
           </Flex>
         </Box>

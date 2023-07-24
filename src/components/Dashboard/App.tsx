@@ -6,6 +6,7 @@ import {
   Icon,
   Center,
   useDisclosure,
+  useMediaQuery,
   Button,
   useToast,
   Image,
@@ -14,6 +15,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  TabIndicator,
 } from "@chakra-ui/react";
 import Header from "../../components/Header";
 import { IoPersonAddOutline } from "react-icons/io5";
@@ -37,11 +39,13 @@ import {
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
 import { HomeChart } from "../HomeChart";
+import Mobile from "../Mobile/Mobile";
 import SmallNotes from "../GrayNotes/SmallNotes";
 import SmallRequests from "../GrayRequests/SmallRequests";
 import { CreateNote } from "../Modals/CreateNote";
 import SmallCases from "../GrayCases/SmallCases";
 import RecentStudent from "./RecentStudent";
+import { capitalizeString } from "../../utils/capitalizeString";
 
 const App = () => {
   const router = useRouter();
@@ -62,8 +66,7 @@ const App = () => {
   const [{ data: count }] = useAdminStudentCountQuery();
   const [{ data: caseCount }] = useAdminCaseCountQuery();
   const tabStyle = {
-    bg: "#F4B95F",
-    color: "white",
+    color: "#F4B95F",
     borderRadius: "4px",
   };
   const [{ data: notes }] = useAdminNotesQuery({
@@ -86,6 +89,8 @@ const App = () => {
           cursor: 0,
         },
       });
+
+    const [mobile] = useMediaQuery('(max-width: 768px)')
   // const [schoolData, setSchoolData] = useState(null);
 
   // useEffect(() => {
@@ -133,10 +138,10 @@ const App = () => {
     );
   } else if (!fetching && !me?.me?.admin) {
     router.reload();
-  } else if (me?.me?.admin?.id) {
+  } else if (me?.me?.admin?.id && !mobile) {
     appPage = (
       <Center>
-        <Flex direction="row" justify="space-between" overflowX={"hidden"} w="full" minH="100vh">
+        <Flex direction="row" justify="space-between" overflowX={"auto"} w="full" minH="100vh">
           <Flex direction="column">
             <GrayLayout />
           </Flex>
@@ -150,7 +155,9 @@ const App = () => {
             <Header />
             <Flex
               bg="#E6E6E6"
-              gap={10}
+              gap={7}
+              // align="center"
+              justify="center"
               h="full"
               mt="5"
               borderRadius="20px 20px 0 0 "
@@ -165,8 +172,10 @@ const App = () => {
                   py={2}
                   borderRadius="5px"
                   bgImg="/app/greyframe.png"
-                  w="800px"
-                  h="250px"
+                  bgRepeat="no-repeat"
+                  bgSize="cover"
+                  w="44rem"
+                  h="300px"
                 >
                   <Flex justify="space-between" gap={2}>
                     <Text
@@ -175,7 +184,7 @@ const App = () => {
                       color="white"
                       display={me?.me?.admin ? "block" : "none"}
                     >
-                      Welcome, {me?.me?.admin?.adminName}
+                      Welcome, {capitalizeString(me?.me?.admin?.adminName)}
                     </Text>
                     <Text
                       textAlign="right"
@@ -187,7 +196,7 @@ const App = () => {
                       {format(new Date(), "EEEE dd MMMM yyyy")}
                     </Text>
                   </Flex>
-                  <Flex mt={20}>
+                  <Flex mt={32}>
                     <Flex
                       bgColor="white"
                       px={4}
@@ -247,23 +256,22 @@ const App = () => {
                     borderRadius="7px"
                     align="center"
                     bg="white"
-                    py={2}
-                    px={4}
+                    p={4}
                     h="300px"
-                    w="330px"
-                    gap={1}
+                    w="14.7rem"
+                    gap={4}
                   >
                     {/* <GuageChart /> */}
-                    <Flex align="center">
-                      <Icon as={IoIosPeople} w="5" h="5" />
-                      <Text>
+                    <Flex align="center" gap="2">
+                      <Icon as={IoIosPeople} bgColor="#F4B95F" p={1} borderRadius='2px' w="8" h="8" />
+                      <Text lineHeight={1}>
                         <strong>Total Students Registered:</strong>{" "}
                         {count?.adminStudentCount}
                       </Text>
                     </Flex>
-                    <Flex align="center" mt={1}>
-                      <Icon as={RiContactsBookFill} w="4" h="4" />
-                      <Text ml={1}>
+                    <Flex align="center" gap={2}>
+                      <Icon as={RiContactsBookFill}bgColor="#F4B95F" p={2} borderRadius='2px' w="8" h="8" />
+                      <Text lineHeight={1}>
                         <strong>Student Defaults Registered:</strong>{" "}
                         {caseCount?.adminCaseCount}
                       </Text>
@@ -276,15 +284,15 @@ const App = () => {
               </Flex>
 
               <Flex
-                overflowY="auto"
                 bg="white"
                 borderRadius="5px"
-                w="380px"
-                h="full"
+                px={10}
+                w="25rem"
+                h="620px"
                 align="center"
                 direction="column"
               >
-                <Text textAlign="left">Recent Activities</Text>
+                <Text textAlign="left" fontWeight={500}>Recent Activities</Text>
                 <Tabs variant="unstyled" mt={2} align="center">
                   <TabList>
                     <Tab _selected={{ ...tabStyle }}>Notes</Tab>
@@ -292,6 +300,13 @@ const App = () => {
                     <Tab _selected={{ ...tabStyle }}>Graycases</Tab>
                     <Tab _selected={{ ...tabStyle }}>Requests</Tab>
                   </TabList>
+                  <TabIndicator
+                mt="-2px"
+                height="2px"
+                w="full"
+                bg="#F4B95F"
+                borderRadius="2"
+              />
                   <TabPanels mt={2}>
                     <TabPanel overflow="auto">
                       {notes?.adminNotes?.notes?.length! < 1 ? (
@@ -366,7 +381,7 @@ const App = () => {
                       )}
                     </TabPanel>
 
-                    <TabPanel overflowY="auto" h="240px">
+                    <TabPanel overflowY="auto" h="240px" border="1px solid #DDDDDD" borderRadius="7px">
                       {school?.schoolRequests?.requests &&
                       school?.schoolRequests?.requests.length > 0 ? (
                         school?.schoolRequests?.requests?.map((req) => (
@@ -401,10 +416,9 @@ const App = () => {
                   h="200px"
                   color="white"
                   p={3}
+                  mt={16}
                   bgImg="/app/greybox.png"
-                  pos="fixed"
                   borderRadius="7px"
-                  bottom={10}
                 >
                   <Text fontWeight={600} fontSize={20} textAlign="center">
                     Experience more with Greynote Premium
@@ -429,6 +443,10 @@ const App = () => {
         <CreateNote isOpen={isNoteOpen} onClose={onNoteClose} />
       </Center>
     );
+  } else if (me?.me?.admin?.id && mobile){
+    appPage = (
+      <Mobile />
+    )
   }
 
   return appPage;

@@ -54,7 +54,7 @@ import {
             mb={2}
           >
             <Stack spacing={1}>
-                <Flex py={2} px={2} align="center">
+                <Flex py={2} px={2} justify="start">
                 <Avatar src={p?.profileImgUrl} size="md" />    
                 <Stack px={3} textAlign="start">
                     <Heading as="h4" fontSize={14} fontWeight={500} noOfLines={2}>
