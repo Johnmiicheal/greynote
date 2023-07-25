@@ -179,9 +179,10 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
           isOpen={isOpen}
           onClose={onClose}
           motionPreset="slideInBottom"
+          size={{ base: "sm", md: "md", lg: "lg" }}
         >
           <ModalOverlay />
-          <ModalContent mt={2} minW="35em">
+          <ModalContent mt={2} minW={{ lg: "35em"}}>
             <ModalCloseButton onClick={handleClose} />
             <Tabs index={tabIndex} variant="enclosed" isFitted>
               <TabPanels>
@@ -244,7 +245,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                         )}
                       </Field>
 
-                      <Flex direction="row">
+                      <Flex direction="row" justify="space-between" gap={2}>
                         <Field name="ageInput">
                           {({ field, form }: any) => (
                             <FormControl mt={4}>
@@ -253,7 +254,6 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                                 {...field}
                                 placeholder="Age"
                                 type="number"
-                                w={"220px"}
                                 focusBorderColor="#F4B95F"
                               />
                             </FormControl>
@@ -267,7 +267,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                               <Select
                                 {...field}
                                 placeholder="Select Gender"
-                                w={"220px"}
+                                w={{ lg: "220px"}}
                                 focusBorderColor="#F4B95F"
                               >
                                 {fakegender.map((p, i) => (
@@ -287,7 +287,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                             <FormLabel>Grade</FormLabel>
                             <Select
                               placeholder="Select Grade"
-                              w={"220px"}
+                              w={{ lg: "220px"}}
                               focusBorderColor="#F4B95F"
                               {...field}
                             >
@@ -305,14 +305,13 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
 
                     <Flex direction='column' mt={4}>
                       <Text fontWeight={600}>Start Date</Text>
-                      <Flex>
+                      <Flex gap={2}>
                         <Field name="startDate.month">
                           {({ field, form }: any) => (
                             <FormControl mt={2}>
                                 <Select
                                   placeholder="Month"
                                   name="startDate.month"
-                                  w={"220px"}
                                   mr={5}
                                   focusBorderColor="#F4B95F"
                                   {...field}
@@ -334,7 +333,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                                   {...field}
                                   name="startDate.year"
                                   placeholder="Year"
-                                  w={"220px"}
+                                  w={{ lg: "220px"}}
                                   focusBorderColor="#F4B95F"
                                 >
                                   { startYears.map((v, i) => (
@@ -352,14 +351,13 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
 
                     <Flex direction='column' mt={4}>
                       <Text fontWeight={600}>End Date(or expected)</Text>
-                      <Flex>
+                      <Flex gap={2}>
                         <Field name="endDate.month">
                           {({ field, form }: any) => (
                             <FormControl mt={2}>
                                 <Select
                                   placeholder="Month"
                                   name="endDate.month"
-                                  w={"220px"}
                                   mr={5}
                                   focusBorderColor="#F4B95F"
                                   {...field}
@@ -381,7 +379,7 @@ export const RegStudent = ({ isOpen, onClose }: any) => {
                                   {...field}
                                   name="endDate.year"
                                   placeholder="Year"
-                                  w={"220px"}
+                                  w={{ lg: "220px"}}
                                   focusBorderColor="#F4B95F"
                                 >
                                   { endYears.map((v, i) => (
