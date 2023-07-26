@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Box,
   Flex,
   Text,
   Image,
@@ -15,6 +16,7 @@ import {
   TableCaption,
   TableContainer,
   useDisclosure,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import Header from "../../src/components/Header";
@@ -25,11 +27,14 @@ import { SearchStudent } from "../../src/components/Modals/SearchStudent";
 import {
   useSchoolCasesQuery,
   useAdminCaseCountQuery,
+  useMeQuery,
 } from "../../src/gql/graphql";
 import NextLink from "next/link";
 import { format } from "date-fns";
 import { CreateNote } from "../../src/components/Modals/CreateNote";
 import { CaseModal } from "../../src/components/GrayCases/CaseModal";
+import BarLoader from "react-spinners/BarLoader";
+import GrayCase from "../../src/components/Mobile/GrayCase";
 
 const Graycase = () => {
   const router = useRouter();
@@ -56,7 +61,9 @@ const Graycase = () => {
       sortBy: "recent",
     },
   });
+  const [{ data: me, fetching }] = useMeQuery();
   const [{ data: caseCount }] = useAdminCaseCountQuery();
+  const [mobile] = useMediaQuery('(max-width: 768px)')
 
   const grayStyle = {
     bg: "white",
@@ -68,8 +75,25 @@ const Graycase = () => {
     align: "center",
     role: "group",
   };
-  return (
-    <Center>
+  let appPage = null;
+  if (fetching) {
+    appPage = (
+      <Center>
+        <Box minW="full" mt={{ base: 60, md: 60, lg: 40 }}>
+          <Flex
+            direction="column"
+            align="center"
+            minW={{ base: "full", lg: "650px" }}
+          >
+            <Image src="/icons/greyicon.png" alt="zlogo" w={40} mb={3} />
+            <BarLoader color="#ffd880" width="150px" />
+          </Flex>
+        </Box>
+      </Center>
+    );
+  } else if (!mobile) {
+    appPage = (
+      <Center>
       <Head>
         <title>Greynote - Student Case Records</title>
         <link rel="shortcut icon" href="/icons/greyicon.png" />
@@ -227,19 +251,19 @@ const Graycase = () => {
                 </TableContainer>
               </Flex>
             )}
-
             <SearchStudent isOpen={isSearchOpen} onClose={onSearchClose} />
             <CreateNote isOpen={isGrayOpen} onClose={onGrayClose} />
-
-            {/* 
-            <Flex direction="column" mt={5} bg="white" borderRadius="md">
-              <RadarChart />
-            </Flex> */}
           </Flex>
         </Flex>
       </Flex>
     </Center>
-  );
+    ); }
+     else if (me?.me?.admin?.id && mobile){
+      appPage = (
+        <GrayCase />
+      )
+    }
+  return appPage;
 };
 
 export default Graycase;

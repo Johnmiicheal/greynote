@@ -54,8 +54,8 @@ const Notes: React.FC<NotesProps> = ({ p }) => {
               h="100"
               w="20px"
               bgColor="#F4B95F"
-              ml={-3}
-              mr={10}
+              ml={{base: -4, lg: -3}}
+              mr={{base: 3, lg: 10}}
               borderRadius="0 5px 5px 0"
             />
             <Avatar

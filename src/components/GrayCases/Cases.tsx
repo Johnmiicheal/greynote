@@ -68,7 +68,7 @@ const Cases: React.FC<CasesProps> = ({ p }) => {
           >
             <LinkOverlay>
             <Flex py={4} px={2} align="center">
-              <Avatar name={p?.firstName} src={s?.getStudentByGrayCase?.student?.profileImgUrl!} size="xl"  />
+              <Avatar name={p?.firstName} src={s?.getStudentByGrayCase?.student?.profileImgUrl!} size={{base: "lg",lg: "xl"}}  />
                 <Stack px={3} cursor="pointer">
                   <Flex>
                     <Heading

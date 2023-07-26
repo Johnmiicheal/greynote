@@ -39,7 +39,7 @@ import {
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
 import { HomeChart } from "../HomeChart";
-import Mobile from "../Mobile/Mobile";
+import Home from "../Mobile/Home";
 import SmallNotes from "../GrayNotes/SmallNotes";
 import SmallRequests from "../GrayRequests/SmallRequests";
 import { CreateNote } from "../Modals/CreateNote";
@@ -445,7 +445,7 @@ const App = () => {
     );
   } else if (me?.me?.admin?.id && mobile){
     appPage = (
-      <Mobile />
+      <Home />
     )
   }
 

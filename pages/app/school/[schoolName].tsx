@@ -15,9 +15,7 @@ import {
   Tabs,
   Center,
   Image,
-  VStack,
-  SkeletonCircle,
-  SkeletonText,
+  useMediaQuery,
   Icon,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
@@ -41,8 +39,8 @@ import {
 import SchoolCard from "../../../src/components/SchoolCard";
 import BarLoader from "react-spinners/BarLoader";
 import { useRouter } from "next/router";
-import { request } from "http";
 import Requests from "../../../src/components/GrayRequests/Requests";
+import SchoolProfile from "../../../src/components/Mobile/SchoolProfile";
 
 const School = () => {
   const [{ data, fetching: loading }] = useGetSchoolFromUrl();
@@ -67,6 +65,7 @@ const School = () => {
     },
   });
   const router = useRouter();
+  const [mobile] = useMediaQuery('(max-width: 768px)');
   let school = null;
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -91,7 +90,7 @@ const School = () => {
         </Box>
       </Center>
     );
-  } else if (isLoaded === true) {
+  } else if (isLoaded === true && !mobile) {
     school = (
       <Center>
         <Flex direction="row" justify="space-between" w="full" minH="100vh">
@@ -411,7 +410,13 @@ const School = () => {
         </Flex>
       </Center>
     );
-  } else {
+  }else if(isLoaded === true && mobile){
+    school = (
+      <SchoolProfile />
+    )
+  } 
+  
+  else {
     school = (
       <Center>
         <Flex direction="row" justify="space-between" w="full" minH="100vh">
