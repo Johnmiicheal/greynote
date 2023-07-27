@@ -16,13 +16,12 @@ import {
   TabPanel,
   TabIndicator,
 } from "@chakra-ui/react";
-import Header from "./Header";
+import Header from "./Navigation/Header";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { RiContactsBookFill } from "react-icons/ri";
 import { useRouter } from "next/router";
-import GrayLayout from "../../components/GrayLayout";
 import { RegStudent } from "../Modals/RegStudent";
 import { SearchStudent } from "../Modals/SearchStudent";
 import {
@@ -37,16 +36,15 @@ import {
 } from "../../gql/graphql";
 import BarLoader from "react-spinners/BarLoader";
 import { format } from "date-fns";
-import { HomeChart } from "../HomeChart";
 import SmallNotes from "../GrayNotes/SmallNotes";
 import SmallRequests from "../GrayRequests/SmallRequests";
 import { CreateNote } from "../Modals/CreateNote";
 import SmallCases from "../GrayCases/SmallCases";
 import RecentStudent from "../Dashboard/RecentStudent";
 import { capitalizeString } from "../../utils/capitalizeString";
-import { Nav } from "./Nav";
+import { Nav } from "./Navigation/BottomNav";
 
-const Mobile = () => {
+const Home = () => {
   const router = useRouter();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -458,4 +456,4 @@ const Mobile = () => {
   return appPage;
 };
 
-export default Mobile;
+export default Home;

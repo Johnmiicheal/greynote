@@ -145,35 +145,15 @@ export default function UserProfile({ onOpen, ...rest }: { onOpen: any }) {
 
       {/* Mobile View Avatar */}
       <Flex ml={"auto"} display={{ base: "flex", md: "none" }}>
-        <HStack
-          spacing="2"
+        <Flex
           align="center"
-          onClick={onOpen}
+          onClick={() => router.push(`/app/school/${me?.me?.admin?.school!}`)}
           cursor="pointer"
           p={2}
           display={{ base: "flex", md: "none" }}
         >
           <Avatar name={me?.me?.admin?.school!} src={me?.me?.admin?.schoolImg} size="sm" />
-          <VStack
-            flexDir="column"
-            // ml={2}
-            // mr={1}
-            display={{ base: "none", md: "flex" }}
-            alignItems="flex-start"
-            spacing="1px"
-          >
-            <Text fontWeight={600} fontSize="0.9em">
-              John Doe
-            </Text>
-            <Text fontSize="0.7rem">204 Points</Text>
-          </VStack>
-          <Box display={{ base: "none", md: "flex" }}>
-            {/* <Badge colorScheme="green" ml={1} mr={4} variant="outline">
-                    Fish
-                  </Badge> */}
-            <IoCaretDown />
-          </Box>
-        </HStack>
+        </Flex>
       </Flex>
     </HStack>
   );

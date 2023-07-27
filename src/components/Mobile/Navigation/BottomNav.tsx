@@ -15,10 +15,10 @@ export const Nav = () => {
       ];
     return(
         <Flex
-        bottom={5}
+        bottom={0}
         pos="fixed"
         w="full"
-        h="6dvh"
+        minH="6dvh"
         p={2}
         zIndex={2}
         align="center"
@@ -28,7 +28,6 @@ export const Nav = () => {
         <Flex
           key={link.text}
           direction="column"
-          mt={7}
           w="full"
           align="center"
           role="group"

@@ -5,14 +5,11 @@ import {
     Flex,
     useDisclosure,
   } from "@chakra-ui/react";
-  import UserProfile from "../UserProfile";
+  import UserProfile from "../../UserProfile";
   import { useRouter } from "next/router";
-  import { IoSearch } from "react-icons/io5";
   
   export default function Header({ onOpen, ...rest }: any) {
-    const router = useRouter();
-    const { isOpen: isSearchOpen, onOpen: onSearchOpen, onClose: onSearchClose } = useDisclosure();
-  
+    const router = useRouter();  
     return (
       <Flex
         display="flex"
@@ -23,6 +20,7 @@ import {
         h={14}
         alignItems="center"
         justifyContent="space-between"
+        bg="#FFF0D9"
         w="full"
         {...rest}
       >

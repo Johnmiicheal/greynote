@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Box,
   Flex,
   Text,
   Image,
@@ -16,27 +15,23 @@ import {
   TableCaption,
   TableContainer,
   useDisclosure,
-  useMediaQuery,
 } from "@chakra-ui/react";
 import Head from "next/head";
-import Header from "../../src/components/Header";
 import { AiOutlineFileSearch, AiOutlineFileAdd } from "react-icons/ai";
 import { useRouter } from "next/router";
-import GrayLayout from "../../src/components/GrayLayout";
-import { SearchStudent } from "../../src/components/Modals/SearchStudent";
+import { SearchStudent } from "../Modals/SearchStudent";
+import Header from "./Navigation/Header";
 import {
   useSchoolCasesQuery,
   useAdminCaseCountQuery,
-  useMeQuery,
-} from "../../src/gql/graphql";
+} from "../../gql/graphql";
 import NextLink from "next/link";
 import { format } from "date-fns";
-import { CreateNote } from "../../src/components/Modals/CreateNote";
-import { CaseModal } from "../../src/components/GrayCases/CaseModal";
-import BarLoader from "react-spinners/BarLoader";
-import GrayCase from "../../src/components/Mobile/GrayCase";
+import { CreateNote } from "../Modals/CreateNote";
+import { CaseModal } from "../GrayCases/CaseModal";
+import { Nav } from "./Navigation/BottomNav";
 
-const Graycase = () => {
+const GrayCase = () => {
   const router = useRouter();
   const {
     isOpen: isGrayOpen,
@@ -61,9 +56,7 @@ const Graycase = () => {
       sortBy: "recent",
     },
   });
-  const [{ data: me, fetching }] = useMeQuery();
   const [{ data: caseCount }] = useAdminCaseCountQuery();
-  const [mobile] = useMediaQuery('(max-width: 768px)')
 
   const grayStyle = {
     bg: "white",
@@ -75,55 +68,36 @@ const Graycase = () => {
     align: "center",
     role: "group",
   };
-  let appPage = null;
-  if (fetching) {
-    appPage = (
-      <Center>
-        <Box minW="full" mt={{ base: 60, md: 60, lg: 40 }}>
-          <Flex
-            direction="column"
-            align="center"
-            minW={{ base: "full", lg: "650px" }}
-          >
-            <Image src="/icons/greyicon.png" alt="zlogo" w={40} mb={3} />
-            <BarLoader color="#ffd880" width="150px" />
-          </Flex>
-        </Box>
-      </Center>
-    );
-  } else if (!mobile) {
-    appPage = (
-      <Center>
+  return (
+    <Center>
       <Head>
         <title>Greynote - Student Case Records</title>
         <link rel="shortcut icon" href="/icons/greyicon.png" />
       </Head>
       <Flex justify="space-between" w="full" minH="100vh">
-        <Flex direction="column">
-          <GrayLayout />
-        </Flex>
 
         <Flex
           direction="column"
-          ml="130px"
           w="full"
-          px={{ base: 4, md: 4, lg: 10 }}
+          bg="#FFF0D9"
         >
           <Header />
-          <Flex
-            direction="column"
-            bg="#CBCBCB"
-            h="full"
-            mt="5"
-            borderRadius="20px 20px 0 0 "
-            py={5}
-            px={10}
-          >
-            <Text fontSize={24} fontWeight={800} color="#212121">
+          <Nav />
+          <Text fontSize={24} mt="7vh" fontWeight={500} color="#212121" textAlign="center">
               Student Case Records
             </Text>
-            <Flex gap="4" mt={4}>
-              <Flex {...grayStyle} bgImg="/Framee.png" gap="4">
+          <Flex
+            direction="column"
+            bg="gray.300"
+            h="100dvh"
+            mt="4"
+            borderRadius="20px 20px 0 0 "
+            py={5}
+            px={2}
+          >
+            
+            <Flex gap="4" mt={4} direction="column" align="center" w="full">
+              <Flex {...grayStyle} bgImg="/Framee.png" bgSize="cover" gap="2" w="full">
                 <Image
                   src="/app/greycircle.png"
                   alt="graybook_logo"
@@ -137,41 +111,47 @@ const Graycase = () => {
                 </Text>
               </Flex>
 
-              <Flex
-                {...grayStyle}
-                _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
-                cursor="pointer"
-                onClick={onSearchOpen}
-              >
+              <Flex gap={2}>
                 <Flex
-                  color="#343434"
-                  bg="#979797"
-                  borderRadius="full"
-                  p={3}
-                  mr={1}
+                  {...grayStyle}
+                  _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
+                  cursor="pointer"
+                  onClick={onSearchOpen}
+                  gap={2}
+                  w="full"
                 >
-                  <Icon as={AiOutlineFileSearch} w={7} h={7} />
+                  <Flex
+                    color="#343434"
+                    bg="#979797"
+                    borderRadius="full"
+                    p={3}
+                  >
+                    <Icon as={AiOutlineFileSearch} w={7} h={7} />
+                  </Flex>
+                  <Text>Search for a student</Text>
                 </Flex>
-                <Text>Search for a student</Text>
+
+                <Flex
+                  {...grayStyle}
+                  _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
+                  cursor="pointer"
+                  onClick={onGrayOpen}
+                  gap={2}
+                  w="full"
+                >
+                  <Flex
+                    color="#8E6930"
+                    bg="#FFCE83"
+                    borderRadius="full"
+                    p={3}
+                  >
+                    <Icon as={AiOutlineFileAdd} w={7} h={7} />
+                  </Flex>
+                  <Text>Create a Report</Text>
+                </Flex>
+
               </Flex>
 
-              <Flex
-                {...grayStyle}
-                _hover={{ borderWidth: "1px", borderColor: "gray.400" }}
-                cursor="pointer"
-                onClick={onGrayOpen}
-              >
-                <Flex
-                  color="#8E6930"
-                  bg="#FFCE83"
-                  borderRadius="full"
-                  p={3}
-                  mr={1}
-                >
-                  <Icon as={AiOutlineFileAdd} w={7} h={7} />
-                </Flex>
-                <Text>Create a Report</Text>
-              </Flex>
             </Flex>
             {caseCount?.adminCaseCount === 0 ? (
               <Flex
@@ -191,7 +171,7 @@ const Graycase = () => {
             ) : (
               <Flex direction="column" mt={5} bg="white" borderRadius="md">
                 <TableContainer>
-                  <Table variant="simple">
+                  <Table variant="simple" size="sm">
                     <TableCaption>Graycase Database</TableCaption>
                     <Thead>
                       <Tr>
@@ -251,19 +231,19 @@ const Graycase = () => {
                 </TableContainer>
               </Flex>
             )}
+
             <SearchStudent isOpen={isSearchOpen} onClose={onSearchClose} />
             <CreateNote isOpen={isGrayOpen} onClose={onGrayClose} />
+
+            {/* 
+            <Flex direction="column" mt={5} bg="white" borderRadius="md">
+              <RadarChart />
+            </Flex> */}
           </Flex>
         </Flex>
       </Flex>
     </Center>
-    ); }
-     else if (me?.me?.admin?.id && mobile){
-      appPage = (
-        <GrayCase />
-      )
-    }
-  return appPage;
+  );
 };
 
-export default Graycase;
+export default GrayCase;

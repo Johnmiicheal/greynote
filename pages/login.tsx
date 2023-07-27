@@ -51,17 +51,17 @@ const Login = () => {
         <Flex direction="row" justify="space-between">
           <Flex
             direction="column"
-            justify="center"
+            justify={{ lg: "center"}}
             pos="fixed"
             right={0}
             bg="white"
-            w="600px"
+            w={{base: "full", lg: "600px"}}
             h="full"
             py={20}
-            px={24}
+            px={{base: 2, lg: 24}}
             borderRadius="md"
           >
-            <Heading mt={2} fontSize="2rem" fontWeight={500}>
+            <Heading mt={2} fontSize={{base:"1.4rem" ,lg: "2rem"}} fontWeight={500}>
               Login to Greynote
             </Heading>
 
